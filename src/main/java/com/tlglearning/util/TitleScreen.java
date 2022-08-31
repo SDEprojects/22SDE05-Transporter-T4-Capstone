@@ -11,7 +11,6 @@ public class TitleScreen {
 
         BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
         Graphics graphic = image.getGraphics();
-        //graphic.setFont(new Font("SansSerif", Font.LAYOUT_NO_LIMIT_CONTEXT, 20));
 
         Graphics2D graphics = (Graphics2D) graphic;
         graphics.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
