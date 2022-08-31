@@ -13,8 +13,7 @@ public class Inventory {
         return backpack;
     }
 
-    public void setBackpack(List<String> backpack, String item) {
-        this.backpack = backpack;
+    public void setBackpack(String item) {
         backpack.add(item);
     }
 }
