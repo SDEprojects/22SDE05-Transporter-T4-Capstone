@@ -1,0 +1,36 @@
+[{
+  "name" : "Truck",
+  "description" : "This is your truck. It looks ready to hit the road, are you?",
+  "exit1" : "North",
+  "exit1To" : null,
+  "exit2" : "South",
+  "exit2To" : null,
+  "exit3" : "East",
+  "exit3To" : "Warehouse",
+  "exit4" : "West",
+  "exit4To" : null
+},
+{
+  "name" : "Warehouse",
+  "description" : "It is late in the year so the shelves are mostly empty ",
+  "exit1" : "North",
+  "exit1To" : null,
+  "exit2" : "South",
+  "exit2To" : "Front Office",
+  "exit3" : "East",
+  "exit3To" : "Boss' Office",
+  "exit4" : "West",
+  "exit4To" : "Truck"
+},
+{
+  "name" : "Front Office",
+  "description" : "This is the front office of your office",
+  "exit1" : "North",
+  "exit1To" : "Warehouse",
+  "exit2" : "South",
+  "exit2To" : null,
+  "exit3" : "East",
+  "exit3To" : "Break Room",
+  "exit4" : "West",
+  "exit4To" : "Gas Station"
+}]
