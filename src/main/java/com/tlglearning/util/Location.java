@@ -1,26 +1,22 @@
 package com.tlglearning.util;
 
 public class Location {
-    private String name;
+    private String locationName;
     private String description;
-    private String exit1;
-    private String exit1To;
-    private String exit2;
-    private String exit2To;
-    private String exit3;
-    private String exit3To;
-    private String exit4;
-    private String exit4To;
+    private String north;
+    private String south;
+    private String east;
+    private String west;
 
     public Location() {
     }
 
-    public String getName() {
-        return name;
+    public String getLocationName() {
+        return locationName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setLocationName(String locationName) {
+        this.locationName = locationName;
     }
 
     public String getDescription() {
@@ -31,83 +27,47 @@ public class Location {
         this.description = description;
     }
 
-    public String getExit1() {
-        return exit1;
+    public String getNorth() {
+        return north;
     }
 
-    public void setExit1(String exit1) {
-        this.exit1 = exit1;
+    public void setNorth(String north) {
+        this.north = north;
     }
 
-    public String getExit1To() {
-        return exit1To;
+    public String getSouth() {
+        return south;
     }
 
-    public void setExit1To(String exit1To) {
-        this.exit1To = exit1To;
+    public void setSouth(String south) {
+        this.south = south;
     }
 
-    public String getExit2() {
-        return exit2;
+    public String getEast() {
+        return east;
     }
 
-    public void setExit2(String exit2) {
-        this.exit2 = exit2;
+    public void setEast(String east) {
+        this.east = east;
     }
 
-    public String getExit2To() {
-        return exit2To;
+    public String getWest() {
+        return west;
     }
 
-    public void setExit2To(String exit2To) {
-        this.exit2To = exit2To;
-    }
-
-    public String getExit3() {
-        return exit3;
-    }
-
-    public void setExit3(String exit3) {
-        this.exit3 = exit3;
-    }
-
-    public String getExit3To() {
-        return exit3To;
-    }
-
-    public void setExit3To(String exit3To) {
-        this.exit3To = exit3To;
-    }
-
-    public String getExit4() {
-        return exit4;
-    }
-
-    public void setExit4(String exit4) {
-        this.exit4 = exit4;
-    }
-
-    public String getExit4To() {
-        return exit4To;
-    }
-
-    public void setExit4To(String exit4To) {
-        this.exit4To = exit4To;
+    public void setWest(String west) {
+        this.west = west;
     }
 
     @Override
     public String toString() {
         return "Location{" +
-                "name='" + name + '\'' +
+                "name='" + locationName + '\'' +
                 ", description='" + description + '\'' +
-                ", exit1='" + exit1 + '\'' +
-                ", exit1To='" + exit1To + '\'' +
-                ", exit2='" + exit2 + '\'' +
-                ", exit2To='" + exit2To + '\'' +
-                ", exit3='" + exit3 + '\'' +
-                ", exit3To='" + exit3To + '\'' +
-                ", exit4='" + exit4 + '\'' +
-                ", exit4To='" + exit4To + '\'' +
+                ", north='" + north + '\'' +
+                ", south='" + south + '\'' +
+                ", east='" + east + '\'' +
+                ", west='" + west + '\'' +
                 '}';
     }
 }
