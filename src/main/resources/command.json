@@ -1,0 +1,17 @@
+[{
+  "Go": "go",
+    "move": "go",
+    "jump": "go",
+    "run": "go",
+    "walk": "go",
+    "dance": "go",
+    "hop": "go",
+
+    "Get" : "get",
+    "grab": "get",
+    "pickup": "get",
+    "lift": "get",
+    "retrieve": "get",
+    "store": "get"
+  }
+]
