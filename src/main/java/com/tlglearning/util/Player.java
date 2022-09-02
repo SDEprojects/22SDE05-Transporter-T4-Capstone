@@ -47,7 +47,6 @@ public class Player {
             //loop back to userinput
         }
         System.out.println(locationFinder(currentLocation.toString(), exploreLocation, locations));
-        //loop back to userinput
     }
 
     public void get(String current, String item, Location currentLocation){
