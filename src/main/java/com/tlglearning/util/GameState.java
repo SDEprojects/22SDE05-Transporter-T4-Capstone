@@ -13,27 +13,13 @@ import static com.tlglearning.util.Menu.helpMenu;
 
 public class GameState {
     //create scanner obj to read user input
-    Scanner read = new Scanner(System.in);
-    ArrayList<String> itemsNeeded = new ArrayList<>();
-    Location startingLocation = new Location();
-    Inventory backpack = new Inventory();
-    ScenarioGenerator startingScenario = new ScenarioGenerator(
-            "New Mexico",
-            "Arizona",
-            "Washington", itemsNeeded);
+
 
     //CTOR
     public GameState() {
-        startingLocation.setLocationName("Truck");
-        startingLocation.setEast("Warehouse");
-        itemsNeeded.add("Logbook");
-        itemsNeeded.add("Keys");
-        itemsNeeded.add("Folder");
-        itemsNeeded.add("Truck Key");
-
     }
 
-    public void gameInput() {
+    public void gameInput(Scanner read, Location startingLocation, Inventory backpack,ScenarioGenerator startingScenario) {
         System.out.println("\nYou may use the inputs 'N' to start a new game. 'Q' to quit game. Also Type 'H' to look at" +
                 " instructions.\n>>>");
         String input = read.next().toLowerCase();
@@ -110,7 +96,21 @@ public class GameState {
         return command;
     }
 
+    public static void action(List<String> toPlayer, Location currentLocation, Inventory backpack){
+        String verb = toPlayer.get(0);
+        String noun = toPlayer.get(1);
+        Player player = new Player();
 
+        if (verb.equals("\"go\"")){
+            player.move(currentLocation.getLocationName(), noun, currentLocation);
+        } else if (verb.equals("explore")) {
+            System.out.println("explore");
+        }else{
+            System.out.println("get");
+        }
+
+
+    }
 
 
 }

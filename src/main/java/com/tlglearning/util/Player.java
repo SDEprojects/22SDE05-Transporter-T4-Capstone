@@ -5,15 +5,10 @@ import com.fasterxml.jackson.databind.JsonNode;
 import java.io.File;
 import java.io.IOException;
 
-import static com.tlglearning.util.JacksonParser.locationFinder;
-import static com.tlglearning.util.JacksonParser.parse;
+import static com.tlglearning.util.JacksonParser.*;
 
 public class Player {
 
-    private Inventory backpack;
-    public Player(Inventory backpack) {
-        this.backpack = backpack;
-    }
 
     public void move(String current, String nextLocation, Location currentLocation){
         JsonNode locations;
@@ -27,9 +22,10 @@ public class Player {
         if (newLocation.equals("null")){
             System.out.println("This direction leads to nowhere, please try a different direction");
             // loop back to userinput
+        }else {
+            currentLocation.setLocationName(newLocation);
+            System.out.println(getDescription(newLocation, "description", locations));
         }
-        currentLocation.setLocationName(newLocation);
-        System.out.println(locationFinder(currentLocation.toString(), "description", locations));
         //loop back to userinput
     }
 
@@ -49,7 +45,7 @@ public class Player {
         System.out.println(locationFinder(currentLocation.toString(), exploreLocation, locations));
     }
 
-    public void get(String current, String item, Location currentLocation){
+    public void get(String current, String item, Location currentLocation, Inventory backpack){
         JsonNode locations;
         File locationJson = new File("src/main/resources/items.json");
         try {

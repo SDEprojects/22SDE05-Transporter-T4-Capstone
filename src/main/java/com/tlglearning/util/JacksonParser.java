@@ -1,5 +1,6 @@
 package com.tlglearning.util;
 
+import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.*;
 
 import java.io.File;
@@ -14,6 +15,7 @@ public class JacksonParser {
     //using Jackson to create a JsonNode object to parse through File objects
     public static JsonNode parse(File file) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.configure(JsonParser.Feature.ALLOW_UNQUOTED_FIELD_NAMES, true);
         JsonNode jsonNode = objectMapper.readTree(file);
         return jsonNode;
     }
@@ -22,7 +24,14 @@ public class JacksonParser {
     public static String locationFinder(String current, String direction, JsonNode locations) {
         JsonNode currentLoc = locations.findValue(current);
         String nextLoc = currentLoc.findValue(direction).toString();
-        return (nextLoc);
+        String realNextLoc = nextLoc.replaceAll("\"", "");
+        return (realNextLoc);
+    }
+
+    public static String getDescription(String newlocation, String desc, JsonNode locations) {
+        JsonNode newLoc = locations.findValue(newlocation);
+        String description = newLoc.findValue(desc).toString();
+        return (description);
     }
 
     //user input handling for verb
