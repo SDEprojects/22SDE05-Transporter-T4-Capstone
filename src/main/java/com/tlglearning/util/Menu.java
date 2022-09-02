@@ -1,16 +1,15 @@
 package com.tlglearning.util;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Menu {
 
     public static String helpMenu(Location location, Inventory inventory, ScenarioGenerator scenario){
-        String currentLocation = "Current Location: " + location.getName();
-        String exitN = "Exit North: " + location.getExit1To();
-        String exitS = "Exit South: " + location.getExit2To();
-        String exitE = "Exit East: " + location.getExit3To();
-        String exitW = "Exit West: " + location.getExit4To();
+        String currentLocation = "Current Location: " + location.getLocationName();
+        String exitN = "Exit North: " + location.getNorth();
+        String exitS = "Exit South: " + location.getSouth();
+        String exitE = "Exit East: " + location.getEast();
+        String exitW = "Exit West: " + location.getWest();
         String availableCMD = "Available Commands:\n" +
                 ">> move/go + <direction> will change your current location\n" +
                 ">> explore + <specific place> will inspect specific parts of a location\n" +

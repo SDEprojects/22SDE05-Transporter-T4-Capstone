@@ -1,0 +1,38 @@
+[{
+  "Logbook": {
+    "description": "",
+    "exploreLocation":"cabinet"
+  },
+  "Keys": {
+    "description": "Keys to the cabinet and closet",
+    "exploreLocation":"desk"
+  },
+  "Folder": {
+    "description": "Folder that contains a route plan",
+    "exploreLocation":"desk"
+  },
+  "Truck Key": {
+    "description": "Key to your truck",
+    "exploreLocation":"locker"
+  },
+  "Thermos": {
+    "description": "An empty thermos",
+    "exploreLocation":"locker"
+  },
+  "Soda": {
+    "description": "A bottle a soda",
+    "exploreLocation": "drink aisle"
+  },
+  "Snack": {
+    "description": "Delicious snack!!!!!",
+    "exploreLocation": "snack aisle"
+  },
+  "GPS": {
+    "description": "GPS that provides directions",
+    "exploreLocation":"cabinet"
+  },
+  "Radio": {
+    "description": "Communication radio",
+    "exploreLocation":"Closet"
+  }
+}]

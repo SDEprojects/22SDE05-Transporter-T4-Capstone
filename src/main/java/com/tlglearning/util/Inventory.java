@@ -1,15 +1,15 @@
 package com.tlglearning.util;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class Inventory {
-    private List<String> backpack;
+    private ArrayList<String> backpack;
 
-    public Inventory(List<String> backpack) {
-        this.backpack = backpack;
+    public Inventory() {
+        backpack = new ArrayList<>();
     }
 
-    public List<String> getBackpack() {
+    public ArrayList<String> getBackpack() {
         return backpack;
     }
 
