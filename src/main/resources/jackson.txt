@@ -1,0 +1,28 @@
+package com.tlglearning.client;
+
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tlglearning.util.Location;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+
+public class TransporterClient {
+
+    public static void main(String[] args) throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        File locationJson = new File("src/main/resources/location.json");
+        List<Location> newLocation = objectMapper.readValue(locationJson,
+                objectMapper.getTypeFactory().constructCollectionType(List.class, Location.class));
+
+        System.out.println(newLocation);
+        System.out.println(newLocation.get(2).getName());
+//        System.out.println(newLocation.getName());
+//        System.out.println(newLocation.getDescription());
+//        System.out.println(newLocation.getExit3());
+//        System.out.println(newLocation.getExit3To());
+    }
+}

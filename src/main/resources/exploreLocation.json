@@ -1,0 +1,36 @@
+[{
+  "Warehouse": {
+    "cabinet": "You see a Logbook",
+    "closet": "Closet is empty",
+    "desk": "You see a Key"
+  },
+  "Boss' Office": {
+    "boss": "Boss wakes up and tells you the next route plan is in the folder",
+    "desk": "You see a Folder"
+  },
+  "Front Office": {
+    "locker": "You see your Truck Key",
+    "desk": "No one is in the front desk",
+    "board": "Board is empty"
+  },
+  "Break Room": {
+    "refrigerator": "It is full of lunch boxes and energy drinks",
+    "locker": "You see a Thermos",
+    "coffee maker": "You get freshly brewed coffee"
+  },
+  "Gas Station": {
+    "snack aisle": "Rows and rows of Snack",
+    "drink aisle": "Door after door of different Soda",
+    "attendant": "Thank you for stopping, have a wonderful day!!!"
+  },
+  "HR Office": {
+    "teddy bear": "All dirty and torn, sitting in a corner.",
+    "complaint box": "Box is empty. You write a complaint about your boss for sleeping in office again",
+    "trash can": "You see a balled up paper. You un-ball it and see it's a note from your manager to fire you"
+  },
+  "Tech Office": {
+    "Cabinet": "You see a GPS",
+    "Laptop": "Broken laptop that should have been fixed 3 weeks ago",
+    "Closet": "You see a Radio"
+  }
+}]
