@@ -1,5 +1,5 @@
 [{
-  "Go": "go",
+  "go": "go",
     "move": "go",
     "jump": "go",
     "run": "go",
@@ -7,7 +7,7 @@
     "dance": "go",
     "hop": "go",
 
-    "Get" : "get",
+    "get" : "get",
     "grab": "get",
     "pickup": "get",
     "lift": "get",
