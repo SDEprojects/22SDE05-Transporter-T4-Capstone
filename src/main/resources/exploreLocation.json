@@ -1,36 +1,36 @@
 [{
-  "Warehouse": {
-    "cabinet": "You see a Logbook",
+  "warehouse": {
+    "cabinet": "You see a LOGBOOK",
     "closet": "Closet is empty",
-    "desk": "You see a Key"
+    "desk": "You see a KEY"
   },
-  "Boss' Office": {
+  "boss office": {
     "boss": "Boss wakes up and tells you the next route plan is in the folder",
-    "desk": "You see a Folder"
+    "desk": "You see a FOLDER"
   },
-  "Front Office": {
-    "locker": "You see your Truck Key",
+  "front office": {
+    "locker": "You see your TRUCK KEY",
     "desk": "No one is in the front desk",
     "board": "Board is empty"
   },
-  "Break Room": {
+  "break room": {
     "refrigerator": "It is full of lunch boxes and energy drinks",
-    "locker": "You see a Thermos",
-    "coffee maker": "You get freshly brewed coffee"
+    "locker": "You see a THERMOS",
+    "coffee maker": "You check the COFFEE pot to see if there is enough to fill your thermos"
   },
-  "Gas Station": {
-    "snack aisle": "Rows and rows of Snack",
-    "drink aisle": "Door after door of different Soda",
+  "gas station": {
+    "snack aisle": "Rows and rows of SNACKS",
+    "drink aisle": "Door after door of different SODAS",
     "attendant": "Thank you for stopping, have a wonderful day!!!"
   },
-  "HR Office": {
+  "hr office": {
     "teddy bear": "All dirty and torn, sitting in a corner.",
     "complaint box": "Box is empty. You write a complaint about your boss for sleeping in office again",
     "trash can": "You see a balled up paper. You un-ball it and see it's a note from your manager to fire you"
   },
-  "Tech Office": {
+  "tech office": {
     "Cabinet": "You see a GPS",
-    "Laptop": "Broken laptop that should have been fixed 3 weeks ago",
-    "Closet": "You see a Radio"
+    "Laptop": "You see your broken laptop that was supposed to be fixed 3 weeks ago",
+    "Closet": "You see a RADIO"
   }
 }]

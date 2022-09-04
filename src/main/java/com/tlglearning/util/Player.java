@@ -42,7 +42,7 @@ public class Player {
             System.out.println("That location is not explorable, please enter a valid explorable location");
             //loop back to userinput
         }
-        System.out.println(locationFinder(currentLocation.toString(), exploreLocation, locations));
+        System.out.println(newExploreLocation);
     }
 
     public void get(String current, String item, Location currentLocation, Inventory backpack){
@@ -58,7 +58,7 @@ public class Player {
             System.out.println("That item is not valid, please enter a valid item to add to your backpack");
             //loop back to userinput
         }
-        System.out.println(locationFinder(currentLocation.toString(), item, locations));
+        System.out.println(newItem);
         backpack.setBackpack(item);
         //loop back to userinput
     }

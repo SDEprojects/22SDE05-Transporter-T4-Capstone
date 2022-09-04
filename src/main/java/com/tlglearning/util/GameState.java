@@ -82,34 +82,34 @@ public class GameState {
         if (wordlist.size() < 2) {
             System.out.println("We need more than one word.");
         } else {
-            verb = wordlist.get(0);
             File commandJson = new File("src/main/resources/command.json");
             JsonNode verbage = parse(commandJson);
+
+            verb = wordlist.get(0);
             String verbHandler = userInputHandling(verb, verbage);
 
             wordlist.remove(0);
             noun = String.join(" ", wordlist);
+            String nounHandler = userInputHandling(noun, verbage);
 
             command.add(verbHandler);
-            command.add(noun);
+            command.add(nounHandler);
         }
         return command;
     }
 
     public static void action(List<String> toPlayer, Location currentLocation, Inventory backpack){
-        String verb = toPlayer.get(0);
-        String noun = toPlayer.get(1);
+        String verb = toPlayer.get(0).replaceAll("\"", "");
+        String noun = toPlayer.get(1).replaceAll("\"", "");
         Player player = new Player();
 
-        if (verb.equals("\"go\"")){
+        if (verb.equals("go")){
             player.move(currentLocation.getLocationName(), noun, currentLocation);
         } else if (verb.equals("explore")) {
-            System.out.println("explore");
+            player.explore(currentLocation.getLocationName(), noun, currentLocation);
         }else{
-            System.out.println("get");
+            player.get(currentLocation.getLocationName(), noun, currentLocation, backpack);
         }
-
-
     }
 
 
