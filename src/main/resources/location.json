@@ -1,6 +1,6 @@
 [
   {
-    "Truck": {
+    "truck": {
       "description": "This is your truck. It looks ready to hit the road, are you?",
       "north": null,
       "south": null,
@@ -14,42 +14,42 @@
       "east": "Boss' Office",
       "west": "Truck"
     },
-    "Front Office": {
+    "front office": {
       "description": "This is the front office where everyone checks in when they come in. There seems no one in the front office. You do see a employees LOCKER, a DESK and a bulletin BOARD",
       "north": "Warehouse",
       "south": null,
       "east": "Break Room",
       "west": "Gas Station"
     },
-    "Gas Station": {
+    "gas station": {
       "description": "This is gas station where trucks fill up for gas and people get their snacks. Looks like gas station is just restocked. You see a SNACK AISLE, a DRINK AISLE, and an ATTENDANT is in the counter playing with his phone",
       "north": "Truck",
       "south": null,
       "east": "Front Office",
       "west": null
     },
-    "Boss' Office": {
+    "boss office": {
       "description": "This is boss' office where you get your next trip information. You see your BOSS is again sleeping on his DESK",
       "north": null,
       "south": "Break Room",
       "east": "Tech Room",
       "west": "Warehouse"
     },
-    "Break Room": {
+    "break room": {
       "description": "This is a break room where people come to relax or eat on their breaks. Room seems to be full. Lots of people gathering around and talking to each other. You see a your LOCKER, a REFRIGERATOR and a COFFEE MAKER",
       "north": "Boss' Office",
       "south": "HR Office",
       "east": null,
       "west": "Front Office"
     },
-    "Tech Room": {
+    "tech room": {
       "description": "This is tech room, place for all the IT nerds to hangout. You see everyone is busy on their computer. You see a CABINET, a LAPTOP and a CLOSET",
       "north": null,
       "south": null,
       "east": null,
       "west": "Boss' Office"
     },
-    "HR Office": {
+    "hr office": {
       "description": "This is human resource room, place where pay check is made. You see everyone busy chatting with each other in big group. You see a TEDDY BEAR, COMPLAINT BOX and a TRASH CAN",
       "north": "Break Room",
       "south": null,

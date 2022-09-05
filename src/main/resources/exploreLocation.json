@@ -14,7 +14,7 @@
     "board": "Board is empty"
   },
   "break room": {
-    "refrigerator": "It is full of lunch boxes and energy drinks",
+    "refrigerator": "It is full of lunch boxes and energy drinks that aren't yours",
     "locker": "You see a THERMOS",
     "coffee maker": "You check the COFFEE pot to see if there is enough to fill your thermos"
   },

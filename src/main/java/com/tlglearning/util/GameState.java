@@ -21,7 +21,7 @@ public class GameState {
 
     public void gameInput(Scanner read, Location startingLocation, Inventory backpack,ScenarioGenerator startingScenario) {
         System.out.println("\nYou may use the inputs 'N' to start a new game. 'Q' to quit game. Also Type 'H' to look at" +
-                " instructions.\n>>>");
+                " instructions.\n>>> ");
         String input = read.next().toLowerCase();
         //switch case to get user input and perform the necessary commands
         switch (input) {
@@ -57,15 +57,15 @@ public class GameState {
         return listOfUserInput;
     }
 
-    public static List<String> runCommand(String input) throws IOException {
+    public static List<String> runCommand(String input, Location currentLocation, Inventory backpack,ScenarioGenerator startingScenario) throws IOException {
         List<String> listOfWords;
         List<String> toPlayer = new ArrayList<>();
         String lowstr = input.trim().toLowerCase();
 
         if (!lowstr.equals("q")) {
-            if (lowstr.equals(" ")) {
-                System.out.println("You must enter a command");
-            } else {
+            if (lowstr.equals("h")) {
+                System.out.println(helpMenu(currentLocation, backpack, startingScenario));
+            }else {
                 listOfWords = commandWords(lowstr);
                 toPlayer = processUserInput(listOfWords);
             }

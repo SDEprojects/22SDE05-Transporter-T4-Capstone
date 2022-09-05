@@ -17,15 +17,15 @@ public class TransporterClient {
     public static void main(String[] args) throws IOException {
         Scanner read = new Scanner(System.in);
         ArrayList<String> itemsNeeded = new ArrayList<>();
-        Location startingLocation = new Location();
+        Location currentLocation = new Location();
         Inventory backpack = new Inventory();
         ScenarioGenerator startingScenario = new ScenarioGenerator(
                 "New Mexico",
                 "Arizona",
                 "Washington", itemsNeeded);
 
-        startingLocation.setLocationName("Truck");
-        startingLocation.setEast("warehouse");
+        currentLocation.setLocationName("truck");
+        currentLocation.setEast("warehouse");
         itemsNeeded.add("Logbook");
         itemsNeeded.add("Keys");
         itemsNeeded.add("Folder");
@@ -38,7 +38,7 @@ public class TransporterClient {
         start.titleScreen();
 
         GameState gameStart = new GameState();
-        gameStart.gameInput(read, startingLocation, backpack, startingScenario);
+        gameStart.gameInput(read, currentLocation, backpack, startingScenario);
 
         BufferedReader in;
         String userInput;
@@ -48,9 +48,9 @@ public class TransporterClient {
         do {
             System.out.print("\nEnter command >>> ");
             userInput = in.readLine();
-            toPlayer = runCommand(userInput);
+            toPlayer = runCommand(userInput, currentLocation, backpack, startingScenario);
             if (!toPlayer.isEmpty()) {
-                action(toPlayer, startingLocation, backpack);
+                action(toPlayer, currentLocation, backpack);
             }
         } while (!"q".equals(userInput));
 
