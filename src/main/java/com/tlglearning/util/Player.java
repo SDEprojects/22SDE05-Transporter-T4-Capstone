@@ -19,14 +19,18 @@ public class Player {
             throw new RuntimeException(e);
         }
         String newLocation = locationFinder(current,nextLocation,locations);
-        if (newLocation.equals("null")){
-            System.out.println("This direction leads to nowhere, please try a different direction");
-            // loop back to userinput
+        if (newLocation == null ||newLocation.equals("null")){
+            System.out.println("That location is invalid.");
+            return;
         }else {
             currentLocation.setLocationName(newLocation);
+            currentLocation.setNorth(getDescription(newLocation, "north", locations));
+            currentLocation.setSouth(getDescription(newLocation, "south", locations));
+            currentLocation.setEast(getDescription(newLocation, "east", locations));
+            currentLocation.setWest(getDescription(newLocation, "west", locations));
+
             System.out.println(getDescription(newLocation, "description", locations));
         }
-        //loop back to userinput
     }
 
     public void explore(String current, String exploreLocation, Location currentLocation){
@@ -39,10 +43,11 @@ public class Player {
         }
         String newExploreLocation = locationFinder(current,exploreLocation,locations);
         if (newExploreLocation == null){
-            System.out.println("That location is not explorable, please enter a valid explorable location");
-            //loop back to userinput
+            System.out.println("That location is not explorable.");
         }
-        System.out.println(locationFinder(currentLocation.toString(), exploreLocation, locations));
+        if (newExploreLocation != null){
+            System.out.println(newExploreLocation);
+        }
     }
 
     public void get(String current, String item, Location currentLocation, Inventory backpack){
@@ -55,12 +60,12 @@ public class Player {
         }
         String newItem = locationFinder(current,item,locations);
         if (newItem == null){
-            System.out.println("That item is not valid, please enter a valid item to add to your backpack");
-            //loop back to userinput
+            System.out.println("That item is invalid.");
         }
-        System.out.println(locationFinder(currentLocation.toString(), item, locations));
-        backpack.setBackpack(item);
-        //loop back to userinput
+        if (item != null) {
+            System.out.println(newItem);
+            backpack.setBackpack(item);
+        }//do nothing
     }
 
 

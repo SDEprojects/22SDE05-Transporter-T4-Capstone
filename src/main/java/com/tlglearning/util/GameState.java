@@ -21,7 +21,7 @@ public class GameState {
 
     public void gameInput(Scanner read, Location startingLocation, Inventory backpack,ScenarioGenerator startingScenario) {
         System.out.println("\nYou may use the inputs 'N' to start a new game. 'Q' to quit game. Also Type 'H' to look at" +
-                " instructions.\n>>>");
+                " instructions.\n>>> ");
         String input = read.next().toLowerCase();
         //switch case to get user input and perform the necessary commands
         switch (input) {
@@ -35,7 +35,7 @@ public class GameState {
                 break;
             case "h":
                 System.out.println(helpMenu(startingLocation, backpack, startingScenario));
-                break;
+               return;
             default:
                 System.out.println("Not a valid input");
         }
@@ -57,15 +57,15 @@ public class GameState {
         return listOfUserInput;
     }
 
-    public static List<String> runCommand(String input) throws IOException {
+    public static List<String> runCommand(String input, Location currentLocation, Inventory backpack,ScenarioGenerator startingScenario) throws IOException {
         List<String> listOfWords;
         List<String> toPlayer = new ArrayList<>();
         String lowstr = input.trim().toLowerCase();
 
         if (!lowstr.equals("q")) {
-            if (lowstr.equals(" ")) {
-                System.out.println("You must enter a command");
-            } else {
+            if (lowstr.equals("h")) {
+                System.out.println(helpMenu(currentLocation, backpack, startingScenario));
+            }else {
                 listOfWords = commandWords(lowstr);
                 toPlayer = processUserInput(listOfWords);
             }
@@ -82,33 +82,51 @@ public class GameState {
         if (wordlist.size() < 2) {
             System.out.println("We need more than one word.");
         } else {
-            verb = wordlist.get(0);
             File commandJson = new File("src/main/resources/command.json");
             JsonNode verbage = parse(commandJson);
+
+            verb = wordlist.get(0);
             String verbHandler = userInputHandling(verb, verbage);
 
             wordlist.remove(0);
             noun = String.join(" ", wordlist);
+            String nounHandler = userInputHandling(noun, verbage);
 
             command.add(verbHandler);
-            command.add(noun);
+            command.add(nounHandler);
         }
         return command;
     }
 
     public static void action(List<String> toPlayer, Location currentLocation, Inventory backpack){
-        String verb = toPlayer.get(0);
-        String noun = toPlayer.get(1);
+        String verb = null;
+        if (toPlayer.get(0) != null) {
+            verb = toPlayer.get(0).replaceAll("\"", "");
+        }
+        String noun = null;
+        if (toPlayer.get(1) != null) {
+            noun = toPlayer.get(1).replaceAll("\"", "");
+        }
         Player player = new Player();
 
-        if (verb.equals("\"go\"")){
-            player.move(currentLocation.getLocationName(), noun, currentLocation);
-        } else if (verb.equals("explore")) {
-            System.out.println("explore");
-        }else{
-            System.out.println("get");
+        if (verb != null) {
+            switch (verb){
+                case "go":
+                    player.move(currentLocation.getLocationName(), noun, currentLocation);
+                    break;
+                case "explore":
+                    player.explore(currentLocation.getLocationName(), noun, currentLocation);
+                    break;
+                case "get":
+                    player.get(currentLocation.getLocationName(), noun, currentLocation, backpack);
+                    break;
+                default:
+                    System.out.println("Not a valid command, use go, explore, or get");
+            }
+        } else {
+            System.out.println("Not a valid command! Please try the command again or type 'h' for " +
+                    "help and to see list of valid commands");
         }
-
 
     }
 
