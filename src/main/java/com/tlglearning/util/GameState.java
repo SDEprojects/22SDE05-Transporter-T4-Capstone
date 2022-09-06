@@ -115,7 +115,7 @@ public class GameState {
                     player.move(currentLocation.getLocationName(), noun, currentLocation);
                     break;
                 case "explore":
-                    player.explore(currentLocation.getLocationName(), noun, currentLocation);
+                    player.explore(currentLocation.getLocationName(), noun, backpack);
                     break;
                 case "get":
                     player.get(currentLocation.getLocationName(), noun, currentLocation, backpack);
