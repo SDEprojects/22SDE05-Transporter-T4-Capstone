@@ -2,9 +2,12 @@ package com.tlglearning.util;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -14,38 +17,26 @@ import static com.tlglearning.util.JacksonParser.userInputHandling;
 import static com.tlglearning.util.Menu.helpMenu;
 
 public class InputHandling {
-//    public void gameInput(Scanner read, Location startingLocation, Inventory backpack, ScenarioGenerator startingScenario) {
-//        System.out.println("\nYou may use the inputs 'N' to start a new game. 'Q' to quit game. Also Type 'H' to look at" +
-//                " instructions.\n>>> ");
-//        String input = read.next().toLowerCase();
-//        //switch case to get user input and perform the necessary commands
-//        switch (input) {
-//            case "q":
-//                System.out.println("quitting....");
-//                System.exit(0);
-//                break;
-//            case "n":
-//                System.out.println("New game started");
-//                newGame();
-//                break;
-//            case "h":
-//                System.out.println(helpMenu(startingLocation, backpack, startingScenario));
-//                return;
-//            default:
-//                System.out.println("Not a valid input");
-//        }
-//
-//    }
-
-    public static List<String> commandWords(String input) {
-        List<String> listOfUserInput = new ArrayList<>();
-        String[] words = input.split(" ");
-
-        for (String word : words) {
-            listOfUserInput.add(word);
+    public void gameStart() throws IOException {
+        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("\n\nYou may use the inputs 'N' to start a new game. 'Q' to quit game.\n>>> ");
+        String input = in.readLine().toLowerCase();
+        //switch case to get user input and perform the necessary commands
+        switch (input) {
+            case "q":
+                System.out.println("quitting....");
+                System.exit(0);
+                break;
+            case "n":
+                System.out.println("New game started");
+                newGame();
+                break;
+            default:
+                System.out.println("Not a valid input");
         }
-        return listOfUserInput;
     }
+
+
 
     public static List<String> runCommand(String input, Location currentLocation, Inventory backpack,ScenarioGenerator startingScenario) throws IOException {
         List<String> listOfWords;
@@ -67,7 +58,12 @@ public class InputHandling {
         return toPlayer;
     }
 
-    public static List<String> processUserInput(List<String> wordlist) throws IOException {
+    private static List<String> commandWords(String input) {
+        String[] words = input.split(" ");
+
+        return new ArrayList<>(Arrays.asList(words));
+    }
+    private static List<String> processUserInput(List<String> wordlist) throws IOException {
         String verb;
         String noun;
         List<String> command = new ArrayList<>();
