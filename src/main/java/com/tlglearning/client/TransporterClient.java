@@ -53,7 +53,7 @@ public class TransporterClient {
                 action(toPlayer, currentLocation, backpack);
             }
         } while (!"q".equals(userInput));
-        System.out.println("Thanks for playing");
+        System.out.println("Thanks for playing, exiting.....");
 
     }
 }

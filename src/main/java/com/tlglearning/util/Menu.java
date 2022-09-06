@@ -41,15 +41,16 @@ public class Menu {
                 exitS + '\n' +
                 exitE + '\n' +
                 exitW + '\n' +
-                "***********************************************************";
+                "**********************************************************";
     }
 
     private static String availableCMD(){
-        return "Available Commands:\n" +
+        return "********************Available Commands********************\n" +
                 ">> move/go + <direction> will change your current location\n" +
                 ">> explore + <specific place> will inspect specific parts of a location\n" +
                 ">> get/pickup + <item name> will add the item to your backpack\n" +
-                ">> Pressing 'q' at anytime will exit you from the game\n";
+                ">> Pressing 'q' at anytime will exit you from the game\n" +
+                "**********************************************************";
     }
 
     private static String showBackpack(Inventory inventory){
@@ -58,9 +59,11 @@ public class Menu {
     }
 
     private static String showScenarioDetails(ScenarioGenerator scenario){
-        return "Home Office: " + scenario.getOfficeLocation() +
+        return "*********************Scenario Details*********************\n" +
+                "Home Office: " + scenario.getOfficeLocation() +
                 "\nPickup Location: " + scenario.getPickupLocation() +
                 "\nDelivery Location " + scenario.getDeliveryLocation() +
-                "\n\nItems needed to get on the road:\n" + scenario.getItemsNeeded() + "\n";
+                "\n\nItems needed to get on the road:\n" + scenario.getItemsNeeded() + "\n"+
+                "**********************************************************";
     }
 }
