@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import static com.tlglearning.util.GameState.action;
-import static com.tlglearning.util.GameState.runCommand;
+import static com.tlglearning.util.InputHandling.runCommand;
 
 public class TransporterClient {
 
@@ -37,8 +37,8 @@ public class TransporterClient {
         TitleScreen start = new TitleScreen();
         start.titleScreen();
 
-        GameState gameStart = new GameState();
-        gameStart.gameInput(read, currentLocation, backpack, startingScenario);
+//        GameState gameStart = new GameState();
+//        gameStart.gameInput(read, currentLocation, backpack, startingScenario);
 
         BufferedReader in;
         String userInput;
@@ -46,13 +46,14 @@ public class TransporterClient {
         //get users input and go through run command
         in = new BufferedReader(new InputStreamReader(System.in));
         do {
-            System.out.print("\nEnter command >>> ");
+            System.out.print("\nEnter command, or type 'h' for help options >>> ");
             userInput = in.readLine();
             toPlayer = runCommand(userInput, currentLocation, backpack, startingScenario);
             if (!toPlayer.isEmpty()) {
                 action(toPlayer, currentLocation, backpack);
             }
         } while (!"q".equals(userInput));
+        System.out.println("Thanks for playing");
 
     }
 }
