@@ -33,6 +33,7 @@ public class InputHandling {
                 break;
             default:
                 System.out.println("Not a valid input");
+                gameStart();
         }
     }
 
