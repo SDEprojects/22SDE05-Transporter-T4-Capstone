@@ -26,11 +26,11 @@
   "hr office": {
     "teddy bear": "All dirty and torn, sitting in a corner.",
     "complaint box": "Box is empty. You write a complaint about your boss for sleeping in office again",
-    "trash can": "You see a balled up paper. You un-ball it and see it's a note from your manager to fire you"
+    "trash can": "You see a balled up paper. You un-ball it and see it's a note from your manager trying to fire you again..."
   },
-  "tech office": {
-    "Cabinet": "You see a GPS",
-    "Laptop": "You see your broken laptop that was supposed to be fixed 3 weeks ago",
-    "Closet": "You see a RADIO"
+  "tech room": {
+    "cabinet": "You see a GPS",
+    "laptop": "You see your broken laptop that was supposed to be fixed 3 weeks ago",
+    "closet": "You see a RADIO"
   }
 }]

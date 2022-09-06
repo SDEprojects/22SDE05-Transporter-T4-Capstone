@@ -35,7 +35,7 @@ public class GameState {
                 break;
             case "h":
                 System.out.println(helpMenu(startingLocation, backpack, startingScenario));
-                break;
+               return;
             default:
                 System.out.println("Not a valid input");
         }
@@ -99,17 +99,35 @@ public class GameState {
     }
 
     public static void action(List<String> toPlayer, Location currentLocation, Inventory backpack){
-        String verb = toPlayer.get(0).replaceAll("\"", "");
-        String noun = toPlayer.get(1).replaceAll("\"", "");
+        String verb = null;
+        if (toPlayer.get(0) != null) {
+            verb = toPlayer.get(0).replaceAll("\"", "");
+        }
+        String noun = null;
+        if (toPlayer.get(1) != null) {
+            noun = toPlayer.get(1).replaceAll("\"", "");
+        }
         Player player = new Player();
 
-        if (verb.equals("go")){
-            player.move(currentLocation.getLocationName(), noun, currentLocation);
-        } else if (verb.equals("explore")) {
-            player.explore(currentLocation.getLocationName(), noun, currentLocation);
-        }else{
-            player.get(currentLocation.getLocationName(), noun, currentLocation, backpack);
+        if (verb != null) {
+            switch (verb){
+                case "go":
+                    player.move(currentLocation.getLocationName(), noun, currentLocation);
+                    break;
+                case "explore":
+                    player.explore(currentLocation.getLocationName(), noun, currentLocation);
+                    break;
+                case "get":
+                    player.get(currentLocation.getLocationName(), noun, currentLocation, backpack);
+                    break;
+                default:
+                    System.out.println("Not a valid command, use go, explore, or get");
+            }
+        } else {
+            System.out.println("Not a valid command! Please try the command again or type 'h' for " +
+                    "help and to see list of valid commands");
         }
+
     }
 
 

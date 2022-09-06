@@ -13,7 +13,8 @@ public class Menu {
         String availableCMD = "Available Commands:\n" +
                 ">> move/go + <direction> will change your current location\n" +
                 ">> explore + <specific place> will inspect specific parts of a location\n" +
-                ">> get/pickup + <item name> will add the item to your backpack\n";
+                ">> get/pickup + <item name> will add the item to your backpack\n" +
+                ">> Pressing 'q' at anytime will exit you from the game\n";
         List<String> backpack = inventory.getBackpack();
         String backpackStr = "\nYour backpack has the following items: \n" + backpack + "\n";
         String currentScenario = "Home Office: " + scenario.getOfficeLocation() +
