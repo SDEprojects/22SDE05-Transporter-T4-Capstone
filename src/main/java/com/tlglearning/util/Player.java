@@ -4,8 +4,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import static com.tlglearning.util.JacksonParser.*;
 
@@ -21,7 +19,8 @@ public class Player {
             throw new RuntimeException(e);
         }
         String newLocation = locationFinder(current,nextLocation,locations);
-        if (newLocation == null){
+        if (newLocation == null ||newLocation.equals("null")){
+            System.out.println("That location is invalid.");
             return;
         }else {
             currentLocation.setLocationName(newLocation);
@@ -44,9 +43,11 @@ public class Player {
         }
         String newExploreLocation = locationFinder(current,exploreLocation,locations);
         if (newExploreLocation == null){
-            System.out.println("That location is not explorable, please enter a valid explorable location");
+            System.out.println("That location is not explorable.");
         }
-        System.out.println(newExploreLocation);
+        if (newExploreLocation != null){
+            System.out.println(newExploreLocation);
+        }
     }
 
     public void get(String current, String item, Location currentLocation, Inventory backpack){
@@ -59,7 +60,7 @@ public class Player {
         }
         String newItem = locationFinder(current,item,locations);
         if (newItem == null){
-            System.out.println("That item is not valid, please enter a valid item to add to your backpack");
+            System.out.println("That item is invalid.");
         }
         if (item != null) {
             System.out.println(newItem);
