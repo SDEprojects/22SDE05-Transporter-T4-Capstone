@@ -26,10 +26,10 @@ public class GameState {
 
         currentLocation.setLocationName("truck");
         currentLocation.setEast("warehouse");
-        itemsNeeded.add("Logbook");
-        itemsNeeded.add("Keys");
-        itemsNeeded.add("Folder");
-        itemsNeeded.add("Truck Key");
+        itemsNeeded.add("logbook");
+        itemsNeeded.add("key");
+        itemsNeeded.add("folder");
+        itemsNeeded.add("truck key");
 
         BufferedReader in;
         String userInput;
@@ -41,7 +41,7 @@ public class GameState {
             userInput = in.readLine();
             toPlayer = runCommand(userInput, currentLocation, backpack, startingScenario);
             if (!toPlayer.isEmpty()) {
-                action(toPlayer, currentLocation, backpack);
+                action(toPlayer, currentLocation, backpack, startingScenario);
             }
         } while (!"q".equals(userInput));
         System.out.println("Thanks for playing, exiting.....");
@@ -49,7 +49,7 @@ public class GameState {
 
     }
 
-    private static void action(List<String> toPlayer, Location currentLocation, Inventory backpack){
+    private static void action(List<String> toPlayer, Location currentLocation, Inventory backpack, ScenarioGenerator scenario) {
         String verb = null;
         if (toPlayer.get(0) != null) {
             verb = toPlayer.get(0).replaceAll("\"", "");
@@ -61,27 +61,54 @@ public class GameState {
         Player player = new Player();
 
         if (verb != null) {
-            switch (verb){
-                case "go":
-                    player.move(currentLocation.getLocationName(), noun, currentLocation);
-                    break;
-                case "explore":
-                    player.explore(currentLocation.getLocationName(), noun, backpack);
-                    break;
-                case "get":
-                    player.get(currentLocation.getLocationName(), noun, currentLocation, backpack);
-                    break;
-                default:
-                    System.out.println("Not a valid command, use go, explore, or get");
+            if (verb.equals("start")) {
+                startDriving(currentLocation, backpack, scenario);
+            } else {
+                switch (verb) {
+                    case "go":
+                        player.move(currentLocation.getLocationName(), noun, currentLocation);
+                        break;
+                    case "explore":
+                        player.explore(currentLocation.getLocationName(), noun, backpack);
+                        break;
+                    case "get":
+                        player.get(currentLocation.getLocationName(), noun, currentLocation, backpack);
+                        break;
+                    default:
+                        System.out.println("Not a valid command, use go, explore, or get");
+                }
             }
         } else {
             System.out.println("Not a valid command! Please try the command again or type 'h' for " +
                     "help and to see list of valid commands");
         }
-
     }
 
 
+    private static void startDriving(Location currentLocation,Inventory backpack, ScenarioGenerator scenario) {
+        List<String> inventory = new ArrayList<>(backpack.getBackpack());
+        List<String> required = new ArrayList<>(scenario.getItemsNeeded());
+        List<String> needed = new ArrayList<>();
+
+        if (currentLocation.getLocationName().equals("truck")){
+            for (String item : required) {
+                if (inventory.contains(item)) {
+                    //do nothing
+                } else {
+                    needed.add(item);
+                }
+            }
+            if (needed.isEmpty()) {
+                System.out.println("Congrats you are on your way!!!!");
+                //call driving class or function here
+            } else {
+                System.out.println("You cannot start driving you still need to find:\n " + needed);
+                needed.clear();
+            }
+        }else {
+            System.out.println("You must be at the truck to start driving");
+        }
+    }
 }
 
 
