@@ -33,6 +33,10 @@ public class JacksonParser {
         return (newLoc.findValue(desc).toString());
     }
 
+    public static JsonNode getScenario(String rand, JsonNode locations){
+        return locations.findValue(rand);
+    }
+
     //user input handling for verb
     public static String userInputHandling(String verb, JsonNode verbs) {
         JsonNode verbNode = verbs.findValue(verb);
