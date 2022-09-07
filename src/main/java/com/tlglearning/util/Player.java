@@ -4,49 +4,49 @@ import com.fasterxml.jackson.databind.JsonNode;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.function.IntBinaryOperator;
 
 import static com.tlglearning.util.JacksonParser.*;
 
 public class Player {
-    
-    public void move(String current, String nextLocation, Location currentLocation) {
-        JsonNode locations;
-        File locationJson = new File("src/main/resources/location.json");
+    private final JsonNode moveLocation;
+    private final JsonNode exploreLocation;
+    private final JsonNode items;
+
+    public Player(){
         try {
-            locations = parse(locationJson);
+            File locationJson = new File("src/main/resources/location.json");
+            moveLocation = parse(locationJson);
+            File exploreLocationJson = new File("src/main/resources/exploreLocation.json");
+            exploreLocation = parse(exploreLocationJson);
+            File itemJson = new File("src/main/resources/items.json");
+            items = parse(itemJson);
         } catch (IOException e) {
             throw new RuntimeException(e);
-        }
-        String newLocation = locationFinder(current, nextLocation, locations);
-        if (newLocation == null || newLocation.equals("null")) {
-            System.out.println("That location is invalid.");
-            return;
-        } else {
-            currentLocation.setLocationName(newLocation);
-            currentLocation.setNorth(getDescription(newLocation, "north", locations));
-            currentLocation.setSouth(getDescription(newLocation, "south", locations));
-            currentLocation.setEast(getDescription(newLocation, "east", locations));
-            currentLocation.setWest(getDescription(newLocation, "west", locations));
-
-            System.out.println(getDescription(newLocation, "description", locations));
         }
     }
 
-    public void explore(String current, String exploreLocation, Inventory backpack) {
-        JsonNode locations;
-        File locationJson = new File("src/main/resources/exploreLocation.json");
-        try {
-            locations = parse(locationJson);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+    public void move(String current, String nextLocation, Location currentLocation) {
+        String newLocation = locationFinder(current, nextLocation, moveLocation);
+        if (newLocation == null || newLocation.equals("null")) {
+            System.out.println("That location is invalid.");
+        } else {
+            currentLocation.setLocationName(newLocation);
+            currentLocation.setNorth(getDescription(newLocation, "north", moveLocation));
+            currentLocation.setSouth(getDescription(newLocation, "south", moveLocation));
+            currentLocation.setEast(getDescription(newLocation, "east", moveLocation));
+            currentLocation.setWest(getDescription(newLocation, "west", moveLocation));
+
+            System.out.println(getDescription(newLocation, "description", moveLocation));
         }
-        String newExploreLocation = locationFinder(current, exploreLocation, locations);
+    }
+
+    public void explore(String current, String interestLocation, Inventory backpack) {
+        String newExploreLocation = locationFinder(current, interestLocation, exploreLocation);
         if (newExploreLocation == null) {
             System.out.println("That location is not explorable.");
         }
         if (newExploreLocation != null) {
-            if (exploreLocation.equals("cabinet") || exploreLocation.equals("closet") || exploreLocation.equals("locker")) {
+            if (interestLocation.equals("cabinet") || interestLocation.equals("closet") || interestLocation.equals("locker")) {
                 boolean hasKey = backpack.getBackpack().contains("key");
                 if (hasKey) {
                     System.out.println(newExploreLocation);
@@ -59,15 +59,8 @@ public class Player {
         }
     }
 
-    public void get(String current, String item, Location currentLocation, Inventory backpack) {
-        JsonNode locations;
-        File locationJson = new File("src/main/resources/items.json");
-        try {
-            locations = parse(locationJson);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        String newItem = locationFinder(current, item, locations);
+    public void get(String current, String item, Inventory backpack) {
+        String newItem = locationFinder(current, item, items);
         if (newItem == null) {
             System.out.println("That item is invalid.");
         }

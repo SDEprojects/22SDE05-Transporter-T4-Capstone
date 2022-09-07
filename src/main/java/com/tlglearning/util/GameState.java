@@ -24,7 +24,7 @@ public class GameState {
         Location currentLocation = new Location();
         Inventory backpack = new Inventory();
         ScenarioGenerator startingScenario = newScenario();
-
+        Player player = new Player();
 
         BufferedReader in;
         String userInput;
@@ -36,7 +36,7 @@ public class GameState {
             userInput = in.readLine();
             toPlayer = runCommand(userInput, currentLocation, backpack, startingScenario);
             if (!toPlayer.isEmpty()) {
-                action(toPlayer, currentLocation, backpack, startingScenario);
+                action(toPlayer, currentLocation, backpack, startingScenario, player);
             }
         } while (!"q".equals(userInput));
         System.out.println("Thanks for playing, exiting.....");
@@ -44,7 +44,7 @@ public class GameState {
 
     }
 
-    private static void action(List<String> toPlayer, Location currentLocation, Inventory backpack, ScenarioGenerator scenario) {
+    private static void action(List<String> toPlayer, Location currentLocation, Inventory backpack, ScenarioGenerator scenario, Player player) {
         String verb = null;
         if (toPlayer.get(0) != null) {
             verb = toPlayer.get(0).replaceAll("\"", "");
@@ -53,7 +53,6 @@ public class GameState {
         if (toPlayer.get(1) != null) {
             noun = toPlayer.get(1).replaceAll("\"", "");
         }
-        Player player = new Player();
 
         if (verb != null) {
             if (verb.equals("start")) {
@@ -67,7 +66,7 @@ public class GameState {
                         player.explore(currentLocation.getLocationName(), noun, backpack);
                         break;
                     case "get":
-                        player.get(currentLocation.getLocationName(), noun, currentLocation, backpack);
+                        player.get(currentLocation.getLocationName(), noun, backpack);
                         break;
                     case "drive":
 //                        truck.drive(scenario.getOfficeLocation(), noun, scenario);
@@ -87,6 +86,7 @@ public class GameState {
         List<String> inventory = new ArrayList<>(backpack.getBackpack());
         List<String> required = new ArrayList<>(scenario.getItemsNeeded());
         List<String> needed = new ArrayList<>();
+
 
         if (currentLocation.getLocationName().equals("truck")){
             for (String item : required) {
