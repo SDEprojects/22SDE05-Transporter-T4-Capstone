@@ -13,8 +13,6 @@ import static com.tlglearning.util.JacksonParser.getScenario;
 import static com.tlglearning.util.JacksonParser.parse;
 
 public class GameState {
-    //create scanner obj to read user input
-
 
     //CTOR
     public GameState() {
@@ -32,14 +30,18 @@ public class GameState {
         //get users input and go through run command
         in = new BufferedReader(new InputStreamReader(System.in));
         do {
-            System.out.print("\nEnter command, or type 'h' for help options >>> ");
+            System.out.print(PrettyText.CYAN.getColor()+
+                    "\nEnter command, or type 'h' for help options >>> "+
+                    PrettyText.RESET.getColor());
             userInput = in.readLine();
             toPlayer = runCommand(userInput, currentLocation, backpack, startingScenario);
             if (!toPlayer.isEmpty()) {
                 action(toPlayer, currentLocation, backpack, startingScenario, player);
             }
         } while (!"q".equals(userInput));
-        System.out.println("Thanks for playing, exiting.....");
+        System.out.println(PrettyText.CYAN.getColor()+
+                "Thanks for playing, exiting....."+
+                PrettyText.RESET.getColor());
 
 
     }
@@ -72,12 +74,16 @@ public class GameState {
 //                        truck.drive(scenario.getOfficeLocation(), noun, scenario);
                         break;
                     default:
-                        System.out.println("Not a valid command, use go, explore, or get");
+                        System.out.println(PrettyText.RED.getColor()+
+                                "Not a valid command, use go, explore, or get"+
+                                PrettyText.RESET.getColor());
                 }
             }
         } else {
-            System.out.println("Not a valid command! Please try the command again or type 'h' for " +
-                    "help and to see list of valid commands");
+            System.out.println(PrettyText.RED.getColor()+
+                    "Not a valid command! Please try the command again or type 'h' for " +
+                    "help and to see list of valid commands"+
+                    PrettyText.RESET.getColor());
         }
     }
 

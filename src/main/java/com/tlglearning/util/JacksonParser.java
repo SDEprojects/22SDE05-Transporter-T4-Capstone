@@ -22,8 +22,10 @@ public class JacksonParser {
             currentLoc = locations.findValue(current);
             nextLoc = (currentLoc.findValue(direction).toString()).replaceAll("\"", "");
         } catch (Exception e) {
-            System.out.println("Not a valid command! Please try the command again or type 'h' for " +
-                    "help and to see list of valid commands");
+            System.out.println(PrettyText.RED.getColor()+
+                    "Not a valid command! Please try the command again or type 'h' for " +
+                    "help and to see list of valid commands"+
+                    PrettyText.RESET.getColor());
         }
         return nextLoc;
     }
