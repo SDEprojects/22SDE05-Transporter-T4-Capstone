@@ -16,30 +16,42 @@ import static com.tlglearning.util.JacksonParser.parse;
 import static com.tlglearning.util.JacksonParser.userInputHandling;
 import static com.tlglearning.util.Menu.helpMenu;
 
+
 public class InputHandling {
+
     public void gameStart() throws IOException {
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println("\n\nYou may use the inputs 'N' to start a new game. 'Q' to quit game.\n>>> ");
+        System.out.println(PrettyText.CYAN.getColor() +
+                "\n\nYou may use the inputs 'N' to start a new game. 'Q' to quit game.\n>>> "
+                + PrettyText.RESET.getColor());
         String input = in.readLine().toLowerCase();
+
         //switch case to get user input and perform the necessary commands
         switch (input) {
             case "q":
-                System.out.println("quitting....");
+                System.out.println(PrettyText.CYAN.getColor() +
+                        "quitting...." +
+                        PrettyText.RESET.getColor());
                 System.exit(0);
                 break;
             case "n":
-                System.out.println("New game started");
+                System.out.println(PrettyText.CYAN.getColor() +
+                        "New game started" +
+                        PrettyText.RESET.getColor());
+                clearScreen();
                 newGame();
+
                 break;
             default:
-                System.out.println("Not a valid input");
+                System.out.println(PrettyText.RED.getColor() +
+                        "Not a valid input" +
+                        PrettyText.RESET.getColor());
                 gameStart();
         }
     }
 
 
-
-    public static List<String> runCommand(String input, Location currentLocation, Inventory backpack,ScenarioGenerator startingScenario) throws IOException {
+    public static List<String> runCommand(String input, Location currentLocation, Inventory backpack, ScenarioGenerator startingScenario) throws IOException {
         List<String> listOfWords;
         List<String> toPlayer = new ArrayList<>();
         String lowstr = input.trim().toLowerCase();
@@ -47,9 +59,12 @@ public class InputHandling {
 
         if (!lowstr.equals("q")) {
             if (lowstr.equals("h")) {
+                clearScreen();
                 helpMenu(read, currentLocation, backpack, startingScenario);
             } else if (lowstr.equals("n")) {
-                System.out.println("New game started");
+                System.out.println(PrettyText.CYAN.getColor()
+                        + "New game started" +
+                        PrettyText.RESET.getColor());
                 newGame();
             } else {
                 listOfWords = commandWords(lowstr);
@@ -64,6 +79,7 @@ public class InputHandling {
 
         return new ArrayList<>(Arrays.asList(words));
     }
+
     private static List<String> processUserInput(List<String> wordlist) throws IOException {
         String verb;
         String noun;
@@ -71,7 +87,9 @@ public class InputHandling {
 
 
         if (wordlist.size() < 2) {
-            System.out.println("We need more than one word.");
+            System.out.println(PrettyText.RED.getColor() +
+                    "We need more than one word."
+                    + PrettyText.RESET.getColor());
         } else {
             File commandJson = new File("src/main/resources/command.json");
             JsonNode verbage = parse(commandJson);
@@ -88,4 +106,17 @@ public class InputHandling {
         }
         return command;
     }
+
+    public static void clearScreen() {
+        String os = System.getProperty("os.name").toLowerCase();
+        ProcessBuilder process = (os.contains("windows")) ?
+                new ProcessBuilder("cmd", "/c", "cls") :
+                new ProcessBuilder("clear");
+        try {
+            process.inheritIO().start().waitFor();
+        } catch (InterruptedException | IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

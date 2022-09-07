@@ -28,7 +28,9 @@ public class Player {
     public void move(String current, String nextLocation, Location currentLocation) {
         String newLocation = locationFinder(current, nextLocation, moveLocation);
         if (newLocation == null || newLocation.equals("null")) {
-            System.out.println("That location is invalid.");
+            System.out.println(PrettyText.RED.getColor()+
+                    "That location is invalid."+
+                    PrettyText.RESET.getColor());
         } else {
             currentLocation.setLocationName(newLocation);
             currentLocation.setNorth(getDescription(newLocation, "north", moveLocation));
@@ -43,7 +45,9 @@ public class Player {
     public void explore(String current, String interestLocation, Inventory backpack) {
         String newExploreLocation = locationFinder(current, interestLocation, exploreLocation);
         if (newExploreLocation == null) {
-            System.out.println("That location is not explorable.");
+            System.out.println(PrettyText.RED.getColor()+
+                    "That location is not explorable."+
+                    PrettyText.RESET.getColor());
         }
         if (newExploreLocation != null) {
             if (interestLocation.equals("cabinet") || interestLocation.equals("closet") || interestLocation.equals("locker")) {
@@ -51,7 +55,9 @@ public class Player {
                 if (hasKey) {
                     System.out.println(newExploreLocation);
                 } else {
-                    System.out.println("You need the key in the warehouse desk to open this");
+                    System.out.println(PrettyText.RED.getColor()+
+                            "You need the key in the warehouse desk to open this"+
+                            PrettyText.RESET.getColor());
                 }
             } else {
                 System.out.println(newExploreLocation);
@@ -62,7 +68,9 @@ public class Player {
     public void get(String current, String item, Inventory backpack) {
         String newItem = locationFinder(current, item, items);
         if (newItem == null) {
-            System.out.println("That item is invalid.");
+            System.out.println(PrettyText.RED.getColor()+
+                    "That item is invalid."+
+                    PrettyText.RESET.getColor());
         }
         if (item != null) {
             if (item.equals("coffee")) {

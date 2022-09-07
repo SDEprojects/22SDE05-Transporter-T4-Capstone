@@ -25,7 +25,9 @@ public class Menu {
                 System.out.println(showScenarioDetails(scenario));
                 break;
             default:
-                System.out.println("Not a valid input");
+                System.out.println(PrettyText.RED.getColor()+
+                        "Not a valid input"+
+                        PrettyText.RESET.getColor());
         }
     }
 
