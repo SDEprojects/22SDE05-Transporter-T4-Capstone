@@ -9,8 +9,7 @@ import java.util.function.IntBinaryOperator;
 import static com.tlglearning.util.JacksonParser.*;
 
 public class Player {
-
-
+    
     public void move(String current, String nextLocation, Location currentLocation) {
         JsonNode locations;
         File locationJson = new File("src/main/resources/location.json");

@@ -7,6 +7,8 @@
   "dance": "go",
   "hop": "go",
 
+  "drive": "drive",
+
   "get" : "get",
   "grab": "get",
   "pickup": "get",
