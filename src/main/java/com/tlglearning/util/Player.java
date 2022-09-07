@@ -11,6 +11,7 @@ public class Player {
     private final JsonNode moveLocation;
     private final JsonNode exploreLocation;
     private final JsonNode items;
+    private final JsonNode stateLocation;
 
     public Player(){
         try {
@@ -20,6 +21,8 @@ public class Player {
             exploreLocation = parse(exploreLocationJson);
             File itemJson = new File("src/main/resources/items.json");
             items = parse(itemJson);
+            File stateLocationJson = new File("src/main/resources/states.json");
+            stateLocation = parse(stateLocationJson);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -86,5 +89,37 @@ public class Player {
                 backpack.setBackpack(item);
             }//do nothing
         }
+    }
+    public void drive(String current, String nextLocation, Location currentLocation) throws IOException {
+        InputHandling gameStart = new InputHandling();
+        String newLocation = locationFinder(current, nextLocation, stateLocation);
+
+        if(newLocation == null || newLocation.equals("null")) {
+            System.out.println("Cannot travel there!!!");
+            return;
+        } else if(newLocation.equals("mexico") || newLocation.equals("canada")) {
+            System.out.println("You cross the international border without passport. You were not able to return back. GAME OVER!!!!!");
+            gameStart.gameStart();
+        } else {
+            currentLocation.setLocationName(newLocation);
+            currentLocation.setNorth(getDescription(newLocation, "north", stateLocation));
+            currentLocation.setSouth(getDescription(newLocation, "south", stateLocation));
+            currentLocation.setEast(getDescription(newLocation, "east", stateLocation));
+            currentLocation.setWest(getDescription(newLocation, "west", stateLocation));
+
+            System.out.println(getDescription(newLocation, "description", stateLocation));
+        }
+
+    }
+
+    public void initializeDrive(Location currentLocation, ScenarioGenerator scenario) {
+        String newLocation = scenario.getOfficeLocation().replaceAll("\"", "");
+        currentLocation.setLocationName(newLocation);
+        currentLocation.setNorth(getDescription(newLocation, "north", stateLocation));
+        currentLocation.setSouth(getDescription(newLocation, "south", stateLocation));
+        currentLocation.setEast(getDescription(newLocation, "east", stateLocation));
+        currentLocation.setWest(getDescription(newLocation, "west", stateLocation));
+
+        System.out.println(getDescription(newLocation, "description", stateLocation));
     }
 }

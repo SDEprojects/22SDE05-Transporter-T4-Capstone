@@ -46,7 +46,7 @@ public class GameState {
 
     }
 
-    private static void action(List<String> toPlayer, Location currentLocation, Inventory backpack, ScenarioGenerator scenario, Player player) {
+    private static void action(List<String> toPlayer, Location currentLocation, Inventory backpack, ScenarioGenerator scenario, Player player) throws IOException {
         String verb = null;
         if (toPlayer.get(0) != null) {
             verb = toPlayer.get(0).replaceAll("\"", "");
@@ -57,8 +57,11 @@ public class GameState {
         }
 
         if (verb != null) {
-            if (verb.equals("start")) {
-                startDriving(currentLocation, backpack, scenario);
+            //Check for error if noun is not driving
+            if(verb.equals("start") && noun == null){
+                System.out.println("Correct command is 'start driving'");
+            } else if (verb.equals("start") && noun.equals("driving")) {
+                startDriving(currentLocation, backpack, scenario, player);
             } else {
                 switch (verb) {
                     case "go":
@@ -71,7 +74,7 @@ public class GameState {
                         player.get(currentLocation.getLocationName(), noun, backpack);
                         break;
                     case "drive":
-//                        truck.drive(scenario.getOfficeLocation(), noun, scenario);
+                        player.drive(currentLocation.getLocationName(), noun, currentLocation);
                         break;
                     default:
                         System.out.println(PrettyText.RED.getColor()+
@@ -88,7 +91,7 @@ public class GameState {
     }
 
 
-    private static void startDriving(Location currentLocation,Inventory backpack, ScenarioGenerator scenario) {
+    private static void startDriving(Location currentLocation, Inventory backpack, ScenarioGenerator scenario, Player player) {
         List<String> inventory = new ArrayList<>(backpack.getBackpack());
         List<String> required = new ArrayList<>(scenario.getItemsNeeded());
         List<String> needed = new ArrayList<>();
@@ -104,7 +107,7 @@ public class GameState {
             }
             if (needed.isEmpty()) {
                 System.out.println("Congrats you are on your way!!!!");
-//                intializeDriving(currentLocation, scenario);
+                player.initializeDrive(currentLocation, scenario);
             } else {
                 System.out.println("You cannot start driving you still need to find:\n " + needed);
                 needed.clear();
