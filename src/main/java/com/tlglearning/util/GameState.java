@@ -91,11 +91,11 @@ public class GameState {
         List<String> needed = new ArrayList<>();
 
         if (currentLocation.getLocationName().equals("truck")){
-            for (int i = 0; i < required.size(); i++) {
-                if (inventory.contains(required.get(i))) {
+            for (String item : required) {
+                if (inventory.contains(item)) {
                     //do nothing
-                }else {
-                    needed.add(required.get(i));
+                } else {
+                    needed.add(item);
                 }
             }
             if (needed.isEmpty()) {
