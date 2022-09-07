@@ -104,7 +104,7 @@ public class GameState {
             }
             if (needed.isEmpty()) {
                 System.out.println("Congrats you are on your way!!!!");
-                //call driving class or function here
+//                intializeDriving(currentLocation, scenario);
             } else {
                 System.out.println("You cannot start driving you still need to find:\n " + needed);
                 needed.clear();
@@ -124,14 +124,14 @@ public class GameState {
         }
         Random random = new Random();
         int rand = 0;
-        while (true){
+        do {
             rand = random.nextInt(6);
-            if(rand !=0) break;
-        }
+        } while (rand == 0);
         JsonNode newScenario = getScenario(String.valueOf(rand), locations);
-        String itemsFromJson = newScenario.findValue("items needed").toString();
+        String itemsFromJson = newScenario.findValue("items needed").toString().replaceAll("\"", "");
+        ArrayList<String> itemsNeeded = new ArrayList<>();
         String[] items = itemsFromJson.split(",");
-        ArrayList<String> itemsNeeded = new ArrayList<>(Arrays.asList(items));
+        Collections.addAll(itemsNeeded, items);
         return new ScenarioGenerator(
                 newScenario.findValue("office location").toString(),
                 newScenario.findValue("pickup location").toString(),

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -16,7 +17,7 @@ public class ScenarioGenerator {
     private String deliveryLocation;
     private List<String> itemsNeeded;
 
-    public ScenarioGenerator(String officeLocation, String pickupLocation, String deliveryLocation, List<String> itemsNeeded) {
+    public ScenarioGenerator(String officeLocation, String pickupLocation, String deliveryLocation, ArrayList<String> itemsNeeded) {
         this.officeLocation = officeLocation;
         this.pickupLocation = pickupLocation;
         this.deliveryLocation = deliveryLocation;
