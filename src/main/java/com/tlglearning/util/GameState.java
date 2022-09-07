@@ -74,6 +74,9 @@ public class GameState {
                     case "get":
                         player.get(currentLocation.getLocationName(), noun, currentLocation, backpack);
                         break;
+                    case "drive":
+                        truck.drive(scenario.getOfficeLocation(), noun, scenario);
+                        break;
                     default:
                         System.out.println("Not a valid command, use go, explore, or get");
                 }
