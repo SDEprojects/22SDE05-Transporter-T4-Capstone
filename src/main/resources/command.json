@@ -60,7 +60,10 @@
   "sodas": "sodas",
   "snacks": "snacks",
   "gps": "gps",
-  "radio": "radio"
+  "radio": "radio",
+
+  "start": "start",
+  "driving": "driving"
 
   }
 ]
