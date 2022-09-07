@@ -1,11 +1,16 @@
 package com.tlglearning.util;
 
+import com.fasterxml.jackson.databind.JsonNode;
+
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
 
 import static com.tlglearning.util.InputHandling.runCommand;
+import static com.tlglearning.util.JacksonParser.getScenario;
+import static com.tlglearning.util.JacksonParser.parse;
 
 public class GameState {
     //create scanner obj to read user input
@@ -16,20 +21,10 @@ public class GameState {
     }
 
     public static void newGame() throws IOException {
-        ArrayList<String> itemsNeeded = new ArrayList<>();
         Location currentLocation = new Location();
         Inventory backpack = new Inventory();
-        ScenarioGenerator startingScenario = new ScenarioGenerator(
-                "New Mexico",
-                "Arizona",
-                "Washington", itemsNeeded);
+        ScenarioGenerator startingScenario = newScenario();
 
-        currentLocation.setLocationName("truck");
-        currentLocation.setEast("warehouse");
-        itemsNeeded.add("logbook");
-        itemsNeeded.add("key");
-        itemsNeeded.add("folder");
-        itemsNeeded.add("truck key");
 
         BufferedReader in;
         String userInput;
@@ -75,7 +70,7 @@ public class GameState {
                         player.get(currentLocation.getLocationName(), noun, currentLocation, backpack);
                         break;
                     case "drive":
-                        truck.drive(scenario.getOfficeLocation(), noun, scenario);
+//                        truck.drive(scenario.getOfficeLocation(), noun, scenario);
                         break;
                     default:
                         System.out.println("Not a valid command, use go, explore, or get");
@@ -111,6 +106,31 @@ public class GameState {
         }else {
             System.out.println("You must be at the truck to start driving");
         }
+    }
+
+    public static ScenarioGenerator newScenario(){
+        JsonNode locations;
+        File locationJson = new File("src/main/resources/scenarios.json");
+        try {
+            locations = parse(locationJson);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        Random random = new Random();
+        int rand = 0;
+        while (true){
+            rand = random.nextInt(6);
+            if(rand !=0) break;
+        }
+        JsonNode newScenario = getScenario(String.valueOf(rand), locations);
+        String itemsFromJson = newScenario.findValue("items needed").toString();
+        String[] items = itemsFromJson.split(",");
+        ArrayList<String> itemsNeeded = new ArrayList<>(Arrays.asList(items));
+        return new ScenarioGenerator(
+                newScenario.findValue("office location").toString(),
+                newScenario.findValue("pickup location").toString(),
+                newScenario.findValue("delivery location").toString(),
+                itemsNeeded);
     }
 }
 

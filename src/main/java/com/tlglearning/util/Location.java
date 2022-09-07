@@ -1,11 +1,11 @@
 package com.tlglearning.util;
 
 public class Location {
-    private String locationName;
+    private String locationName = "truck";
     private String description;
     private String north;
     private String south;
-    private String east;
+    private String east = "warehouse";
     private String west;
 
     public Location() {
