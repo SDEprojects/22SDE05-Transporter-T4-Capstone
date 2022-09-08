@@ -1,5 +1,6 @@
 package com.tlglearning.util;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ScenarioGenerator {
@@ -8,14 +9,14 @@ public class ScenarioGenerator {
     private String pickupLocation;
     private String deliveryLocation;
     private List<String> itemsNeeded;
-
-    public ScenarioGenerator(String officeLocation, String pickupLocation, String deliveryLocation, List<String> itemsNeeded) {
+    //ctor
+    public ScenarioGenerator(String officeLocation, String pickupLocation, String deliveryLocation, ArrayList<String> itemsNeeded) {
         this.officeLocation = officeLocation;
         this.pickupLocation = pickupLocation;
         this.deliveryLocation = deliveryLocation;
         this.itemsNeeded = itemsNeeded;
     }
-
+    //setters and getters to access ScenarioGenerator objects private fields
     public String getOfficeLocation() {
         return officeLocation;
     }

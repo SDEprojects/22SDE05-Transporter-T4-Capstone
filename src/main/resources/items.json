@@ -1,38 +1,24 @@
 [{
-  "Logbook": {
-    "description": "",
-    "exploreLocation":"cabinet"
+  "warehouse": {
+    "logbook": "The logbook has all of your trucks log hours in it",
+    "key": "Key to the cabinet and closet"
   },
-  "Keys": {
-    "description": "Keys to the cabinet and closet",
-    "exploreLocation":"desk"
+  "boss office": {
+    "folder": "Folder that contains a route plan"
   },
-  "Folder": {
-    "description": "Folder that contains a route plan",
-    "exploreLocation":"desk"
+  "front office": {
+    "truck key": "Key to your truck"
   },
-  "Truck Key": {
-    "description": "Key to your truck",
-    "exploreLocation":"locker"
+  "break room": {
+    "thermos": "An empty thermos",
+    "coffee": "You have enough coffee to keep you awake for today"
   },
-  "Thermos": {
-    "description": "An empty thermos",
-    "exploreLocation":"locker"
+  "gas station": {
+    "soda": "A bottle a soda",
+    "snacks": "Delicious snack!!!!!"
   },
-  "Soda": {
-    "description": "A bottle a soda",
-    "exploreLocation": "drink aisle"
-  },
-  "Snack": {
-    "description": "Delicious snack!!!!!",
-    "exploreLocation": "snack aisle"
-  },
-  "GPS": {
-    "description": "GPS that provides directions",
-    "exploreLocation":"cabinet"
-  },
-  "Radio": {
-    "description": "Communication radio",
-    "exploreLocation":"Closet"
+  "tech room": {
+    "gps": "GPS that provides directions",
+    "radio": "Communication radio"
   }
 }]

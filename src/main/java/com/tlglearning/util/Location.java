@@ -1,16 +1,18 @@
 package com.tlglearning.util;
 
 public class Location {
-    private String locationName;
+    //default starting location = truck for new game start
+    private String locationName = "truck";
     private String description;
     private String north;
     private String south;
-    private String east;
+    //default east warehouse for new game start
+    private String east = "warehouse";
     private String west;
-
+    //ctor
     public Location() {
     }
-
+    //setters and getters to access Location objects private fields
     public String getLocationName() {
         return locationName;
     }
