@@ -9,23 +9,20 @@ import java.io.InputStreamReader;
 import java.util.*;
 
 import static com.tlglearning.util.InputHandling.runCommand;
-import static com.tlglearning.util.JacksonParser.getScenario;
+import static com.tlglearning.util.InputHandling.getScenario;
 import static com.tlglearning.util.JacksonParser.parse;
 
 public class GameState {
     private static GamePrompt prompt = new GamePrompt();
-
-
     //CTOR
     public GameState(){
     }
-
+    //method to start a new game and initialize all necessary components
     public static void newGame() throws IOException {
         Location currentLocation = new Location();
         Inventory backpack = new Inventory();
         ScenarioGenerator startingScenario = newScenario();
         Actions player = new Actions();
-
 
         BufferedReader in;
         String userInput;
@@ -41,10 +38,8 @@ public class GameState {
             }
         } while (!"q".equals(userInput));
         prompt.runPromptCyan("quit");
-
-
     }
-
+    //takes the command input and runs the action method that correlates to the verb in the command input
     private static void action(List<String> toPlayer, Location currentLocation, Inventory backpack, ScenarioGenerator scenario, Actions player) throws IOException {
         String verb = null;
         if (toPlayer.get(0) != null) {
@@ -54,7 +49,6 @@ public class GameState {
         if (toPlayer.get(1) != null) {
             noun = toPlayer.get(1).replaceAll("\"", "");
         }
-
         if (verb != null && noun != null ) {
                 switch (verb) {
                     case "go":
@@ -75,8 +69,8 @@ public class GameState {
                     case "pickup":
                         player.pickup(currentLocation.getLocationName(), scenario);
                         break;
-                    case "dropoff":
-                        player.dropoff(currentLocation.getLocationName(), scenario);
+                    case "deliver":
+                        player.deliver(currentLocation.getLocationName(), scenario);
                         break;
                     default:
                         prompt.runPromptRed("defaultError");
@@ -85,13 +79,11 @@ public class GameState {
             prompt.runPromptRed("invalidCommand");
         }
     }
-
-
+    //allows player to start the driving phase of the game as long as they have collected the required items and are at their truck.
     private static void startDriving(Location currentLocation, Inventory backpack, ScenarioGenerator scenario, Actions player) {
         List<String> inventory = new ArrayList<>(backpack.getBackpack());
         List<String> required = new ArrayList<>(scenario.getItemsNeeded());
         List<String> needed = new ArrayList<>();
-
 
         if (currentLocation.getLocationName().equals("truck")){
             for (String item : required) {
@@ -102,7 +94,7 @@ public class GameState {
                 }
             }
             if (needed.isEmpty()) {
-                prompt.runPromptCyan("onYourWay");
+                prompt.runPrompt("onYourWay");
                 player.initializeDrive(currentLocation, scenario);
             } else {
                 prompt.runPromptRed("drivingItemsNeed");
@@ -113,7 +105,7 @@ public class GameState {
             prompt.runPromptRed("noTruckError");
         }
     }
-
+    //generates a random scenario at the start of each new game
     private static ScenarioGenerator newScenario(){
         JsonNode locations;
         File locationJson = new File("src/main/resources/scenarios.json");

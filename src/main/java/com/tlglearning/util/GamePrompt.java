@@ -1,14 +1,9 @@
 package com.tlglearning.util;
 
-import com.fasterxml.jackson.databind.JsonNode;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
 
-import static com.tlglearning.util.JacksonParser.parse;
 import static com.tlglearning.util.JacksonParser.parseToMap;
 
 public class GamePrompt {
@@ -16,7 +11,6 @@ public class GamePrompt {
     private File gameJson = new File("src/main/resources/gameprompt.json");
 
     private HashMap gameInput;
-
     {
         try {
             gameInput = parseToMap(gameJson);
@@ -29,22 +23,20 @@ public class GamePrompt {
     public GamePrompt() {
 
     }
-
-
+    //get text from gameInput and color it White
     public void runPrompt(String key) {
         System.out.println("\n" +
-                PrettyText.WHITE.getColor() +
-                gameInput.get(key) +
-                PrettyText.RESET.getColor());
+                PrettyText.RESET.getColor() +
+                gameInput.get(key));
     }
-
+    //get text from gameInput and color it Cyan
     public void runPromptCyan(String key) {
         System.out.println("\n" +
                 PrettyText.CYAN.getColor() +
                 gameInput.get(key) +
                 PrettyText.RESET.getColor());
     }
-
+    //get text from gameInput and color it Red
     public void runPromptRed(String key) {
         System.out.println("\n" +
                 PrettyText.RED.getColor() +

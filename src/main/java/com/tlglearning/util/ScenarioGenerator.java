@@ -1,14 +1,7 @@
 package com.tlglearning.util;
 
-import com.fasterxml.jackson.databind.JsonNode;
-
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
-
-import static com.tlglearning.util.JacksonParser.*;
 
 public class ScenarioGenerator {
 
@@ -16,14 +9,14 @@ public class ScenarioGenerator {
     private String pickupLocation;
     private String deliveryLocation;
     private List<String> itemsNeeded;
-
+    //ctor
     public ScenarioGenerator(String officeLocation, String pickupLocation, String deliveryLocation, ArrayList<String> itemsNeeded) {
         this.officeLocation = officeLocation;
         this.pickupLocation = pickupLocation;
         this.deliveryLocation = deliveryLocation;
         this.itemsNeeded = itemsNeeded;
     }
-
+    //setters and getters to access ScenarioGenerator objects private fields
     public String getOfficeLocation() {
         return officeLocation;
     }
