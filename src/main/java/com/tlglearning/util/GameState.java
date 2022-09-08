@@ -13,9 +13,11 @@ import static com.tlglearning.util.JacksonParser.getScenario;
 import static com.tlglearning.util.JacksonParser.parse;
 
 public class GameState {
+    private static GamePrompt prompt = new GamePrompt();
+
 
     //CTOR
-    public GameState() {
+    public GameState(){
     }
 
     public static void newGame() throws IOException {
@@ -24,24 +26,21 @@ public class GameState {
         ScenarioGenerator startingScenario = newScenario();
         Actions player = new Actions();
 
+
         BufferedReader in;
         String userInput;
         List<String> toPlayer;
         //get users input and go through run command
         in = new BufferedReader(new InputStreamReader(System.in));
         do {
-            System.out.print(PrettyText.CYAN.getColor()+
-                    "\nEnter command, or type 'h' for help options >>> "+
-                    PrettyText.RESET.getColor());
+            prompt.runPromptCyan("enterCommand");
             userInput = in.readLine();
             toPlayer = runCommand(userInput, currentLocation, backpack, startingScenario);
             if (!toPlayer.isEmpty()) {
                 action(toPlayer, currentLocation, backpack, startingScenario, player);
             }
         } while (!"q".equals(userInput));
-        System.out.println(PrettyText.CYAN.getColor()+
-                "Thanks for playing, exiting....."+
-                PrettyText.RESET.getColor());
+        prompt.runPromptCyan("quit");
 
 
     }
@@ -80,15 +79,10 @@ public class GameState {
                         player.dropoff(currentLocation.getLocationName(), scenario);
                         break;
                     default:
-                        System.out.println(PrettyText.RED.getColor()+
-                                "Not a valid command, use go, explore, or get"+
-                                PrettyText.RESET.getColor());
+                        prompt.runPromptRed("defaultError");
                 }
         } else {
-            System.out.println(PrettyText.RED.getColor()+
-                    "Not a valid command! Please try the command again or type 'h' for " +
-                    "help and to see list of valid commands"+
-                    PrettyText.RESET.getColor());
+            prompt.runPromptRed("invalidCommand");
         }
     }
 
@@ -108,14 +102,15 @@ public class GameState {
                 }
             }
             if (needed.isEmpty()) {
-                System.out.println("Congrats you are on your way!!!!");
+                prompt.runPromptCyan("onYourWay");
                 player.initializeDrive(currentLocation, scenario);
             } else {
-                System.out.println("You cannot start driving you still need to find:\n " + needed);
+                prompt.runPromptRed("drivingItemsNeed");
+                System.out.println(needed);
                 needed.clear();
             }
         }else {
-            System.out.println("You must be at the truck to start driving");
+            prompt.runPromptRed("noTruckError");
         }
     }
 
