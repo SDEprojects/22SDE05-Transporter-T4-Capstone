@@ -4,6 +4,7 @@ import java.util.*;
 
 public class Menu {
     //method to display the help menu to the user
+    private static GamePrompt prompt = new GamePrompt();
     public static void helpMenu(Scanner read, Location location, Inventory inventory, ScenarioGenerator scenario){
         System.out.println("\nWhat do you need help with today?\n" +
                 "'1' - for a list of available commands.\n" +
@@ -25,9 +26,7 @@ public class Menu {
                 System.out.println(showScenarioDetails(scenario));
                 break;
             default:
-                System.out.println(PrettyText.RED.getColor()+
-                        "Not a valid input"+
-                        PrettyText.RESET.getColor());
+                prompt.runPromptRed("error");
         }
     }
     //provides the location data for option 3 using the location object that is passed in

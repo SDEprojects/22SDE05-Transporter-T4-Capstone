@@ -14,6 +14,9 @@ public class Actions {
     private final JsonNode stateLocation;
     boolean loadPickedUp = false;
     boolean loadDelivered = false;
+    GamePrompt prompt = new GamePrompt();
+
+    public Actions() throws IOException {
     //ctor for Actions that reads in and parses JSON files into a JsonNode obj to be used by the other methods
     public Actions(){
         try {
@@ -33,9 +36,7 @@ public class Actions {
     public void move(String current, String nextLocation, Location currentLocation) {
         String newLocation = InputHandling.locationFinder(current, nextLocation, moveLocation);
         if (newLocation == null || newLocation.equals("null")) {
-            System.out.println(PrettyText.RED.getColor()+
-                    "That location is invalid."+
-                    PrettyText.RESET.getColor());
+            prompt.runPromptRed("invalidLocation");
         } else {
             updateLocationDetails(currentLocation, newLocation, moveLocation);
             System.out.println(InputHandling.getDescription(newLocation, "description", moveLocation));
@@ -45,9 +46,7 @@ public class Actions {
     public void explore(String current, String interestLocation, Inventory backpack) {
         String newExploreLocation = InputHandling.locationFinder(current, interestLocation, exploreLocation);
         if (newExploreLocation == null) {
-            System.out.println(PrettyText.RED.getColor()+
-                    "That location is not explorable."+
-                    PrettyText.RESET.getColor());
+            prompt.runPromptRed("invalidExplore");
         }
         if (newExploreLocation != null) {
             if (interestLocation.equals("cabinet") || interestLocation.equals("closet") || interestLocation.equals("locker")) {
@@ -55,9 +54,7 @@ public class Actions {
                 if (hasKey) {
                     System.out.println(newExploreLocation);
                 } else {
-                    System.out.println(PrettyText.RED.getColor()+
-                            "You need the key in the warehouse desk to open this"+
-                            PrettyText.RESET.getColor());
+                    prompt.runPromptRed("keyNeeded");
                 }
             } else {
                 System.out.println(newExploreLocation);
@@ -68,9 +65,7 @@ public class Actions {
     public void get(String current, String item, Inventory backpack) {
         String newItem = InputHandling.locationFinder(current, item, items);
         if (newItem == null) {
-            System.out.println(PrettyText.RED.getColor()+
-                    "That item is invalid."+
-                    PrettyText.RESET.getColor());
+            prompt.runPromptRed("invalidItem");
         }
         if (item != null) {
             if (item.equals("coffee")) {
@@ -79,7 +74,7 @@ public class Actions {
                     System.out.println(newItem);
                     backpack.setBackpack(item);
                 } else {
-                    System.out.println("You need something to put coffee in, grab your thermos from your locker");
+                    prompt.runPromptRed("thermosNeeded");
                 }
             } else {
                 System.out.println(newItem);
@@ -93,9 +88,9 @@ public class Actions {
         String newLocation = InputHandling.locationFinder(current, nextLocation, stateLocation);
 
         if(newLocation == null || newLocation.equals("null")) {
-            System.out.println("Cannot travel there!!!");
+            prompt.runPromptRed("canNotTravel");
         } else if(newLocation.equals("mexico") || newLocation.equals("canada")) {
-            System.out.println("You cross the international border without passport. You were not able to return back. GAME OVER!!!!!");
+            prompt.runPromptRed("passportError");
             gameStart.gameStart();
         } else if (newLocation.equals("ocean")) {
             System.out.println("Do you think you are an Aquaman?? You just sank your truck and yourself in the ocean. You are dead. START OVER AGAIN!!!!");
@@ -117,10 +112,10 @@ public class Actions {
     public void pickup(String locationName, ScenarioGenerator scenario) {
         String pickupLocation = scenario.getPickupLocation().replaceAll("\"", "");
         if (pickupLocation.equals(locationName)){
-            System.out.println("You have successfully picked up your load, proceed to delivery location");
+            prompt.runPromptCyan("successPickUp");
             loadPickedUp = true;
         }else {
-            System.out.println("You are not in your pickup location, type 'h' and select option 4 to confirm pickup location");
+           prompt.runPromptRed("pickUpLocationError");
         }
     }
     //allows player to deliver load as long as they are in the  location determined by the scenario
@@ -128,13 +123,13 @@ public class Actions {
         String deliveryLocation = scenario.getDeliveryLocation().replaceAll("\"", "");
         if (deliveryLocation.equals(locationName)){
             if (loadPickedUp){
-                System.out.println("You have successfully delivered your load, go back to the office!");
+                prompt.runPromptCyan("deliverySuccess");
                 loadDelivered = true;
             } else {
-                System.out.println("You need to go back to your pickup location and pickup your load.");
+                prompt.runPromptRed("missingLoadError");
             }
         }else{
-            System.out.println("You are not in your delivery location, type 'h' and select option 4 to confirm delivery location");
+            prompt.runPromptRed("deliveryLocationError");
         }
     }
 //HELPER METHOD
