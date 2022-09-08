@@ -20,7 +20,7 @@
     "missingLoadError": "You need to go back to your pickup location and pickup your load.",
     "deliveryLocationError": "You are not in your delivery location, type 'h' and select option 4 to confirm delivery location",
     "enterCommand": "Enter command, or type 'h' for help options >>> ",
-    "invalidCommand": "Not a valid command! Please try the command again or type 'h' + '\n'for help and to see list of valid commands",
+    "invalidCommand": "Not a valid command! Please try the command again or type 'h' for help and to see list of valid commands",
     "onYourWay": "Congrats you are on your way!!!!",
     "drivingItemsNeed": "You cannot start driving you still need to find: ",
     "noTruckError": "You must be at the truck to start driving"

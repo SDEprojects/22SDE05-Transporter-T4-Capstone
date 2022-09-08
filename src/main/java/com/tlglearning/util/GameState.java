@@ -69,7 +69,7 @@ public class GameState {
                     case "pickup":
                         player.pickup(currentLocation.getLocationName(), scenario);
                         break;
-                    case "dropoff":
+                    case "deliver":
                         player.deliver(currentLocation.getLocationName(), scenario);
                         break;
                     default:
@@ -94,7 +94,7 @@ public class GameState {
                 }
             }
             if (needed.isEmpty()) {
-                prompt.runPromptCyan("onYourWay");
+                prompt.runPrompt("onYourWay");
                 player.initializeDrive(currentLocation, scenario);
             } else {
                 prompt.runPromptRed("drivingItemsNeed");

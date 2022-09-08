@@ -111,7 +111,7 @@ public class Actions {
     public void pickup(String locationName, ScenarioGenerator scenario) {
         String pickupLocation = scenario.getPickupLocation().replaceAll("\"", "");
         if (pickupLocation.equals(locationName)){
-            prompt.runPromptCyan("successPickUp");
+            prompt.runPrompt("successPickUp");
             loadPickedUp = true;
         }else {
            prompt.runPromptRed("pickUpLocationError");
@@ -122,7 +122,7 @@ public class Actions {
         String deliveryLocation = scenario.getDeliveryLocation().replaceAll("\"", "");
         if (deliveryLocation.equals(locationName)){
             if (loadPickedUp){
-                prompt.runPromptCyan("deliverySuccess");
+                prompt.runPrompt("deliverySuccess");
                 loadDelivered = true;
             } else {
                 prompt.runPromptRed("missingLoadError");

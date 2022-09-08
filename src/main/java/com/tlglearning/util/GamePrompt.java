@@ -26,9 +26,8 @@ public class GamePrompt {
     //get text from gameInput and color it White
     public void runPrompt(String key) {
         System.out.println("\n" +
-                PrettyText.WHITE.getColor() +
-                gameInput.get(key) +
-                PrettyText.RESET.getColor());
+                PrettyText.RESET.getColor() +
+                gameInput.get(key));
     }
     //get text from gameInput and color it Cyan
     public void runPromptCyan(String key) {
