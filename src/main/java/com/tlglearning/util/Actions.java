@@ -94,6 +94,9 @@ public class Actions {
         } else if(newLocation.equals("mexico") || newLocation.equals("canada")) {
             System.out.println("You cross the international border without passport. You were not able to return back. GAME OVER!!!!!");
             gameStart.gameStart();
+        } else if (newLocation.equals("ocean")) {
+            System.out.println("Do you think you are an Aquaman?? You just sank your truck and yourself in the ocean. You are dead. START OVER AGAIN!!!!");
+            gameStart.gameStart();
         } else {
             updateLocationDetails(currentLocation, newLocation, stateLocation);
         }
