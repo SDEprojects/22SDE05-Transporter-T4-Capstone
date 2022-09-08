@@ -14,8 +14,6 @@ import static com.tlglearning.util.JacksonParser.parse;
 
 public class GameState {
     private static GamePrompt prompt = new GamePrompt();
-
-
     //CTOR
     public GameState(){
     }
@@ -25,7 +23,6 @@ public class GameState {
         Inventory backpack = new Inventory();
         ScenarioGenerator startingScenario = newScenario();
         Actions player = new Actions();
-
 
         BufferedReader in;
         String userInput;
@@ -41,8 +38,6 @@ public class GameState {
             }
         } while (!"q".equals(userInput));
         prompt.runPromptCyan("quit");
-
-
     }
     //takes the command input and runs the action method that correlates to the verb in the command input
     private static void action(List<String> toPlayer, Location currentLocation, Inventory backpack, ScenarioGenerator scenario, Actions player) throws IOException {

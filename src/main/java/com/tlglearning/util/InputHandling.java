@@ -14,8 +14,6 @@ import java.util.Scanner;
 import static com.tlglearning.util.GameState.newGame;
 import static com.tlglearning.util.JacksonParser.parse;
 import static com.tlglearning.util.Menu.helpMenu;
-
-
 public class InputHandling {
     private static GamePrompt prompt = new GamePrompt();
     private static JsonNode commandInput;
@@ -32,9 +30,7 @@ public class InputHandling {
     public void gameStart() throws IOException {
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         prompt.runPromptCyan("start");
-
         String input = in.readLine().toLowerCase();
-
         //switch case to get user input and perform the necessary commands
         switch (input) {
             case "q":
@@ -52,7 +48,7 @@ public class InputHandling {
                 gameStart();
         }
     }
-
+    //processes command input and returns toPlayer to be used by the action methods
     public static List<String> runCommand(String input, Location currentLocation, Inventory backpack, ScenarioGenerator startingScenario) throws IOException {
         List<String> listOfWords;
         List<String> toPlayer = new ArrayList<>();
@@ -142,7 +138,6 @@ public class InputHandling {
     //splits the input string for separating verbs and nouns
     private static List<String> commandWords(String input) {
         String[] words = input.split(" ");
-
         return new ArrayList<>(Arrays.asList(words));
     }
 

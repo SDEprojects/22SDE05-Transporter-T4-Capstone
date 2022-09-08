@@ -18,7 +18,6 @@ public class Actions {
 
     public Actions() throws IOException {
     //ctor for Actions that reads in and parses JSON files into a JsonNode obj to be used by the other methods
-    public Actions(){
         try {
             File locationJson = new File("src/main/resources/location.json");
             moveLocation = parse(locationJson);
@@ -93,7 +92,7 @@ public class Actions {
             prompt.runPromptRed("passportError");
             gameStart.gameStart();
         } else if (newLocation.equals("ocean")) {
-            System.out.println("Do you think you are an Aquaman?? You just sank your truck and yourself in the ocean. You are dead. START OVER AGAIN!!!!");
+            prompt.runPromptRed("oceanError");
             gameStart.gameStart();
         } else {
             updateLocationDetails(currentLocation, newLocation, stateLocation);
