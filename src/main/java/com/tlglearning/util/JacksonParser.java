@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 
 public class JacksonParser {
     //using Jackson to create a JsonNode object to parse through File objects
@@ -12,6 +13,11 @@ public class JacksonParser {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.configure(JsonParser.Feature.ALLOW_UNQUOTED_FIELD_NAMES, true);
         return objectMapper.readTree(file);
+    }
+
+    public static HashMap parseToMap(File file) throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        return objectMapper.readValue(file, HashMap.class);
     }
 
     //use locationFinder method to use current location and return next location

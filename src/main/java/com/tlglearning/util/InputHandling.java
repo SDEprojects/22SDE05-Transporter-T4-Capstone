@@ -18,34 +18,27 @@ import static com.tlglearning.util.Menu.helpMenu;
 
 
 public class InputHandling {
-
+    private static GamePrompt prompt = new GamePrompt();
     public void gameStart() throws IOException {
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println(PrettyText.CYAN.getColor() +
-                "\n\nYou may use the inputs 'N' to start a new game. 'Q' to quit game.\n>>> "
-                + PrettyText.RESET.getColor());
+        prompt.runPromptCyan("start");
+
         String input = in.readLine().toLowerCase();
 
         //switch case to get user input and perform the necessary commands
         switch (input) {
             case "q":
-                System.out.println(PrettyText.CYAN.getColor() +
-                        "quitting...." +
-                        PrettyText.RESET.getColor());
+               prompt.runPromptCyan("quit");
                 System.exit(0);
                 break;
             case "n":
-                System.out.println(PrettyText.CYAN.getColor() +
-                        "New game started" +
-                        PrettyText.RESET.getColor());
+                prompt.runPromptCyan("newGame");
                 clearScreen();
                 newGame();
 
                 break;
             default:
-                System.out.println(PrettyText.RED.getColor() +
-                        "Not a valid input" +
-                        PrettyText.RESET.getColor());
+                prompt.runPromptRed("error");
                 gameStart();
         }
     }
@@ -62,9 +55,7 @@ public class InputHandling {
                 clearScreen();
                 helpMenu(read, currentLocation, backpack, startingScenario);
             } else if (lowstr.equals("n")) {
-                System.out.println(PrettyText.CYAN.getColor()
-                        + "New game started" +
-                        PrettyText.RESET.getColor());
+                prompt.runPromptCyan("newGame");
                 newGame();
             } else {
                 listOfWords = commandWords(lowstr);
@@ -87,9 +78,7 @@ public class InputHandling {
 
 
         if (wordlist.size() < 2) {
-            System.out.println(PrettyText.RED.getColor() +
-                    "We need more than one word."
-                    + PrettyText.RESET.getColor());
+            prompt.runPromptRed("twoError");
         } else {
             File commandJson = new File("src/main/resources/command.json");
             JsonNode verbage = parse(commandJson);

@@ -3,7 +3,7 @@ package com.tlglearning.util;
 import java.util.*;
 
 public class Menu {
-
+    private static GamePrompt prompt = new GamePrompt();
     public static void helpMenu(Scanner read, Location location, Inventory inventory, ScenarioGenerator scenario){
         System.out.println("\nWhat do you need help with today?\n" +
                 "'1' - for a list of available commands.\n" +
@@ -25,9 +25,7 @@ public class Menu {
                 System.out.println(showScenarioDetails(scenario));
                 break;
             default:
-                System.out.println(PrettyText.RED.getColor()+
-                        "Not a valid input"+
-                        PrettyText.RESET.getColor());
+                prompt.runPromptRed("error");
         }
     }
 
