@@ -22,7 +22,7 @@ public class GameState {
         Location currentLocation = new Location();
         Inventory backpack = new Inventory();
         ScenarioGenerator startingScenario = newScenario();
-        Player player = new Player();
+        Actions player = new Actions();
 
         BufferedReader in;
         String userInput;
@@ -46,7 +46,7 @@ public class GameState {
 
     }
 
-    private static void action(List<String> toPlayer, Location currentLocation, Inventory backpack, ScenarioGenerator scenario, Player player) throws IOException {
+    private static void action(List<String> toPlayer, Location currentLocation, Inventory backpack, ScenarioGenerator scenario, Actions player) throws IOException {
         String verb = null;
         if (toPlayer.get(0) != null) {
             verb = toPlayer.get(0).replaceAll("\"", "");
@@ -73,6 +73,12 @@ public class GameState {
                     case "drive":
                         player.drive(currentLocation.getLocationName(), noun, currentLocation);
                         break;
+                    case "pickup":
+                        player.pickup(currentLocation.getLocationName(), scenario);
+                        break;
+                    case "dropoff":
+                        player.dropoff(currentLocation.getLocationName(), scenario);
+                        break;
                     default:
                         System.out.println(PrettyText.RED.getColor()+
                                 "Not a valid command, use go, explore, or get"+
@@ -87,7 +93,7 @@ public class GameState {
     }
 
 
-    private static void startDriving(Location currentLocation, Inventory backpack, ScenarioGenerator scenario, Player player) {
+    private static void startDriving(Location currentLocation, Inventory backpack, ScenarioGenerator scenario, Actions player) {
         List<String> inventory = new ArrayList<>(backpack.getBackpack());
         List<String> required = new ArrayList<>(scenario.getItemsNeeded());
         List<String> needed = new ArrayList<>();

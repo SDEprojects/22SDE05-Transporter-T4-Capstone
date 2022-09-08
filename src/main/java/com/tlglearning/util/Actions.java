@@ -7,13 +7,15 @@ import java.io.IOException;
 
 import static com.tlglearning.util.JacksonParser.*;
 
-public class Player {
+public class Actions {
     private final JsonNode moveLocation;
     private final JsonNode exploreLocation;
     private final JsonNode items;
     private final JsonNode stateLocation;
+    boolean loadPickedUp = false;
+    boolean loadDelivered = false;
 
-    public Player(){
+    public Actions(){
         try {
             File locationJson = new File("src/main/resources/location.json");
             moveLocation = parse(locationJson);
@@ -35,16 +37,9 @@ public class Player {
                     "That location is invalid."+
                     PrettyText.RESET.getColor());
         } else {
-            currentLocation.setLocationName(newLocation);
-            currentLocation.setNorth(getDescription(newLocation, "north", moveLocation));
-            currentLocation.setSouth(getDescription(newLocation, "south", moveLocation));
-            currentLocation.setEast(getDescription(newLocation, "east", moveLocation));
-            currentLocation.setWest(getDescription(newLocation, "west", moveLocation));
-
-            System.out.println(getDescription(newLocation, "description", moveLocation));
+            updateLocationDetails(currentLocation, newLocation, moveLocation);
         }
     }
-
     public void explore(String current, String interestLocation, Inventory backpack) {
         String newExploreLocation = locationFinder(current, interestLocation, exploreLocation);
         if (newExploreLocation == null) {
@@ -96,30 +91,52 @@ public class Player {
 
         if(newLocation == null || newLocation.equals("null")) {
             System.out.println("Cannot travel there!!!");
-            return;
         } else if(newLocation.equals("mexico") || newLocation.equals("canada")) {
             System.out.println("You cross the international border without passport. You were not able to return back. GAME OVER!!!!!");
             gameStart.gameStart();
         } else {
-            currentLocation.setLocationName(newLocation);
-            currentLocation.setNorth(getDescription(newLocation, "north", stateLocation));
-            currentLocation.setSouth(getDescription(newLocation, "south", stateLocation));
-            currentLocation.setEast(getDescription(newLocation, "east", stateLocation));
-            currentLocation.setWest(getDescription(newLocation, "west", stateLocation));
-
-            System.out.println(getDescription(newLocation, "description", stateLocation));
+            updateLocationDetails(currentLocation, newLocation, stateLocation);
         }
 
     }
 
     public void initializeDrive(Location currentLocation, ScenarioGenerator scenario) {
         String newLocation = scenario.getOfficeLocation().replaceAll("\"", "");
-        currentLocation.setLocationName(newLocation);
-        currentLocation.setNorth(getDescription(newLocation, "north", stateLocation));
-        currentLocation.setSouth(getDescription(newLocation, "south", stateLocation));
-        currentLocation.setEast(getDescription(newLocation, "east", stateLocation));
-        currentLocation.setWest(getDescription(newLocation, "west", stateLocation));
-
-        System.out.println(getDescription(newLocation, "description", stateLocation));
+        updateLocationDetails(currentLocation, newLocation, stateLocation);
     }
+    public void pickup(String locationName, ScenarioGenerator scenario) {
+        String pickupLocation = scenario.getPickupLocation().replaceAll("\"", "");
+        if (pickupLocation.equals(locationName)){
+            System.out.println("You have successfully picked up your load, proceed to delivery location");
+            loadPickedUp = true;
+        }else {
+            System.out.println("You are not in your pickup location, type 'h' and select option 4 to confirm pickup location");
+        }
+    }
+
+    public void dropoff(String locationName, ScenarioGenerator scenario) {
+        String dropoffLocation = scenario.getDeliveryLocation().replaceAll("\"", "");
+        if (dropoffLocation.equals(locationName)){
+            if (loadPickedUp){
+                System.out.println("You have successfully delivered your load, go back to the office!");
+                loadDelivered = true;
+            } else {
+                System.out.println("You need to go back to your pickup location and pickup your load.");
+            }
+        }else{
+            System.out.println("You are not in your delivery location, type 'h' and select option 4 to confirm delivery location");
+        }
+    }
+
+    private void updateLocationDetails(Location currentLocation, String newLocation, JsonNode jsonNodeObj) {
+        currentLocation.setLocationName(newLocation);
+        currentLocation.setNorth(getDescription(newLocation, "north", jsonNodeObj));
+        currentLocation.setSouth(getDescription(newLocation, "south", jsonNodeObj));
+        currentLocation.setEast(getDescription(newLocation, "east", jsonNodeObj));
+        currentLocation.setWest(getDescription(newLocation, "west", jsonNodeObj));
+
+        System.out.println(getDescription(newLocation, "description", jsonNodeObj));
+    }
+
 }
+
