@@ -2,10 +2,7 @@ package com.tlglearning.util;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.*;
 
 import static com.tlglearning.util.InputHandling.runCommand;
@@ -108,14 +105,14 @@ public class GameState {
     //generates a random scenario at the start of each new game
     private static ScenarioGenerator newScenario(){
         JsonNode locations;
-        File locationJson = new File("src/main/resources/scenarios.json");
+        InputStream locationJson = GameState.class.getClassLoader().getResourceAsStream("scenarios.json");
         try {
             locations = parse(locationJson);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
         Random random = new Random();
-        int rand = 0;
+        int rand;
         do {
             rand = random.nextInt(6);
         } while (rand == 0);

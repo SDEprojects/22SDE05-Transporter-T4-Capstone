@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 import static com.tlglearning.util.JacksonParser.*;
 
@@ -16,16 +17,16 @@ public class Actions {
     boolean loadDelivered = false;
     GamePrompt prompt = new GamePrompt();
 
-    public Actions() throws IOException {
+    public Actions(){
     //ctor for Actions that reads in and parses JSON files into a JsonNode obj to be used by the other methods
         try {
-            File locationJson = new File("src/main/resources/location.json");
+            InputStream locationJson = Actions.class.getClassLoader().getResourceAsStream("location.json");
             moveLocation = parse(locationJson);
-            File exploreLocationJson = new File("src/main/resources/exploreLocation.json");
+            InputStream exploreLocationJson = Actions.class.getClassLoader().getResourceAsStream("exploreLocation.json");
             exploreLocation = parse(exploreLocationJson);
-            File itemJson = new File("src/main/resources/items.json");
+            InputStream itemJson = Actions.class.getClassLoader().getResourceAsStream("items.json");
             items = parse(itemJson);
-            File stateLocationJson = new File("src/main/resources/states.json");
+            InputStream stateLocationJson = Actions.class.getClassLoader().getResourceAsStream("states.json");
             stateLocation = parse(stateLocationJson);
         } catch (IOException e) {
             throw new RuntimeException(e);

@@ -2,10 +2,7 @@ package com.tlglearning.util;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -20,7 +17,7 @@ public class InputHandling {
     //ctor to read in and parse JSON file into a JsonNode obj to be used by the other methods
     public InputHandling(){
         try {
-        File commandJson = new File("src/main/resources/command.json");
+        InputStream commandJson = InputHandling.class.getClassLoader().getResourceAsStream("command.json");
         commandInput = parse(commandJson);
         } catch (IOException e) {
             throw new RuntimeException(e);
