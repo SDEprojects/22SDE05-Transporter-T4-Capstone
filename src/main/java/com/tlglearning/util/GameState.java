@@ -22,7 +22,7 @@ public class GameState {
         Location currentLocation = new Location();
         Inventory backpack = new Inventory();
         ScenarioGenerator startingScenario = newScenario();
-        Player player = new Player();
+        Actions player = new Actions();
 
         BufferedReader in;
         String userInput;
@@ -46,7 +46,7 @@ public class GameState {
 
     }
 
-    private static void action(List<String> toPlayer, Location currentLocation, Inventory backpack, ScenarioGenerator scenario, Player player) throws IOException {
+    private static void action(List<String> toPlayer, Location currentLocation, Inventory backpack, ScenarioGenerator scenario, Actions player) throws IOException {
         String verb = null;
         if (toPlayer.get(0) != null) {
             verb = toPlayer.get(0).replaceAll("\"", "");
@@ -56,13 +56,7 @@ public class GameState {
             noun = toPlayer.get(1).replaceAll("\"", "");
         }
 
-        if (verb != null) {
-            //Check for error if noun is not driving
-            if(verb.equals("start") && noun == null){
-                System.out.println("Correct command is 'start driving'");
-            } else if (verb.equals("start") && noun.equals("driving")) {
-                startDriving(currentLocation, backpack, scenario, player);
-            } else {
+        if (verb != null && noun != null ) {
                 switch (verb) {
                     case "go":
                         player.move(currentLocation.getLocationName(), noun, currentLocation);
@@ -73,15 +67,23 @@ public class GameState {
                     case "get":
                         player.get(currentLocation.getLocationName(), noun, backpack);
                         break;
+                    case "start":
+                        startDriving(currentLocation, backpack, scenario, player);
+                        break;
                     case "drive":
                         player.drive(currentLocation.getLocationName(), noun, currentLocation);
+                        break;
+                    case "pickup":
+                        player.pickup(currentLocation.getLocationName(), scenario);
+                        break;
+                    case "dropoff":
+                        player.dropoff(currentLocation.getLocationName(), scenario);
                         break;
                     default:
                         System.out.println(PrettyText.RED.getColor()+
                                 "Not a valid command, use go, explore, or get"+
                                 PrettyText.RESET.getColor());
                 }
-            }
         } else {
             System.out.println(PrettyText.RED.getColor()+
                     "Not a valid command! Please try the command again or type 'h' for " +
@@ -91,7 +93,7 @@ public class GameState {
     }
 
 
-    private static void startDriving(Location currentLocation, Inventory backpack, ScenarioGenerator scenario, Player player) {
+    private static void startDriving(Location currentLocation, Inventory backpack, ScenarioGenerator scenario, Actions player) {
         List<String> inventory = new ArrayList<>(backpack.getBackpack());
         List<String> required = new ArrayList<>(scenario.getItemsNeeded());
         List<String> needed = new ArrayList<>();
@@ -117,7 +119,7 @@ public class GameState {
         }
     }
 
-    public static ScenarioGenerator newScenario(){
+    private static ScenarioGenerator newScenario(){
         JsonNode locations;
         File locationJson = new File("src/main/resources/scenarios.json");
         try {

@@ -11,7 +11,6 @@
 
   "get" : "get",
   "grab": "get",
-  "pickup": "get",
   "lift": "get",
   "retrieve": "get",
   "store": "get",
@@ -65,7 +64,11 @@
   "radio": "radio",
 
   "start": "start",
-  "driving": "driving"
+  "driving": "driving",
+
+  "pickup": "pickup",
+  "dropoff": "dropoff",
+  "load": "load"
 
   }
 ]
