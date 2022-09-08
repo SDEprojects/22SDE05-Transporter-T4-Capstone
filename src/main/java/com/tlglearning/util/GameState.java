@@ -56,13 +56,7 @@ public class GameState {
             noun = toPlayer.get(1).replaceAll("\"", "");
         }
 
-        if (verb != null) {
-            //Check for error if noun is not driving
-            if(verb.equals("start") && noun == null){
-                System.out.println("Correct command is 'start driving'");
-            } else if (verb.equals("start") && noun.equals("driving")) {
-                startDriving(currentLocation, backpack, scenario, player);
-            } else {
+        if (verb != null && noun != null ) {
                 switch (verb) {
                     case "go":
                         player.move(currentLocation.getLocationName(), noun, currentLocation);
@@ -73,6 +67,9 @@ public class GameState {
                     case "get":
                         player.get(currentLocation.getLocationName(), noun, backpack);
                         break;
+                    case "start":
+                        startDriving(currentLocation, backpack, scenario, player);
+                        break;
                     case "drive":
                         player.drive(currentLocation.getLocationName(), noun, currentLocation);
                         break;
@@ -81,7 +78,6 @@ public class GameState {
                                 "Not a valid command, use go, explore, or get"+
                                 PrettyText.RESET.getColor());
                 }
-            }
         } else {
             System.out.println(PrettyText.RED.getColor()+
                     "Not a valid command! Please try the command again or type 'h' for " +
@@ -117,7 +113,7 @@ public class GameState {
         }
     }
 
-    public static ScenarioGenerator newScenario(){
+    private static ScenarioGenerator newScenario(){
         JsonNode locations;
         File locationJson = new File("src/main/resources/scenarios.json");
         try {
