@@ -14,7 +14,7 @@ public class Actions {
     private final JsonNode stateLocation;
     boolean loadPickedUp = false;
     boolean loadDelivered = false;
-
+    //ctor for Actions that reads in and parses JSON files into a JsonNode obj to be used by the other methods
     public Actions(){
         try {
             File locationJson = new File("src/main/resources/location.json");
@@ -29,19 +29,21 @@ public class Actions {
             throw new RuntimeException(e);
         }
     }
-
+    //uses current location and user input along with JsonNode obj to move player from one room to another
     public void move(String current, String nextLocation, Location currentLocation) {
-        String newLocation = locationFinder(current, nextLocation, moveLocation);
+        String newLocation = InputHandling.locationFinder(current, nextLocation, moveLocation);
         if (newLocation == null || newLocation.equals("null")) {
             System.out.println(PrettyText.RED.getColor()+
                     "That location is invalid."+
                     PrettyText.RESET.getColor());
         } else {
             updateLocationDetails(currentLocation, newLocation, moveLocation);
+            System.out.println(InputHandling.getDescription(newLocation, "description", moveLocation));
         }
     }
+    //uses current location and user input to explore a location within a room, also checks for locked locations
     public void explore(String current, String interestLocation, Inventory backpack) {
-        String newExploreLocation = locationFinder(current, interestLocation, exploreLocation);
+        String newExploreLocation = InputHandling.locationFinder(current, interestLocation, exploreLocation);
         if (newExploreLocation == null) {
             System.out.println(PrettyText.RED.getColor()+
                     "That location is not explorable."+
@@ -62,9 +64,9 @@ public class Actions {
             }
         }
     }
-
+    //uses current location and user input to add items to inventory, checks for items in inventory for required conditions.
     public void get(String current, String item, Inventory backpack) {
-        String newItem = locationFinder(current, item, items);
+        String newItem = InputHandling.locationFinder(current, item, items);
         if (newItem == null) {
             System.out.println(PrettyText.RED.getColor()+
                     "That item is invalid."+
@@ -85,9 +87,10 @@ public class Actions {
             }//do nothing
         }
     }
+    //uses current location, user input to allow player to drive from state to state.
     public void drive(String current, String nextLocation, Location currentLocation) throws IOException {
         InputHandling gameStart = new InputHandling();
-        String newLocation = locationFinder(current, nextLocation, stateLocation);
+        String newLocation = InputHandling.locationFinder(current, nextLocation, stateLocation);
 
         if(newLocation == null || newLocation.equals("null")) {
             System.out.println("Cannot travel there!!!");
@@ -99,14 +102,18 @@ public class Actions {
             gameStart.gameStart();
         } else {
             updateLocationDetails(currentLocation, newLocation, stateLocation);
+            System.out.println(InputHandling.getDescription(newLocation, "description", stateLocation));
         }
 
     }
-
+    //switches the location details to the 'home office' location from the scenario and sets valid directions
     public void initializeDrive(Location currentLocation, ScenarioGenerator scenario) {
         String newLocation = scenario.getOfficeLocation().replaceAll("\"", "");
         updateLocationDetails(currentLocation, newLocation, stateLocation);
+        System.out.println("Your current location is " + currentLocation.getLocationName());
+
     }
+    //allows player to pick up load as long as they are in the pickup location determined by the scenario
     public void pickup(String locationName, ScenarioGenerator scenario) {
         String pickupLocation = scenario.getPickupLocation().replaceAll("\"", "");
         if (pickupLocation.equals(locationName)){
@@ -116,10 +123,10 @@ public class Actions {
             System.out.println("You are not in your pickup location, type 'h' and select option 4 to confirm pickup location");
         }
     }
-
-    public void dropoff(String locationName, ScenarioGenerator scenario) {
-        String dropoffLocation = scenario.getDeliveryLocation().replaceAll("\"", "");
-        if (dropoffLocation.equals(locationName)){
+    //allows player to deliver load as long as they are in the  location determined by the scenario
+    public void deliver(String locationName, ScenarioGenerator scenario) {
+        String deliveryLocation = scenario.getDeliveryLocation().replaceAll("\"", "");
+        if (deliveryLocation.equals(locationName)){
             if (loadPickedUp){
                 System.out.println("You have successfully delivered your load, go back to the office!");
                 loadDelivered = true;
@@ -130,15 +137,14 @@ public class Actions {
             System.out.println("You are not in your delivery location, type 'h' and select option 4 to confirm delivery location");
         }
     }
-
+//HELPER METHOD
+    //updates the location name and the directions in the location object
     private void updateLocationDetails(Location currentLocation, String newLocation, JsonNode jsonNodeObj) {
         currentLocation.setLocationName(newLocation);
-        currentLocation.setNorth(getDescription(newLocation, "north", jsonNodeObj));
-        currentLocation.setSouth(getDescription(newLocation, "south", jsonNodeObj));
-        currentLocation.setEast(getDescription(newLocation, "east", jsonNodeObj));
-        currentLocation.setWest(getDescription(newLocation, "west", jsonNodeObj));
-
-        System.out.println(getDescription(newLocation, "description", jsonNodeObj));
+        currentLocation.setNorth(InputHandling.getDescription(newLocation, "north", jsonNodeObj));
+        currentLocation.setSouth(InputHandling.getDescription(newLocation, "south", jsonNodeObj));
+        currentLocation.setEast(InputHandling.getDescription(newLocation, "east", jsonNodeObj));
+        currentLocation.setWest(InputHandling.getDescription(newLocation, "west", jsonNodeObj));
     }
 
 }

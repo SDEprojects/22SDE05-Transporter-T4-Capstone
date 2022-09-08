@@ -67,7 +67,7 @@
   "driving": "driving",
 
   "pickup": "pickup",
-  "dropoff": "dropoff",
+  "deliver": "deliver",
   "load": "load"
 
   }
