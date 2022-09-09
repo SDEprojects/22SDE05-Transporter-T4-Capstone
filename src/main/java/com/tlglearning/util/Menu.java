@@ -61,9 +61,11 @@ public class Menu {
         String exitS = "South= " + location.getSouth();
         String exitE = "East= " + location.getEast();
         String exitW = "West= " + location.getWest();
+        String officeMap = prompt.getMap("officeMap");
         return "*************************Location*************************\n" +
                 currentLocation + '\n' +
                 description + '\n' +
+                officeMap + '\n' +
                 exitN + '\n' +
                 exitS + '\n' +
                 exitE + '\n' +
@@ -106,30 +108,6 @@ public class Menu {
                     "\nDelivery Location " + scenario.getDeliveryLocation() + "\n" +
                     "**********************************************************";
         }
-    }
-
-    public static void main(String[] args) {
-        System.out.println(
-"┌─────────────┐        ┌─────────────┐        ┌─────────────┐       ┌─────────────┐\n" +
-"│             │        │             │        │             │       │             │\n" +
-"│    TRUCK    ├────────┤  Warehouse  ├────────┤ Boss Office ├───────┤ Tech Office │\n" +
-"│             │        │             │        │             │       │             │\n" +
-"└─────────────┘        └──────┬──────┘        └──────┬──────┘       └─────────────┘\n" +
-"                              │                      │\n" +
-"                              │                      │\n" +
-"┌─────────────┐        ┌──────┴──────┐        ┌──────┴──────┐\n" +
-"│             │        │             │        │             │\n" +
-"│ Gas Station ├────────┤Front Office ├────────┤  Break Room │\n" +
-"│             │        │             │        │             │\n" +
-"└─────────────┘        └─────────────┘        └──────┬──────┘\n" +
-"                                                     │\n" +
-"                                                     │\n" +
-"                                              ┌──────┴──────┐\n" +
-"                                              │             │\n" +
-"                                              │  HR Office  │\n" +
-"                                              │             │\n" +
-"                                              └─────────────┘"
- );
     }
 }
 

@@ -23,5 +23,7 @@
     "invalidCommand": "Not a valid command! Please try the command again or type 'h' for help and to see list of valid commands",
     "onYourWay": "Congrats you are on your way!!!!",
     "drivingItemsNeed": "You cannot start driving you still need to find: ",
-    "noTruckError": "You must be at the truck to start driving"
+    "noTruckError": "You must be at the truck to start driving",
+    "officeMap": "┌─────────────┐        ┌─────────────┐        ┌─────────────┐       ┌─────────────┐\n│             │        │             │        │             │       │             │\n│    TRUCK    ├────────┤  Warehouse  ├────────┤ Boss Office ├───────┤ Tech Office │\n│             │        │             │        │             │       │             │\n└─────────────┘        └──────┬──────┘        └──────┬──────┘       └─────────────┘\n                              │                      │\n                              │                      │\n┌─────────────┐        ┌──────┴──────┐        ┌──────┴──────┐\n│             │        │             │        │             │\n│ Gas Station ├────────┤Front Office ├────────┤  Break Room │\n│             │        │             │        │             │\n└─────────────┘        └─────────────┘        └──────┬──────┘\n                                                     │\n                                                     │\n                                              ┌──────┴──────┐\n                                              │             │\n                                              │  HR Office  │\n                                              │             │\n                                              └─────────────┘"
+
   }
