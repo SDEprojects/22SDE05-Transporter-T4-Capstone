@@ -5,8 +5,8 @@ import java.util.*;
 public class Menu {
     //method to display the help menu to the user
     private static final GamePrompt prompt = new GamePrompt();
-    private static final ArrayList<String> inOffice = new ArrayList<>(
-            Arrays.asList("truck", "warehouse", "boss office", "tech office", "gas station", "front office", "break room", "hr office"));
+    static final ArrayList<String> inOffice = new ArrayList<>(
+            Arrays.asList("truck", "warehouse", "boss office", "tech room", "gas station", "front office", "break room", "hr office"));
 
     public static void helpMenu(Scanner read, Location location, Inventory inventory, ScenarioGenerator scenario){
         if (inOffice.contains(location.getLocationName())) {
@@ -104,8 +104,12 @@ public class Menu {
         } else {
             return "***********************Game Details***********************\n" +
                     "Home Office: " + scenario.getOfficeLocation() +
-                    "\nPickup Location: " + scenario.getPickupLocation() +
-                    "\nDelivery Location " + scenario.getDeliveryLocation() + "\n" +
+                    "\nPickup Location 1: " + scenario.getPickupLocation1() +
+                    "\nDelivery Location 1: " + scenario.getDeliveryLocation1() +
+                    "\nDelivery Location 1b: " + scenario.getDeliveryLocation1b() +
+                    "\nPickup Location 2: " + scenario.getPickupLocation2() +
+                    "\nDelivery Location 2: " + scenario.getDeliveryLocation2() +
+                    "\nDelivery Location 2b: " + scenario.getDeliveryLocation2b() + "\n" +
                     "**********************************************************";
         }
     }

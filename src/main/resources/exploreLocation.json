@@ -2,10 +2,10 @@
   "warehouse": {
     "cabinet": "You see a LOGBOOK",
     "closet": "Closet is empty",
-    "desk": "You see a KEY"
+    "desk": "You see a KEY (type 'get key' to add it to your inventory)"
   },
   "boss office": {
-    "boss": "Boss wakes up and tells you the next route plan is in the folder",
+    "boss": "Boss wakes up and tells you to let him sleep",
     "desk": "You see a FOLDER"
   },
   "front office": {

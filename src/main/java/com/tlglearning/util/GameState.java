@@ -8,6 +8,7 @@ import java.util.*;
 import static com.tlglearning.util.InputHandling.runCommand;
 import static com.tlglearning.util.InputHandling.getScenario;
 import static com.tlglearning.util.JacksonParser.parse;
+import static com.tlglearning.util.Menu.inOffice;
 
 public class GameState {
     private static GamePrompt prompt = new GamePrompt();
@@ -27,8 +28,15 @@ public class GameState {
         //get users input and go through run command
         in = new BufferedReader(new InputStreamReader(System.in));
         do {
-            String map = currentLocation.getLocationName();
-            prompt.runPrompt(map);
+            if (inOffice.contains(currentLocation.getLocationName())) {
+                String map = currentLocation.getLocationName();
+                prompt.runPrompt(map);
+            } else {
+                System.out.println("Your available directions of travel are:\nNorth= " + currentLocation.getNorth() +
+                "\nSouth= " + currentLocation.getSouth() +
+                "\nEast= " + currentLocation.getEast() +
+                "\nWest= " + currentLocation.getWest());
+            }
             prompt.runPromptCyan("enterCommand");
             userInput = in.readLine();
             toPlayer = runCommand(userInput, currentLocation, backpack, startingScenario);
@@ -125,8 +133,12 @@ public class GameState {
         Collections.addAll(itemsNeeded, items);
         return new ScenarioGenerator(
                 newScenario.findValue("office location").toString(),
-                newScenario.findValue("pickup location").toString(),
-                newScenario.findValue("delivery location").toString(),
+                newScenario.findValue("pickup location 1").toString(),
+                newScenario.findValue("delivery location 1").toString(),
+                newScenario.findValue("delivery location 1b").toString(),
+                newScenario.findValue("pickup location 2").toString(),
+                newScenario.findValue("delivery location 2").toString(),
+                newScenario.findValue("delivery location 2b").toString(),
                 itemsNeeded);
     }
 }

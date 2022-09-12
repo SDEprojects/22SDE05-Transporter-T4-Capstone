@@ -45,6 +45,13 @@ public class GamePrompt {
                 PrettyText.RESET.getColor());
     }
 
+    public void runPromptWithLocation(String key, String nextLocation) {
+        System.out.println("\n" +
+                PrettyText.RESET.getColor() +
+                gameInput.get(key) +
+                nextLocation);
+    }
+
     public String getMap(String key){
         return "\n" +
                 PrettyText.RESET.getColor() +
