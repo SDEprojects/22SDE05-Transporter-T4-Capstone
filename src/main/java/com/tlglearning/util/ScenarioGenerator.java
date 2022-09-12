@@ -6,16 +6,28 @@ import java.util.List;
 public class ScenarioGenerator {
 
     private String officeLocation;
-    private String pickupLocation;
-    private String deliveryLocation;
+    private String pickupLocation1;
+    private String pickupLocation2;
+
+    private String deliveryLocation1;
+    private String deliveryLocation1b;
+    private String deliveryLocation2;
+    private String deliveryLocation2b;
+
     private List<String> itemsNeeded;
     //ctor
-    public ScenarioGenerator(String officeLocation, String pickupLocation, String deliveryLocation, ArrayList<String> itemsNeeded) {
+
+    public ScenarioGenerator(String officeLocation, String pickupLocation1, String pickupLocation2, String deliveryLocation1, String deliveryLocation1b, String deliveryLocation2, String deliveryLocation2b, List<String> itemsNeeded) {
         this.officeLocation = officeLocation;
-        this.pickupLocation = pickupLocation;
-        this.deliveryLocation = deliveryLocation;
+        this.pickupLocation1 = pickupLocation1;
+        this.pickupLocation2 = pickupLocation2;
+        this.deliveryLocation1 = deliveryLocation1;
+        this.deliveryLocation1b = deliveryLocation1b;
+        this.deliveryLocation2 = deliveryLocation2;
+        this.deliveryLocation2b = deliveryLocation2b;
         this.itemsNeeded = itemsNeeded;
     }
+
     //setters and getters to access ScenarioGenerator objects private fields
     public String getOfficeLocation() {
         return officeLocation;
@@ -25,20 +37,52 @@ public class ScenarioGenerator {
         this.officeLocation = officeLocation;
     }
 
-    public String getPickupLocation() {
-        return pickupLocation;
+    public String getPickupLocation1() {
+        return pickupLocation1;
     }
 
-    public void setPickupLocation(String pickupLocation) {
-        this.pickupLocation = pickupLocation;
+    public void setPickupLocation1(String pickupLocation1) {
+        this.pickupLocation1 = pickupLocation1;
     }
 
-    public String getDeliveryLocation() {
-        return deliveryLocation;
+    public String getPickupLocation2() {
+        return pickupLocation2;
     }
 
-    public void setDeliveryLocation(String deliveryLocation) {
-        this.deliveryLocation = deliveryLocation;
+    public void setPickupLocation2(String pickupLocation2) {
+        this.pickupLocation2 = pickupLocation2;
+    }
+
+    public String getDeliveryLocation1() {
+        return deliveryLocation1;
+    }
+
+    public void setDeliveryLocation1(String deliveryLocation1) {
+        this.deliveryLocation1 = deliveryLocation1;
+    }
+
+    public String getDeliveryLocation1b() {
+        return deliveryLocation1b;
+    }
+
+    public void setDeliveryLocation1b(String deliveryLocation1b) {
+        this.deliveryLocation1b = deliveryLocation1b;
+    }
+
+    public String getDeliveryLocation2() {
+        return deliveryLocation2;
+    }
+
+    public void setDeliveryLocation2(String deliveryLocation2) {
+        this.deliveryLocation2 = deliveryLocation2;
+    }
+
+    public String getDeliveryLocation2b() {
+        return deliveryLocation2b;
+    }
+
+    public void setDeliveryLocation2b(String deliveryLocation2b) {
+        this.deliveryLocation2b = deliveryLocation2b;
     }
 
     public List<String> getItemsNeeded() {

@@ -2,7 +2,6 @@ package com.tlglearning.util;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -13,8 +12,13 @@ public class Actions {
     private final JsonNode exploreLocation;
     private final JsonNode items;
     private final JsonNode stateLocation;
-    boolean loadPickedUp = false;
-    boolean loadDelivered = false;
+    boolean load1PickedUp = false;
+    boolean load2PickedUp = false;
+    boolean aLoadDelivered = false;
+    boolean bLoadDelivered = false;
+    boolean cLoadDelivered = false;
+    boolean dLoadDelivered = false;
+
     GamePrompt prompt = new GamePrompt();
 
     public Actions(){
@@ -37,6 +41,12 @@ public class Actions {
         String newLocation = InputHandling.locationFinder(current, nextLocation, moveLocation);
         if (newLocation == null || newLocation.equals("leads to nowhere")) {
             prompt.runPromptRed("invalidLocation");
+        } else if (newLocation.equals("warehouse")) {
+            updateLocationDetails(currentLocation, newLocation, moveLocation);
+            System.out.println(InputHandling.getDescription(newLocation, "description", moveLocation));
+            prompt.runPrompt("manager approach");
+            prompt.runPrompt("manager conv");
+
         } else {
             updateLocationDetails(currentLocation, newLocation, moveLocation);
             System.out.println(InputHandling.getDescription(newLocation, "description", moveLocation));
@@ -105,30 +115,60 @@ public class Actions {
     public void initializeDrive(Location currentLocation, ScenarioGenerator scenario) {
         String newLocation = scenario.getOfficeLocation().replaceAll("\"", "");
         updateLocationDetails(currentLocation, newLocation, stateLocation);
-        System.out.println("Your current location is " + currentLocation.getLocationName());
-
+        prompt.runPromptWithLocation("initializeDrive", scenario.getOfficeLocation());
+        prompt.runPromptWithLocation("firstPickup", scenario.getPickupLocation1());
     }
     //allows player to pick up load as long as they are in the pickup location determined by the scenario
     public void pickup(String locationName, ScenarioGenerator scenario) {
-        String pickupLocation = scenario.getPickupLocation().replaceAll("\"", "");
-        if (pickupLocation.equals(locationName)){
-            prompt.runPrompt("successPickUp");
-            loadPickedUp = true;
+        String pickupLocation1 = scenario.getPickupLocation1().replaceAll("\"", "");
+        String pickupLocation2 = scenario.getPickupLocation2().replaceAll("\"", "");
+        if (pickupLocation1.equals(locationName)) {
+            prompt.runPromptWithLocation("successPickup", scenario.getDeliveryLocation1());
+            load1PickedUp = true;
+        } else if (pickupLocation2.equals(locationName)) {
+            if (bLoadDelivered) {
+                prompt.runPromptWithLocation("successPickup", scenario.getDeliveryLocation2());
+                load2PickedUp = true;
+            }else {
+                prompt.runPromptRed("truckStillFull");
+            }
         }else {
-           prompt.runPromptRed("pickUpLocationError");
+               prompt.runPromptRed("pickUpLocationError");
+            }
         }
-    }
     //allows player to deliver load as long as they are in the  location determined by the scenario
     public void deliver(String locationName, ScenarioGenerator scenario) {
-        String deliveryLocation = scenario.getDeliveryLocation().replaceAll("\"", "");
-        if (deliveryLocation.equals(locationName)){
-            if (loadPickedUp){
-                prompt.runPrompt("deliverySuccess");
-                loadDelivered = true;
+        String deliveryLocation1 = scenario.getDeliveryLocation1().replaceAll("\"", "");
+        String deliveryLocation1b = scenario.getDeliveryLocation1b().replaceAll("\"", "");
+        String deliveryLocation2 = scenario.getDeliveryLocation2().replaceAll("\"", "");
+        String deliveryLocation2b = scenario.getDeliveryLocation2b().replaceAll("\"", "");
+        if (deliveryLocation1.equals(locationName)) {
+            if (load1PickedUp) {
+                prompt.runPromptWithLocation("halfDeliverySuccess", scenario.getDeliveryLocation1b());
+                aLoadDelivered = true;
             } else {
                 prompt.runPromptRed("missingLoadError");
             }
-        }else{
+        } else if (deliveryLocation1b.equals(locationName)) {
+            if (load1PickedUp && aLoadDelivered){
+                prompt.runPromptWithLocation("bDeliverySuccess", scenario.getPickupLocation2());
+                bLoadDelivered = true;
+            } else {
+                prompt.runPromptRed("missingLoadError");
+            }
+        } else if (deliveryLocation2.equals(locationName)) {
+            if (load2PickedUp){
+                prompt.runPromptWithLocation("halfDeliverySuccess", scenario.getDeliveryLocation2b());
+                cLoadDelivered = true;
+            }
+        } else if (deliveryLocation2b.equals(locationName)) {
+            if (load2PickedUp && cLoadDelivered){
+                prompt.runPromptWithLocation("dDeliverySuccess", scenario.getOfficeLocation());
+                dLoadDelivered = true;
+            } else {
+                prompt.runPromptRed("missingLoadError");
+            }
+    }else{
             prompt.runPromptRed("deliveryLocationError");
         }
     }
