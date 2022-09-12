@@ -11,6 +11,8 @@ import java.util.Scanner;
 import static com.tlglearning.util.GameState.newGame;
 import static com.tlglearning.util.JacksonParser.parse;
 import static com.tlglearning.util.Menu.helpMenu;
+import static com.tlglearning.util.SaveGame.save;
+
 public class InputHandling {
     private static GamePrompt prompt = new GamePrompt();
     private static JsonNode commandInput;
@@ -62,6 +64,13 @@ public class InputHandling {
             } else {
                 listOfWords = commandWords(lowstr);
                 toPlayer = processUserInput(listOfWords);
+            }
+        }else {
+            System.out.println("Want to save? Input y");
+            BufferedReader saveIn = new BufferedReader(new InputStreamReader(System.in));
+            String saveInput = saveIn.readLine().toLowerCase();
+            if (saveInput.equals("y")) {
+                save(currentLocation,backpack,startingScenario);
             }
         }
         return toPlayer;

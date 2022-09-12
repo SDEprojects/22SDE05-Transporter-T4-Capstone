@@ -12,6 +12,16 @@ public class Location {
     //ctor
     public Location() {
     }
+    public Location(Location currentLocation){
+        this.locationName = currentLocation.getLocationName();
+        this.description = currentLocation.getDescription();
+        this.east = currentLocation.getEast();
+        this.west = currentLocation.getWest();
+        this.north = currentLocation.getNorth();
+        this.south = currentLocation.getSouth();
+    }
+
+
     //setters and getters to access Location objects private fields
     public String getLocationName() {
         return locationName;

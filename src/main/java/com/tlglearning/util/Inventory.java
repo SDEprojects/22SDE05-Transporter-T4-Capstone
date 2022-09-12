@@ -8,6 +8,9 @@ public class Inventory {
     public Inventory() {
         backpack = new ArrayList<>();
     }
+    public Inventory(Inventory backpack){
+        this.backpack = backpack.getBackpack();
+    }
     //allows methods to access current backpack items
     public ArrayList<String> getBackpack() {
         return backpack;

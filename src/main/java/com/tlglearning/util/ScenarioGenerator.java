@@ -16,7 +16,16 @@ public class ScenarioGenerator {
 
     private List<String> itemsNeeded;
     //ctor
-
+    public ScenarioGenerator(ScenarioGenerator scenario){
+        this.officeLocation = scenario.getOfficeLocation();
+        this.pickupLocation1 = scenario.getPickupLocation1();
+        this.pickupLocation2 = scenario.getPickupLocation2();
+        this.deliveryLocation1 = scenario.getDeliveryLocation1();
+        this.deliveryLocation1b = scenario.getDeliveryLocation1b();
+        this.deliveryLocation2 = scenario.getDeliveryLocation2();
+        this.deliveryLocation2b = scenario.getDeliveryLocation2b();
+        this.itemsNeeded = scenario.getItemsNeeded();
+    }
     public ScenarioGenerator(String officeLocation, String pickupLocation1, String pickupLocation2, String deliveryLocation1, String deliveryLocation1b, String deliveryLocation2, String deliveryLocation2b, List<String> itemsNeeded) {
         this.officeLocation = officeLocation;
         this.pickupLocation1 = pickupLocation1;
