@@ -32,7 +32,7 @@ public class Menu {
                 default:
                     prompt.runPromptRed("error");
             }
-        }else {
+        } else {
             System.out.println("\nWhat do you need help with today?\n" +
                     "'1' - for a list of available commands.\n" +
                     "'2' - to see your current location and available routes.\n" +

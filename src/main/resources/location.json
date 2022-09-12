@@ -23,7 +23,7 @@
     },
     "gas station": {
       "description": "This is gas station where trucks fill up for gas and people get their snacks. Looks like gas station is just restocked. You see a SNACK AISLE, a DRINK AISLE, and an ATTENDANT is in the counter playing with his phone",
-      "north": "truck",
+      "north": "leads to nowhere",
       "south": "leads to nowhere",
       "east": "front office",
       "west": "leads to nowhere"
