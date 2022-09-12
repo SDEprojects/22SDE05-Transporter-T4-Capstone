@@ -18,6 +18,7 @@ public class Actions {
     boolean bLoadDelivered = false;
     boolean cLoadDelivered = false;
     boolean dLoadDelivered = false;
+    boolean needGas = false;
 
     GamePrompt prompt = new GamePrompt();
 
@@ -97,7 +98,9 @@ public class Actions {
         InputHandling gameStart = new InputHandling();
         String newLocation = InputHandling.locationFinder(current, nextLocation, stateLocation);
 
-        if(newLocation == null || newLocation.equals("null")) {
+        if (needGas){
+            prompt.runPromptRed("need gas");
+        }else if(newLocation == null || newLocation.equals("null")) {
             prompt.runPromptRed("canNotTravel");
         } else if(newLocation.equals("mexico") || newLocation.equals("canada")) {
             prompt.runPromptRed("passportError");
@@ -146,6 +149,7 @@ public class Actions {
             if (load1PickedUp) {
                 prompt.runPromptWithLocation("halfDeliverySuccess", scenario.getDeliveryLocation1b());
                 aLoadDelivered = true;
+                needGas = true;
             } else {
                 prompt.runPromptRed("missingLoadError");
             }
@@ -153,6 +157,7 @@ public class Actions {
             if (load1PickedUp && aLoadDelivered){
                 prompt.runPromptWithLocation("bDeliverySuccess", scenario.getPickupLocation2());
                 bLoadDelivered = true;
+                needGas = true;
             } else {
                 prompt.runPromptRed("missingLoadError");
             }
@@ -160,17 +165,22 @@ public class Actions {
             if (load2PickedUp){
                 prompt.runPromptWithLocation("halfDeliverySuccess", scenario.getDeliveryLocation2b());
                 cLoadDelivered = true;
+                needGas = true;
             }
         } else if (deliveryLocation2b.equals(locationName)) {
             if (load2PickedUp && cLoadDelivered){
                 prompt.runPromptWithLocation("dDeliverySuccess", scenario.getOfficeLocation());
                 dLoadDelivered = true;
+                needGas = true;
             } else {
                 prompt.runPromptRed("missingLoadError");
             }
     }else{
             prompt.runPromptRed("deliveryLocationError");
         }
+    }
+    public void getGas(){
+        needGas = false;
     }
 //HELPER METHOD
     //updates the location name and the directions in the location object
@@ -182,6 +192,5 @@ public class Actions {
         currentLocation.setEast(InputHandling.getDescription(newLocation, "east", jsonNodeObj));
         currentLocation.setWest(InputHandling.getDescription(newLocation, "west", jsonNodeObj));
     }
-
 }
 
