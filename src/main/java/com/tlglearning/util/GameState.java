@@ -27,6 +27,8 @@ public class GameState {
         //get users input and go through run command
         in = new BufferedReader(new InputStreamReader(System.in));
         do {
+            String map = currentLocation.getLocationName();
+            prompt.runPrompt(map);
             prompt.runPromptCyan("enterCommand");
             userInput = in.readLine();
             toPlayer = runCommand(userInput, currentLocation, backpack, startingScenario);
