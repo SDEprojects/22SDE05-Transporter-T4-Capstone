@@ -79,6 +79,9 @@ public class GameState {
                     case "deliver":
                         player.deliver(currentLocation.getLocationName(), scenario);
                         break;
+                    case "fill":
+                        player.getGas();
+                        break;
                     default:
                         prompt.runPromptRed("defaultError");
                 }
