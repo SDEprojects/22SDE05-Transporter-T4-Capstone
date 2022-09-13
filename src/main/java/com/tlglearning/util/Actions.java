@@ -21,6 +21,7 @@ public class Actions {
     boolean needGas = false;
 
     GamePrompt prompt = new GamePrompt();
+    InputHandling gameStart = new InputHandling();
 
     public Actions(){
     //ctor for Actions that reads in and parses JSON files into a JsonNode obj to be used by the other methods
@@ -94,19 +95,27 @@ public class Actions {
         }
     }
     //uses current location, user input to allow player to drive from state to state.
-    public void drive(String current, String nextLocation, Location currentLocation) throws IOException {
-        InputHandling gameStart = new InputHandling();
+    public void drive(String current, String nextLocation, Location currentLocation, ScenarioGenerator scenario) throws IOException {
         String newLocation = InputHandling.locationFinder(current, nextLocation, stateLocation);
+
+        //Checking for game winning condition
+        String officeLocation = scenario.getOfficeLocation().replaceAll("\"", "");
+        if(dLoadDelivered && newLocation.equals(officeLocation)){
+            prompt.runPromptCyan("winScreen");
+            gameStart.gameStart();
+        }
 
         if (needGas){
             prompt.runPromptRed("need gas");
         }else if(newLocation == null || newLocation.equals("null")) {
             prompt.runPromptRed("canNotTravel");
-        } else if(newLocation.equals("mexico") || newLocation.equals("canada")) {
+        } else if (newLocation.equals("mexico") || newLocation.equals("canada")) {
             prompt.runPromptRed("passportError");
+            prompt.runPromptRed("loseScreen");
             gameStart.gameStart();
         } else if (newLocation.equals("ocean")) {
             prompt.runPromptRed("oceanError");
+            prompt.runPromptRed("loseScreen");
             gameStart.gameStart();
         } else {
             updateLocationDetails(currentLocation, newLocation, stateLocation);
@@ -181,6 +190,32 @@ public class Actions {
     }
     public void getGas(){
         needGas = false;
+    }
+
+    public void currentToDestination(Location currentLocation, ScenarioGenerator startingScenario){
+
+        if (dLoadDelivered) {
+           System.out.println("Current Location: " + currentLocation.getLocationName() + " --> "
+                   + "Home Office Location: " + startingScenario.getOfficeLocation());
+        } else if (cLoadDelivered) {
+            System.out.println("Current Location: " + currentLocation.getLocationName() + " --> "
+                + "Deliver location: " + startingScenario.getDeliveryLocation2b());
+        } else if (load2PickedUp) {
+            System.out.println("Current Location: " + currentLocation.getLocationName() + " --> "
+                    + "Deliver location: " + startingScenario.getDeliveryLocation2());
+        } else if (bLoadDelivered) {
+            System.out.println("Current Location: " + currentLocation.getLocationName() + " --> "
+                    + "Pickup location: " + startingScenario.getPickupLocation2());
+        } else if (aLoadDelivered) {
+            System.out.println("Current Location: " + currentLocation.getLocationName() + " --> "
+                    + "Deliver location: " + startingScenario.getDeliveryLocation1b());
+        } else if (load1PickedUp) {
+        System.out.println("Current Location: " + currentLocation.getLocationName() + " --> "
+                + "Deliver location: " + startingScenario.getDeliveryLocation1());
+        }else {
+            System.out.println("Current Location: " + currentLocation.getLocationName() + " --> "
+                    + "Pickup location: " + startingScenario.getPickupLocation1());
+        }
     }
 //HELPER METHOD
     //updates the location name and the directions in the location object

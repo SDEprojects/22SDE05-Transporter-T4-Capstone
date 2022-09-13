@@ -5,8 +5,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import java.io.*;
 import java.util.*;
 
-import static com.tlglearning.util.InputHandling.runCommand;
-import static com.tlglearning.util.InputHandling.getScenario;
+import static com.tlglearning.util.InputHandling.*;
 import static com.tlglearning.util.JacksonParser.parse;
 import static com.tlglearning.util.Menu.inOffice;
 
@@ -32,13 +31,15 @@ public class GameState {
                 String map = currentLocation.getLocationName();
                 prompt.runPrompt(map);
             } else {
-                System.out.println("Your available directions of travel are:\nNorth= " + currentLocation.getNorth() +
+                System.out.println("\nYour available directions of travel are:\nNorth= " + currentLocation.getNorth() +
                 "\nSouth= " + currentLocation.getSouth() +
                 "\nEast= " + currentLocation.getEast() +
                 "\nWest= " + currentLocation.getWest());
+                player.currentToDestination(currentLocation, startingScenario);
             }
             prompt.runPromptCyan("enterCommand");
             userInput = in.readLine();
+            clearScreen();
             toPlayer = runCommand(userInput, currentLocation, backpack, startingScenario);
             if (!toPlayer.isEmpty()) {
                 action(toPlayer, currentLocation, backpack, startingScenario, player);
@@ -71,7 +72,7 @@ public class GameState {
                         startDriving(currentLocation, backpack, scenario, player);
                         break;
                     case "drive":
-                        player.drive(currentLocation.getLocationName(), noun, currentLocation);
+                        player.drive(currentLocation.getLocationName(), noun, currentLocation, scenario);
                         break;
                     case "pickup":
                         player.pickup(currentLocation.getLocationName(), scenario);
