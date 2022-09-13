@@ -22,7 +22,6 @@ public class Actions {
 
     GamePrompt prompt = new GamePrompt();
     InputHandling gameStart = new InputHandling();
-    TitleScreen ts = new TitleScreen();
 
     public Actions(){
     //ctor for Actions that reads in and parses JSON files into a JsonNode obj to be used by the other methods
@@ -102,7 +101,7 @@ public class Actions {
         //Checking for game winning condition
         String officeLocation = scenario.getOfficeLocation().replaceAll("\"", "");
         if(dLoadDelivered && newLocation.equals(officeLocation)){
-            ts.finalWinScreen();
+            prompt.runPromptCyan("winScreen");
             gameStart.gameStart();
         }
 
@@ -112,11 +111,11 @@ public class Actions {
             prompt.runPromptRed("canNotTravel");
         } else if (newLocation.equals("mexico") || newLocation.equals("canada")) {
             prompt.runPromptRed("passportError");
-            ts.finalLoseScreen();
+            prompt.runPromptRed("loseScreen");
             gameStart.gameStart();
         } else if (newLocation.equals("ocean")) {
             prompt.runPromptRed("oceanError");
-            ts.finalLoseScreen();
+            prompt.runPromptRed("loseScreen");
             gameStart.gameStart();
         } else {
             updateLocationDetails(currentLocation, newLocation, stateLocation);

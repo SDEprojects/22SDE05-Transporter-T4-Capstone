@@ -11,12 +11,9 @@ public class TransporterClient {
         TitleScreen start = new TitleScreen();
         start.titleScreen();
         start.intro();
+
         //initializes input handling and calls the gameStart method to start new game or quit
         InputHandling gameStart = new InputHandling();
         gameStart.gameStart();
-
-
-
-
     }
 }
