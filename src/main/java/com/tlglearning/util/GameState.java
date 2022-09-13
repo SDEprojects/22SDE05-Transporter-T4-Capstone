@@ -47,7 +47,7 @@ public class GameState {
         prompt.runPromptCyan("quit");
     }
     //takes the command input and runs the action method that correlates to the verb in the command input
-    private static void action(List<String> toPlayer, Location currentLocation, Inventory backpack, ScenarioGenerator scenario, Actions player) throws IOException {
+    public static void action(List<String> toPlayer, Location currentLocation, Inventory backpack, ScenarioGenerator scenario, Actions player) throws IOException {
         String verb = null;
         if (toPlayer.get(0) != null) {
             verb = toPlayer.get(0).replaceAll("\"", "");
