@@ -1,8 +1,8 @@
 package com.tlglearning.client;
 
-import com.tlglearning.util.*;
-
 import java.io.IOException;
+import com.tlglearning.util.InputHandling;
+import com.tlglearning.util.TitleScreen;
 
 public class TransporterClient {
 
