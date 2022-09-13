@@ -13,7 +13,7 @@ public class Menu {
             System.out.println("\nWhat do you need help with today?\n" +
                     "'1' - for a list of available commands.\n" +
                     "'2' - to see items in your inventory.\n" +
-                    "'3' - to see your current location and available exits.\n" +
+                    "'3' - to see your current location, available exits, and a map of the office.\n" +
                     "'4' - to see items needed to get on the road.\n >>>");
             int input = Integer.parseInt(read.next());
             switch (input) {

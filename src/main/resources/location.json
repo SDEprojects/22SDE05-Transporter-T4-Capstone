@@ -29,7 +29,7 @@
       "west": "leads to nowhere"
     },
     "boss office": {
-      "description": "This is boss' office where you get your next trip information. You see your BOSS is again sleeping on his DESK",
+      "description": "This is boss' office. You see your BOSS is again sleeping on his DESK",
       "north": "leads to nowhere",
       "south": "break room",
       "east": "tech room",

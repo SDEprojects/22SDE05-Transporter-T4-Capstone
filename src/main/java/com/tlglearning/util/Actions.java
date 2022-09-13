@@ -41,7 +41,7 @@ public class Actions {
     //uses current location and user input along with JsonNode obj to move player from one room to another
     public void move(String current, String nextLocation, Location currentLocation) {
         String newLocation = InputHandling.locationFinder(current, nextLocation, moveLocation);
-        if (newLocation == null || newLocation.equals("leads to nowhere")) {
+        if (newLocation == null || newLocation.equals("null")) {
             prompt.runPromptRed("invalidLocation");
         } else if (newLocation.equals("warehouse")) {
             updateLocationDetails(currentLocation, newLocation, moveLocation);
@@ -221,7 +221,6 @@ public class Actions {
     //updates the location name and the directions in the location object
     private void updateLocationDetails(Location currentLocation, String newLocation, JsonNode jsonNodeObj) {
         currentLocation.setLocationName(newLocation);
-        currentLocation.setDescription(InputHandling.getDescription(newLocation, "description", jsonNodeObj));
         currentLocation.setNorth(InputHandling.getDescription(newLocation, "north", jsonNodeObj));
         currentLocation.setSouth(InputHandling.getDescription(newLocation, "south", jsonNodeObj));
         currentLocation.setEast(InputHandling.getDescription(newLocation, "east", jsonNodeObj));
