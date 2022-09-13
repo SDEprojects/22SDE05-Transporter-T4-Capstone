@@ -10,6 +10,7 @@ import java.io.InputStreamReader;
 import java.util.List;
 
 import static com.tlglearning.util.GameState.action;
+import static com.tlglearning.util.InputHandling.clearScreen;
 import static com.tlglearning.util.InputHandling.runCommand;
 import static com.tlglearning.util.Menu.inOffice;
 
@@ -39,14 +40,17 @@ public class LoadGame {
             if (inOffice.contains(currentLocation.getLocationName())) {
                 String map = currentLocation.getLocationName();
                 prompt.runPrompt(map);
+                System.out.println("Items Needed to start driving\n" + startingScenario.getItemsNeeded());
             } else {
                 System.out.println("Your available directions of travel are:\nNorth= " + currentLocation.getNorth() +
                         "\nSouth= " + currentLocation.getSouth() +
                         "\nEast= " + currentLocation.getEast() +
                         "\nWest= " + currentLocation.getWest());
+                player.currentToDestination(currentLocation, startingScenario);
             }
             prompt.runPromptCyan("enterCommand");
             userInput = in.readLine();
+            clearScreen();
             toPlayer = runCommand(userInput, currentLocation, backpack, startingScenario);
             if (!toPlayer.isEmpty()) {
                 action(toPlayer, currentLocation, backpack, startingScenario, player);

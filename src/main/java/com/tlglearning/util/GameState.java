@@ -30,6 +30,7 @@ public class GameState {
             if (inOffice.contains(currentLocation.getLocationName())) {
                 String map = currentLocation.getLocationName();
                 prompt.runPrompt(map);
+                System.out.println("Items Needed to start driving\n" + startingScenario.getItemsNeeded());
             } else {
                 System.out.println("\nYour available directions of travel are:\nNorth= " + currentLocation.getNorth() +
                 "\nSouth= " + currentLocation.getSouth() +
@@ -106,6 +107,8 @@ public class GameState {
             }
             if (needed.isEmpty()) {
                 prompt.runPrompt("onYourWay");
+                prompt.runPrompt("pickupHelp");
+                prompt.runPrompt("deliveryHelp");
                 player.initializeDrive(currentLocation, scenario);
             } else {
                 prompt.runPromptRed("drivingItemsNeed");
