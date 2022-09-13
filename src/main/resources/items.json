@@ -1,10 +1,10 @@
 [{
   "warehouse": {
     "logbook": "The logbook has all of your trucks log hours in it",
-    "key": "Key to the cabinet and closet"
+    "key": "Key to the cabinet, closet, and locker"
   },
   "boss office": {
-    "folder": "Folder that contains a route plan"
+    "folder": "Folder that contains your severance package for when you fail and get fired"
   },
   "front office": {
     "truck key": "Key to your truck"

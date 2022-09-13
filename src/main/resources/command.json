@@ -68,7 +68,10 @@
 
   "pickup": "pickup",
   "deliver": "deliver",
-  "load": "load"
+  "load": "load",
+
+  "fill": "fill",
+  "tank": "tank"
 
   }
 ]

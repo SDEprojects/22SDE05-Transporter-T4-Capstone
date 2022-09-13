@@ -5,9 +5,9 @@ import com.fasterxml.jackson.databind.JsonNode;
 import java.io.*;
 import java.util.*;
 
-import static com.tlglearning.util.InputHandling.runCommand;
-import static com.tlglearning.util.InputHandling.getScenario;
+import static com.tlglearning.util.InputHandling.*;
 import static com.tlglearning.util.JacksonParser.parse;
+import static com.tlglearning.util.Menu.inOffice;
 
 public class GameState {
     private static GamePrompt prompt = new GamePrompt();
@@ -27,8 +27,20 @@ public class GameState {
         //get users input and go through run command
         in = new BufferedReader(new InputStreamReader(System.in));
         do {
+            if (inOffice.contains(currentLocation.getLocationName())) {
+                String map = currentLocation.getLocationName();
+                prompt.runPrompt(map);
+                System.out.println("Items Needed to start driving\n" + startingScenario.getItemsNeeded());
+            } else {
+                System.out.println("\nYour available directions of travel are:\nNorth= " + currentLocation.getNorth() +
+                "\nSouth= " + currentLocation.getSouth() +
+                "\nEast= " + currentLocation.getEast() +
+                "\nWest= " + currentLocation.getWest());
+                player.currentToDestination(currentLocation, startingScenario);
+            }
             prompt.runPromptCyan("enterCommand");
             userInput = in.readLine();
+            clearScreen();
             toPlayer = runCommand(userInput, currentLocation, backpack, startingScenario);
             if (!toPlayer.isEmpty()) {
                 action(toPlayer, currentLocation, backpack, startingScenario, player);
@@ -37,7 +49,7 @@ public class GameState {
         prompt.runPromptCyan("quit");
     }
     //takes the command input and runs the action method that correlates to the verb in the command input
-    private static void action(List<String> toPlayer, Location currentLocation, Inventory backpack, ScenarioGenerator scenario, Actions player) throws IOException {
+    public static void action(List<String> toPlayer, Location currentLocation, Inventory backpack, ScenarioGenerator scenario, Actions player) throws IOException {
         String verb = null;
         if (toPlayer.get(0) != null) {
             verb = toPlayer.get(0).replaceAll("\"", "");
@@ -61,13 +73,16 @@ public class GameState {
                         startDriving(currentLocation, backpack, scenario, player);
                         break;
                     case "drive":
-                        player.drive(currentLocation.getLocationName(), noun, currentLocation);
+                        player.drive(currentLocation.getLocationName(), noun, currentLocation, scenario);
                         break;
                     case "pickup":
                         player.pickup(currentLocation.getLocationName(), scenario);
                         break;
                     case "deliver":
                         player.deliver(currentLocation.getLocationName(), scenario);
+                        break;
+                    case "fill":
+                        player.getGas();
                         break;
                     default:
                         prompt.runPromptRed("defaultError");
@@ -92,6 +107,8 @@ public class GameState {
             }
             if (needed.isEmpty()) {
                 prompt.runPrompt("onYourWay");
+                prompt.runPrompt("pickupHelp");
+                prompt.runPrompt("deliveryHelp");
                 player.initializeDrive(currentLocation, scenario);
             } else {
                 prompt.runPromptRed("drivingItemsNeed");
@@ -123,8 +140,12 @@ public class GameState {
         Collections.addAll(itemsNeeded, items);
         return new ScenarioGenerator(
                 newScenario.findValue("office location").toString(),
-                newScenario.findValue("pickup location").toString(),
-                newScenario.findValue("delivery location").toString(),
+                newScenario.findValue("pickup location 1").toString(),
+                newScenario.findValue("delivery location 1").toString(),
+                newScenario.findValue("delivery location 1b").toString(),
+                newScenario.findValue("pickup location 2").toString(),
+                newScenario.findValue("delivery location 2").toString(),
+                newScenario.findValue("delivery location 2b").toString(),
                 itemsNeeded);
     }
 }
