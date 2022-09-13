@@ -1,7 +1,7 @@
 [
   {
     "truck": {
-      "description": "This is your truck. It looks ready to hit the road, are you?",
+      "description": "This is your truck. It looks ready to hit the road, are you? (if you think you're ready type 'start driving')",
       "north": "leads to nowhere",
       "south": "leads to nowhere",
       "east": "warehouse",
