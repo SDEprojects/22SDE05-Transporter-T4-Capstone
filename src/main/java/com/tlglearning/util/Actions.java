@@ -21,6 +21,8 @@ public class Actions {
     boolean needGas = false;
 
     GamePrompt prompt = new GamePrompt();
+    InputHandling gameStart = new InputHandling();
+    TitleScreen ts = new TitleScreen();
 
     public Actions(){
     //ctor for Actions that reads in and parses JSON files into a JsonNode obj to be used by the other methods
@@ -94,19 +96,27 @@ public class Actions {
         }
     }
     //uses current location, user input to allow player to drive from state to state.
-    public void drive(String current, String nextLocation, Location currentLocation) throws IOException {
-        InputHandling gameStart = new InputHandling();
+    public void drive(String current, String nextLocation, Location currentLocation, ScenarioGenerator scenario) throws IOException {
         String newLocation = InputHandling.locationFinder(current, nextLocation, stateLocation);
+
+        //Checking for game winning condition
+        String officeLocation = scenario.getOfficeLocation().replaceAll("\"", "");
+        if(dLoadDelivered && newLocation.equals(officeLocation)){
+            ts.finalWinScreen();
+            gameStart.gameStart();
+        }
 
         if (needGas){
             prompt.runPromptRed("need gas");
         }else if(newLocation == null || newLocation.equals("null")) {
             prompt.runPromptRed("canNotTravel");
-        } else if(newLocation.equals("mexico") || newLocation.equals("canada")) {
+        } else if (newLocation.equals("mexico") || newLocation.equals("canada")) {
             prompt.runPromptRed("passportError");
+            ts.finalLoseScreen();
             gameStart.gameStart();
         } else if (newLocation.equals("ocean")) {
             prompt.runPromptRed("oceanError");
+            ts.finalLoseScreen();
             gameStart.gameStart();
         } else {
             updateLocationDetails(currentLocation, newLocation, stateLocation);

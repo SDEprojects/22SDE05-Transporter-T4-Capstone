@@ -71,7 +71,7 @@ public class GameState {
                         startDriving(currentLocation, backpack, scenario, player);
                         break;
                     case "drive":
-                        player.drive(currentLocation.getLocationName(), noun, currentLocation);
+                        player.drive(currentLocation.getLocationName(), noun, currentLocation, scenario);
                         break;
                     case "pickup":
                         player.pickup(currentLocation.getLocationName(), scenario);
