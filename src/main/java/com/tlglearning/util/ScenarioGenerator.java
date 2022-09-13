@@ -16,6 +16,9 @@ public class ScenarioGenerator {
 
     private List<String> itemsNeeded;
     //ctor
+    public ScenarioGenerator(){
+
+    }
     public ScenarioGenerator(ScenarioGenerator scenario){
         this.officeLocation = scenario.getOfficeLocation();
         this.pickupLocation1 = scenario.getPickupLocation1();
@@ -100,5 +103,19 @@ public class ScenarioGenerator {
 
     public void setItemsNeeded(List<String> itemsNeeded) {
         this.itemsNeeded = itemsNeeded;
+    }
+
+    @Override
+    public String toString() {
+        return "ScenarioGenerator{" +
+                "officeLocation='" + officeLocation + '\'' +
+                ", pickupLocation1='" + pickupLocation1 + '\'' +
+                ", pickupLocation2='" + pickupLocation2 + '\'' +
+                ", deliveryLocation1='" + deliveryLocation1 + '\'' +
+                ", deliveryLocation1b='" + deliveryLocation1b + '\'' +
+                ", deliveryLocation2='" + deliveryLocation2 + '\'' +
+                ", deliveryLocation2b='" + deliveryLocation2b + '\'' +
+                ", itemsNeeded=" + itemsNeeded +
+                '}';
     }
 }

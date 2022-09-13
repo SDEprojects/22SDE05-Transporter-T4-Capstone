@@ -84,13 +84,13 @@ public class Actions {
                 boolean hasKey = backpack.getBackpack().contains("thermos");
                 if (hasKey) {
                     System.out.println(newItem);
-                    backpack.setBackpack(item);
+                    backpack.addItem(item);
                 } else {
                     prompt.runPromptRed("thermosNeeded");
                 }
             } else {
                 System.out.println(newItem);
-                backpack.setBackpack(item);
+                backpack.addItem(item);
             }//do nothing
         }
     }
