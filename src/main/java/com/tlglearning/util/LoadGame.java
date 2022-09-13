@@ -1,7 +1,5 @@
 package com.tlglearning.util;
 
-import com.fasterxml.jackson.databind.DeserializationConfig;
-import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectReader;
 
@@ -20,22 +18,16 @@ public class LoadGame {
 
         GamePrompt prompt = new GamePrompt();
 
-        File file = new File("src/main/resources/currentSave.json");
+        File file = new File("currentSave.json");
         ObjectMapper loadMapper = new ObjectMapper();
         ObjectReader loadReader = loadMapper.reader(Location.class);
         Location currentLocation = loadReader.readValue(loadMapper.readTree(file).findValue("location"));
 
-        // Location currentLocation = (Location) loadMap.get("location");
-        System.out.println("It loaded:\nLoc: " + currentLocation);
         loadReader = loadMapper.reader(ScenarioGenerator.class);
         ScenarioGenerator startingScenario = loadReader.readValue(loadMapper.readTree(file).findValue("scenario"));
-        System.out.println("Scenario: " + startingScenario);
         loadReader = loadMapper.reader(Inventory.class);
         Inventory backpack = loadReader.readValue(loadMapper.readTree(file).findValue("inventory"));
 
-
-
-        System.out.println("Backpack: " + backpack);
         Actions player = new Actions();
 
         BufferedReader in;

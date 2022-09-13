@@ -20,7 +20,7 @@ public class SaveGame {
     public static void save(Location currentLocation, Inventory backpack, ScenarioGenerator startingScenario) {
 //        String dateTime = LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES).toString().replace(':','-');
 //        File file = new File(String.format("src/main/resources/currentSave_%s.json", dateTime));
-        File file = new File("src/main/resources/currentSave.json");
+        File file = new File("currentSave.json");
         ObjectMapper save = new ObjectMapper();
         try {
             Map<String,Object> saveHashMap = new HashMap<>();
