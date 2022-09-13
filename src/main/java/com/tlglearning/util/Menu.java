@@ -35,17 +35,13 @@ public class Menu {
         } else {
             System.out.println("\nWhat do you need help with today?\n" +
                     "'1' - for a list of available commands.\n" +
-                    "'2' - to see your current location and available routes.\n" +
-                    "'3' - to see route plan.\n >>>");
+                    "'2' - to see route plan.\n >>>");
             int input = Integer.parseInt(read.next());
             switch (input) {
                 case 1:
                     System.out.println(availableCMD(location));
                     break;
                 case 2:
-                    System.out.println(locationData(location));
-                    break;
-                case 3:
                     System.out.println(showScenarioDetails(scenario, location));
                     break;
                 default:

@@ -10,7 +10,6 @@ import java.util.Scanner;
 
 import static com.tlglearning.util.GameState.newGame;
 import static com.tlglearning.util.JacksonParser.parse;
-//import static com.tlglearning.util.LoadGame.load;
 import static com.tlglearning.util.LoadGame.load;
 import static com.tlglearning.util.Menu.helpMenu;
 import static com.tlglearning.util.SaveGame.save;
@@ -42,6 +41,8 @@ public class InputHandling {
                 break;
             case "n":
                 prompt.runPromptCyan("newGame");
+                prompt.runPromptCyan("newGameHelp");
+                prompt.runPromptCyan("newGameCommands");
                 System.out.println("Would you like to load your saved data? Type 'y' ");
                 BufferedReader loadIn = new BufferedReader(new InputStreamReader(System.in));
                 String loadInput = loadIn.readLine().toLowerCase();
@@ -71,6 +72,8 @@ public class InputHandling {
                 helpMenu(read, currentLocation, backpack, startingScenario);
             } else if (lowstr.equals("n")) {
                 prompt.runPromptCyan("newGame");
+                prompt.runPromptCyan("newGameHelp");
+                prompt.runPromptCyan("newGameCommands");
                 newGame();
             } else {
                 listOfWords = commandWords(lowstr);
@@ -116,7 +119,7 @@ public class InputHandling {
 
     //HELPER Methods
     //used to clear screen for player readability
-    private static void clearScreen() {
+    static void clearScreen() {
         String os = System.getProperty("os.name").toLowerCase();
         ProcessBuilder process = (os.contains("windows")) ?
                 new ProcessBuilder("cmd", "/c", "cls") :
