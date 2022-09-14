@@ -18,6 +18,8 @@ public class GameState {
     //method to start a new game and initialize all necessary components
     public static void newGame() throws IOException {
         Location currentLocation = new Location();
+
+        Redirect.setLocation(currentLocation);
         Inventory backpack = new Inventory();
         ScenarioGenerator startingScenario = newScenario();
         Actions player = new Actions();
