@@ -1,5 +1,7 @@
 package com.tlglearning.util;
 
+import com.tlglearning.middleware.Redirect;
+
 import java.util.*;
 
 public class Menu {
@@ -18,31 +20,31 @@ public class Menu {
             int input = Integer.parseInt(read.next());
             switch (input) {
                 case 1:
-                    System.out.println(availableCMD(location));
+                    Redirect.sendAppToGui(availableCMD(location));
                     break;
                 case 2:
-                    System.out.println("\nYour backpack has the following items: \n" + showBackpack(inventory) + "\n");
+                    Redirect.sendAppToGui("\nYour backpack has the following items: \n" + showBackpack(inventory) + "\n");
                     break;
                 case 3:
-                    System.out.println(locationData(location));
+                    Redirect.sendAppToGui(locationData(location));
                     break;
                 case 4:
-                    System.out.println(showScenarioDetails(scenario, location));
+                    Redirect.sendAppToGui(showScenarioDetails(scenario, location));
                     break;
                 default:
                     prompt.runPromptRed("error");
             }
         } else {
-            System.out.println("\nWhat do you need help with today?\n" +
+            Redirect.sendAppToGui("\nWhat do you need help with today?\n" +
                     "'1' - for a list of available commands.\n" +
                     "'2' - to see route plan.\n >>>");
             int input = Integer.parseInt(read.next());
             switch (input) {
                 case 1:
-                    System.out.println(availableCMD(location));
+                    Redirect.sendAppToGui(availableCMD(location));
                     break;
                 case 2:
-                    System.out.println(showScenarioDetails(scenario, location));
+                    Redirect.sendAppToGui(showScenarioDetails(scenario, location));
                     break;
                 default:
                     prompt.runPromptRed("error");

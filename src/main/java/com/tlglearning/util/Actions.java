@@ -1,6 +1,7 @@
 package com.tlglearning.util;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.tlglearning.middleware.Redirect;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -195,25 +196,25 @@ public class Actions {
     public void currentToDestination(Location currentLocation, ScenarioGenerator startingScenario){
 
         if (dLoadDelivered) {
-           System.out.println("Current Location: " + currentLocation.getLocationName() + " --> "
+            Redirect.sendAppToGui("Current Location: " + currentLocation.getLocationName() + " --> "
                    + "Home Office Location: " + startingScenario.getOfficeLocation());
         } else if (cLoadDelivered) {
-            System.out.println("Current Location: " + currentLocation.getLocationName() + " --> "
+            Redirect.sendAppToGui("Current Location: " + currentLocation.getLocationName() + " --> "
                 + "Deliver location: " + startingScenario.getDeliveryLocation2b());
         } else if (load2PickedUp) {
-            System.out.println("Current Location: " + currentLocation.getLocationName() + " --> "
+            Redirect.sendAppToGui("Current Location: " + currentLocation.getLocationName() + " --> "
                     + "Deliver location: " + startingScenario.getDeliveryLocation2());
         } else if (bLoadDelivered) {
-            System.out.println("Current Location: " + currentLocation.getLocationName() + " --> "
+            Redirect.sendAppToGui("Current Location: " + currentLocation.getLocationName() + " --> "
                     + "Pickup location: " + startingScenario.getPickupLocation2());
         } else if (aLoadDelivered) {
-            System.out.println("Current Location: " + currentLocation.getLocationName() + " --> "
+            Redirect.sendAppToGui("Current Location: " + currentLocation.getLocationName() + " --> "
                     + "Deliver location: " + startingScenario.getDeliveryLocation1b());
         } else if (load1PickedUp) {
-        System.out.println("Current Location: " + currentLocation.getLocationName() + " --> "
+            Redirect.sendAppToGui("Current Location: " + currentLocation.getLocationName() + " --> "
                 + "Deliver location: " + startingScenario.getDeliveryLocation1());
         }else {
-            System.out.println("Current Location: " + currentLocation.getLocationName() + " --> "
+            Redirect.sendAppToGui("Current Location: " + currentLocation.getLocationName() + " --> "
                     + "Pickup location: " + startingScenario.getPickupLocation1());
         }
     }

@@ -1,5 +1,7 @@
 package com.tlglearning.util;
 
+import com.tlglearning.middleware.Redirect;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
@@ -20,9 +22,9 @@ public class TitleScreen {
 
     public void intro() {
 
-        System.out.printf("\n\nSTORY: %s", story);
-        System.out.printf("\n\nOBJECTIVE: %s", objective);
-        System.out.printf("\n\nHOW TO PLAY: %s", play);
-        System.out.printf("\n\nHOW TO WIN: %s\n", win_game);
+        Redirect.sendprintfAppToGui("\n\nSTORY: %s", story);
+        Redirect.sendprintfAppToGui("\n\nOBJECTIVE: %s", objective);
+        Redirect.sendprintfAppToGui("\n\nHOW TO PLAY: %s", play);
+        Redirect.sendprintfAppToGui("\n\nHOW TO WIN: %s\n", win_game);
     }
 }

@@ -1,5 +1,7 @@
 package com.tlglearning.util;
 
+import com.tlglearning.middleware.Redirect;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -26,27 +28,27 @@ public class GamePrompt {
     }
     //get text from gameInput and color it White
     public void runPrompt(String key) {
-        System.out.println("\n" +
+        Redirect.sendAppToGui("\n" +
                 PrettyText.RESET.getColor() +
                 gameInput.get(key));
     }
     //get text from gameInput and color it Cyan
     public void runPromptCyan(String key) {
-        System.out.println("\n" +
+        Redirect.sendAppToGui("\n" +
                 PrettyText.CYAN.getColor() +
                 gameInput.get(key) +
                 PrettyText.RESET.getColor());
     }
     //get text from gameInput and color it Red
     public void runPromptRed(String key) {
-        System.out.println("\n" +
+        Redirect.sendAppToGui("\n" +
                 PrettyText.RED.getColor() +
                 gameInput.get(key) +
                 PrettyText.RESET.getColor());
     }
 
     public void runPromptWithLocation(String key, String nextLocation) {
-        System.out.println("\n" +
+        Redirect.sendAppToGui("\n" +
                 PrettyText.RESET.getColor() +
                 gameInput.get(key) +
                 nextLocation);
