@@ -1,6 +1,7 @@
 package com.tlglearning.util;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.tlglearning.middleware.Redirect;
 
 import java.io.*;
 import java.util.*;
@@ -30,9 +31,9 @@ public class GameState {
             if (inOffice.contains(currentLocation.getLocationName())) {
                 String map = currentLocation.getLocationName();
                 prompt.runPrompt(map);
-                System.out.println("Items Needed to start driving\n" + startingScenario.getItemsNeeded());
+                Redirect.sendAppToGui("Items Needed to start driving\n" + startingScenario.getItemsNeeded());
             } else {
-                System.out.println("\nYour available directions of travel are:\nNorth= " + currentLocation.getNorth() +
+                Redirect.sendAppToGui("\nYour available directions of travel are:\nNorth= " + currentLocation.getNorth() +
                 "\nSouth= " + currentLocation.getSouth() +
                 "\nEast= " + currentLocation.getEast() +
                 "\nWest= " + currentLocation.getWest());
@@ -112,7 +113,7 @@ public class GameState {
                 player.initializeDrive(currentLocation, scenario);
             } else {
                 prompt.runPromptRed("drivingItemsNeed");
-                System.out.println(needed);
+                Redirect.sendAppToGui(needed.toString());
                 needed.clear();
             }
         }else {
