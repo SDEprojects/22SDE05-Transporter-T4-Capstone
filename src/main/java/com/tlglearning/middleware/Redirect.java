@@ -3,6 +3,8 @@ import com.tlglearning.util.Location;
 
 import java.util.Scanner;  // Import the Scanner class
 
+import static com.tlglearning.client.TransporterClient.mainWindow;
+
 /*
     Messages are sent from app to Gui and Gui to app. This class will function as a middleware.
  */
@@ -15,12 +17,17 @@ public class Redirect {
      */
 
     static Location location;
-    public static void sendAppToGui(String messageToGui){
 
-        System.out.println(messageToGui);
+    public static void sendAppToGui(String messageToGui) {
+        System.out.println("the message" + messageToGui);
         System.out.println(location);
+        mainWindow.setMap(messageToGui);
     }
 
+    public static void sendTitleToGui(String title) {
+        System.out.println("the title" + title);
+        mainWindow.setTitle(title);
+    }
     /**
      * sendsCommmandsToGui sends
      * @param commands

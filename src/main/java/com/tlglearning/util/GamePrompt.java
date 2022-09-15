@@ -2,7 +2,6 @@ package com.tlglearning.util;
 
 import com.tlglearning.middleware.Redirect;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
@@ -13,7 +12,7 @@ public class GamePrompt {
     // Variables
     private InputStream gameJson = InputHandling.class.getClassLoader().getResourceAsStream("gameprompt.json");
 
-    private HashMap gameInput;
+    public HashMap gameInput;
     {
         try {
             gameInput = parseToMap(gameJson);
