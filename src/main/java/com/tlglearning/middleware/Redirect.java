@@ -1,6 +1,9 @@
 package com.tlglearning.middleware;
+import com.sun.tools.javac.Main;
 import com.tlglearning.util.Location;
+import org.yaml.snakeyaml.Yaml;
 
+import java.util.HashMap;
 import java.util.Scanner;  // Import the Scanner class
 
 import static com.tlglearning.client.TransporterClient.mainWindow;
@@ -18,9 +21,31 @@ public class Redirect {
 
     static Location location;
 
+    static HashMap<String, Object> DestinationsMap;
+
+    public Redirect() {
+
+    }
+
+    public static void generateDestinationMap(){
+        ClassLoader cl = Main.class.getClassLoader();
+
+        java.io.InputStream input = cl.getResourceAsStream("Destinations.yaml");
+
+        Yaml yaml = new Yaml();
+
+        DestinationsMap = yaml.load(input);
+
+    }
+
     public static void sendAppToGui(String messageToGui) {
         System.out.println("the message" + messageToGui);
-        System.out.println(location);
+
+        // Send Destination information to Gui. Destinations allow include button information.
+        if(location!=null){
+//            System.out.println(DestinationsMap.get(location.getLocationName()));
+        }
+
         mainWindow.setMap(messageToGui);
     }
 
