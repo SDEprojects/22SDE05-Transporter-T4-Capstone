@@ -27,7 +27,8 @@ public class GameState {
         BufferedReader in;
         String userInput;
         List<String> toPlayer;
-        //get users input and go through run command
+
+        //Get users input and go through run command
         in = new BufferedReader(new InputStreamReader(System.in));
         do {
             if (inOffice.contains(currentLocation.getLocationName())) {
