@@ -91,14 +91,14 @@ public class MainWindow {
         p2.setEditable(true);
         setText(str);
 //        p2.setText("");
-        try {
-            Thread.sleep(1000); // sleep/stop a thread for 1 second
-        } catch(InterruptedException e) {
-            System.out.println("An Excetion occured: " + e);
-        }
         p2.appendANSI(text);
         panel.revalidate();
         panel.repaint();
+        try {
+            Thread.sleep(100); // sleep/stop a thread for .1 second
+        } catch(InterruptedException e) {
+            System.out.println("An Exception occurred: " + e);
+        }
         p2.setEditable(false);
     }
 
