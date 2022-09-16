@@ -88,7 +88,9 @@ public class MainWindow {
     public void setTitleText(String title) {this.titleText = title;}
 
     public void setMap(String str) {
+
         p2.setEditable(true);
+        clearMap();
         setText(str);
 //        p2.setText("");
         p2.appendANSI(text);
@@ -100,11 +102,16 @@ public class MainWindow {
             System.out.println("An Exception occurred: " + e);
         }
         p2.setEditable(false);
+
     }
 
     public void setTitle(String str) {
         setTitleText(str);
         p1.append(titleText);
         p1.setEditable(false);
+    }
+
+    public void clearMap(){
+        p2.setText("");
     }
 }
