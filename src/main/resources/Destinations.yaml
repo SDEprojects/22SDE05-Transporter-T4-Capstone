@@ -1,5 +1,4 @@
 truck:
-
   description: >-
     This is your truck. It looks ready to hit the road, are you? (if you think
     you're ready type 'start driving')
@@ -30,6 +29,10 @@ truck:
   south: leads to nowhere
   east: warehouse
   west: leads to nowhere
+    --------------------------------------------------------------------------------------------------------------------
+    --------------------------------------------------------------------------------------------------------------------
+    --------------------------------------------------------------------------------------------------------------------
+
 warehouse:
   description: >-
     This is warehouse to store the needed parts. It is late in the year so the
@@ -46,6 +49,9 @@ warehouse:
   get:
      logbook: The logbook has all of your trucks log hours in it,
      key: Key to the cabinet, closet, and locker
+      ------------------------------------------------------------------------------------------------------------------
+      ------------------------------------------------------------------------------------------------------------------
+      ------------------------------------------------------------------------------------------------------------------
 
 front office:
   description: >-
@@ -60,6 +66,12 @@ front office:
      locker: You see your TRUCK KEY
      desk: No one is in the front desk
      board: Board is empty
+  get:
+    truck key: Key to your truck
+      ------------------------------------------------------------------------------------------------------------------
+      ------------------------------------------------------------------------------------------------------------------
+      ------------------------------------------------------------------------------------------------------------------
+
 gas station:
   description: >-
     This is gas station where trucks fill up for gas and people get their
@@ -73,6 +85,13 @@ gas station:
      snack aisle: Rows and rows of SNACKS
      drink aisle: Door after door of different SODA
      attendant: Thank you for stopping, have a wonderful day!!!
+  get:
+    soda: A bottle a soda
+    snacks: Delicious snack!!!!!
+      ------------------------------------------------------------------------------------------------------------------
+      ------------------------------------------------------------------------------------------------------------------
+      ------------------------------------------------------------------------------------------------------------------
+
 boss office:
   description: This is boss' office. You see your BOSS is again sleeping on his DESK
   north: leads to nowhere
@@ -82,6 +101,12 @@ boss office:
   explore:
     boss: Boss wakes up and tells you to let him sleep,
     desk: You see a FOLDER
+  get:
+    folder: Folder that contains your severance package for when you fail and get fired
+      ------------------------------------------------------------------------------------------------------------------
+      ------------------------------------------------------------------------------------------------------------------
+      ------------------------------------------------------------------------------------------------------------------
+
 break room:
   description: >-
     This is a break room where people come to relax or eat on their breaks. Room
@@ -91,10 +116,17 @@ break room:
   south: hr office
   east: leads to nowhere
   west: front office
-  explore: >-
-    refrigerator: It is full of lunch boxes and energy drinks that aren't yours",
-    locker: You see a THERMOS,
-    coffee maker": You check the COFFEE pot to see if there is enough to fill your thermos
+  explore:
+    refrigerator: It is full of lunch boxes and energy drinks that aren't yours
+    locker: You see a THERMOS
+    coffee maker: You check the COFFEE pot to see if there is enough to fill your thermos
+  get:
+    thermos: An empty thermos
+    coffee": You have enough coffee to keep you awake for today
+      ------------------------------------------------------------------------------------------------------------------
+      ------------------------------------------------------------------------------------------------------------------
+      ------------------------------------------------------------------------------------------------------------------
+
 tech room:
   description: >-
     This is tech room, place for all the IT nerds to hangout. You see everyone
@@ -103,10 +135,17 @@ tech room:
   south: leads to nowhere
   east: leads to nowhere
   west: boss office
-  explore: >-
-    cabinet: You see a GPS
-    laptop: You see your broken laptop that was supposed to be fixed 3 weeks ago
-    closet: You see a RADIO
+  explore:
+    cabinet": You see a GPS
+    laptop": You see your broken laptop that was supposed to be fixed 3 weeks ago
+    closet": You see a RADIO
+  get:
+    gps: GPS that provides directions
+    radio: Communication radio
+      ------------------------------------------------------------------------------------------------------------------
+      ------------------------------------------------------------------------------------------------------------------
+      ------------------------------------------------------------------------------------------------------------------
+
 hr office:
   description: >-
     This is human resource room, place where pay check is made. You see everyone
@@ -116,10 +155,14 @@ hr office:
   south: leads to nowhere
   east: leads to nowhere
   west: leads to nowhere
-  explore: >-
+  explore:
     "teddy bear": All dirty and torn, sitting in a corner.
-    "complaint box": "Box is empty. You write a complaint about your boss for sleeping in office again",
-    "trash can": "You see a balled up paper. You un-ball it and see it's a note from your manager trying to fire you again..."
+    "complaint box": Box is empty. You write a complaint about your boss for sleeping in office again,
+    "trash can": You see a balled up paper. You un-ball it and see it's a note from your manager trying to fire you again...
+  get: Nothing to get in here
+      ------------------------------------------------------------------------------------------------------------------
+      ------------------------------------------------------------------------------------------------------------------
+      ------------------------------------------------------------------------------------------------------------------
 
 washington:
   description: You entered the state of Washington
@@ -379,3 +422,13 @@ pennsylvania:
   south: maryland
   east: new jersey
   west: ohio
+  
+      ------------------------------------------------------------------------------------------------------------------
+      ------------------------------------------------------------------------------------------------------------------
+      ------------------------------------------------------------------------------------------------------------------
+
+drive: drive
+pickup: pickup
+deliver: deliver
+load: load
+fill: fill
