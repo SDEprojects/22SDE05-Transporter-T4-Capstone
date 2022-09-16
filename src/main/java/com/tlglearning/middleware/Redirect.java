@@ -75,16 +75,16 @@ public class Redirect {
 
     public static void sendTitleToGui(String title) {
         System.out.println("the title" + title);
-//        mainWindow.setTitle(title);
+        mainWindow.setTitle(title);
     }
+
     /**
      * sendsCommmandsToGui sends
      * @param commands
      */
+
     public static void sendCommandsToGui(String commands){
-
         System.out.println(commands);
-
     }
 
     /**
@@ -120,34 +120,24 @@ public class Redirect {
         if(gameMapImages.contains(key)){
             mainWindow.setMap(prompt);
         } else{
-//            mainWindow.setPrompt(prompt);
+            mainWindow.setPrompt(prompt);
         }
-
     }
+
     public static void getPromptCyan_DictLookUp_PromptToGui(String key){
         String prompt = (String) GamePromptsMap.get(key);
-        //        mainWindow.setPrompt(prompt);
+            mainWindow.setPrompt(prompt);
     }
 
     public static void getPromptRed_DictLookUp_PromptToGui(String key) {
         String prompt = (String) GamePromptsMap.get(key);
-//                mainWindow.setPrompt(prompt);
+            mainWindow.setPrompt(prompt);
     }
 
     public static void getPromptWithLocation(String key, String nextLocation) {
         String prompt = (String) GamePromptsMap.get(key);
-        //        mainWindow.setPrompt(prompt);
-
+            mainWindow.setPrompt(prompt);
     }
-
-    public static void getMapKey_DictLookUp_PromptToGui(String key) {
-        String prompt = (String) GamePromptsMap.get(key);
-        mainWindow.setMap(prompt);
-
-    }
-
-
-
 
     /**
      * getMenu Sends instructions to GUI to create buttons and then sends commends to App after button is pushed.

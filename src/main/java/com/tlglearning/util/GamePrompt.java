@@ -59,7 +59,6 @@ public class GamePrompt {
 
 
     public String getMap(String key){
-        Redirect.getMapKey_DictLookUp_PromptToGui(key);
         return "\n" +
                 PrettyText.RESET.getColor() +
                 gameInput.get(key);
