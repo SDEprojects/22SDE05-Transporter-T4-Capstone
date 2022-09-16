@@ -1,0 +1,59 @@
+[
+  {
+    "truck": {
+      "description": "This is your truck. It looks ready to hit the road, are you? (if you think you're ready type 'start driving')",
+      "north": "leads to nowhere",
+      "south": "leads to nowhere",
+      "east": "warehouse",
+      "west": "leads to nowhere"
+    },
+    "warehouse": {
+      "description": "This is warehouse to store the needed parts. It is late in the year so the shelves are mostly empty. You see a rusty CABINET, an old CLOSET and a DESK",
+      "north": "leads to nowhere",
+      "south": "front office",
+      "east": "boss office",
+      "west": "truck"
+    },
+    "front office": {
+      "description": "This is the front office where everyone checks in when they come in. There seems no one in the front office. You do see a employees LOCKER, a DESK and a bulletin BOARD",
+      "north": "warehouse",
+      "south": "leads to nowhere",
+      "east": "break room",
+      "west": "gas station"
+    },
+    "gas station": {
+      "description": "This is gas station where trucks fill up for gas and people get their snacks. Looks like gas station is just restocked. You see a SNACK AISLE, a DRINK AISLE, and an ATTENDANT is in the counter playing with his phone",
+      "north": "leads to nowhere",
+      "south": "leads to nowhere",
+      "east": "front office",
+      "west": "leads to nowhere"
+    },
+    "boss office": {
+      "description": "This is boss' office. You see your BOSS is again sleeping on his DESK",
+      "north": "leads to nowhere",
+      "south": "break room",
+      "east": "tech room",
+      "west": "warehouse"
+    },
+    "break room": {
+      "description": "This is a break room where people come to relax or eat on their breaks. Room seems to be full. Lots of people gathering around and talking to each other. You see a your LOCKER, a REFRIGERATOR and a COFFEE MAKER",
+      "north": "boss office",
+      "south": "hr office",
+      "east": "leads to nowhere",
+      "west": "front office"
+    },
+    "tech room": {
+      "description": "This is tech room, place for all the IT nerds to hangout. You see everyone is busy on their computer. You see a CABINET, a LAPTOP and a CLOSET",
+      "north": "leads to nowhere",
+      "south": "leads to nowhere",
+      "east": "leads to nowhere",
+      "west": "boss office"
+    },
+    "hr office": {
+      "description": "This is human resource room, place where pay check is made. You see everyone busy chatting with each other in big group. You see a TEDDY BEAR, COMPLAINT BOX and a TRASH CAN",
+      "north": "break room",
+      "south": "leads to nowhere",
+      "east": "leads to nowhere",
+      "west": "leads to nowhere"
+    }
+  }]

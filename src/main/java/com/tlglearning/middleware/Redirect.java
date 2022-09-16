@@ -22,6 +22,7 @@ public class Redirect {
     static Location location;
 
     static HashMap<String, Object> DestinationsMap;
+    static HashMap<String, Object> GamePromptsMap;
 
     public Redirect() {
 
@@ -35,6 +36,17 @@ public class Redirect {
         Yaml yaml = new Yaml();
 
         DestinationsMap = yaml.load(input);
+
+    }
+    // TODO: Create Method to retrieve GamePrompts YAML
+    public static void generateGamePromptsMap() {
+        ClassLoader cl = Main.class.getClassLoader();
+
+        java.io.InputStream input = cl.getResourceAsStream("GamePrompts.yaml");
+
+        Yaml yaml = new Yaml();
+
+        GamePromptsMap = yaml.load(input);
 
     }
 
