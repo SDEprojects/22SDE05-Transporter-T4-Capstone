@@ -3,6 +3,7 @@ import com.sun.tools.javac.Main;
 import com.tlglearning.util.Location;
 import org.yaml.snakeyaml.Yaml;
 
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Scanner;  // Import the Scanner class
 
@@ -28,23 +29,16 @@ public class Redirect {
 
     }
 
-    public static void generateDestinationMap(){
+    public static void generateMaps(){
         ClassLoader cl = Main.class.getClassLoader();
 
-        java.io.InputStream input = cl.getResourceAsStream("Destinations.yaml");
+        InputStream input = cl.getResourceAsStream("Destinations.yaml");
 
         Yaml yaml = new Yaml();
 
         DestinationsMap = yaml.load(input);
 
-    }
-    // TODO: Create Method to retrieve GamePrompts YAML
-    public static void generateGamePromptsMap() {
-        ClassLoader cl = Main.class.getClassLoader();
-
-        java.io.InputStream input = cl.getResourceAsStream("GamePrompts.yaml");
-
-        Yaml yaml = new Yaml();
+        input = cl.getResourceAsStream("GamePrompts.yaml");
 
         GamePromptsMap = yaml.load(input);
 
@@ -101,6 +95,33 @@ public class Redirect {
 
         return location;
     }
+
+    public static void getPromptKey_DictLookUp_PromptToGui(String key){
+        String prompt = (String) GamePromptsMap.get(key);
+        //        mainWindow.setPrompt(prompt);
+    }
+    public static void getPromptCyan_DictLookUp_PromptToGui(String key){
+        String prompt = (String) GamePromptsMap.get(key);
+        //        mainWindow.setPrompt(prompt);
+    }
+
+    public static void getPromptRed_DictLookUp_PromptToGui(String key) {
+        String prompt = (String) GamePromptsMap.get(key);
+        //        mainWindow.setPrompt(prompt);
+    }
+
+    public static void getPromptWithLocation(String key, String nextLocation) {
+        String prompt = (String) GamePromptsMap.get(key);
+        //        mainWindow.setPrompt(prompt);
+    }
+
+    public static void getMapKey_DictLookUp_PromptToGui(String key) {
+        String prompt = (String) GamePromptsMap.get(key);
+        //        mainWindow.setPrompt(prompt);
+    }
+
+
+
 
     /**
      * getMenu Sends instructions to GUI to create buttons and then sends commends to App after button is pushed.
