@@ -27,33 +27,39 @@ public class GamePrompt {
     }
     //get text from gameInput and color it White
     public void runPrompt(String key) {
-        Redirect.sendAppToGui("\n" +
+        System.out.println("\n" +
                 PrettyText.RESET.getColor() +
                 gameInput.get(key));
+        Redirect.getPromptKey_DictLookUp_PromptToGui(key);
     }
     //get text from gameInput and color it Cyan
     public void runPromptCyan(String key) {
-        Redirect.sendAppToGui("\n" +
+        System.out.println(("\n" +
                 PrettyText.CYAN.getColor() +
                 gameInput.get(key) +
-                PrettyText.RESET.getColor());
+                PrettyText.RESET.getColor()));
+        Redirect.getPromptCyan_DictLookUp_PromptToGui(key);
     }
     //get text from gameInput and color it Red
     public void runPromptRed(String key) {
-        Redirect.sendAppToGui("\n" +
+        System.out.println(("\n" +
                 PrettyText.RED.getColor() +
                 gameInput.get(key) +
-                PrettyText.RESET.getColor());
+                PrettyText.RESET.getColor()));
+        Redirect.getPromptRed_DictLookUp_PromptToGui(key);
     }
 
     public void runPromptWithLocation(String key, String nextLocation) {
-        Redirect.sendAppToGui("\n" +
+        System.out.println(("\n" +
                 PrettyText.RESET.getColor() +
                 gameInput.get(key) +
-                nextLocation);
+                nextLocation));
+        Redirect.getPromptWithLocation(key, nextLocation);
     }
 
+
     public String getMap(String key){
+        Redirect.getMapKey_DictLookUp_PromptToGui(key);
         return "\n" +
                 PrettyText.RESET.getColor() +
                 gameInput.get(key);

@@ -14,8 +14,7 @@ import java.util.HashMap;
 public class TransporterClient {
     public static MainWindow mainWindow;
     public static void main(String[] args) throws InterruptedException, InvocationTargetException {
-        Redirect.generateDestinationMap();
-
+        Redirect.generateMaps();
         SwingUtilities.invokeAndWait(new Runnable() {
             /**
              * run() - Override creates a new instance of our main window class.
