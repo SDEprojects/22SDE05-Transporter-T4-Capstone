@@ -1,0 +1,303 @@
+[{
+  "washington": {
+    "description": "You entered the state of Washington",
+    "north": "canada",
+    "south": "oregon",
+    "east": "montana",
+    "west": "ocean"
+  },
+  "oregon": {
+    "description": "You entered the state of Oregon",
+    "north": "washington",
+    "south": "california",
+    "east": "idaho",
+    "west": "ocean"
+  },
+  "california": {
+    "description": "You entered the state of California",
+    "north": "oregon",
+    "south": "mexico",
+    "east": "arizona",
+    "west": "ocean"
+  },
+  "montana": {
+    "description": "You entered the state of Montana",
+    "north": "canada",
+    "south": "wyoming",
+    "east": "north dakota",
+    "west": "washington"
+  },
+  "idaho": {
+    "description": "You entered the state of Idaho",
+    "north": "montana",
+    "south": "utah",
+    "east": "wyoming",
+    "west": "oregon"
+  },
+  "nevada": {
+    "description": "You entered the state of Nevada",
+    "north": "idaho",
+    "south": "arizona",
+    "east": "utah",
+    "west": "california"
+  },
+  "utah": {
+    "description": "You entered the state of Utah",
+    "north": "idaho",
+    "south": "arizona",
+    "east": "colorado",
+    "west": "nevada"
+  },
+  "arizona": {
+    "description": "You entered the state of Arizona",
+    "north": "utah",
+    "south": "mexico",
+    "east": "new mexico",
+    "west": "california"
+  },
+  "wyoming": {
+    "description": "You entered the state of Wyoming",
+    "north": "montana",
+    "south": "colorado",
+    "east": "nebraska",
+    "west": "idaho"
+  },
+  "colorado": {
+    "description": "You entered the state of Colorado",
+    "north": "wyoming",
+    "south": "new mexico",
+    "east": "kansas",
+    "west": "utah"
+  },
+  "new mexico": {
+    "description": "You entered the state of New Mexico",
+    "north": "colorado",
+    "south": "mexico",
+    "east": "texas",
+    "west": "arizona"
+  },
+  "north dakota": {
+    "description": "You entered the state of North Dakota",
+    "north": "canada",
+    "south": "south dakota",
+    "east": "minnesota",
+    "west": "montana"
+  },
+  "south dakota": {
+    "description": "You entered the state of South Dakota",
+    "north": "north dakota",
+    "south": "nebraska",
+    "east": "minnesota",
+    "west": "wyoming"
+  },
+  "nebraska": {
+    "description": "You entered the state of Nebraska",
+    "north": "south dakota",
+    "south": "kansas",
+    "east": "iowa",
+    "west": "wyoming"
+  },
+  "kansas": {
+    "description": "You entered the state of Kansas",
+    "north": "nebraska",
+    "south": "oklahoma",
+    "east": "missouri",
+    "west": "colorado"
+  },
+  "oklahoma": {
+    "description": "You entered the state of Oklahoma",
+    "north": "kansas",
+    "south": "texas",
+    "east": "arkansas",
+    "west": "texas"
+  },
+  "texas": {
+    "description": "You entered the state of Texas",
+    "north": "oklahoma",
+    "south": "mexico",
+    "east": "louisiana",
+    "west": "new mexico"
+  },
+  "louisiana": {
+    "description": "You entered the state of Louisiana",
+    "north": "arkansas",
+    "south": "ocean",
+    "east": "mississippi",
+    "west": "texas"
+  },
+  "arkansas": {
+    "description": "You entered the state of Arkansas",
+    "north": "missouri",
+    "south": "louisiana",
+    "east": "mississippi",
+    "west": "oklahoma"
+  },
+  "missouri": {
+    "description": "You entered the state of Missouri",
+    "north": "iowa",
+    "south": "arkansas",
+    "east": "illinois",
+    "west": "kansas"
+  },
+  "iowa": {
+    "description": "You entered the state of Iowa",
+    "north": "minnesota",
+    "south": "missouri",
+    "east": "illinois",
+    "west": "nebraska"
+  },
+  "minnesota": {
+    "description": "You entered the state of Minnesota",
+    "north": "canada",
+    "south": "iowa",
+    "east": "wisconsin",
+    "west": "south dakota"
+  },
+  "wisconsin": {
+    "description": "You entered the state of Wisconsin",
+    "north": "canada",
+    "south": "illinois",
+    "east": "michigan",
+    "west": "minnesota"
+  },
+  "illinois": {
+    "description": "You entered the state of Illinois",
+    "north": "wisconsin",
+    "south": "tennessee",
+    "east": "indiana",
+    "west": "missouri"
+  },
+  "tennessee": {
+    "description": "You entered the state of Tennessee",
+    "north": "kentucky",
+    "south": "alabama",
+    "east": "north carolina",
+    "west": "arkansas"
+  },
+  "mississippi": {
+    "description": "You entered the state of Mississippi",
+    "north": "tennessee",
+    "south": "ocean",
+    "east": "alabama",
+    "west": "louisiana"
+  },
+  "alabama": {
+    "description": "You entered the state of Alabama",
+    "north": "tennessee",
+    "south": "florida",
+    "east": "georgia",
+    "west": "mississippi"
+  },
+  "georgia": {
+    "description": "You entered the state of Georgia",
+    "north": "south carolina",
+    "south": "florida",
+    "east": "ocean",
+    "west": "alabama"
+  },
+  "florida": {
+    "description": "You entered the state of Florida",
+    "north": "georgia",
+    "south": "ocean",
+    "east": "ocean",
+    "west": "ocean"
+  },
+  "south carolina": {
+    "description": "You entered the state of South Carolina",
+    "north": "north carolina",
+    "south": "georgia",
+    "east": "ocean",
+    "west": "georgia"
+  },
+  "north carolina": {
+    "description": "You entered the state of North Carolina",
+    "north": "west virginia",
+    "south": "south carolina",
+    "east": "ocean",
+    "west": "tennessee"
+  },
+  "kentucky": {
+    "description": "You entered the state of Kentucky",
+    "north": "indiana",
+    "south": "tennessee",
+    "east": "west virginia",
+    "west": "illinois"
+  },
+  "indiana": {
+    "description": "You entered the state of Indiana",
+    "north": "michigan",
+    "south": "kentucky",
+    "east": "ohio",
+    "west": "illinois"
+  },
+  "michigan": {
+    "description": "You entered the state of Michigan",
+    "north": "canada",
+    "south": "indiana",
+    "east": "canada",
+    "west": "wisconsin"
+  },
+  "ohio": {
+    "description": "You entered the state of Ohio",
+    "north": "michigan",
+    "south": "west virginia",
+    "east": "pennsylvania",
+    "west": "indiana"
+  },
+  "west virginia": {
+    "description": "You entered the state of West Virginia",
+    "north": "ohio",
+    "south": "virginia",
+    "east": "virginia",
+    "west": "kentucky"
+  },
+  "virginia": {
+    "description": "You entered the state of Virginia",
+    "north": "DC",
+    "south": "north carolina",
+    "east": "ocean",
+    "west": "west virginia"
+  },
+  "DC": {
+    "description": "You entered the state of DC",
+    "north": "maryland",
+    "south": "virginia",
+    "east": "maryland",
+    "west": "virginia"
+  },
+  "maryland": {
+    "description": "You entered the state of Maryland",
+    "north": "pennsylvania",
+    "south": "DC",
+    "east": "delaware",
+    "west": "west virginia"
+  },
+  "delaware": {
+    "description": "You entered the state of Delaware",
+    "north": "new jersey",
+    "south": "maryland",
+    "east": "ocean",
+    "west": "maryland"
+  },
+  "new jersey": {
+    "description": "You entered the state of New Jersey",
+    "north": "new york",
+    "south": "delaware",
+    "east": "ocean",
+    "west": "pennsylvania"
+  },
+  "new york": {
+    "description": "You entered the state of New York",
+    "north": null,
+    "south": "pennsylvania",
+    "east": "ocean",
+    "west": "canada"
+  },
+  "pennsylvania": {
+    "description": "You entered the state of Pennsylvania",
+    "north": "new york",
+    "south": "maryland",
+    "east": "new jersey",
+    "west": "ohio"
+  }
+}]

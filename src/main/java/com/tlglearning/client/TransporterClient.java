@@ -1,8 +1,10 @@
 package com.tlglearning.client;
 
+import com.sun.tools.javac.Main;
 import com.tlglearning.gui.MainWindow;
 import com.tlglearning.middleware.Redirect;
 import com.tlglearning.util.*;
+import org.yaml.snakeyaml.Yaml;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -13,6 +15,7 @@ public class TransporterClient {
     public static MainWindow mainWindow;
     public static void main(String[] args) throws InterruptedException, InvocationTargetException {
         Redirect.generateDestinationMap();
+
         SwingUtilities.invokeAndWait(new Runnable() {
             /**
              * run() - Override creates a new instance of our main window class.
