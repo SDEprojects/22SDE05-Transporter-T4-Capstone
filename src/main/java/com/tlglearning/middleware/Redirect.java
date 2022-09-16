@@ -1,10 +1,13 @@
 package com.tlglearning.middleware;
 import com.sun.tools.javac.Main;
+import com.tlglearning.util.GamePrompt;
 import com.tlglearning.util.Location;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;  // Import the Scanner class
 
 import static com.tlglearning.client.TransporterClient.mainWindow;
@@ -20,10 +23,25 @@ public class Redirect {
      * @param messageToGui
      */
 
+
+
     static Location location;
 
     static HashMap<String, Object> DestinationsMap;
     static HashMap<String, Object> GamePromptsMap;
+    static final List<String> gameMapImages = new ArrayList<String>() {
+        {
+            add("truck");
+            add("warehouse");
+            add("front office");
+            add("boss office");
+            add("break room");
+            add("hr office");
+            add("tech room");
+        }
+    };
+
+
 
     public Redirect() {
 
@@ -52,12 +70,12 @@ public class Redirect {
 //            System.out.println(DestinationsMap.get(location.getLocationName()));
         }
 
-        mainWindow.setMap(messageToGui);
+//        mainWindow.setMap(messageToGui);
     }
 
     public static void sendTitleToGui(String title) {
         System.out.println("the title" + title);
-        mainWindow.setTitle(title);
+//        mainWindow.setTitle(title);
     }
     /**
      * sendsCommmandsToGui sends
@@ -77,6 +95,7 @@ public class Redirect {
     public static void sendprintfAppToGui(String format,String messageToGui){
 
         System.out.printf(format,messageToGui);
+
     }
 
     /**
@@ -98,7 +117,12 @@ public class Redirect {
 
     public static void getPromptKey_DictLookUp_PromptToGui(String key){
         String prompt = (String) GamePromptsMap.get(key);
-        //        mainWindow.setPrompt(prompt);
+        if(gameMapImages.contains(key)){
+            mainWindow.setMap(prompt);
+        } else{
+//            mainWindow.setPrompt(prompt);
+        }
+
     }
     public static void getPromptCyan_DictLookUp_PromptToGui(String key){
         String prompt = (String) GamePromptsMap.get(key);
@@ -107,17 +131,19 @@ public class Redirect {
 
     public static void getPromptRed_DictLookUp_PromptToGui(String key) {
         String prompt = (String) GamePromptsMap.get(key);
-        //        mainWindow.setPrompt(prompt);
+//                mainWindow.setPrompt(prompt);
     }
 
     public static void getPromptWithLocation(String key, String nextLocation) {
         String prompt = (String) GamePromptsMap.get(key);
         //        mainWindow.setPrompt(prompt);
+
     }
 
     public static void getMapKey_DictLookUp_PromptToGui(String key) {
         String prompt = (String) GamePromptsMap.get(key);
-        //        mainWindow.setPrompt(prompt);
+        mainWindow.setMap(prompt);
+
     }
 
 
