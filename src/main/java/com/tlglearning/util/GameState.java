@@ -34,9 +34,9 @@ public class GameState {
             if (inOffice.contains(currentLocation.getLocationName())) {
                 String map = currentLocation.getLocationName();
                 prompt.runPrompt(map);
-                Redirect.sendAppToGui("Items Needed to start driving\n" + startingScenario.getItemsNeeded());
+                Redirect.sendPromptToGui("Items Needed to start driving\n" + startingScenario.getItemsNeeded());
             } else {
-                Redirect.sendAppToGui("\nYour available directions of travel are:\nNorth= " + currentLocation.getNorth() +
+                Redirect.sendPromptToGui("\nYour available directions of travel are:\nNorth= " + currentLocation.getNorth() +
                 "\nSouth= " + currentLocation.getSouth() +
                 "\nEast= " + currentLocation.getEast() +
                 "\nWest= " + currentLocation.getWest());
@@ -116,7 +116,7 @@ public class GameState {
                 player.initializeDrive(currentLocation, scenario);
             } else {
                 prompt.runPromptRed("drivingItemsNeed");
-                Redirect.sendAppToGui(needed.toString());
+                Redirect.sendPromptToGui(needed.toString());
                 needed.clear();
             }
         }else {
