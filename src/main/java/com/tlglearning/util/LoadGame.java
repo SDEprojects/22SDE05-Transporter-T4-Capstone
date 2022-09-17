@@ -41,9 +41,9 @@ public class LoadGame {
             if (inOffice.contains(currentLocation.getLocationName())) {
                 String map = currentLocation.getLocationName();
                 prompt.runPrompt(map);
-                Redirect.sendAppToGui("Items Needed to start driving\n" + startingScenario.getItemsNeeded());
+                Redirect.sendPromptToGui("Items Needed to start driving\n" + startingScenario.getItemsNeeded());
             } else {
-                Redirect.sendAppToGui("Your available directions of travel are:\nNorth= " + currentLocation.getNorth() +
+                Redirect.sendPromptToGui("Your available directions of travel are:\nNorth= " + currentLocation.getNorth() +
                         "\nSouth= " + currentLocation.getSouth() +
                         "\nEast= " + currentLocation.getEast() +
                         "\nWest= " + currentLocation.getWest());

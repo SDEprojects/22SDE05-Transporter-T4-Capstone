@@ -19,7 +19,7 @@ import static com.tlglearning.client.TransporterClient.mainWindow;
 public class Redirect {
 
     /**
-     * sendAppToGui redirects messages from App to Gui interface
+     * sendPromptToGui redirects messages from App to Gui interface
      * @param messageToGui
      */
 
@@ -62,9 +62,9 @@ public class Redirect {
 
     }
 
-    public static void sendAppToGui(String messageToGui) {
+    public static void sendPromptToGui(String messageToGui) {
         System.out.println("the message" + messageToGui);
-
+        mainWindow.setPrompt(messageToGui);
         // Send Destination information to Gui. Destinations allow include button information.
         if(location!=null){
 //            System.out.println(DestinationsMap.get(location.getLocationName()));
@@ -93,9 +93,9 @@ public class Redirect {
      * @param messageToGui
      */
     public static void sendprintfAppToGui(String format,String messageToGui){
-
         System.out.printf(format,messageToGui);
-
+        String prompt = String.format(format,messageToGui);
+        mainWindow.setPrompt(prompt);
     }
 
     /**

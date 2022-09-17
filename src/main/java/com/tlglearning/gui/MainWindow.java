@@ -9,7 +9,7 @@ import java.awt.*;
 public class MainWindow {
 
     private static final JTextArea P1 = new JTextArea(6,94);
-    private static final JTextArea P2 = new JTextArea(180,40);
+    private static final JTextArea P2 = new JTextArea();
     private static final ColorPane P3 = new ColorPane();
     private String titleText;
     private String map;
@@ -18,6 +18,7 @@ public class MainWindow {
     private static final JPanel TITLE_CONTAINER = new JPanel();
     private static final JPanel MAP_CONTAINER = new JPanel();
     private static final JPanel PROMPT_CONTAINER = new JPanel();
+    private static boolean gameStarted = false;
 
 
     public MainWindow(){
@@ -38,18 +39,16 @@ public class MainWindow {
         APP_CONTAINER.setVisible(true);
     }
 
-
-
     /**
      * initialize() - setup and customize main gui panels & elements
      */
     private void initialize() {
 
         /* Create a main window panel and set attributes. */
-        APP_CONTAINER.setLayout(new BorderLayout(10,5));
+        APP_CONTAINER.setLayout(new BorderLayout(0,0));
         APP_CONTAINER.setTitle("Transporter");
         APP_CONTAINER.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        APP_CONTAINER.setSize(800,800);
+        APP_CONTAINER.setSize(800,480);
         APP_CONTAINER.setLocationRelativeTo(null);
 
 
@@ -80,6 +79,7 @@ public class MainWindow {
         SimpleAttributeSet att = new SimpleAttributeSet();
         StyleConstants.setBold(att, true);
         StyleConstants.setBackground(att, Color.BLACK);
+        P3.setPreferredSize( new Dimension( 600, 350 ) );
         P3.setCharacterAttributes(att, true);
         P3.setFont(new Font("Courier New", Font.PLAIN, 12));
         P3.setOpaque(false);
@@ -105,6 +105,7 @@ public class MainWindow {
  * --------------------------------------------------------------------------------------------------------------------|
  * --------------------------------------------------------------------------------------------------------------------|
  */
+    public void setGameStarted() {this.gameStarted = true;}
 
     public void setTitleText(String title) {this.titleText = title;}
 
@@ -144,7 +145,6 @@ public class MainWindow {
             int end = map.length();
             setMapChars(str);
             P2.replaceRange(map,0,end);
-
         } else {
             setMapChars(str);
             P2.append(map);
@@ -159,24 +159,48 @@ public class MainWindow {
     }
 
     /**
-     * setPrompt() - calls setPromptText and appends text to P3 JColorPane
+     * setPrompt() - calls sleep, setPromptText and appends text to P3 JColorPane
      */
     public void setPrompt(String str) {
+        sleep();
+        sleep();
+        sleep();
         P3.setEditable(true);
-        /* TODO: if statement is a dirty fix to allow use of appendANSI method and needs replacing*/
-        if (text == null) {
-            P3.setText(".");
-        }
-        setPromptText(str);
-        P3.appendANSI(text);
-        PROMPT_CONTAINER.revalidate();
-        PROMPT_CONTAINER.repaint();
-        try {
-            Thread.sleep(100); // sleep/stop a thread for .1 second
-        } catch(InterruptedException e) {
-            System.out.println("An Exception occurred: " + e);
-        }
-        P3.setEditable(false);
+
+            if (!gameStarted) {
+                setPromptText(str);
+                P3.appendANSI("\n" + text);
+                sleep();
+            }
+            if (P3.getText().length() == 808){
+                APP_CONTAINER.setSize(800,600);
+                P3.setPreferredSize( new Dimension( 600, 150 ) );
+                setGameStarted();
+                setPromptText(str);
+                P3.setText(text);
+                sleep();
+            } else if (P3.getText().charAt(P3.getText().length() - 3) == '>'){
+                setPromptText(str);
+                P3.setText(text);
+                sleep();
+            } else if (gameStarted){
+                setPromptText(str);
+                P3.appendANSI("\n" + text);
+                sleep();
+            }
+
+            PROMPT_CONTAINER.revalidate();
+            PROMPT_CONTAINER.repaint();
+
+            P3.setEditable(false);
     }
 
+
+    public static void sleep() {
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            System.out.println("An Exception occurred: " + e);
+        }
+    }
 }

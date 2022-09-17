@@ -196,25 +196,25 @@ public class Actions {
     public void currentToDestination(Location currentLocation, ScenarioGenerator startingScenario){
 
         if (dLoadDelivered) {
-            Redirect.sendAppToGui("Current Location: " + currentLocation.getLocationName() + " --> "
+            Redirect.sendPromptToGui("Current Location: " + currentLocation.getLocationName() + " --> "
                    + "Home Office Location: " + startingScenario.getOfficeLocation());
         } else if (cLoadDelivered) {
-            Redirect.sendAppToGui("Current Location: " + currentLocation.getLocationName() + " --> "
+            Redirect.sendPromptToGui("Current Location: " + currentLocation.getLocationName() + " --> "
                 + "Deliver location: " + startingScenario.getDeliveryLocation2b());
         } else if (load2PickedUp) {
-            Redirect.sendAppToGui("Current Location: " + currentLocation.getLocationName() + " --> "
+            Redirect.sendPromptToGui("Current Location: " + currentLocation.getLocationName() + " --> "
                     + "Deliver location: " + startingScenario.getDeliveryLocation2());
         } else if (bLoadDelivered) {
-            Redirect.sendAppToGui("Current Location: " + currentLocation.getLocationName() + " --> "
+            Redirect.sendPromptToGui("Current Location: " + currentLocation.getLocationName() + " --> "
                     + "Pickup location: " + startingScenario.getPickupLocation2());
         } else if (aLoadDelivered) {
-            Redirect.sendAppToGui("Current Location: " + currentLocation.getLocationName() + " --> "
+            Redirect.sendPromptToGui("Current Location: " + currentLocation.getLocationName() + " --> "
                     + "Deliver location: " + startingScenario.getDeliveryLocation1b());
         } else if (load1PickedUp) {
-            Redirect.sendAppToGui("Current Location: " + currentLocation.getLocationName() + " --> "
+            Redirect.sendPromptToGui("Current Location: " + currentLocation.getLocationName() + " --> "
                 + "Deliver location: " + startingScenario.getDeliveryLocation1());
         }else {
-            Redirect.sendAppToGui("Current Location: " + currentLocation.getLocationName() + " --> "
+            Redirect.sendPromptToGui("Current Location: " + currentLocation.getLocationName() + " --> "
                     + "Pickup location: " + startingScenario.getPickupLocation1());
         }
     }

@@ -20,31 +20,31 @@ public class Menu {
             int input = Integer.parseInt(read.next());
             switch (input) {
                 case 1:
-                    Redirect.sendAppToGui(availableCMD(location));
+                    Redirect.sendPromptToGui(availableCMD(location));
                     break;
                 case 2:
-                    Redirect.sendAppToGui("\nYour backpack has the following items: \n" + showBackpack(inventory) + "\n");
+                    Redirect.sendPromptToGui("\nYour backpack has the following items: \n" + showBackpack(inventory) + "\n");
                     break;
                 case 3:
-                    Redirect.sendAppToGui(locationData(location));
+                    Redirect.sendPromptToGui(locationData(location));
                     break;
                 case 4:
-                    Redirect.sendAppToGui(showScenarioDetails(scenario, location));
+                    Redirect.sendPromptToGui(showScenarioDetails(scenario, location));
                     break;
                 default:
                     prompt.runPromptRed("error");
             }
         } else {
-            Redirect.sendAppToGui("\nWhat do you need help with today?\n" +
+            Redirect.sendPromptToGui("\nWhat do you need help with today?\n" +
                     "'1' - for a list of available commands.\n" +
                     "'2' - to see route plan.\n >>>");
             int input = Integer.parseInt(read.next());
             switch (input) {
                 case 1:
-                    Redirect.sendAppToGui(availableCMD(location));
+                    Redirect.sendPromptToGui(availableCMD(location));
                     break;
                 case 2:
-                    Redirect.sendAppToGui(showScenarioDetails(scenario, location));
+                    Redirect.sendPromptToGui(showScenarioDetails(scenario, location));
                     break;
                 default:
                     prompt.runPromptRed("error");
