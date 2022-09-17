@@ -164,7 +164,6 @@ public class MainWindow {
     public void setPrompt(String str) {
         sleep();
         sleep();
-        sleep();
         P3.setEditable(true);
 
             if (!gameStarted) {
