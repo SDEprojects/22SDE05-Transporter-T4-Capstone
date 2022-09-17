@@ -2,6 +2,7 @@ package com.tlglearning.util;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectReader;
+import com.tlglearning.middleware.Redirect;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -40,9 +41,9 @@ public class LoadGame {
             if (inOffice.contains(currentLocation.getLocationName())) {
                 String map = currentLocation.getLocationName();
                 prompt.runPrompt(map);
-                System.out.println("Items Needed to start driving\n" + startingScenario.getItemsNeeded());
+                Redirect.sendPromptToGui("Items Needed to start driving\n" + startingScenario.getItemsNeeded());
             } else {
-                System.out.println("Your available directions of travel are:\nNorth= " + currentLocation.getNorth() +
+                Redirect.sendPromptToGui("Your available directions of travel are:\nNorth= " + currentLocation.getNorth() +
                         "\nSouth= " + currentLocation.getSouth() +
                         "\nEast= " + currentLocation.getEast() +
                         "\nWest= " + currentLocation.getWest());

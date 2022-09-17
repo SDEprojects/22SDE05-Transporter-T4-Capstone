@@ -1,6 +1,7 @@
 package com.tlglearning.util;
 
-import java.io.File;
+import com.tlglearning.middleware.Redirect;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
@@ -11,7 +12,7 @@ public class GamePrompt {
     // Variables
     private InputStream gameJson = InputHandling.class.getClassLoader().getResourceAsStream("gameprompt.json");
 
-    private HashMap gameInput;
+    public HashMap gameInput;
     {
         try {
             gameInput = parseToMap(gameJson);
@@ -29,28 +30,33 @@ public class GamePrompt {
         System.out.println("\n" +
                 PrettyText.RESET.getColor() +
                 gameInput.get(key));
+        Redirect.getPromptKey_DictLookUp_PromptToGui(key);
     }
     //get text from gameInput and color it Cyan
     public void runPromptCyan(String key) {
-        System.out.println("\n" +
+        System.out.println(("\n" +
                 PrettyText.CYAN.getColor() +
                 gameInput.get(key) +
-                PrettyText.RESET.getColor());
+                PrettyText.RESET.getColor()));
+        Redirect.getPromptCyan_DictLookUp_PromptToGui(key);
     }
     //get text from gameInput and color it Red
     public void runPromptRed(String key) {
-        System.out.println("\n" +
+        System.out.println(("\n" +
                 PrettyText.RED.getColor() +
                 gameInput.get(key) +
-                PrettyText.RESET.getColor());
+                PrettyText.RESET.getColor()));
+        Redirect.getPromptRed_DictLookUp_PromptToGui(key);
     }
 
     public void runPromptWithLocation(String key, String nextLocation) {
-        System.out.println("\n" +
+        System.out.println(("\n" +
                 PrettyText.RESET.getColor() +
                 gameInput.get(key) +
-                nextLocation);
+                nextLocation));
+        Redirect.getPromptWithLocation(key, nextLocation);
     }
+
 
     public String getMap(String key){
         return "\n" +
@@ -60,4 +66,3 @@ public class GamePrompt {
 
 
 }
-

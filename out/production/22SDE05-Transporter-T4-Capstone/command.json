@@ -1,0 +1,77 @@
+[{
+  "go": "go",
+  "move": "go",
+  "jump": "go",
+  "run": "go",
+  "walk": "go",
+  "dance": "go",
+  "hop": "go",
+
+  "drive": "drive",
+
+  "get" : "get",
+  "grab": "get",
+  "lift": "get",
+  "retrieve": "get",
+  "store": "get",
+
+  "explore": "explore",
+  "inspect": "explore",
+  "look": "explore",
+  "analyze": "explore",
+  "probe": "explore",
+  "examine": "explore",
+
+  "north": "north",
+  "straight" : "north",
+  "forward": "north",
+
+  "east": "east",
+  "right": "east",
+
+  "south": "south",
+  "backward": "south",
+  "behind": "south",
+
+  "west": "west",
+  "left": "west",
+
+  "cabinet": "cabinet",
+  "closet": "closet",
+  "boss": "boss",
+  "locker": "locker",
+  "desk": "desk",
+  "board": "board",
+  "refrigerator": "refrigerator",
+  "coffee maker": "coffee maker",
+  "snack aisle": "snack aisle",
+  "drink aisle": "drink aisle",
+  "attendant": "attendant",
+  "teddy bear": "teddy bear",
+  "complaint box": "complaint box",
+  "trash can": "trash can",
+  "laptop": "laptop",
+
+  "logbook": "logbook",
+  "key": "key",
+  "folder": "folder",
+  "truck key": "truck key",
+  "thermos": "thermos",
+  "coffee": "coffee",
+  "soda": "soda",
+  "snacks": "snacks",
+  "gps": "gps",
+  "radio": "radio",
+
+  "start": "start",
+  "driving": "driving",
+
+  "pickup": "pickup",
+  "deliver": "deliver",
+  "load": "load",
+
+  "fill": "fill",
+  "tank": "tank"
+
+  }
+]

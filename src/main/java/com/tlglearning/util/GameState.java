@@ -1,6 +1,7 @@
 package com.tlglearning.util;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.tlglearning.middleware.Redirect;
 
 import java.io.*;
 import java.util.*;
@@ -17,6 +18,8 @@ public class GameState {
     //method to start a new game and initialize all necessary components
     public static void newGame() throws IOException {
         Location currentLocation = new Location();
+
+        Redirect.setLocation(currentLocation);
         Inventory backpack = new Inventory();
         ScenarioGenerator startingScenario = newScenario();
         Actions player = new Actions();
@@ -24,15 +27,16 @@ public class GameState {
         BufferedReader in;
         String userInput;
         List<String> toPlayer;
-        //get users input and go through run command
+
+        //Get users input and go through run command
         in = new BufferedReader(new InputStreamReader(System.in));
         do {
             if (inOffice.contains(currentLocation.getLocationName())) {
                 String map = currentLocation.getLocationName();
                 prompt.runPrompt(map);
-                System.out.println("Items Needed to start driving\n" + startingScenario.getItemsNeeded());
+                Redirect.sendPromptToGui("Items Needed to start driving\n" + startingScenario.getItemsNeeded());
             } else {
-                System.out.println("\nYour available directions of travel are:\nNorth= " + currentLocation.getNorth() +
+                Redirect.sendPromptToGui("\nYour available directions of travel are:\nNorth= " + currentLocation.getNorth() +
                 "\nSouth= " + currentLocation.getSouth() +
                 "\nEast= " + currentLocation.getEast() +
                 "\nWest= " + currentLocation.getWest());
@@ -112,7 +116,7 @@ public class GameState {
                 player.initializeDrive(currentLocation, scenario);
             } else {
                 prompt.runPromptRed("drivingItemsNeed");
-                System.out.println(needed);
+                Redirect.sendPromptToGui(needed.toString());
                 needed.clear();
             }
         }else {
