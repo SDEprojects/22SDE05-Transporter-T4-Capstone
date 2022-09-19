@@ -1,6 +1,6 @@
 package com.tlglearning.middleware;
+
 import com.sun.tools.javac.Main;
-import com.tlglearning.util.GamePrompt;
 import com.tlglearning.util.Location;
 import org.yaml.snakeyaml.Yaml;
 
@@ -8,7 +8,6 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Scanner;  // Import the Scanner class
 
 import static com.tlglearning.client.TransporterClient.mainWindow;
 
@@ -20,9 +19,9 @@ public class Redirect {
 
     /**
      * sendPromptToGui redirects messages from App to Gui interface
+     *
      * @param messageToGui
      */
-
 
 
     static Location location;
@@ -42,12 +41,11 @@ public class Redirect {
     };
 
 
-
     public Redirect() {
 
     }
 
-    public static void generateMaps(){
+    public static void generateMaps() {
         ClassLoader cl = Main.class.getClassLoader();
 
         InputStream input = cl.getResourceAsStream("Destinations.yaml");
@@ -66,7 +64,7 @@ public class Redirect {
         System.out.println("the message" + messageToGui);
         mainWindow.setPrompt(messageToGui);
         // Send Destination information to Gui. Destinations allow include button information.
-        if(location!=null){
+        if (location != null) {
 //            System.out.println(DestinationsMap.get(location.getLocationName()));
         }
 
@@ -80,34 +78,46 @@ public class Redirect {
 
     /**
      * sendsCommmandsToGui sends
+     *
      * @param commands
      */
 
-    public static void sendCommandsToGui(String commands){
+    public static void sendCommandsToGui(String commands) {
         System.out.println(commands);
     }
 
     /**
      * sendprintfAppToGui Allows for communication from App To Gui interface
+     *
      * @param format
      * @param messageToGui
      */
-    public static void sendprintfAppToGui(String format,String messageToGui){
-        System.out.printf(format,messageToGui);
-        String prompt = String.format(format,messageToGui);
+    public static void sendprintfAppToGui(String format, String messageToGui) {
+        System.out.printf(format, messageToGui);
+        String prompt = String.format(format, messageToGui);
         mainWindow.setPrompt(prompt);
     }
 
     /**
-     * sendGuiToApp Allows for userInput from Gui to Application
+     * sendGuiToApp Allows for userInput from Gui to Application.
+     * If command is not sent then wait, wait is represented by the while loop.
+     *
      * @return messageToApp
      */
-    public static String sendGuiToApp(){
+    public static String sendGuiCommandToApp() {
 
-        Scanner scanner = new Scanner(System.in);
-        String messageToApp = scanner.nextLine();
+        while (!commandGateObject.isCommandSentFromGui()) {
 
-        return messageToApp;
+            // Sleep slows down the while loop from processing.
+            try {
+                Thread.sleep(80);
+            } catch (InterruptedException e) {
+                System.out.println("An Exception occurred: " + e);
+            }
+        }
+//        command=commandObject.getCommand();
+        commandGateObject.setIsCommandSentFromGui(false);
+        return commandGateObject.getCommand();
     }
 
     public Location getLocation() {
@@ -115,28 +125,28 @@ public class Redirect {
         return location;
     }
 
-    public static void getPromptKey_DictLookUp_PromptToGui(String key){
+    public static void getPromptKey_DictLookUp_PromptToGui(String key) {
         String prompt = (String) GamePromptsMap.get(key);
-        if(gameMapImages.contains(key)){
+        if (gameMapImages.contains(key)) {
             mainWindow.setMap(prompt);
-        } else{
+        } else {
             mainWindow.setPrompt(prompt);
         }
     }
 
-    public static void getPromptCyan_DictLookUp_PromptToGui(String key){
+    public static void getPromptCyan_DictLookUp_PromptToGui(String key) {
         String prompt = (String) GamePromptsMap.get(key);
-            mainWindow.setPrompt(prompt);
+        mainWindow.setPrompt(prompt);
     }
 
     public static void getPromptRed_DictLookUp_PromptToGui(String key) {
         String prompt = (String) GamePromptsMap.get(key);
-            mainWindow.setPrompt(prompt);
+        mainWindow.setPrompt(prompt);
     }
 
     public static void getPromptWithLocation(String key, String nextLocation) {
         String prompt = (String) GamePromptsMap.get(key);
-            mainWindow.setPrompt(prompt);
+        mainWindow.setPrompt(prompt);
     }
 
     /**

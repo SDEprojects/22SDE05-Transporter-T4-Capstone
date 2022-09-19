@@ -13,6 +13,7 @@ public class GamePrompt {
     private InputStream gameJson = InputHandling.class.getClassLoader().getResourceAsStream("gameprompt.json");
 
     public HashMap gameInput;
+
     {
         try {
             gameInput = parseToMap(gameJson);
@@ -25,6 +26,7 @@ public class GamePrompt {
     public GamePrompt() {
 
     }
+
     //get text from gameInput and color it White
     public void runPrompt(String key) {
         System.out.println("\n" +
@@ -32,6 +34,7 @@ public class GamePrompt {
                 gameInput.get(key));
         Redirect.getPromptKey_DictLookUp_PromptToGui(key);
     }
+
     //get text from gameInput and color it Cyan
     public void runPromptCyan(String key) {
         System.out.println(("\n" +
@@ -40,6 +43,7 @@ public class GamePrompt {
                 PrettyText.RESET.getColor()));
         Redirect.getPromptCyan_DictLookUp_PromptToGui(key);
     }
+
     //get text from gameInput and color it Red
     public void runPromptRed(String key) {
         System.out.println(("\n" +
@@ -58,7 +62,7 @@ public class GamePrompt {
     }
 
 
-    public String getMap(String key){
+    public String getMap(String key) {
         return "\n" +
                 PrettyText.RESET.getColor() +
                 gameInput.get(key);

@@ -1,18 +1,17 @@
 package com.tlglearning.client;
 
-import com.sun.tools.javac.Main;
 import com.tlglearning.gui.MainWindow;
 import com.tlglearning.middleware.Redirect;
-import com.tlglearning.util.*;
-import org.yaml.snakeyaml.Yaml;
+import com.tlglearning.util.InputHandling;
+import com.tlglearning.util.TitleScreen;
 
 import javax.swing.*;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.util.HashMap;
 
 public class TransporterClient {
     public static MainWindow mainWindow;
+
     public static void main(String[] args) throws InterruptedException, InvocationTargetException {
         Redirect.generateMaps();
         SwingUtilities.invokeAndWait(new Runnable() {

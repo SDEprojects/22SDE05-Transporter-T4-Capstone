@@ -3,7 +3,10 @@ package com.tlglearning.util;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.tlglearning.middleware.Redirect;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -33,7 +36,8 @@ public class InputHandling {
     public void gameStart() throws IOException {
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         prompt.runPromptCyan("start");
-        String input = in.readLine().toLowerCase();
+//        String input = in.readLine().toLowerCase();
+        String input = Redirect.sendGuiCommandToApp();
         //switch case to get user input and perform the necessary commands
         switch (input) {
             case "q":
@@ -43,7 +47,10 @@ public class InputHandling {
             case "n":
                 Redirect.sendPromptToGui("Would you like to load your saved data? Type 'y' ");
                 BufferedReader loadIn = new BufferedReader(new InputStreamReader(System.in));
-                String loadInput = loadIn.readLine().toLowerCase();
+//                String loadInput = loadIn.readLine().toLowerCase();
+
+                String loadInput = Redirect.sendGuiCommandToApp();
+
                 if (loadInput.equals("y")) {
                     prompt.runPromptCyan("newGameHelp");
                     prompt.runPromptCyan("newGameCommands");
@@ -85,7 +92,9 @@ public class InputHandling {
         } else {
             Redirect.sendPromptToGui("Want to save? Input y");
             BufferedReader saveIn = new BufferedReader(new InputStreamReader(System.in));
-            String saveInput = saveIn.readLine().toLowerCase();
+//            String saveInput = saveIn.readLine().toLowerCase();
+
+            String saveInput = Redirect.sendGuiCommandToApp();
             if (saveInput.equals("y")) {
                 save(currentLocation, backpack, startingScenario);
             }
