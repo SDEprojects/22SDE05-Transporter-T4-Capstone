@@ -48,11 +48,13 @@ public class Actions {
         } else if (newLocation.equals("warehouse")) {
             updateLocationDetails(currentLocation, newLocation, moveLocation);
             System.out.println(InputHandling.getDescription(newLocation, "description", moveLocation));
+            Redirect.sendDescriptionToGui(InputHandling.getDescription(newLocation, "description", moveLocation));
             prompt.runPrompt("manager approach");
             prompt.runPrompt("manager conv");
 
         } else {
             updateLocationDetails(currentLocation, newLocation, moveLocation);
+            Redirect.sendDescriptionToGui(InputHandling.getDescription(newLocation, "description", moveLocation));
             System.out.println(InputHandling.getDescription(newLocation, "description", moveLocation));
         }
     }

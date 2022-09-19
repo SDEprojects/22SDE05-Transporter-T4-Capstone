@@ -83,8 +83,11 @@ public class Redirect {
      */
     //TODO Help Command Re-direct
     public static void sendHelpMenuToGui (String helpMenu){
-        System.out.println();
         mainWindow.setPrompt(helpMenu);
+    }
+
+    public static void sendDescriptionToGui(String description){
+        mainWindow.setPrompt(description);
     }
 
     /**
