@@ -23,11 +23,10 @@ public class Redirect {
      * @param messageToGui
      */
 
-
     static Location location;
-
     static HashMap<String, Object> DestinationsMap;
     static HashMap<String, Object> GamePromptsMap;
+
     static final List<String> gameMapImages = new ArrayList<String>() {
         {
             add("truck");
@@ -149,79 +148,12 @@ public class Redirect {
         mainWindow.setPrompt(prompt);
     }
 
-    /**
-     * getMenu Sends instructions to GUI to create buttons and then sends commends to App after button is pushed.
-     */
-    public static void getMenu() {
 
-
-//        if (inOffice.contains(location.getLocationName())) {
-//            return "********************Available Commands********************\n" +
-//                    ">> move/go + <direction> will change your current location\n" +
-//                    ">> explore + <specific place> will inspect specific parts of a location\n" +
-//                    ">> get/grab + <item name> will add the item to your backpack\n" +
-//                    ">> start driving will allow you to start driving if you have met the required conditions\n" +
-//                    ">> Pressing 'q' at anytime will exit you from the game\n" +
-//                    "**********************************************************";
-//        }else {
-//            return "********************Available Commands********************\n" +
-//                    ">> drive + <direction> will will change your current location\n" +
-//                    ">> deliver/pickup + load will pickup or delivery your load\n" +
-//                    ">> Pressing 'q' at anytime will exit you from the game\n" +
-//                    "**********************************************************";
-//        }
-
-//        if (inOffice.contains(location.getLocationName())) {
-//            return "***********************Game Details***********************\n" +
-//                    "Items needed to get on the road:\n" + scenario.getItemsNeeded() + "\n" +
-//                    "**********************************************************";
-//        } else {
-//            return "***********************Game Details***********************\n" +
-//                    "Home Office: " + scenario.getOfficeLocation() +
-//                    "\nPickup Location 1: " + scenario.getPickupLocation1() +
-//                    "\nDelivery Location 1: " + scenario.getDeliveryLocation1() +
-//                    "\nDelivery Location 1b: " + scenario.getDeliveryLocation1b() +
-//                    "\nPickup Location 2: " + scenario.getPickupLocation2() +
-//                    "\nDelivery Location 2: " + scenario.getDeliveryLocation2() +
-//                    "\nDelivery Location 2b: " + scenario.getDeliveryLocation2b() + "\n" +
-//                    "**********************************************************";
-//        }
-
-//        return "*************************Location*************************\n" +
-//                currentLocation + '\n' +
-//                description + '\n' +
-//                officeMap + '\n' +
-//                exitN + '\n' +
-//                exitS + '\n' +
-//                exitE + '\n' +
-//                exitW + '\n' +
-//                "**********************************************************";
-    }
 
     public static void setLocation(Location loc) {
 
         location = loc;
     }
 
-    public static String waitAndSendCommandFromGui(){
 
-        String command="";
-        boolean cont=false;
-        while(!cont){
-            cont=commandObject.isCommandSentFromGui();
-            try {
-                Thread.sleep(80);
-                cont=commandObject.isCommandSentFromGui();
-            } catch (InterruptedException e) {
-                System.out.println("An Exception occurred: " + e);
-            }
-        }
-        command=commandObject.getCommand();
-        commandObject.setIsCommandSentFromGui(false);
-
-        return command.toLowerCase();
-
-
-
-    }
 }
