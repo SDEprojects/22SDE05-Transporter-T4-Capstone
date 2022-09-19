@@ -81,7 +81,7 @@ public class Redirect {
      *
      * @param helpMenu
      */
-    //TODO Help Command Re-direct
+    //Redirecting the help menu to the GUI
     public static void sendHelpMenuToGui (String helpMenu){
         mainWindow.setPrompt(helpMenu);
     }
