@@ -2,6 +2,7 @@ package com.tlglearning.middleware;
 
 import com.sun.tools.javac.Main;
 import com.tlglearning.util.Location;
+import com.tlglearning.util.Menu;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.InputStream;
@@ -76,13 +77,17 @@ public class Redirect {
     }
 
     /**
-     * sendsCommmandsToGui sends
+     * sendsHelpMenuToGui sends
      *
-     * @param commands
+     * @param helpMenu
      */
+    //Redirecting the help menu to the GUI
+    public static void sendHelpMenuToGui (String helpMenu){
+        mainWindow.setPrompt(helpMenu);
+    }
 
-    public static void sendCommandsToGui(String commands) {
-        System.out.println(commands);
+    public static void sendDescriptionToGui(String description){
+        mainWindow.setPrompt(description);
     }
 
     /**
