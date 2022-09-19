@@ -15,7 +15,7 @@ public class Menu {
 
     public static void helpMenu(Scanner read, Location location, Inventory inventory, ScenarioGenerator scenario) {
         if (inOffice.contains(location.getLocationName())) {
-            Redirect.sendCommandsToGui("\nWhat do you need help with today?\n" +
+            Redirect.sendHelpMenuToGui("\nWhat do you need help with today?\n" +
                     "'1' - for a list of available commands.\n" +
                     "'2' - to see items in your inventory.\n" +
                     "'3' - to see your current location, available exits, and a map of the office.\n" +
@@ -40,7 +40,7 @@ public class Menu {
                     prompt.runPromptRed("error");
             }
         } else {
-            Redirect.sendPromptToGui("\nWhat do you need help with today?\n" +
+            Redirect.sendHelpMenuToGui("\nWhat do you need help with today?\n" +
                     "'1' - for a list of available commands.\n" +
                     "'2' - to see route plan.\n >>>");
 //            int input = Integer.parseInt(read.next());
