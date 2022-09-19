@@ -3,8 +3,14 @@ package com.tlglearning.util;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.tlglearning.middleware.Redirect;
 
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
 
 import static com.tlglearning.util.InputHandling.*;
 import static com.tlglearning.util.JacksonParser.parse;
@@ -12,9 +18,11 @@ import static com.tlglearning.util.Menu.inOffice;
 
 public class GameState {
     private static GamePrompt prompt = new GamePrompt();
+
     //CTOR
-    public GameState(){
+    public GameState() {
     }
+
     //method to start a new game and initialize all necessary components
     public static void newGame() throws IOException {
         Location currentLocation = new Location();
@@ -37,13 +45,14 @@ public class GameState {
                 Redirect.sendPromptToGui("Items Needed to start driving\n" + startingScenario.getItemsNeeded());
             } else {
                 Redirect.sendPromptToGui("\nYour available directions of travel are:\nNorth= " + currentLocation.getNorth() +
-                "\nSouth= " + currentLocation.getSouth() +
-                "\nEast= " + currentLocation.getEast() +
-                "\nWest= " + currentLocation.getWest());
+                        "\nSouth= " + currentLocation.getSouth() +
+                        "\nEast= " + currentLocation.getEast() +
+                        "\nWest= " + currentLocation.getWest());
                 player.currentToDestination(currentLocation, startingScenario);
             }
             prompt.runPromptCyan("enterCommand");
-            userInput = in.readLine();
+//            userInput = in.readLine();
+            userInput = Redirect.sendGuiCommandToApp();
             clearScreen();
             toPlayer = runCommand(userInput, currentLocation, backpack, startingScenario);
             if (!toPlayer.isEmpty()) {
@@ -52,6 +61,7 @@ public class GameState {
         } while (!"q".equals(userInput));
         prompt.runPromptCyan("quit");
     }
+
     //takes the command input and runs the action method that correlates to the verb in the command input
     public static void action(List<String> toPlayer, Location currentLocation, Inventory backpack, ScenarioGenerator scenario, Actions player) throws IOException {
         String verb = null;
@@ -62,46 +72,47 @@ public class GameState {
         if (toPlayer.get(1) != null) {
             noun = toPlayer.get(1).replaceAll("\"", "");
         }
-        if (verb != null && noun != null ) {
-                switch (verb) {
-                    case "go":
-                        player.move(currentLocation.getLocationName(), noun, currentLocation);
-                        break;
-                    case "explore":
-                        player.explore(currentLocation.getLocationName(), noun, backpack);
-                        break;
-                    case "get":
-                        player.get(currentLocation.getLocationName(), noun, backpack);
-                        break;
-                    case "start":
-                        startDriving(currentLocation, backpack, scenario, player);
-                        break;
-                    case "drive":
-                        player.drive(currentLocation.getLocationName(), noun, currentLocation, scenario);
-                        break;
-                    case "pickup":
-                        player.pickup(currentLocation.getLocationName(), scenario);
-                        break;
-                    case "deliver":
-                        player.deliver(currentLocation.getLocationName(), scenario);
-                        break;
-                    case "fill":
-                        player.getGas();
-                        break;
-                    default:
-                        prompt.runPromptRed("defaultError");
-                }
+        if (verb != null && noun != null) {
+            switch (verb) {
+                case "go":
+                    player.move(currentLocation.getLocationName(), noun, currentLocation);
+                    break;
+                case "explore":
+                    player.explore(currentLocation.getLocationName(), noun, backpack);
+                    break;
+                case "get":
+                    player.get(currentLocation.getLocationName(), noun, backpack);
+                    break;
+                case "start":
+                    startDriving(currentLocation, backpack, scenario, player);
+                    break;
+                case "drive":
+                    player.drive(currentLocation.getLocationName(), noun, currentLocation, scenario);
+                    break;
+                case "pickup":
+                    player.pickup(currentLocation.getLocationName(), scenario);
+                    break;
+                case "deliver":
+                    player.deliver(currentLocation.getLocationName(), scenario);
+                    break;
+                case "fill":
+                    player.getGas();
+                    break;
+                default:
+                    prompt.runPromptRed("defaultError");
+            }
         } else {
             prompt.runPromptRed("invalidCommand");
         }
     }
+
     //allows player to start the driving phase of the game as long as they have collected the required items and are at their truck.
     private static void startDriving(Location currentLocation, Inventory backpack, ScenarioGenerator scenario, Actions player) {
         List<String> inventory = new ArrayList<>(backpack.getBackpack());
         List<String> required = new ArrayList<>(scenario.getItemsNeeded());
         List<String> needed = new ArrayList<>();
 
-        if (currentLocation.getLocationName().equals("truck")){
+        if (currentLocation.getLocationName().equals("truck")) {
             for (String item : required) {
                 if (inventory.contains(item)) {
                     //do nothing
@@ -119,12 +130,13 @@ public class GameState {
                 Redirect.sendPromptToGui(needed.toString());
                 needed.clear();
             }
-        }else {
+        } else {
             prompt.runPromptRed("noTruckError");
         }
     }
+
     //generates a random scenario at the start of each new game
-    private static ScenarioGenerator newScenario(){
+    private static ScenarioGenerator newScenario() {
         JsonNode locations;
         InputStream locationJson = GameState.class.getClassLoader().getResourceAsStream("scenarios.json");
         try {

@@ -1,16 +1,25 @@
 package com.tlglearning.gui;
 
+import com.tlglearning.middleware.commandGateObject;
+
 import javax.swing.*;
-import javax.swing.JFrame;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import java.awt.*;
 
 public class MainWindow {
 
-    private static final JTextArea P1 = new JTextArea(6,94);
+    private static final JTextArea P1 = new JTextArea(6, 94);
     private static final JTextArea P2 = new JTextArea();
     private static final ColorPane P3 = new ColorPane();
+
+    // commandTextField is the user input area to be sent to application
+    // After button.
+    private static final JTextField commandTextField = new JTextField(10);
+
+    // commandSubmitButton submits commandTextField and is linked to action
+    // listener.
+    private static final JButton commandSubmitButton = new JButton("Enter");
     private String titleText;
     private String map;
     private String text;
@@ -21,7 +30,7 @@ public class MainWindow {
     private static boolean gameStarted = false;
 
 
-    public MainWindow(){
+    public MainWindow() {
         initialize();
     }
 
@@ -45,10 +54,10 @@ public class MainWindow {
     private void initialize() {
 
         /* Create a main window panel and set attributes. */
-        APP_CONTAINER.setLayout(new BorderLayout(0,0));
+        APP_CONTAINER.setLayout(new BorderLayout(0, 0));
         APP_CONTAINER.setTitle("Transporter");
         APP_CONTAINER.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        APP_CONTAINER.setSize(800,480);
+        APP_CONTAINER.setSize(800, 480);
         APP_CONTAINER.setLocationRelativeTo(null);
 
 
@@ -79,15 +88,42 @@ public class MainWindow {
         SimpleAttributeSet att = new SimpleAttributeSet();
         StyleConstants.setBold(att, true);
         StyleConstants.setBackground(att, Color.BLACK);
-        P3.setPreferredSize( new Dimension( 600, 350 ) );
+        P3.setPreferredSize(new Dimension(600, 350));
         P3.setCharacterAttributes(att, true);
         P3.setFont(new Font("Courier New", Font.PLAIN, 12));
         P3.setOpaque(false);
+
+
+
+
+
+        /*submitText */
+
+
+        commandSubmitButton.addActionListener(e ->
+        {
+            new SwingWorker<String, Object>() {
+                public String doInBackground() throws InterruptedException {
+                    //create String for the label
+                    sendCommandToApp();
+
+                    return null;
+                }
+
+
+            }.execute();
+//            commandText.setText("");
+
+
+        });
+
 
         /* Add basic GUI elements to their containers */
         TITLE_CONTAINER.add(P1);
         MAP_CONTAINER.add(P2);
         PROMPT_CONTAINER.add(P3);
+        PROMPT_CONTAINER.add(commandTextField);
+        PROMPT_CONTAINER.add(commandSubmitButton);
 
         /* Add elements container to the main application */
         APP_CONTAINER.add(TITLE_CONTAINER, BorderLayout.NORTH);
@@ -99,15 +135,18 @@ public class MainWindow {
     }
 
 
+    /**
+     * (NOT GUI!!) FIELD SETTER METHODS BELOW  ----------------------------------------------------------------------------|
+     * --------------------------------------------------------------------------------------------------------------------|
+     * --------------------------------------------------------------------------------------------------------------------|
+     */
+    public void setGameStarted() {
+        this.gameStarted = true;
+    }
 
-/**
- * (NOT GUI!!) FIELD SETTER METHODS BELOW  ----------------------------------------------------------------------------|
- * --------------------------------------------------------------------------------------------------------------------|
- * --------------------------------------------------------------------------------------------------------------------|
- */
-    public void setGameStarted() {this.gameStarted = true;}
-
-    public void setTitleText(String title) {this.titleText = title;}
+    public void setTitleText(String title) {
+        this.titleText = title;
+    }
 
 
     public void setMapChars(String map) {
@@ -144,7 +183,7 @@ public class MainWindow {
         if (map != null) {
             int end = map.length();
             setMapChars(str);
-            P2.replaceRange(map,0,end);
+            P2.replaceRange(map, 0, end);
         } else {
             setMapChars(str);
             P2.append(map);
@@ -152,7 +191,7 @@ public class MainWindow {
         /* Sleep gui thread for .1 seconds for synchronicity */
         try {
             Thread.sleep(100);
-        } catch(InterruptedException e) {
+        } catch (InterruptedException e) {
             System.out.println("An Exception occurred: " + e);
         }
         P2.setEditable(false);
@@ -165,32 +204,48 @@ public class MainWindow {
         sleep();
         P3.setEditable(true);
 
-            if (!gameStarted) {
-                setPromptText(str);
-                P3.appendANSI("\n" + text);
-                sleep();
-            }
-            if (P3.getText().length() == 808){
-                APP_CONTAINER.setSize(800,600);
-                P3.setPreferredSize( new Dimension( 600, 150 ) );
-                setGameStarted();
-                setPromptText(str);
-                P3.setText(text);
-                sleep();
-            } else if (P3.getText().charAt(P3.getText().length() - 3) == '>'){
-                setPromptText(str);
-                P3.setText(text);
-                sleep();
-            } else if (gameStarted){
-                setPromptText(str);
-                P3.appendANSI("\n" + text);
-                sleep();
-            }
+        if (!gameStarted) {
+            setPromptText(str);
+            P3.appendANSI("\n" + text);
+            sleep();
+        }
+        if (P3.getText().length() == 808) {
+            APP_CONTAINER.setSize(800, 600);
+            P3.setPreferredSize(new Dimension(600, 150));
+            setGameStarted();
+            setPromptText(str);
+            P3.setText(text);
+            sleep();
+        } else if (P3.getText().charAt(P3.getText().length() - 3) == '>') {
+            setPromptText(str);
+            P3.setText(text);
+            sleep();
+        } else if (gameStarted) {
+            setPromptText(str);
+            P3.appendANSI("\n" + text);
+            sleep();
+        }
 
-            PROMPT_CONTAINER.revalidate();
-            PROMPT_CONTAINER.repaint();
 
-            P3.setEditable(false);
+        PROMPT_CONTAINER.revalidate();
+        PROMPT_CONTAINER.repaint();
+
+        P3.setEditable(false);
+    }
+
+
+    /**
+     * sendCommandToApp changes the value in commandObject to record command is sent and set command Variable to command text.
+     */
+
+    public static void sendCommandToApp() {
+
+        // Sets commandGateObject command text  field to the user input command.
+        commandGateObject.setCommand(commandTextField.getText().toLowerCase());
+
+        // Sends confirmation boolean variable to tell the middleware that command is sent.
+        // Then command string is passed to Transport Application.
+        commandGateObject.setIsCommandSentFromGui(true);
     }
 
 

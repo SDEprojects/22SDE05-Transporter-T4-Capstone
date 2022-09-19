@@ -9,10 +9,12 @@ public class Location {
     //default east warehouse for new game start
     private String east = "warehouse";
     private String west;
+
     //ctor
     public Location() {
     }
-    public Location(Location currentLocation){
+
+    public Location(Location currentLocation) {
         this.locationName = currentLocation.getLocationName();
         this.description = currentLocation.getDescription();
         this.east = currentLocation.getEast();

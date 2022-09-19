@@ -7,7 +7,6 @@ import com.tlglearning.middleware.Redirect;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.List;
 
 import static com.tlglearning.util.GameState.action;
@@ -36,7 +35,7 @@ public class LoadGame {
         String userInput;
         List<String> toPlayer;
         //get users input and go through run command
-        in = new BufferedReader(new InputStreamReader(System.in));
+//        in = new BufferedReader(new InputStreamReader(System.in));
         do {
             if (inOffice.contains(currentLocation.getLocationName())) {
                 String map = currentLocation.getLocationName();
@@ -50,7 +49,8 @@ public class LoadGame {
                 player.currentToDestination(currentLocation, startingScenario);
             }
             prompt.runPromptCyan("enterCommand");
-            userInput = in.readLine();
+//            userInput = in.readLine();
+            userInput = Redirect.sendGuiCommandToApp();
             clearScreen();
             toPlayer = runCommand(userInput, currentLocation, backpack, startingScenario);
             if (!toPlayer.isEmpty()) {

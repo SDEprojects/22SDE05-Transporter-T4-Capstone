@@ -1,8 +1,8 @@
 package com.tlglearning.util;
 
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.databind.*;
-
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,6 +16,7 @@ public class JacksonParser {
         return objectMapper.readTree(file);
 
     }
+
     //using Jackson to create a HashMap to parse through text output
     public static HashMap parseToMap(InputStream file) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
