@@ -192,4 +192,26 @@ public class Redirect {
 
         location = loc;
     }
+
+    public static String waitAndSendCommandFromGui(){
+
+        String command="";
+        boolean cont=false;
+        while(!cont){
+            cont=commandObject.isCommandSentFromGui();
+            try {
+                Thread.sleep(80);
+                cont=commandObject.isCommandSentFromGui();
+            } catch (InterruptedException e) {
+                System.out.println("An Exception occurred: " + e);
+            }
+        }
+        command=commandObject.getCommand();
+        commandObject.setIsCommandSentFromGui(false);
+
+        return command.toLowerCase();
+
+
+
+    }
 }

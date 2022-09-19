@@ -1,5 +1,7 @@
 package com.tlglearning.gui;
 
+import com.tlglearning.middleware.commandObject;
+
 import javax.swing.*;
 import javax.swing.JFrame;
 import javax.swing.text.SimpleAttributeSet;
@@ -11,6 +13,14 @@ public class MainWindow {
     private static final JTextArea P1 = new JTextArea(6,94);
     private static final JTextArea P2 = new JTextArea();
     private static final ColorPane P3 = new ColorPane();
+
+    // commandText is user input text selection
+
+    private static JTextField commandText = new JTextField("",10);
+
+    // submitCommand sends command Text to Transporter application.
+    private static JButton submitCommand = new JButton("Enter");
+
     private String titleText;
     private String map;
     private String text;
@@ -84,10 +94,45 @@ public class MainWindow {
         P3.setFont(new Font("Courier New", Font.PLAIN, 12));
         P3.setOpaque(false);
 
+        /*commandText */
+        commandText.setSize(100,4);
+        commandText.setVisible(true);
+
+
+        /*submitText */
+
+        submitCommand.setVisible(true);
+        submitCommand.setSize(2,2);
+
+        submitCommand.addActionListener(e ->
+        {
+            new SwingWorker<String , Object>(){
+                public String doInBackground() throws InterruptedException {
+                    //create String for the label
+                    sendCommandToApp();
+
+                    return null;
+                }
+
+
+
+            }.execute();
+//            commandText.setText("");
+
+
+        });
+
+
+
+
         /* Add basic GUI elements to their containers */
         TITLE_CONTAINER.add(P1);
         MAP_CONTAINER.add(P2);
         PROMPT_CONTAINER.add(P3);
+
+        PROMPT_CONTAINER.add(commandText);
+        PROMPT_CONTAINER.add(submitCommand);
+
 
         /* Add elements container to the main application */
         APP_CONTAINER.add(TITLE_CONTAINER, BorderLayout.NORTH);
@@ -192,6 +237,17 @@ public class MainWindow {
             PROMPT_CONTAINER.repaint();
 
             P3.setEditable(false);
+    }
+
+    public static void sendCommandToApp(){
+
+
+        commandObject.setCommand(commandText.getText().toLowerCase());
+        commandObject.setIsCommandSentFromGui(true);
+
+        System.out.println("sendCommandToApp");
+        System.out.println(commandObject.getCommand());
+        System.out.println(commandObject.isCommandSentFromGui());
     }
 
 

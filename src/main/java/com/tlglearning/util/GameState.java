@@ -43,7 +43,13 @@ public class GameState {
                 player.currentToDestination(currentLocation, startingScenario);
             }
             prompt.runPromptCyan("enterCommand");
-            userInput = in.readLine();
+
+            //Original user input statement, we will use a redirect.
+//            userInput = in.readLine();
+            System.out.println("GameState-> newGame Pre Input");
+            userInput=Redirect.waitAndSendCommandFromGui();
+            System.out.println("GameState-> newGame Post Input");
+
             clearScreen();
             toPlayer = runCommand(userInput, currentLocation, backpack, startingScenario);
             if (!toPlayer.isEmpty()) {

@@ -50,7 +50,12 @@ public class LoadGame {
                 player.currentToDestination(currentLocation, startingScenario);
             }
             prompt.runPromptCyan("enterCommand");
-            userInput = in.readLine();
+
+
+            // Original user input line for terminal. Commeneted out to add GUI command communication.
+//            userInput = in.readLine();
+
+            userInput=Redirect.waitAndSendCommandFromGui();
             clearScreen();
             toPlayer = runCommand(userInput, currentLocation, backpack, startingScenario);
             if (!toPlayer.isEmpty()) {

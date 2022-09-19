@@ -31,9 +31,16 @@ public class InputHandling {
 
     //Initial user prompt to start new game or quit
     public void gameStart() throws IOException {
-        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+
         prompt.runPromptCyan("start");
-        String input = in.readLine().toLowerCase();
+
+        // Original input form user, changed to input from GUI
+        //BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+//        String input = in.readLine().toLowerCase();
+
+
+        String input = Redirect.waitAndSendCommandFromGui();
+
         //switch case to get user input and perform the necessary commands
         switch (input) {
             case "q":
@@ -42,8 +49,9 @@ public class InputHandling {
                 break;
             case "n":
                 Redirect.sendPromptToGui("Would you like to load your saved data? Type 'y' ");
-                BufferedReader loadIn = new BufferedReader(new InputStreamReader(System.in));
-                String loadInput = loadIn.readLine().toLowerCase();
+//                BufferedReader loadIn = new BufferedReader(new InputStreamReader(System.in));
+//                String loadInput = loadIn.readLine().toLowerCase();
+                String loadInput = Redirect.waitAndSendCommandFromGui();
                 if (loadInput.equals("y")) {
                     prompt.runPromptCyan("newGameHelp");
                     prompt.runPromptCyan("newGameCommands");
