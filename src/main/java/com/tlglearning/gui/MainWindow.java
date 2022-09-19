@@ -189,11 +189,7 @@ public class MainWindow {
             P2.append(map);
         }
         /* Sleep gui thread for .1 seconds for synchronicity */
-        try {
-            Thread.sleep(100);
-        } catch (InterruptedException e) {
-            System.out.println("An Exception occurred: " + e);
-        }
+        sleep();
         P2.setEditable(false);
     }
 
