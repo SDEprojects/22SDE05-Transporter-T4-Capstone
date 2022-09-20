@@ -31,7 +31,8 @@ public class Menu {
                     Redirect.sendPromptToGui("\nYour backpack has the following items: \n" + showBackpack(inventory) + "\n");
                     break;
                 case "3":
-                    Redirect.sendPromptToGui(locationData(location));
+                    System.out.println(locationData(location));
+                    //Redirect.sendLocationImagesToGui(locationData(location));
                     break;
                 case "4":
                     Redirect.sendPromptToGui(showScenarioDetails(scenario, location));

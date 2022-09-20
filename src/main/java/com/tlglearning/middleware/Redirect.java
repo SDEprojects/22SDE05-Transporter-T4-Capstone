@@ -2,7 +2,6 @@ package com.tlglearning.middleware;
 
 import com.sun.tools.javac.Main;
 import com.tlglearning.util.Location;
-import com.tlglearning.util.Menu;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.InputStream;
@@ -24,6 +23,15 @@ public class Redirect {
      * @param messageToGui
      */
 
+    private static final String ANSI_BLUE = "\u001B[34m";
+
+    private static final String ANSI_RESET = "\u001B[0m";
+
+    private static final String CYAN = "\u001B[36m";
+
+    private static final String RED = "\u001B[31m";
+
+    private static final String WHITE = "\u001B[37m";
     static Location location;
     static HashMap<String, Object> DestinationsMap;
     static HashMap<String, Object> GamePromptsMap;
@@ -102,6 +110,23 @@ public class Redirect {
     public static void sendDescriptionToGui(String description){
         mainWindow.setPrompt(description);
     }
+
+
+    //TODO: THIS IS A LIST OF TODO'S FOR THE REDIRECT TO THE GUI________________________________________________________
+
+    public static void sendExploreTextToGui(String exploreText) {
+        mainWindow.setPrompt(exploreText);
+
+    }
+    public static void sendLocationImagesToGui(String key) {
+        mainWindow.appendOfficeMap((String) GamePromptsMap.get(key));
+    }
+    public static void sendGetCommandsToGui() {}
+
+    //TODO: CREATE A FUNCTION TO MOVE TO THE TECH OFFICE
+
+    //TODO: CREATE A FUNCTION TO CHANGE COLOR OF TEXT
+
 
     /**
      * sendprintfAppToGui Allows for communication from App To Gui interface
