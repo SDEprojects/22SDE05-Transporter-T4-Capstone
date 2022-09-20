@@ -40,6 +40,19 @@ public class Redirect {
         }
     };
 
+    static final List<String> gamePhotoImages = new ArrayList<String>() {
+        {
+            add("truck");
+            add("warehouse");
+//            add("front office");
+//            add("boss office");
+//            add("break room");
+//            add("hr office");
+//            add("tech room");
+        }
+    };
+
+
 
     public Redirect() {
 
@@ -132,11 +145,17 @@ public class Redirect {
     public static void getPromptKey_DictLookUp_PromptToGui(String key) {
         String prompt = (String) GamePromptsMap.get(key);
         if (gameMapImages.contains(key)) {
-            mainWindow.setMap(prompt);
+            if(gamePhotoImages.contains(key)){
+                mainWindow.setPhotoToMapPanel(key);
+            }else{
+                mainWindow.setMap(prompt);
+            }
+
         } else {
             mainWindow.setPrompt(prompt);
         }
     }
+
 
     public static void getPromptCyan_DictLookUp_PromptToGui(String key) {
         String prompt = (String) GamePromptsMap.get(key);

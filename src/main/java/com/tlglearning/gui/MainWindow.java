@@ -29,6 +29,9 @@ public class MainWindow {
     private static final JPanel PROMPT_CONTAINER = new JPanel();
     private static boolean gameStarted = false;
 
+    private static ImageIcon MapImageIcon;
+
+    JLabel MapPanelLable= new JLabel();
 
     public MainWindow() {
         initialize();
@@ -39,7 +42,6 @@ public class MainWindow {
  * GUI METHODS(show, initialize, setTitle, setMap, setPrompt)----------------------------------------------------------|
  * --------------------------------------------------------------------------------------------------------------------|
  */
-
 
     /**
      * show() - display initialized APP_CONTAINER.
@@ -93,12 +95,7 @@ public class MainWindow {
         P3.setFont(new Font("Courier New", Font.PLAIN, 12));
         P3.setOpaque(false);
 
-
-
-
-
         /*submitText */
-
 
         commandSubmitButton.addActionListener(e ->
         {
@@ -106,17 +103,16 @@ public class MainWindow {
                 public String doInBackground() throws InterruptedException {
                     //create String for the label
                     sendCommandToApp();
-
                     return null;
                 }
 
 
             }.execute();
-//            commandText.setText("");
-
-
         });
 
+
+        ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+        MapImageIcon= new ImageIcon(classloader.getResource("photos/intro.png"));
 
         /* Add basic GUI elements to their containers */
         TITLE_CONTAINER.add(P1);
@@ -129,6 +125,8 @@ public class MainWindow {
         APP_CONTAINER.add(TITLE_CONTAINER, BorderLayout.NORTH);
         APP_CONTAINER.add(MAP_CONTAINER, BorderLayout.CENTER);
         APP_CONTAINER.add(PROMPT_CONTAINER, BorderLayout.SOUTH);
+        MapPanelLable.setIcon(MapImageIcon);
+        MAP_CONTAINER.add(MapPanelLable);
 
         /* Setting GUI visibility */
         show();
@@ -148,23 +146,19 @@ public class MainWindow {
         this.titleText = title;
     }
 
-
     public void setMapChars(String map) {
         this.map = map;
     }
 
-
     public void setPromptText(String text) {
         this.text = text;
     }
-
 
 /**
  * GUI METHODS BELOW---------------------------------------------------------------------------------------------------|
  * --------------------------------------------------------------------------------------------------------------------|
  * --------------------------------------------------------------------------------------------------------------------|
  */
-
 
     /**
      * setTitle() - calls setTitleText and appends titleText to P1 JTextArea
@@ -190,6 +184,7 @@ public class MainWindow {
         }
         /* Sleep gui thread for .1 seconds for synchronicity */
         sleep();
+        sleep();
         P2.setEditable(false);
     }
 
@@ -197,44 +192,73 @@ public class MainWindow {
      * setPrompt() - calls sleep, setPromptText and appends text to P3 JColorPane
      */
     public void setPrompt(String str) {
-        sleep();
+
         P3.setEditable(true);
+        sleep();
 
         if (!gameStarted) {
             setPromptText(str);
             P3.appendANSI("\n" + text);
-            sleep();
+
         }
         if (P3.getText().length() == 808) {
             APP_CONTAINER.setSize(800, 600);
             P3.setPreferredSize(new Dimension(600, 150));
             setGameStarted();
             setPromptText(str);
-            P3.setText(text);
-            sleep();
+//            P3.setText(text);
+            P3.appendANSI("\n"+text);
+
         } else if (P3.getText().charAt(P3.getText().length() - 3) == '>') {
             setPromptText(str);
-            P3.setText(text);
-            sleep();
+//            P3.setText(text);
+            P3.appendANSI("\n"+text);
+
         } else if (gameStarted) {
             setPromptText(str);
             P3.appendANSI("\n" + text);
-            sleep();
-        }
 
+        }
+        sleep();
 
         PROMPT_CONTAINER.revalidate();
         PROMPT_CONTAINER.repaint();
-
+        sleep();
         P3.setEditable(false);
     }
 
+    public void setPhotoToMapPanel(String key)  {
+
+        // Set to editable
+        P2.setEditable(true);
+
+        // Remove any text from area
+        P2.setText("");
+
+        //Get the resource from resources Photos
+        ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+        MapImageIcon= new ImageIcon(classloader.getResource("photos/"+key+".png"));
+
+        // Set Icon to new image Icon
+        MapPanelLable.setIcon(MapImageIcon);
+
+        /* Sleep gui thread for .1 seconds for synchronicity */
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            System.out.println("An Exception occurred: " + e);
+        }
+        P2.setEditable(false);
+    }
 
     /**
      * sendCommandToApp changes the value in commandObject to record command is sent and set command Variable to command text.
      */
 
     public static void sendCommandToApp() {
+        P2.setText("");
+        P3.setText("");
+
 
         // Sets commandGateObject command text  field to the user input command.
         commandGateObject.setCommand(commandTextField.getText().toLowerCase());
@@ -243,7 +267,6 @@ public class MainWindow {
         // Then command string is passed to Transport Application.
         commandGateObject.setIsCommandSentFromGui(true);
     }
-
 
     public static void sleep() {
         try {
