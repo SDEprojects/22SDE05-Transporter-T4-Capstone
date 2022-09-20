@@ -13,6 +13,8 @@ public class MainWindow {
     private static final JTextArea P2 = new JTextArea();
     private static final ColorPane P3 = new ColorPane();
 
+    private static final JTextArea P4 = new JTextArea();
+
     // commandTextField is the user input area to be sent to application
     // After button.
     private static final JTextField commandTextField = new JTextField(10);
@@ -95,6 +97,11 @@ public class MainWindow {
         P3.setFont(new Font("Courier New", Font.PLAIN, 12));
         P3.setOpaque(false);
 
+        /* P4 is JTextArea - will populate officeMap */
+        P4.setFont(new Font("Courier New", Font.PLAIN, 12));
+        P4.setForeground(Color.WHITE);
+        P4.setBackground(Color.BLACK);
+
         /*submitText */
 
         commandSubmitButton.addActionListener(e ->
@@ -117,6 +124,7 @@ public class MainWindow {
         /* Add basic GUI elements to their containers */
         TITLE_CONTAINER.add(P1);
         MAP_CONTAINER.add(P2);
+        MAP_CONTAINER.add(P4);
         PROMPT_CONTAINER.add(P3);
         PROMPT_CONTAINER.add(commandTextField);
         PROMPT_CONTAINER.add(commandSubmitButton);
@@ -227,6 +235,12 @@ public class MainWindow {
         P3.setEditable(false);
     }
 
+    public void appendOfficeMap(String officeMap){
+       P4.append(officeMap);
+       MAP_CONTAINER.revalidate();
+       MAP_CONTAINER.repaint();
+    }
+
     public void setPhotoToMapPanel(String key)  {
 
         // Set to editable
@@ -258,6 +272,7 @@ public class MainWindow {
     public static void sendCommandToApp() {
         P2.setText("");
         P3.setText("");
+        P4.setText("");
 
 
         // Sets commandGateObject command text  field to the user input command.

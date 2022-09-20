@@ -61,8 +61,9 @@ public class GamePrompt {
         Redirect.getPromptWithLocation(key, nextLocation);
     }
 
-
+//This is where the officeMap comes from
     public String getMap(String key) {
+        Redirect.sendLocationImagesToGui(key);
         return "\n" +
                 PrettyText.RESET.getColor() +
                 gameInput.get(key);

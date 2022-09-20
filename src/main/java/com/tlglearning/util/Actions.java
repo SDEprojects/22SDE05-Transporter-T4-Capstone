@@ -69,11 +69,13 @@ public class Actions {
             if (interestLocation.equals("cabinet") || interestLocation.equals("closet") || interestLocation.equals("locker")) {
                 boolean hasKey = backpack.getBackpack().contains("key");
                 if (hasKey) {
+                    Redirect.sendExploreTextToGui(newExploreLocation);
                     System.out.println(newExploreLocation);
                 } else {
                     prompt.runPromptRed("keyNeeded");
                 }
             } else {
+                Redirect.sendExploreTextToGui(newExploreLocation);
                 System.out.println(newExploreLocation);
             }
         }
