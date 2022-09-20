@@ -6,6 +6,8 @@ import javax.swing.*;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class MainWindow {
 
@@ -104,17 +106,13 @@ public class MainWindow {
 
         /*submitText */
 
-        commandSubmitButton.addActionListener(e ->
-        {
-            new SwingWorker<String, Object>() {
-                public String doInBackground() throws InterruptedException {
-                    //create String for the label
+        commandTextField.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode() == KeyEvent.VK_ENTER){
                     sendCommandToApp();
-                    return null;
                 }
-
-
-            }.execute();
+            }
         });
 
 
