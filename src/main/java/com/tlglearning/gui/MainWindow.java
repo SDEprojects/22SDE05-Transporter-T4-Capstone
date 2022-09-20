@@ -1,11 +1,14 @@
 package com.tlglearning.gui;
 
+import com.tlglearning.gui.button.CommandButton;
 import com.tlglearning.middleware.commandGateObject;
 
 import javax.swing.*;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class MainWindow {
 
@@ -21,7 +24,9 @@ public class MainWindow {
 
     // commandSubmitButton submits commandTextField and is linked to action
     // listener.
-    private static final JButton commandSubmitButton = new JButton("Enter");
+    private static final JPanel BUTTON_ACTION_CONTAINER = new JPanel(new BorderLayout());
+    private static final JPanel BUTTON_GO_CONTAINER = new JPanel(new BorderLayout());
+
     private String titleText;
     private String map;
     private String text;
@@ -104,17 +109,13 @@ public class MainWindow {
 
         /*submitText */
 
-        commandSubmitButton.addActionListener(e ->
-        {
-            new SwingWorker<String, Object>() {
-                public String doInBackground() throws InterruptedException {
-                    //create String for the label
+        commandTextField.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode() == KeyEvent.VK_ENTER){
                     sendCommandToApp();
-                    return null;
                 }
-
-
-            }.execute();
+            }
         });
 
 
@@ -127,7 +128,20 @@ public class MainWindow {
         MAP_CONTAINER.add(P4);
         PROMPT_CONTAINER.add(P3);
         PROMPT_CONTAINER.add(commandTextField);
-        PROMPT_CONTAINER.add(commandSubmitButton);
+
+        BUTTON_GO_CONTAINER.add((new CommandButton("N","Go North")).getButton(),BorderLayout.NORTH);
+        BUTTON_GO_CONTAINER.add((new CommandButton("S","Go South")).getButton(),BorderLayout.SOUTH);
+        BUTTON_GO_CONTAINER.add(commandTextField, BorderLayout.CENTER);
+        BUTTON_GO_CONTAINER.add((new CommandButton("E","Go East")).getButton(),BorderLayout.EAST);
+        BUTTON_GO_CONTAINER.add((new CommandButton("W","Go West")).getButton(),BorderLayout.WEST);
+
+        BUTTON_ACTION_CONTAINER.add((new CommandButton("EXPLORE","Explore")).getButton(),BorderLayout.WEST);
+        BUTTON_ACTION_CONTAINER.add((new CommandButton("Get","Get")).getButton(),BorderLayout.EAST);
+
+        PROMPT_CONTAINER.add(BUTTON_GO_CONTAINER,BorderLayout.NORTH);
+        PROMPT_CONTAINER.add(BUTTON_ACTION_CONTAINER,BorderLayout.SOUTH);
+
+
 
         /* Add elements container to the main application */
         APP_CONTAINER.add(TITLE_CONTAINER, BorderLayout.NORTH);
@@ -209,18 +223,18 @@ public class MainWindow {
             P3.appendANSI("\n" + text);
 
         }
-        if (P3.getText().length() == 808) {
+        if (P3.getText().length() == 807 || P3.getText().length() == 808) {
             APP_CONTAINER.setSize(800, 600);
             P3.setPreferredSize(new Dimension(600, 150));
             setGameStarted();
             setPromptText(str);
 //            P3.setText(text);
-            P3.appendANSI("\n"+text);
+            P3.setText("\n"+text);
 
         } else if (P3.getText().charAt(P3.getText().length() - 3) == '>') {
             setPromptText(str);
 //            P3.setText(text);
-            P3.appendANSI("\n"+text);
+            P3.setText("\n"+text);
 
         } else if (gameStarted) {
             setPromptText(str);
@@ -271,7 +285,7 @@ public class MainWindow {
 
     public static void sendCommandToApp() {
         P2.setText("");
-        P3.setText("");
+//        P3.setText("");
         P4.setText("");
 
 
