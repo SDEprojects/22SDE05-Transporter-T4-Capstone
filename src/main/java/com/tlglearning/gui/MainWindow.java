@@ -29,6 +29,12 @@ public class MainWindow {
     private static final JPanel PROMPT_CONTAINER = new JPanel();
     private static boolean gameStarted = false;
 
+    private static ImageIcon MapImageIcon;
+
+    JLabel MapPanelLable= new JLabel();
+
+
+
 
     public MainWindow() {
         initialize();
@@ -116,6 +122,12 @@ public class MainWindow {
 
 
         });
+
+
+        ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+        MapImageIcon= new ImageIcon(classloader.getResource("Photos/intro.png"));
+
+        MapPanelLable.setIcon(MapImageIcon);
 
 
         /* Add basic GUI elements to their containers */
@@ -228,6 +240,32 @@ public class MainWindow {
 
         P3.setEditable(false);
     }
+
+    public void setPhotoToMapPanel(String key)  {
+
+        // Set to editable
+        P2.setEditable(true);
+
+        // Remove any text from area
+        P2.setText("");
+
+        //Get the resource from resources Photos
+        ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+        MapImageIcon= new ImageIcon(classloader.getResource("Photos/"+key+".png"));
+
+        // Set Icon to new image Icon
+        MapPanelLable.setIcon(MapImageIcon);
+
+
+        /* Sleep gui thread for .1 seconds for synchronicity */
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            System.out.println("An Exception occurred: " + e);
+        }
+        P2.setEditable(false);
+    }
+
 
 
     /**
