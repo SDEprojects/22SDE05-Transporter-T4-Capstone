@@ -17,6 +17,7 @@ public class CommandButton {
      */
     private String command;
     private JButton button;
+    MainWindow mainWindow;
 
     /**
      * displayName is text that shows on the button itself.
@@ -28,7 +29,8 @@ public class CommandButton {
      * @param displayName
      * @param command
      */
-    public CommandButton(String displayName, String command) {
+    public CommandButton(MainWindow ref, String displayName, String command) {
+        this.mainWindow = ref;
         setCommand(command.toLowerCase());
         setButton(displayName);
     }
@@ -68,6 +70,7 @@ public class CommandButton {
         {
             new SwingWorker<String, Object>() {
                 public String doInBackground() throws InterruptedException {
+                    mainWindow.wipe();
                     //create String for the label
                     // Sets commandGateObject command text  field to the user input command.
                     commandGateObject.setCommand(command);

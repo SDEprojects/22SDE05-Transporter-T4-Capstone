@@ -66,12 +66,14 @@ public class MainWindow {
         APP_CONTAINER.setLayout(new BorderLayout(0, 0));
         APP_CONTAINER.setTitle("Transporter");
         APP_CONTAINER.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        APP_CONTAINER.setSize(800, 480);
+        APP_CONTAINER.setSize(1200, 1000);
+        APP_CONTAINER.setResizable(false);
         APP_CONTAINER.setLocationRelativeTo(null);
 
 
         /* Element containers */
-        MAP_CONTAINER.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 5));
+        MAP_CONTAINER.setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
         MAP_CONTAINER.setBackground(Color.BLACK);
 
         PROMPT_CONTAINER.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 5));
@@ -124,56 +126,58 @@ public class MainWindow {
 
         /* Add basic GUI elements to their containers */
         TITLE_CONTAINER.add(P1);
-        MAP_CONTAINER.add(P2);
-        MAP_CONTAINER.add(P4);
+        MAP_CONTAINER.add(P2, gbc);
+        MAP_CONTAINER.add(P4, gbc);
         PROMPT_CONTAINER.add(P3);
         PROMPT_CONTAINER.add(commandTextField);
 
-        BUTTON_GO_CONTAINER.add((new CommandButton("N","Go North")).getButton(),BorderLayout.NORTH);
-        BUTTON_GO_CONTAINER.add((new CommandButton("S","Go South")).getButton(),BorderLayout.SOUTH);
+        BUTTON_GO_CONTAINER.add((new CommandButton(this, "N","Go North")).getButton(),BorderLayout.NORTH);
+        BUTTON_GO_CONTAINER.add((new CommandButton(this, "S","Go South")).getButton(),BorderLayout.SOUTH);
         BUTTON_GO_CONTAINER.add(commandTextField, BorderLayout.CENTER);
-        BUTTON_GO_CONTAINER.add((new CommandButton("E","Go East")).getButton(),BorderLayout.EAST);
-        BUTTON_GO_CONTAINER.add((new CommandButton("W","Go West")).getButton(),BorderLayout.WEST);
+        BUTTON_GO_CONTAINER.add((new CommandButton(this, "E","Go East")).getButton(),BorderLayout.EAST);
+        BUTTON_GO_CONTAINER.add((new CommandButton(this, "W","Go West")).getButton(),BorderLayout.WEST);
 
-        BUTTON_ACTION_CONTAINER.add((new CommandButton("EXPLORE","Explore")).getButton(),BorderLayout.WEST);
-        BUTTON_ACTION_CONTAINER.add((new CommandButton("Get","Get")).getButton(),BorderLayout.EAST);
+        BUTTON_ACTION_CONTAINER.add((new CommandButton(this, "EXPLORE","Explore")).getButton(),BorderLayout.WEST);
+        BUTTON_ACTION_CONTAINER.add((new CommandButton(this, "Get","Get")).getButton(),BorderLayout.EAST);
 
         PROMPT_CONTAINER.add(BUTTON_GO_CONTAINER,BorderLayout.NORTH);
         PROMPT_CONTAINER.add(BUTTON_ACTION_CONTAINER,BorderLayout.SOUTH);
-
-
 
         /* Add elements container to the main application */
         APP_CONTAINER.add(TITLE_CONTAINER, BorderLayout.NORTH);
         APP_CONTAINER.add(MAP_CONTAINER, BorderLayout.CENTER);
         APP_CONTAINER.add(PROMPT_CONTAINER, BorderLayout.SOUTH);
         MapPanelLable.setIcon(MapImageIcon);
-        MAP_CONTAINER.add(MapPanelLable);
+        MAP_CONTAINER.add(MapPanelLable, gbc);
 
         /* Setting GUI visibility */
         show();
     }
 
 
-    /**
-     * (NOT GUI!!) FIELD SETTER METHODS BELOW  ----------------------------------------------------------------------------|
-     * --------------------------------------------------------------------------------------------------------------------|
-     * --------------------------------------------------------------------------------------------------------------------|
-     */
-    public void setGameStarted() {
-        this.gameStarted = true;
-    }
-
-    public void setTitleText(String title) {
-        this.titleText = title;
-    }
+/**
+ * (NOT GUI!!) FIELD SETTER METHODS BELOW  ----------------------------------------------------------------------------|
+ * --------------------------------------------------------------------------------------------------------------------|
+ * --------------------------------------------------------------------------------------------------------------------|
+ */
 
     public void setMapChars(String map) {
         this.map = map;
     }
 
+
     public void setPromptText(String text) {
         this.text = text;
+    }
+
+
+    public void setTitleText(String title) {
+        this.titleText = title;
+    }
+
+
+    public void setGameStarted(){
+        gameStarted = true;
     }
 
 /**
@@ -191,104 +195,97 @@ public class MainWindow {
         P1.setEditable(false);
     }
 
+
     /**
      * setMap() - calls setMapChars and appends map to P2 JTextArea
      */
     public void setMap(String str) {
-        P2.setEditable(true);
-        if (map != null) {
-            int end = map.length();
+        if (P4.getText().length() == 0) {
+            P2.setEditable(true);
+            MapPanelLable.setIcon(null);
             setMapChars(str);
-            P2.replaceRange(map, 0, end);
-        } else {
-            setMapChars(str);
-            P2.append(map);
+            P2.setText(map);
+            /* Sleep gui thread for .1 seconds for synchronicity */
+            sleep();
+            P2.setEditable(false);
         }
-        /* Sleep gui thread for .1 seconds for synchronicity */
-        sleep();
-        sleep();
-        P2.setEditable(false);
     }
+
 
     /**
      * setPrompt() - calls sleep, setPromptText and appends text to P3 JColorPane
      */
     public void setPrompt(String str) {
-
         P3.setEditable(true);
         sleep();
-
         if (!gameStarted) {
             setPromptText(str);
             P3.appendANSI("\n" + text);
-
         }
         if (P3.getText().length() == 807 || P3.getText().length() == 808) {
-            APP_CONTAINER.setSize(800, 600);
+            APP_CONTAINER.setSize(1200,800);
+            APP_CONTAINER.setLocationRelativeTo(null);
             P3.setPreferredSize(new Dimension(600, 150));
             setGameStarted();
             setPromptText(str);
-//            P3.setText(text);
-            P3.setText("\n"+text);
-
+            P3.setText(text);
         } else if (P3.getText().charAt(P3.getText().length() - 3) == '>') {
             setPromptText(str);
-//            P3.setText(text);
-            P3.setText("\n"+text);
-
+            P3.setText("\n" + text);
         } else if (gameStarted) {
             setPromptText(str);
             P3.appendANSI("\n" + text);
-
         }
-        sleep();
-
         PROMPT_CONTAINER.revalidate();
         PROMPT_CONTAINER.repaint();
         sleep();
         P3.setEditable(false);
     }
 
+
     public void appendOfficeMap(String officeMap){
-       P4.append(officeMap);
-       MAP_CONTAINER.revalidate();
-       MAP_CONTAINER.repaint();
+        P4.append(officeMap);
+        MapPanelLable.setIcon(null);
+        P2.setText(null);
+        sleep();
     }
+
 
     public void setPhotoToMapPanel(String key)  {
+        if (P4.getText().length() == 0){
+            // Set to editable
+            P2.setEditable(true);
+            P2.setText("");
+            //Get the resource from resources Photos
+            ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+            switch(key){
+                case "truck":
+                    MapImageIcon = new ImageIcon(
+                        new ImageIcon(classloader.getResource("photos/"+key+".png"))
+                            .getImage()
+                            .getScaledInstance(900, 186, Image.SCALE_DEFAULT)
+                    );
+                    break;
+                default:
+                    MapImageIcon= new ImageIcon(classloader.getResource("photos/"+key+".png"));
+                    break;
+            }
 
-        // Set to editable
-        P2.setEditable(true);
+            // Set Icon to new image Icon
+            MapPanelLable.setIcon(MapImageIcon);
 
-        // Remove any text from area
-        P2.setText("");
-
-        //Get the resource from resources Photos
-        ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-        MapImageIcon= new ImageIcon(classloader.getResource("photos/"+key+".png"));
-
-        // Set Icon to new image Icon
-        MapPanelLable.setIcon(MapImageIcon);
-
-        /* Sleep gui thread for .1 seconds for synchronicity */
-        try {
-            Thread.sleep(100);
-        } catch (InterruptedException e) {
-            System.out.println("An Exception occurred: " + e);
+            /* Sleep gui thread for .1 seconds for synchronicity */
+            sleep();
+            P2.setEditable(false);
         }
-        P2.setEditable(false);
     }
+
 
     /**
      * sendCommandToApp changes the value in commandObject to record command is sent and set command Variable to command text.
      */
 
     public static void sendCommandToApp() {
-        P2.setText("");
-//        P3.setText("");
-        P4.setText("");
-
-
         // Sets commandGateObject command text  field to the user input command.
         commandGateObject.setCommand(commandTextField.getText().toLowerCase());
 
@@ -303,5 +300,10 @@ public class MainWindow {
         } catch (InterruptedException e) {
             System.out.println("An Exception occurred: " + e);
         }
+    }
+
+    public void wipe() {
+        P4.setText(null);
+        P2.setText(null);
     }
 }
