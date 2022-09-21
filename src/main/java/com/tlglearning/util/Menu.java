@@ -15,7 +15,7 @@ public class Menu {
 
     public static void helpMenu(Scanner read, Location location, Inventory inventory, ScenarioGenerator scenario) {
         if (inOffice.contains(location.getLocationName())) {
-            Redirect.sendHelpMenuToGui("\nWhat do you need help with today?\n" +
+            Redirect.sendHelpMenuToGui("25","\nWhat do you need help with today?\n" +
                     "'1' - for a list of available commands.\n" +
                     "'2' - to see items in your inventory.\n" +
                     "'3' - to see your current location, available exits, and a map of the office.\n" +
@@ -25,33 +25,33 @@ public class Menu {
             String input = Redirect.sendGuiCommandToApp();
             switch (input) {
                 case "1":
-                    Redirect.sendPromptToGui(availableCMD(location));
+                    Redirect.sendPromptToGui("26",availableCMD(location));
                     break;
                 case "2":
-                    Redirect.sendPromptToGui("\nYour backpack has the following items: \n" + showBackpack(inventory) + "\n");
+                    Redirect.sendPromptToGui("27","\nYour backpack has the following items: \n" + showBackpack(inventory) + "\n");
                     break;
                 case "3":
                     System.out.println(locationData(location));
                     //Redirect.sendLocationImagesToGui(locationData(location));
                     break;
                 case "4":
-                    Redirect.sendPromptToGui(showScenarioDetails(scenario, location));
+                    Redirect.sendPromptToGui("28",showScenarioDetails(scenario, location));
                     break;
                 default:
                     prompt.runPromptRed("error");
             }
         } else {
-            Redirect.sendHelpMenuToGui("\nWhat do you need help with today?\n" +
+            Redirect.sendHelpMenuToGui("29","\nWhat do you need help with today?\n" +
                     "'1' - for a list of available commands.\n" +
                     "'2' - to see route plan.\n >>>");
 //            int input = Integer.parseInt(read.next());
             String input = Redirect.sendGuiCommandToApp();
             switch (input) {
                 case "1":
-                    Redirect.sendPromptToGui(availableCMD(location));
+                    Redirect.sendPromptToGui("30",availableCMD(location));
                     break;
                 case "2":
-                    Redirect.sendPromptToGui(showScenarioDetails(scenario, location));
+                    Redirect.sendPromptToGui("31",showScenarioDetails(scenario, location));
                     break;
                 default:
                     prompt.runPromptRed("error");
