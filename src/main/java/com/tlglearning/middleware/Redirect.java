@@ -1,6 +1,7 @@
 package com.tlglearning.middleware;
 
 import com.sun.tools.javac.Main;
+import com.tlglearning.gui.panelinterface.MapPanel;
 import com.tlglearning.util.Location;
 import org.yaml.snakeyaml.Yaml;
 
@@ -163,19 +164,8 @@ public class Redirect {
     }
 
     public static void getPromptKey_DictLookUp_PromptToGui(String identity,String key) {
-        String prompt = (String) GamePromptsMap.get(key);
-        System.out.println(prompt);
-        if (gameMapImages.contains(key)) {
+        MapPanel.updateMapIfChange(identity,key);
 
-            if(gamePhotoImages.contains(key)){
-                mainWindow.setPhotoToMapPanel(key);
-            }else{
-                mainWindow.setMap("#"+identity+": "+prompt);
-            }
-
-        } else {
-            mainWindow.setPrompt("#"+identity+": "+prompt);
-        }
     }
 
 
