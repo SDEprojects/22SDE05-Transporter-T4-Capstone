@@ -10,12 +10,12 @@
     "itemsNeeded" : [ "key", "logbook", "truck key", "soda", "gps", "radio" ]
   },
   "location" : {
-    "locationName" : "gas station",
+    "locationName" : "michigan",
     "description" : null,
-    "north" : "\"leads to nowhere\"",
-    "south" : "\"leads to nowhere\"",
-    "east" : "\"front office\"",
-    "west" : "\"leads to nowhere\""
+    "north" : "\"canada\"",
+    "south" : "\"indiana\"",
+    "east" : "\"canada\"",
+    "west" : "\"wisconsin\""
   },
   "inventory" : {
     "backpack" : [ "key", "logbook", "folder", "gps", "radio", "thermos", "truck key", "soda" ]
