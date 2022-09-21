@@ -20,9 +20,7 @@ public class TransporterClient {
              */
             @Override
             public void run() {
-
                 mainWindow = new MainWindow();
-//                mainWindow.show();
             }
         });
 

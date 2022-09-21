@@ -61,8 +61,8 @@ public class TruckGUI {
         truckLabel = new JLabel(truckUp);
         truckPanel.add(truckLabel);
         truckPanel.setLocation(350,275);
-//        truckPanel.setBackground(Color.blue);
-        truckPanel.setOpaque(false);
+        truckPanel.setBackground(Color.blue);
+//        truckPanel.setOpaque(false);
         fr.add(truckPanel);
         fr.setSize(800,800);
         fr.setVisible(true);
