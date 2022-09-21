@@ -211,8 +211,7 @@ public class MainWindow {
             setPromptText(str);
             P3.appendANSI("\n" + text);
         }
-
-        if (P3.getText().length() > 806 && P3.getText().length() <820) {
+        if (str.contains("New game started.")) {
             APP_CONTAINER.setSize(1200,800);
             APP_CONTAINER.setLocationRelativeTo(null);
             P3.setPreferredSize(new Dimension(600, 150));
@@ -274,8 +273,6 @@ public class MainWindow {
      * sendCommandToApp changes the value in commandObject to record command is sent and set command Variable to command text.
      */
 
-
-
     public static void sendCommandToApp() {
         // Sets commandGateObject command text  field to the user input command.
         commandGateObject.setCommand(commandTextField.getText().toLowerCase());
@@ -297,8 +294,4 @@ public class MainWindow {
         P4.setText(null);
         P2.setText(null);
     }
-
-
-
-
 }
