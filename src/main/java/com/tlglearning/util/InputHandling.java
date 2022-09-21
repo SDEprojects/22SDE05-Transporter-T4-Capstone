@@ -45,7 +45,7 @@ public class InputHandling {
                 System.exit(0);
                 break;
             case "n":
-                Redirect.sendPromptToGui("Would you like to load your saved data? Type 'y' ");
+                Redirect.sendPromptToGui("20","Would you like to load your saved data? Type 'y' ");
                 BufferedReader loadIn = new BufferedReader(new InputStreamReader(System.in));
 //                String loadInput = loadIn.readLine().toLowerCase();
 
@@ -90,7 +90,7 @@ public class InputHandling {
                 toPlayer = processUserInput(listOfWords);
             }
         } else {
-            Redirect.sendPromptToGui("Want to save? Input y");
+            Redirect.sendPromptToGui("21","Want to save? Input y");
             BufferedReader saveIn = new BufferedReader(new InputStreamReader(System.in));
 //            String saveInput = saveIn.readLine().toLowerCase();
 
@@ -110,7 +110,7 @@ public class InputHandling {
             currentLoc = locations.findValue(current);
             nextLoc = (currentLoc.findValue(direction).toString()).replaceAll("\"", "");
         } catch (Exception e) {
-            Redirect.sendPromptToGui(PrettyText.RED.getColor() +
+            Redirect.sendPromptToGui("22",PrettyText.RED.getColor() +
                     "Not a valid command! Please try the command again or type 'h' for " +
                     "help and to see list of valid commands" +
                     PrettyText.RESET.getColor());

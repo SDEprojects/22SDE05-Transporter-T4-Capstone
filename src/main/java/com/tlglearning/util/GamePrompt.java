@@ -32,7 +32,7 @@ public class GamePrompt {
         System.out.println("\n" +
                 PrettyText.RESET.getColor() +
                 gameInput.get(key));
-        Redirect.getPromptKey_DictLookUp_PromptToGui(key);
+        Redirect.getPromptKey_DictLookUp_PromptToGui("12",key);
     }
 
     //get text from gameInput and color it Cyan
@@ -41,7 +41,8 @@ public class GamePrompt {
                 PrettyText.CYAN.getColor() +
                 gameInput.get(key) +
                 PrettyText.RESET.getColor()));
-        Redirect.getPromptCyan_DictLookUp_PromptToGui(key);
+        Redirect.getPromptCyan_DictLookUp_PromptToGui("13",key);
+
     }
 
     //get text from gameInput and color it Red
@@ -50,7 +51,7 @@ public class GamePrompt {
                 PrettyText.RED.getColor() +
                 gameInput.get(key) +
                 PrettyText.RESET.getColor()));
-        Redirect.getPromptRed_DictLookUp_PromptToGui(key);
+        Redirect.getPromptRed_DictLookUp_PromptToGui("14",key);
     }
 
     public void runPromptWithLocation(String key, String nextLocation) {
@@ -58,12 +59,12 @@ public class GamePrompt {
                 PrettyText.RESET.getColor() +
                 gameInput.get(key) +
                 nextLocation));
-        Redirect.getPromptWithLocation(key, nextLocation);
+        Redirect.getPromptWithLocation("15",key, nextLocation);
     }
 
 //This is where the officeMap comes from
     public String getMap(String key) {
-        Redirect.sendLocationImagesToGui(key);
+        Redirect.sendLocationImagesToGui("16",key);
         return "\n" +
                 PrettyText.RESET.getColor() +
                 gameInput.get(key);
