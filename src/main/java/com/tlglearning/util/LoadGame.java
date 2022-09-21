@@ -7,7 +7,6 @@ import com.tlglearning.middleware.Redirect;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.List;
 
 import static com.tlglearning.util.GameState.action;
@@ -36,21 +35,22 @@ public class LoadGame {
         String userInput;
         List<String> toPlayer;
         //get users input and go through run command
-        in = new BufferedReader(new InputStreamReader(System.in));
+//        in = new BufferedReader(new InputStreamReader(System.in));
         do {
             if (inOffice.contains(currentLocation.getLocationName())) {
                 String map = currentLocation.getLocationName();
                 prompt.runPrompt(map);
-                Redirect.sendPromptToGui("Items Needed to start driving\n" + startingScenario.getItemsNeeded());
+                Redirect.sendPromptToGui("23","Items Needed to start driving\n" + startingScenario.getItemsNeeded());
             } else {
-                Redirect.sendPromptToGui("Your available directions of travel are:\nNorth= " + currentLocation.getNorth() +
+                Redirect.sendPromptToGui("24","Your available directions of travel are:\nNorth= " + currentLocation.getNorth() +
                         "\nSouth= " + currentLocation.getSouth() +
                         "\nEast= " + currentLocation.getEast() +
                         "\nWest= " + currentLocation.getWest());
                 player.currentToDestination(currentLocation, startingScenario);
             }
             prompt.runPromptCyan("enterCommand");
-            userInput = in.readLine();
+//            userInput = in.readLine();
+            userInput = Redirect.sendGuiCommandToApp();
             clearScreen();
             toPlayer = runCommand(userInput, currentLocation, backpack, startingScenario);
             if (!toPlayer.isEmpty()) {
