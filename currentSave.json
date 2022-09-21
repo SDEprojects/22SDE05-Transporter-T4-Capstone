@@ -1,0 +1,23 @@
+{
+  "scenario" : {
+    "officeLocation" : "\"michigan\"",
+    "pickupLocation1" : "\"minnesota\"",
+    "pickupLocation2" : "\"colorado\"",
+    "deliveryLocation1" : "\"nevada\"",
+    "deliveryLocation1b" : "\"california\"",
+    "deliveryLocation2" : "\"arizona\"",
+    "deliveryLocation2b" : "\"louisiana\"",
+    "itemsNeeded" : [ "key", "logbook", "truck key", "soda", "gps", "radio" ]
+  },
+  "location" : {
+    "locationName" : "gas station",
+    "description" : null,
+    "north" : "\"leads to nowhere\"",
+    "south" : "\"leads to nowhere\"",
+    "east" : "\"front office\"",
+    "west" : "\"leads to nowhere\""
+  },
+  "inventory" : {
+    "backpack" : [ "key", "logbook", "folder", "gps", "radio", "thermos", "truck key", "soda" ]
+  }
+}

@@ -111,7 +111,16 @@ public class Redirect {
 
 
     //TODO: THIS IS A LIST OF TODO'S FOR THE REDIRECT TO THE GUI________________________________________________________
+
     //TODO: CREATE A FUNCTION TO CHANGE COLOR OF TEXT
+
+    //TODO: CREATE A FUNCTION TO DISPLAY GAS STATION MAP CORRECTLY. SOMETIMES IT STAYS ON THE FRONT OFFICE MAP AND SOME-
+    // TIMES ONLY A PORTION OF THE GAS STATION MAP DISPLAYS.
+
+    //TODO:
+
+
+
     public static void sendExploreTextToGui(String exploreText) {
         mainWindow.setPrompt(exploreText);
     }
