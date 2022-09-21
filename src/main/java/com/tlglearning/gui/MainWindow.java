@@ -211,7 +211,7 @@ public class MainWindow {
             setPromptText(str);
             P3.appendANSI("\n" + text);
         }
-        if (P3.getText().length() == 807 || P3.getText().length() == 808) {
+        if (str.contains("New game started.")) {
             APP_CONTAINER.setSize(1200,800);
             APP_CONTAINER.setLocationRelativeTo(null);
             P3.setPreferredSize(new Dimension(600, 150));
