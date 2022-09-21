@@ -212,8 +212,6 @@ public class MainWindow {
             P3.appendANSI("\n" + text);
         }
         if (str.contains("New game started.")) {
-            APP_CONTAINER.setSize(1200,800);
-            APP_CONTAINER.setLocationRelativeTo(null);
             P3.setPreferredSize(new Dimension(600, 150));
             setGameStarted();
             setPromptText(str);
