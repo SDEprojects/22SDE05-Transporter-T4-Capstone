@@ -45,6 +45,7 @@ public class Redirect {
             add("break room");
             add("hr office");
             add("tech room");
+            add("gas station");
         }
     };
 
@@ -82,6 +83,7 @@ public class Redirect {
     }
 
     public static void sendPromptToGui(String identity,String messageToGui) {
+        System.out.println("85 " + messageToGui);
         mainWindow.setPrompt("#"+identity+": "+messageToGui);
         // Send Destination information to Gui. Destinations allow include button information.
         if (location != null) {
@@ -158,13 +160,11 @@ public class Redirect {
     }
 
     public Location getLocation() {
-
         return location;
     }
 
     public static void getPromptKey_DictLookUp_PromptToGui(String identity,String key) {
         String prompt = (String) GamePromptsMap.get(key);
-        System.out.println(prompt);
         if (gameMapImages.contains(key)) {
 
             if(gamePhotoImages.contains(key)){
@@ -172,7 +172,6 @@ public class Redirect {
             }else{
                 mainWindow.setMap("#"+identity+": "+prompt);
             }
-
         } else {
             mainWindow.setPrompt("#"+identity+": "+prompt);
         }
