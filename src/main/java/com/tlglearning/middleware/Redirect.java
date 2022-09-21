@@ -82,7 +82,6 @@ public class Redirect {
     }
 
     public static void sendPromptToGui(String messageToGui) {
-        System.out.println("the message" + messageToGui);
         mainWindow.setPrompt(messageToGui);
         // Send Destination information to Gui. Destinations allow include button information.
         if (location != null) {
@@ -93,7 +92,6 @@ public class Redirect {
     }
 
     public static void sendTitleToGui(String title) {
-        System.out.println("the title" + title);
         mainWindow.setTitle(title);
     }
 
@@ -166,7 +164,9 @@ public class Redirect {
 
     public static void getPromptKey_DictLookUp_PromptToGui(String key) {
         String prompt = (String) GamePromptsMap.get(key);
+        System.out.println(prompt);
         if (gameMapImages.contains(key)) {
+
             if(gamePhotoImages.contains(key)){
                 mainWindow.setPhotoToMapPanel(key);
             }else{
