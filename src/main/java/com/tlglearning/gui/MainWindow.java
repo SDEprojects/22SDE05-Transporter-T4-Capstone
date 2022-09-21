@@ -201,8 +201,8 @@ public class MainWindow {
             setMapChars(str);
             P2.replaceRange(map, 0, end);
         } else {
-            setMapChars(str);
-            P2.append(map);
+            //setMapChars(str);
+            //P2.append(map);
         }
         /* Sleep gui thread for .1 seconds for synchronicity */
         sleep();
@@ -285,7 +285,7 @@ public class MainWindow {
 
     public static void sendCommandToApp() {
         P2.setText("");
-//        P3.setText("");
+//      P3.setText("");
         P4.setText("");
 
 

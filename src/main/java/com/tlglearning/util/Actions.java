@@ -91,12 +91,14 @@ public class Actions {
             if (item.equals("coffee")) {
                 boolean hasKey = backpack.getBackpack().contains("thermos");
                 if (hasKey) {
+                    Redirect.sendItemTextToGui(newItem);
                     System.out.println(newItem);
                     backpack.addItem(item);
                 } else {
                     prompt.runPromptRed("thermosNeeded");
                 }
             } else {
+                Redirect.sendItemTextToGui(newItem);
                 System.out.println(newItem);
                 backpack.addItem(item);
             }//do nothing

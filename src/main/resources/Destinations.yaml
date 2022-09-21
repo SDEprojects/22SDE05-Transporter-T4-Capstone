@@ -47,8 +47,8 @@ warehouse:
      closet: Closet is empty
      desk: You see a KEY (type 'get key' to add it to your inventory)
   get:
-     logbook: The logbook has all of your trucks log hours in it,
-     key: Key to the cabinet, closet, and locker
+     GETlogbook: The logbook has all of your trucks log hours in it,
+     GETkey: Key to the cabinet, closet, and locker
       ------------------------------------------------------------------------------------------------------------------
       ------------------------------------------------------------------------------------------------------------------
       ------------------------------------------------------------------------------------------------------------------
@@ -67,7 +67,7 @@ front office:
      desk: No one is in the front desk
      board: Board is empty
   get:
-    truck key: Key to your truck
+    GETtruck key: Key to your truck
       ------------------------------------------------------------------------------------------------------------------
       ------------------------------------------------------------------------------------------------------------------
       ------------------------------------------------------------------------------------------------------------------
@@ -86,8 +86,8 @@ gas station:
      drink aisle: Door after door of different SODA
      attendant: Thank you for stopping, have a wonderful day!!!
   get:
-    soda: A bottle a soda
-    snacks: Delicious snack!!!!!
+    GETsoda: A bottle a soda
+    GETsnacks: Delicious snack!!!!!
       ------------------------------------------------------------------------------------------------------------------
       ------------------------------------------------------------------------------------------------------------------
       ------------------------------------------------------------------------------------------------------------------
@@ -102,7 +102,7 @@ boss office:
     boss: Boss wakes up and tells you to let him sleep,
     desk: You see a FOLDER
   get:
-    folder: Folder that contains your severance package for when you fail and get fired
+    GETfolder: Folder that contains your severance package for when you fail and get fired
       ------------------------------------------------------------------------------------------------------------------
       ------------------------------------------------------------------------------------------------------------------
       ------------------------------------------------------------------------------------------------------------------
@@ -121,8 +121,8 @@ break room:
     locker: You see a THERMOS
     coffee maker: You check the COFFEE pot to see if there is enough to fill your thermos
   get:
-    thermos: An empty thermos
-    coffee": You have enough coffee to keep you awake for today
+    GETthermos: An empty thermos
+    GETcoffee": You have enough coffee to keep you awake for today
       ------------------------------------------------------------------------------------------------------------------
       ------------------------------------------------------------------------------------------------------------------
       ------------------------------------------------------------------------------------------------------------------
@@ -140,8 +140,8 @@ tech room:
     laptop": You see your broken laptop that was supposed to be fixed 3 weeks ago
     closet": You see a RADIO
   get:
-    gps: GPS that provides directions
-    radio: Communication radio
+    GETgps: GPS that provides directions
+    GETradio: Communication radio
       ------------------------------------------------------------------------------------------------------------------
       ------------------------------------------------------------------------------------------------------------------
       ------------------------------------------------------------------------------------------------------------------
