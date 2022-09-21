@@ -111,19 +111,16 @@ public class Redirect {
 
 
     //TODO: THIS IS A LIST OF TODO'S FOR THE REDIRECT TO THE GUI________________________________________________________
-
+    //TODO: CREATE A FUNCTION TO CHANGE COLOR OF TEXT
     public static void sendExploreTextToGui(String exploreText) {
         mainWindow.setPrompt(exploreText);
-
     }
     public static void sendLocationImagesToGui(String key) {
         mainWindow.appendOfficeMap((String) GamePromptsMap.get(key));
     }
-    public static void sendGetCommandsToGui() {}
-
-    //TODO: CREATE A FUNCTION TO MOVE TO THE TECH OFFICE
-
-    //TODO: CREATE A FUNCTION TO CHANGE COLOR OF TEXT
+    public static void sendItemTextToGui(String itemText) {
+        mainWindow.setPrompt(itemText);
+    }
 
 
     /**
