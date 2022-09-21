@@ -15,18 +15,11 @@ public class MainWindow {
     private static final JTextArea P1 = new JTextArea(6, 94);
     private static final JTextArea P2 = new JTextArea();
     private static final ColorPane P3 = new ColorPane();
-
     private static final JTextArea P4 = new JTextArea();
-
-    // commandTextField is the user input area to be sent to application
-    // After button.
+    // commandTextField is the user input area to be sent to application after button.
     private static final JTextField commandTextField = new JTextField(10);
-
-    // commandSubmitButton submits commandTextField and is linked to action
-    // listener.
     private static final JPanel BUTTON_ACTION_CONTAINER = new JPanel(new BorderLayout());
     private static final JPanel BUTTON_GO_CONTAINER = new JPanel(new BorderLayout());
-
     private String titleText;
     private String map;
     private String text;
@@ -35,10 +28,8 @@ public class MainWindow {
     private static final JPanel MAP_CONTAINER = new JPanel();
     private static final JPanel PROMPT_CONTAINER = new JPanel();
     private static boolean gameStarted = false;
-
     private static ImageIcon MapImageIcon;
-
-    JLabel MapPanelLable= new JLabel();
+    JLabel mapPanelLabel = new JLabel();
 
     public MainWindow() {
         initialize();
@@ -70,7 +61,6 @@ public class MainWindow {
         APP_CONTAINER.setResizable(false);
         APP_CONTAINER.setLocationRelativeTo(null);
 
-
         /* Element containers */
         MAP_CONTAINER.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -81,7 +71,6 @@ public class MainWindow {
 
         TITLE_CONTAINER.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 5));
         TITLE_CONTAINER.setBackground(Color.BLACK);
-
 
         /* P1 is JTextArea - will populate title */
         P1.setFont(new Font("Courier New", Font.PLAIN, 12));
@@ -147,8 +136,8 @@ public class MainWindow {
         APP_CONTAINER.add(TITLE_CONTAINER, BorderLayout.NORTH);
         APP_CONTAINER.add(MAP_CONTAINER, BorderLayout.CENTER);
         APP_CONTAINER.add(PROMPT_CONTAINER, BorderLayout.SOUTH);
-        MapPanelLable.setIcon(MapImageIcon);
-        MAP_CONTAINER.add(MapPanelLable, gbc);
+        mapPanelLabel.setIcon(MapImageIcon);
+        MAP_CONTAINER.add(mapPanelLabel, gbc);
 
         /* Setting GUI visibility */
         show();
@@ -202,7 +191,7 @@ public class MainWindow {
     public void setMap(String str) {
         if (P4.getText().length() == 0) {
             P2.setEditable(true);
-            MapPanelLable.setIcon(null);
+            mapPanelLabel.setIcon(null);
             setMapChars(str);
             P2.setText(map);
             /* Sleep gui thread for .1 seconds for synchronicity */
@@ -245,7 +234,7 @@ public class MainWindow {
 
     public void appendOfficeMap(String officeMap){
         P4.append(officeMap);
-        MapPanelLable.setIcon(null);
+        mapPanelLabel.setIcon(null);
         P2.setText(null);
         sleep();
     }
@@ -263,8 +252,7 @@ public class MainWindow {
                     MapImageIcon = new ImageIcon(
                         new ImageIcon(classloader.getResource("photos/"+key+".png"))
                             .getImage()
-                            .getScaledInstance(900, 186, Image.SCALE_DEFAULT)
-                    );
+                            .getScaledInstance(900, 186, Image.SCALE_DEFAULT));
                     break;
                 default:
                     MapImageIcon= new ImageIcon(classloader.getResource("photos/"+key+".png"));
@@ -272,7 +260,7 @@ public class MainWindow {
             }
 
             // Set Icon to new image Icon
-            MapPanelLable.setIcon(MapImageIcon);
+            mapPanelLabel.setIcon(MapImageIcon);
 
             /* Sleep gui thread for .1 seconds for synchronicity */
             sleep();
