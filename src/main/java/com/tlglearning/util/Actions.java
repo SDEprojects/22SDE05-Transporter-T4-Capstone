@@ -48,13 +48,13 @@ public class Actions {
         } else if (newLocation.equals("warehouse")) {
             updateLocationDetails(currentLocation, newLocation, moveLocation);
             System.out.println(InputHandling.getDescription(newLocation, "description", moveLocation));
-            Redirect.sendDescriptionToGui(InputHandling.getDescription(newLocation, "description", moveLocation));
+            Redirect.sendDescriptionToGui("1",InputHandling.getDescription(newLocation, "description", moveLocation));
             prompt.runPrompt("manager approach");
             prompt.runPrompt("manager conv");
 
         } else {
             updateLocationDetails(currentLocation, newLocation, moveLocation);
-            Redirect.sendDescriptionToGui(InputHandling.getDescription(newLocation, "description", moveLocation));
+            Redirect.sendDescriptionToGui("2",InputHandling.getDescription(newLocation, "description", moveLocation));
             System.out.println(InputHandling.getDescription(newLocation, "description", moveLocation));
         }
     }
@@ -69,13 +69,13 @@ public class Actions {
             if (interestLocation.equals("cabinet") || interestLocation.equals("closet") || interestLocation.equals("locker")) {
                 boolean hasKey = backpack.getBackpack().contains("key");
                 if (hasKey) {
-                    Redirect.sendExploreTextToGui(newExploreLocation);
+                    Redirect.sendExploreTextToGui("3",newExploreLocation);
                     System.out.println(newExploreLocation);
                 } else {
                     prompt.runPromptRed("keyNeeded");
                 }
             } else {
-                Redirect.sendExploreTextToGui(newExploreLocation);
+                Redirect.sendExploreTextToGui("4",newExploreLocation);
                 System.out.println(newExploreLocation);
             }
         }
@@ -91,14 +91,14 @@ public class Actions {
             if (item.equals("coffee")) {
                 boolean hasKey = backpack.getBackpack().contains("thermos");
                 if (hasKey) {
-                    Redirect.sendItemTextToGui(newItem);
+                    Redirect.sendItemTextToGui("5",newItem);
                     System.out.println(newItem);
                     backpack.addItem(item);
                 } else {
                     prompt.runPromptRed("thermosNeeded");
                 }
             } else {
-                Redirect.sendItemTextToGui(newItem);
+                Redirect.sendItemTextToGui("6",newItem);
                 System.out.println(newItem);
                 backpack.addItem(item);
             }//do nothing
@@ -210,25 +210,25 @@ public class Actions {
     public void currentToDestination(Location currentLocation, ScenarioGenerator startingScenario) {
 
         if (dLoadDelivered) {
-            Redirect.sendPromptToGui("Current Location: " + currentLocation.getLocationName() + " --> "
+            Redirect.sendPromptToGui("5","Current Location: " + currentLocation.getLocationName() + " --> "
                     + "Home Office Location: " + startingScenario.getOfficeLocation());
         } else if (cLoadDelivered) {
-            Redirect.sendPromptToGui("Current Location: " + currentLocation.getLocationName() + " --> "
+            Redirect.sendPromptToGui("6","Current Location: " + currentLocation.getLocationName() + " --> "
                     + "Deliver location: " + startingScenario.getDeliveryLocation2b());
         } else if (load2PickedUp) {
-            Redirect.sendPromptToGui("Current Location: " + currentLocation.getLocationName() + " --> "
+            Redirect.sendPromptToGui("7","Current Location: " + currentLocation.getLocationName() + " --> "
                     + "Deliver location: " + startingScenario.getDeliveryLocation2());
         } else if (bLoadDelivered) {
-            Redirect.sendPromptToGui("Current Location: " + currentLocation.getLocationName() + " --> "
+            Redirect.sendPromptToGui("8","Current Location: " + currentLocation.getLocationName() + " --> "
                     + "Pickup location: " + startingScenario.getPickupLocation2());
         } else if (aLoadDelivered) {
-            Redirect.sendPromptToGui("Current Location: " + currentLocation.getLocationName() + " --> "
+            Redirect.sendPromptToGui("9","Current Location: " + currentLocation.getLocationName() + " --> "
                     + "Deliver location: " + startingScenario.getDeliveryLocation1b());
         } else if (load1PickedUp) {
-            Redirect.sendPromptToGui("Current Location: " + currentLocation.getLocationName() + " --> "
+            Redirect.sendPromptToGui("10","Current Location: " + currentLocation.getLocationName() + " --> "
                     + "Deliver location: " + startingScenario.getDeliveryLocation1());
         } else {
-            Redirect.sendPromptToGui("Current Location: " + currentLocation.getLocationName() + " --> "
+            Redirect.sendPromptToGui("11","Current Location: " + currentLocation.getLocationName() + " --> "
                     + "Pickup location: " + startingScenario.getPickupLocation1());
         }
     }

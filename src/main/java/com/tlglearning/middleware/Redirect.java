@@ -81,8 +81,8 @@ public class Redirect {
 
     }
 
-    public static void sendPromptToGui(String messageToGui) {
-        mainWindow.setPrompt(messageToGui);
+    public static void sendPromptToGui(String identity,String messageToGui) {
+        mainWindow.setPrompt("#"+identity+": "+messageToGui);
         // Send Destination information to Gui. Destinations allow include button information.
         if (location != null) {
 //            System.out.println(DestinationsMap.get(location.getLocationName()));
@@ -91,7 +91,7 @@ public class Redirect {
 //        mainWindow.setMap(messageToGui);
     }
 
-    public static void sendTitleToGui(String title) {
+    public static void sendTitleToGui(String identity,String title) {
         mainWindow.setTitle(title);
     }
 
@@ -101,25 +101,25 @@ public class Redirect {
      * @param helpMenu
      */
     //Redirecting the help menu to the GUI
-    public static void sendHelpMenuToGui (String helpMenu){
-        mainWindow.setPrompt(helpMenu);
+    public static void sendHelpMenuToGui (String identity,String helpMenu){
+        mainWindow.setPrompt("#"+identity+": "+helpMenu);
     }
 
-    public static void sendDescriptionToGui(String description){
-        mainWindow.setPrompt(description);
+    public static void sendDescriptionToGui(String identity,String description){
+        mainWindow.setPrompt("#"+identity+": "+description);
     }
 
 
     //TODO: THIS IS A LIST OF TODO'S FOR THE REDIRECT TO THE GUI________________________________________________________
     //TODO: CREATE A FUNCTION TO CHANGE COLOR OF TEXT
-    public static void sendExploreTextToGui(String exploreText) {
-        mainWindow.setPrompt(exploreText);
+    public static void sendExploreTextToGui(String identity,String exploreText) {
+        mainWindow.setPrompt("#"+identity+": "+exploreText);
     }
-    public static void sendLocationImagesToGui(String key) {
-        mainWindow.appendOfficeMap((String) GamePromptsMap.get(key));
+    public static void sendLocationImagesToGui(String identity,String key) {
+        mainWindow.appendOfficeMap("#"+identity+": "+(String) GamePromptsMap.get(key));
     }
-    public static void sendItemTextToGui(String itemText) {
-        mainWindow.setPrompt(itemText);
+    public static void sendItemTextToGui(String identity,String itemText) {
+        mainWindow.setPrompt("#"+identity+": "+itemText);
     }
 
 
@@ -129,10 +129,10 @@ public class Redirect {
      * @param format
      * @param messageToGui
      */
-    public static void sendprintfAppToGui(String format, String messageToGui) {
+    public static void sendprintfAppToGui(String identity,String format, String messageToGui) {
         System.out.printf(format, messageToGui);
         String prompt = String.format(format, messageToGui);
-        mainWindow.setPrompt(prompt);
+        mainWindow.setPrompt("#"+identity+": "+prompt);
     }
 
     /**
@@ -162,7 +162,7 @@ public class Redirect {
         return location;
     }
 
-    public static void getPromptKey_DictLookUp_PromptToGui(String key) {
+    public static void getPromptKey_DictLookUp_PromptToGui(String identity,String key) {
         String prompt = (String) GamePromptsMap.get(key);
         System.out.println(prompt);
         if (gameMapImages.contains(key)) {
@@ -170,28 +170,28 @@ public class Redirect {
             if(gamePhotoImages.contains(key)){
                 mainWindow.setPhotoToMapPanel(key);
             }else{
-                mainWindow.setMap(prompt);
+                mainWindow.setMap("#"+identity+": "+prompt);
             }
 
         } else {
-            mainWindow.setPrompt(prompt);
+            mainWindow.setPrompt("#"+identity+": "+prompt);
         }
     }
 
 
-    public static void getPromptCyan_DictLookUp_PromptToGui(String key) {
+    public static void getPromptCyan_DictLookUp_PromptToGui(String identity,String key) {
         String prompt = (String) GamePromptsMap.get(key);
-        mainWindow.setPrompt(prompt);
+        mainWindow.setPrompt("#"+identity+": "+prompt);
     }
 
-    public static void getPromptRed_DictLookUp_PromptToGui(String key) {
+    public static void getPromptRed_DictLookUp_PromptToGui(String identity,String key) {
         String prompt = (String) GamePromptsMap.get(key);
-        mainWindow.setPrompt(prompt);
+        mainWindow.setPrompt("#"+identity+": "+prompt);
     }
 
-    public static void getPromptWithLocation(String key, String nextLocation) {
+    public static void getPromptWithLocation(String identity,String key, String nextLocation) {
         String prompt = (String) GamePromptsMap.get(key);
-        mainWindow.setPrompt(prompt);
+        mainWindow.setPrompt("#"+identity+": "+prompt);
     }
 
 

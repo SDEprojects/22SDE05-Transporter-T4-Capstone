@@ -17,7 +17,7 @@ public class TitleScreen extends GamePrompt {
         GamePrompt prompt2 = new GamePrompt() {
             @Override
             public void runPrompt(String title) {
-                Redirect.sendTitleToGui(title);
+                Redirect.sendTitleToGui("32",title);
             }
         };
 
@@ -27,10 +27,10 @@ public class TitleScreen extends GamePrompt {
 
     public void intro() {
 
-        Redirect.sendprintfAppToGui("\n\nSTORY: %s", story);
-        Redirect.sendprintfAppToGui("\n\nOBJECTIVE: %s", objective);
-        Redirect.sendprintfAppToGui("\n\nHOW TO PLAY: %s", play);
-        Redirect.sendprintfAppToGui("\n\nHOW TO WIN: %s\n", win_game);
+        Redirect.sendprintfAppToGui("33","\n\nSTORY: %s", story);
+        Redirect.sendprintfAppToGui("34","\n\nOBJECTIVE: %s", objective);
+        Redirect.sendprintfAppToGui("35","\n\nHOW TO PLAY: %s", play);
+        Redirect.sendprintfAppToGui("36","\n\nHOW TO WIN: %s\n", win_game);
     }
 
 }
