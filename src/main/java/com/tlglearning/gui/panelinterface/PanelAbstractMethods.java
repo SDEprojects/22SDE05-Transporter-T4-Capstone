@@ -15,8 +15,9 @@ public abstract class PanelAbstractMethods {
 
     private static  HashMap<String, Object> DestinationsMap;
     private static  HashMap<String, Object> GamePromptsMap;
-
+    private static  HashMap<String, Object> locationsCommands;
     private static Location location=new Location();
+
 
     protected static  List<String> PNG_ImagesList = new ArrayList<>() {
         {
@@ -59,6 +60,10 @@ public abstract class PanelAbstractMethods {
         input = cl.getResourceAsStream("GamePrompts.yaml");
 
         GamePromptsMap = yaml.load(input);
+
+        input = cl.getResourceAsStream("location.yaml");
+
+        locationsCommands = yaml.load(input);
 
 //        MainWindow.mapPanelLabel_setIcon(MapImageIcon);
 
@@ -114,7 +119,11 @@ public abstract class PanelAbstractMethods {
         return location.getLocationName();
     }
 
+    public static HashMap<String, Object> getLocationsCommands() {
+        return locationsCommands;
+    }
 
-
-
+    public static void setLocationsCommands(HashMap<String, Object> locationsCommands) {
+        PanelAbstractMethods.locationsCommands = locationsCommands;
+    }
 }

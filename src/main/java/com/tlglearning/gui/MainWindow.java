@@ -69,7 +69,7 @@ public class MainWindow {
         APP_CONTAINER.setLocationRelativeTo(null);
 
         /* Element containers */
-        MAP_CONTAINER.setLayout(new GridBagLayout());
+//        MAP_CONTAINER.setLayout(new BorderLayout(0,0));
         GridBagConstraints gbc = new GridBagConstraints();
         MAP_CONTAINER.setBackground(Color.BLACK);
 
@@ -100,12 +100,12 @@ public class MainWindow {
         prompt_SubPanelAscii.setFont(new Font("Courier New", Font.PLAIN, 12));
         prompt_SubPanelAscii.setOpaque(false);
 
-        map_SubPanelAscii.setPreferredSize(new Dimension(600, 350));
+//        map_SubPanelAscii.setPreferredSize(new Dimension(400,10));
         map_SubPanelAscii.setCharacterAttributes(att, true);
         map_SubPanelAscii.setFont(new Font("Courier New", Font.PLAIN, 12));
         map_SubPanelAscii.setOpaque(false);
 
-        map_SubPanelAsciiMap.setPreferredSize(new Dimension(600, 350));
+//        map_SubPanelAsciiMap.setPreferredSize(new Dimension(600, 350));
         map_SubPanelAsciiMap.setCharacterAttributes(att, true);
         map_SubPanelAsciiMap.setFont(new Font("Courier New", Font.PLAIN, 12));
         map_SubPanelAsciiMap.setOpaque(false);
@@ -156,9 +156,9 @@ public class MainWindow {
         APP_CONTAINER.add(MAP_CONTAINER, BorderLayout.CENTER);
         APP_CONTAINER.add(PROMPT_CONTAINER, BorderLayout.SOUTH);
 //        mapPanelLabel.setIcon(MapImageIcon);
-        MAP_CONTAINER.add(mapPanelLabel, gbc);
-        MAP_CONTAINER.add(map_SubPanelAscii);
-        MAP_CONTAINER.add(map_SubPanelAsciiMap);
+        MAP_CONTAINER.add(mapPanelLabel,BorderLayout.NORTH);
+        MAP_CONTAINER.add(map_SubPanelAscii,BorderLayout.NORTH);
+        MAP_CONTAINER.add(map_SubPanelAsciiMap,BorderLayout.SOUTH);
 
         MapPanel.setUpMapPanel();
         /* Setting GUI visibility */
