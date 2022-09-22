@@ -116,7 +116,6 @@ public class Redirect {
 
     //TODO: CREATE A FUNCTION TO DISPLAY CYAN GAME OVER TEXT CORRECTLY
 
-
     //TODO: CREATE A FUNCTION TO CHANGE COLOR OF TEXT
 
     public static void sendExploreTextToGui(String identity,String exploreText) {
