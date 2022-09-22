@@ -67,7 +67,7 @@ public class MapPanel extends PanelAbstractMethods implements PanelImageInterfac
                 prompt=prompt+getLocationsCommands().get(getLocationName());
             }
             mapPanel_SubPanelAscii.setText("");
-            prompt=formatStringForPanel(prompt,50);
+            prompt=formatStringForPanel(prompt,120);
             mapPanel_SubPanelAscii.append(Color.red,prompt);
         }
         else if(get_Ascii_ImagesList().contains(getKey())){
