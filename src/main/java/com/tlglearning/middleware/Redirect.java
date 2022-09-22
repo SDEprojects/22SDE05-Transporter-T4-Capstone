@@ -119,7 +119,7 @@ public class Redirect {
         mainWindow.setPrompt("#"+identity+": "+exploreText);
     }
     public static void sendLocationImagesToGui(String identity,String key) {
-        mainWindow.appendOfficeMap("#"+identity+": "+(String) GamePromptsMap.get(key));
+//        mainWindow.appendOfficeMap("#"+identity+": "+(String) GamePromptsMap.get(key));
     }
     public static void sendItemTextToGui(String identity,String itemText) {
         mainWindow.setPrompt("#"+identity+": "+itemText);

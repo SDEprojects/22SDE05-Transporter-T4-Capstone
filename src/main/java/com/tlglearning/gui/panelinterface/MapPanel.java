@@ -55,7 +55,10 @@ public class MapPanel extends PanelAbstractMethods implements PanelImageInterfac
         if(get_PNG_ImagesList().contains(getLocationName())){
             mapPanel_SubPanelAscii.setText("");
             mapPanel_SubPanelAsciiMap.setText("");
-            setImageToMapPanel(getKey());
+            ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+            MapImageIcon = new ImageIcon(classloader.getResource("photos/" + getKey() + ".png"));
+            mapPanelLabel.setIcon(MapImageIcon);
+//            setImageToMapPanel(getKey());
         }
 
         else if(!get_Ascii_ImagesList().contains(getKey()) ){
@@ -64,7 +67,7 @@ public class MapPanel extends PanelAbstractMethods implements PanelImageInterfac
                 prompt=prompt+getLocationsCommands().get(getLocationName());
             }
             mapPanel_SubPanelAscii.setText("");
-            prompt=formatString(prompt,50);
+            prompt=formatStringForPanel(prompt,50);
             mapPanel_SubPanelAscii.append(Color.red,prompt);
         }
         else if(get_Ascii_ImagesList().contains(getKey())){
@@ -74,59 +77,11 @@ public class MapPanel extends PanelAbstractMethods implements PanelImageInterfac
             mapPanel_SubPanelAsciiMap.setText("");
             mapPanel_SubPanelAsciiMap.append(Color.green,prompt);
 
-        } else{
-            MapImageIcon=new ImageIcon();
-            mapPanelLabel.setIcon(MapImageIcon);
-            mapPanel_SubPanelAsciiMap.setText("");
-            mapPanel_SubPanelAscii.setText("");
-            System.out.println("Error in MapPanel class.");
-            System.out.println(identity);
-            System.out.println(updated_key);
         }
-
-
         return "Gui Updated";
     }
 
-    public static void setImageToMapPanel(String key) {
-//        if (mapImageKey != key) {
-
-            mapImageKey = key;
-            ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-
-            switch (key) {
-
-                case "truck":
-
-                    MapImageIcon = new ImageIcon(
-                            new ImageIcon(classloader.getResource("photos/" + key + ".png"))
-                                    .getImage()
-                                    .getScaledInstance(900, 186, Image.SCALE_DEFAULT));
-                    mapPanelLabel.setIcon(MapImageIcon);
-
-                    break;
-
-                default:
-
-                    MapImageIcon = new ImageIcon(classloader.getResource("photos/" + key + ".png"));
-
-                    mapPanelLabel.setIcon(MapImageIcon);
-
-                    break;
-            }
-        }
-//    }
-
-    public static String getKey() {
-        return mapImageKey;
-    }
-
-    public static void setKey(String key) {
-        mapImageKey = key;
-    }
-
-
-    public static String formatString(String string, int width){
+    public static String formatStringForPanel(String string, int width){
         String updateString="";
         char[] charString=string.toCharArray();
         for(int  i=0; i<charString.length; i++){
@@ -138,4 +93,14 @@ public class MapPanel extends PanelAbstractMethods implements PanelImageInterfac
         }
         return updateString;
     }
+
+    public static String getKey() {
+        return mapImageKey;
+    }
+
+    public static void setKey(String key) {
+        mapImageKey = key;
+    }
+
+
 }

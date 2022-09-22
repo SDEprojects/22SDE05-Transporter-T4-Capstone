@@ -19,7 +19,7 @@ public class MainWindow {
 
     private static final ColorPane map_SubPanelAscii = new ColorPane();
 
-    private static ColorPane map_SubPanelAsciiMap=new ColorPane();
+    private static ColorPane map_SubPanelAsciiMap = new ColorPane();
     private static final JTextArea P4 = new JTextArea();
     // commandTextField is the user input area to be sent to application after button.
     private static final JTextField commandTextField = new JTextField(10);
@@ -32,15 +32,21 @@ public class MainWindow {
     private static final JPanel TITLE_CONTAINER = new JPanel();
     private static final JPanel MAP_CONTAINER = new JPanel();
     private static final JPanel PROMPT_CONTAINER = new JPanel();
+
+    static CommandButton BUTTON_GO_NORTH = new CommandButton("N", "Go North");
+    static CommandButton BUTTON_GO_SOUTH = new CommandButton("S", "Go South");
+    static CommandButton BUTTON_GO_EAST = new CommandButton("E", "Go East");
+    static CommandButton BUTTON_GO_WEST = new CommandButton("W", "Go West");
+
+    static CommandButton BUTTON_GET = new CommandButton( "Get", "get");
+    static CommandButton BUTTON_EXPLORE = new CommandButton( "Explore", "explore");
     private static boolean gameStarted = false;
-//    private static ImageIcon MapImageIcon;
+    //    private static ImageIcon MapImageIcon;
     static JLabel mapPanelLabel = new JLabel();
 
     public MainWindow() {
         initialize();
     }
-
-
 
 /**
  * CLASS METHODS BELOW ------------------------------------------------------------------------------------------------|
@@ -121,7 +127,7 @@ public class MainWindow {
         commandTextField.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
-                if(e.getKeyCode() == KeyEvent.VK_ENTER){
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                     sendCommandToApp();
                 }
             }
@@ -139,26 +145,26 @@ public class MainWindow {
 //        MAP_CONTAINER.add(mapPanel_SubPanelAscii);
         PROMPT_CONTAINER.add(commandTextField);
 
-        BUTTON_GO_CONTAINER.add((new CommandButton(this, "N","Go North")).getButton(),BorderLayout.NORTH);
-        BUTTON_GO_CONTAINER.add((new CommandButton(this, "S","Go South")).getButton(),BorderLayout.SOUTH);
+        BUTTON_GO_CONTAINER.add((BUTTON_GO_NORTH).getButton(), BorderLayout.NORTH);
+        BUTTON_GO_CONTAINER.add((BUTTON_GO_SOUTH).getButton(), BorderLayout.SOUTH);
         BUTTON_GO_CONTAINER.add(commandTextField, BorderLayout.CENTER);
-        BUTTON_GO_CONTAINER.add((new CommandButton(this, "E","Go East")).getButton(),BorderLayout.EAST);
-        BUTTON_GO_CONTAINER.add((new CommandButton(this, "W","Go West")).getButton(),BorderLayout.WEST);
+        BUTTON_GO_CONTAINER.add((BUTTON_GO_EAST).getButton(), BorderLayout.EAST);
+        BUTTON_GO_CONTAINER.add((BUTTON_GO_WEST).getButton(), BorderLayout.WEST);
 
-        BUTTON_ACTION_CONTAINER.add((new CommandButton(this, "EXPLORE","Explore")).getButton(),BorderLayout.WEST);
-        BUTTON_ACTION_CONTAINER.add((new CommandButton(this, "Get","Get")).getButton(),BorderLayout.EAST);
+        BUTTON_ACTION_CONTAINER.add(BUTTON_EXPLORE.getButton(), BorderLayout.WEST);
+        BUTTON_ACTION_CONTAINER.add(BUTTON_GET.getButton(), BorderLayout.EAST);
 
-        PROMPT_CONTAINER.add(BUTTON_GO_CONTAINER,BorderLayout.NORTH);
-        PROMPT_CONTAINER.add(BUTTON_ACTION_CONTAINER,BorderLayout.SOUTH);
+        PROMPT_CONTAINER.add(BUTTON_GO_CONTAINER, BorderLayout.NORTH);
+        PROMPT_CONTAINER.add(BUTTON_ACTION_CONTAINER, BorderLayout.SOUTH);
 
         /* Add elements container to the main application */
         APP_CONTAINER.add(TITLE_CONTAINER, BorderLayout.NORTH);
         APP_CONTAINER.add(MAP_CONTAINER, BorderLayout.CENTER);
         APP_CONTAINER.add(PROMPT_CONTAINER, BorderLayout.SOUTH);
 //        mapPanelLabel.setIcon(MapImageIcon);
-        MAP_CONTAINER.add(mapPanelLabel,BorderLayout.NORTH);
-        MAP_CONTAINER.add(map_SubPanelAscii,BorderLayout.NORTH);
-        MAP_CONTAINER.add(map_SubPanelAsciiMap,BorderLayout.SOUTH);
+        MAP_CONTAINER.add(mapPanelLabel, BorderLayout.NORTH);
+        MAP_CONTAINER.add(map_SubPanelAscii, BorderLayout.NORTH);
+        MAP_CONTAINER.add(map_SubPanelAsciiMap, BorderLayout.SOUTH);
 
         MapPanel.setUpMapPanel();
         /* Setting GUI visibility */
@@ -166,11 +172,11 @@ public class MainWindow {
     }
 
 
-/**
- * (NOT GUI!!) FIELD SETTER METHODS BELOW  ----------------------------------------------------------------------------|
- * --------------------------------------------------------------------------------------------------------------------|
- * --------------------------------------------------------------------------------------------------------------------|
- */
+    /**
+     * (NOT GUI!!) FIELD SETTER METHODS BELOW  ----------------------------------------------------------------------------|
+     * --------------------------------------------------------------------------------------------------------------------|
+     * --------------------------------------------------------------------------------------------------------------------|
+     */
 
     public void setMapChars(String map) {
         this.map = map;
@@ -187,7 +193,7 @@ public class MainWindow {
     }
 
 
-    public void setGameStarted(){
+    public void setGameStarted() {
         gameStarted = true;
     }
 
@@ -252,14 +258,14 @@ public class MainWindow {
     }
 
 
-    public void appendOfficeMap(String officeMap){
-        P4.append(officeMap);
-        mapPanelLabel.setIcon(null);
-        P2.setText(null);
-        sleep();
-    }
+//    public void appendOfficeMap(String officeMap){
+//        P4.append(officeMap);
+//        mapPanelLabel.setIcon(null);
+//        P2.setText(null);
+//        sleep();
+//    }
 
-    public static void mapPanelLabel_setImage(ImageIcon icon){
+    public static void mapPanelLabel_setImage(ImageIcon icon) {
         mapPanelLabel.setIcon(icon);
     }
 
@@ -305,7 +311,6 @@ public class MainWindow {
         // Then command string is passed to Transport Application.
         commandGateObject.setIsCommandSentFromGui(true);
     }
-
     public static void sleep() {
         try {
             Thread.sleep(100);
@@ -313,27 +318,65 @@ public class MainWindow {
             System.out.println("An Exception occurred: " + e);
         }
     }
-
     public void wipe() {
         P4.setText(null);
         P2.setText(null);
     }
-
-    public static JLabel getMapPanel(){
+    public static JLabel getMapPanel() {
         return mapPanelLabel;
 
     }
-    public static ColorPane getMapAsciiJPanel(){
-      
+    public static ColorPane getMapAsciiJPanel() {
+
         return map_SubPanelAscii;
 
     }
-
-    public static ColorPane getMapAsciiMapJPanel(){
+    public static ColorPane getMapAsciiMapJPanel() {
 
         return map_SubPanelAsciiMap;
 
     }
+    public static void setPROMPT_CONTAINER(JPanel PROMPT_CONT) {
+        PROMPT_CONT = PROMPT_CONTAINER;
+    }
+    public static void setcommandTextField(JTextField cmndTxtField) {
+        cmndTxtField = commandTextField;
+    }
+    public static void set_prompt_SubPanelAscii(ColorPane prompt_SbPnlAscii) {
+        prompt_SbPnlAscii = prompt_SubPanelAscii;
+    }
+    public static void set_BUTTON_ACTION_CONTAINER(JPanel BTN_ACTN_CONTNER) {
+        BTN_ACTN_CONTNER = BUTTON_ACTION_CONTAINER;
+    }
+    public static void set_BUTTON_GO_CONTAINER(JPanel BUTTON_GO_CNTNER) {
+        BUTTON_GO_CNTNER = BUTTON_GO_CONTAINER;
+    }
+    public static void set_BUTTON_GO_NORTH(CommandButton BUTTON_GO_N) {
+        BUTTON_GO_N = BUTTON_GO_NORTH;
+    }
+    public static void set_BUTTON_GO_SOUTH(CommandButton BUTTON_GO_S) {
+        BUTTON_GO_S = BUTTON_GO_SOUTH;
+    }
+    public static void set_BUTTON_GO_WEST(CommandButton BUTTON_GO_W) {
+        BUTTON_GO_W = BUTTON_GO_WEST;
+    }
+    public static void set_BUTTON_GO_EAST(CommandButton BUTTON_GO_E) {
+        BUTTON_GO_E = BUTTON_GO_EAST;
+    }
+    public static void set_BUTTON_EXPLORE(CommandButton BUTTON_EX) {
+        BUTTON_EX = BUTTON_EXPLORE;
+    }
+    public static void set_BUTTON_GET(CommandButton BUTTON_GE) {
+        BUTTON_GET = BUTTON_GE;
+    }
+
+
+//
+//        private static  JPanel BUTTON_GO_NORTH = new JPanel(new BorderLayout());
+//        private static  JPanel BUTTON_GO_SOUTH = new JPanel(new BorderLayout());
+//        private static  JPanel BUTTON_GO_EAST = new JPanel(new BorderLayout());
+//        private static  JPanel BUTTON_GO_WEST = new JPanel(new BorderLayout());
+//    }
 
 
 }
