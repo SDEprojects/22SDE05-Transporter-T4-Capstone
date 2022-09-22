@@ -1,23 +1,23 @@
 {
   "scenario" : {
-    "officeLocation" : "\"michigan\"",
-    "pickupLocation1" : "\"minnesota\"",
-    "pickupLocation2" : "\"colorado\"",
-    "deliveryLocation1" : "\"nevada\"",
-    "deliveryLocation1b" : "\"california\"",
-    "deliveryLocation2" : "\"arizona\"",
-    "deliveryLocation2b" : "\"louisiana\"",
-    "itemsNeeded" : [ "key", "logbook", "truck key", "soda", "gps", "radio" ]
+    "officeLocation" : "\"alabama\"",
+    "pickupLocation1" : "\"texas\"",
+    "pickupLocation2" : "\"nebraska\"",
+    "deliveryLocation1" : "\"illinois\"",
+    "deliveryLocation1b" : "\"wisconsin\"",
+    "deliveryLocation2" : "\"wyoming\"",
+    "deliveryLocation2b" : "\"washington\"",
+    "itemsNeeded" : [ "key", "logbook", "truck key", "thermos", "coffee", "gps" ]
   },
   "location" : {
-    "locationName" : "michigan",
+    "locationName" : "warehouse",
     "description" : null,
-    "north" : "\"canada\"",
-    "south" : "\"indiana\"",
-    "east" : "\"canada\"",
-    "west" : "\"wisconsin\""
+    "north" : "\"leads to nowhere\"",
+    "south" : "\"front office\"",
+    "east" : "\"boss office\"",
+    "west" : "\"truck\""
   },
   "inventory" : {
-    "backpack" : [ "key", "logbook", "folder", "gps", "radio", "thermos", "truck key", "soda" ]
+    "backpack" : [ "logbook", "key", "folder", "gps", "radio", "thermos", "coffee", "truck key", "soda", "snacks" ]
   }
 }

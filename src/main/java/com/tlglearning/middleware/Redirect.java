@@ -116,7 +116,6 @@ public class Redirect {
 
     //TODO: CREATE A FUNCTION TO DISPLAY CYAN GAME OVER TEXT CORRECTLY
 
-    //TODO: CREATE A FUNCTION TO DISPLAY ALL TEXT ONCE YOU START DRIVING(ALL TEXT IS NOT DISPLAYING)
 
     //TODO: CREATE A FUNCTION TO CHANGE COLOR OF TEXT
 
@@ -129,7 +128,6 @@ public class Redirect {
     public static void sendItemTextToGui(String identity,String itemText) {
         mainWindow.setPrompt("#"+identity+": "+itemText);
     }
-
 
     /**
      * sendprintfAppToGui Allows for communication from App To Gui interface
