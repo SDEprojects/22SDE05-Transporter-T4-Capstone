@@ -1,6 +1,7 @@
 package com.tlglearning.gui;
 
 import com.tlglearning.gui.button.CommandButton;
+import com.tlglearning.gui.panelinterface.MapPanel;
 import com.tlglearning.middleware.commandGateObject;
 
 import javax.swing.*;
@@ -14,7 +15,11 @@ public class MainWindow {
 
     private static final JTextArea P1 = new JTextArea(6, 94);
     private static final JTextArea P2 = new JTextArea();
-    private static final ColorPane P3 = new ColorPane();
+    private static final ColorPane prompt_SubPanelAscii = new ColorPane();
+
+    private static final ColorPane map_SubPanelAscii = new ColorPane();
+
+    private static ColorPane map_SubPanelAsciiMap=new ColorPane();
     private static final JTextArea P4 = new JTextArea();
     // commandTextField is the user input area to be sent to application after button.
     private static final JTextField commandTextField = new JTextField(10);
@@ -28,12 +33,14 @@ public class MainWindow {
     private static final JPanel MAP_CONTAINER = new JPanel();
     private static final JPanel PROMPT_CONTAINER = new JPanel();
     private static boolean gameStarted = false;
-    private static ImageIcon MapImageIcon;
-    JLabel mapPanelLabel = new JLabel();
+//    private static ImageIcon MapImageIcon;
+    static JLabel mapPanelLabel = new JLabel();
 
     public MainWindow() {
         initialize();
     }
+
+
 
 /**
  * CLASS METHODS BELOW ------------------------------------------------------------------------------------------------|
@@ -88,10 +95,21 @@ public class MainWindow {
         SimpleAttributeSet att = new SimpleAttributeSet();
         StyleConstants.setBold(att, true);
         StyleConstants.setBackground(att, Color.BLACK);
-        P3.setPreferredSize(new Dimension(600, 350));
-        P3.setCharacterAttributes(att, true);
-        P3.setFont(new Font("Courier New", Font.PLAIN, 12));
-        P3.setOpaque(false);
+        prompt_SubPanelAscii.setPreferredSize(new Dimension(600, 350));
+        prompt_SubPanelAscii.setCharacterAttributes(att, true);
+        prompt_SubPanelAscii.setFont(new Font("Courier New", Font.PLAIN, 12));
+        prompt_SubPanelAscii.setOpaque(false);
+
+        map_SubPanelAscii.setPreferredSize(new Dimension(600, 350));
+        map_SubPanelAscii.setCharacterAttributes(att, true);
+        map_SubPanelAscii.setFont(new Font("Courier New", Font.PLAIN, 12));
+        map_SubPanelAscii.setOpaque(false);
+
+        map_SubPanelAsciiMap.setPreferredSize(new Dimension(600, 350));
+        map_SubPanelAsciiMap.setCharacterAttributes(att, true);
+        map_SubPanelAsciiMap.setFont(new Font("Courier New", Font.PLAIN, 12));
+        map_SubPanelAsciiMap.setOpaque(false);
+
 
         /* P4 is JTextArea - will populate officeMap */
         P4.setFont(new Font("Courier New", Font.PLAIN, 12));
@@ -111,13 +129,14 @@ public class MainWindow {
 
 
         ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-        MapImageIcon= new ImageIcon(classloader.getResource("photos/intro.png"));
+//        MapImageIcon= new ImageIcon(classloader.getResource("photos/intro.png"));
 
         /* Add basic GUI elements to their containers */
         TITLE_CONTAINER.add(P1);
         MAP_CONTAINER.add(P2, gbc);
         MAP_CONTAINER.add(P4, gbc);
-        PROMPT_CONTAINER.add(P3);
+        PROMPT_CONTAINER.add(prompt_SubPanelAscii);
+//        MAP_CONTAINER.add(mapPanel_SubPanelAscii);
         PROMPT_CONTAINER.add(commandTextField);
 
         BUTTON_GO_CONTAINER.add((new CommandButton(this, "N","Go North")).getButton(),BorderLayout.NORTH);
@@ -136,9 +155,12 @@ public class MainWindow {
         APP_CONTAINER.add(TITLE_CONTAINER, BorderLayout.NORTH);
         APP_CONTAINER.add(MAP_CONTAINER, BorderLayout.CENTER);
         APP_CONTAINER.add(PROMPT_CONTAINER, BorderLayout.SOUTH);
-        mapPanelLabel.setIcon(MapImageIcon);
+//        mapPanelLabel.setIcon(MapImageIcon);
         MAP_CONTAINER.add(mapPanelLabel, gbc);
+        MAP_CONTAINER.add(map_SubPanelAscii);
+        MAP_CONTAINER.add(map_SubPanelAsciiMap);
 
+        MapPanel.setUpMapPanel();
         /* Setting GUI visibility */
         show();
     }
@@ -200,35 +222,33 @@ public class MainWindow {
         }
     }
 
-
     /**
      * setPrompt() - calls sleep, setPromptText and appends text to P3 JColorPane
      */
     public void setPrompt(String str) {
-        P3.setEditable(true);
+        prompt_SubPanelAscii.setEditable(true);
         sleep();
         if (!gameStarted) {
             setPromptText(str);
-            P3.appendANSI("\n" + text);
+            prompt_SubPanelAscii.appendANSI("\n" + text);
         }
         if (str.contains("New game started.")) {
-            APP_CONTAINER.setSize(1200,800);
-            APP_CONTAINER.setLocationRelativeTo(null);
-            P3.setPreferredSize(new Dimension(600, 150));
+
+            prompt_SubPanelAscii.setPreferredSize(new Dimension(600, 150));
             setGameStarted();
             setPromptText(str);
-            P3.setText(text);
-        } else if (P3.getText().charAt(P3.getText().length() - 3) == '>') {
+            prompt_SubPanelAscii.setText(text);
+        } else if (prompt_SubPanelAscii.getText().charAt(prompt_SubPanelAscii.getText().length() - 3) == '>') {
             setPromptText(str);
-            P3.setText("\n" + text);
+            prompt_SubPanelAscii.setText("\n" + text);
         } else if (gameStarted) {
             setPromptText(str);
-            P3.appendANSI("\n" + text);
+            prompt_SubPanelAscii.appendANSI("\n" + text);
         }
         PROMPT_CONTAINER.revalidate();
         PROMPT_CONTAINER.repaint();
         sleep();
-        P3.setEditable(false);
+        prompt_SubPanelAscii.setEditable(false);
     }
 
 
@@ -239,34 +259,38 @@ public class MainWindow {
         sleep();
     }
 
-
-    public void setPhotoToMapPanel(String key)  {
-        if (P4.getText().length() == 0){
-            // Set to editable
-            P2.setEditable(true);
-            P2.setText("");
-            //Get the resource from resources Photos
-            ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-            switch(key){
-                case "truck":
-                    MapImageIcon = new ImageIcon(
-                        new ImageIcon(classloader.getResource("photos/"+key+".png"))
-                            .getImage()
-                            .getScaledInstance(900, 186, Image.SCALE_DEFAULT));
-                    break;
-                default:
-                    MapImageIcon= new ImageIcon(classloader.getResource("photos/"+key+".png"));
-                    break;
-            }
-
-            // Set Icon to new image Icon
-            mapPanelLabel.setIcon(MapImageIcon);
-
-            /* Sleep gui thread for .1 seconds for synchronicity */
-            sleep();
-            P2.setEditable(false);
-        }
+    public static void mapPanelLabel_setImage(ImageIcon icon){
+        mapPanelLabel.setIcon(icon);
     }
+
+
+//    public static void setPhotoToMapPanel(String key)  {
+//        if (P4.getText().length() == 0){
+//            // Set to editable
+//            P2.setEditable(true);
+//            P2.setText("");
+//            //Get the resource from resources Photos
+//            ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+//            switch(key){
+//                case "truck":
+//                    MapImageIcon = new ImageIcon(
+//                        new ImageIcon(classloader.getResource("photos/"+key+".png"))
+//                            .getImage()
+//                            .getScaledInstance(900, 186, Image.SCALE_DEFAULT));
+//                    break;
+//                default:
+//                    MapImageIcon= new ImageIcon(classloader.getResource("photos/"+key+".png"));
+//                    break;
+//            }
+//
+//            // Set Icon to new image Icon
+//            mapPanelLabel.setIcon(MapImageIcon);
+//
+//            /* Sleep gui thread for .1 seconds for synchronicity */
+//            sleep();
+//            P2.setEditable(false);
+//        }
+//    }
 
 
     /**
@@ -294,4 +318,22 @@ public class MainWindow {
         P4.setText(null);
         P2.setText(null);
     }
+
+    public static JLabel getMapPanel(){
+        return mapPanelLabel;
+
+    }
+    public static ColorPane getMapAsciiJPanel(){
+      
+        return map_SubPanelAscii;
+
+    }
+
+    public static ColorPane getMapAsciiMapJPanel(){
+
+        return map_SubPanelAsciiMap;
+
+    }
+
+
 }

@@ -96,9 +96,7 @@ deliveryHelp: >-
 drivingItemsNeed: 'You cannot start driving you still need to find: '
 noTruckError: You must be at the truck to start driving
 manager approach: 'Your manager approaches you and says:'
-manager conv: >-
-  It's about time you got in, your logbook is in the cabinet, you better hurry
-  if you want to make your pickup (type 'explore cabinet' to take a closer look)
+manager conv: It's about time you got in, your logbook is in the cabinet, you better hurry if you want to make your pickup (type 'explore cabinet' to take a closer look)
 need gas: You don't have enough gas to drive that far (type 'fill tank' to get gas)
 winScreen: >2-
    ██████╗ ██████╗ ███╗   ██╗ ██████╗ ██████╗  █████╗ ████████╗██╗   ██╗██╗      █████╗ ████████╗██╗ ██████╗ ███╗   ██╗███████╗       ██╗   ██╗ ██████╗ ██╗   ██╗    ██╗    ██╗ ██████╗ ███╗   ██╗██╗██╗██╗
@@ -192,7 +190,7 @@ truck: |-
   │                         TRUCK                           │ │
   │                                                         ├─┘
   └─────────────────────────────────────────────────────────┘
-warehouse: >2-
+warehouse: |2-
     ┌──────────────┬──────────────────────┬────────────────┐
   ┌─┤              │       Cabinet        │                ├─┐
 
@@ -206,8 +204,8 @@ warehouse: >2-
 
   │ │                    ┌────────┐                        │s│
 
-  │T│                    │        │                       
-  │s│                                 
+  │T│                    │        │
+  │s│
 
   │r│                    │        │                        │ │
 
@@ -231,7 +229,10 @@ warehouse: >2-
     └───┴────────┴─┬────────────────────────┬──────────────┘
                    │      Front Office      │
                    └────────────────────────┘
-front office: |2-
+
+warehouse_Text: Your manager approaches you and says "It's about time you got in, your logbook is in the cabinet, you better hurry if you want to make your pickup (type 'explore cabinet' to take a closer look)
+  warehouse".
+front office: 2-
                    ┌────────────────────────┐
                    │       Warehouse        │
     ┌─┬──────────┬─┴────────────────────────┴──┬──────────┬─┐
@@ -367,3 +368,7 @@ gas station: |-
   │                        │  ├───────────────────────────┤ │ │
   │       Attendent        │  │        Drink Aisle        │ ├─┘
   └────────────────────────┴──┴───────────────────────────┴─┘
+  
+  
+  
+

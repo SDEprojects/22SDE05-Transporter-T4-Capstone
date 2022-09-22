@@ -37,6 +37,8 @@ public class ColorPane extends JTextPane {
         replaceSelection(s); // there is no selection, so inserts at caret
     }
 
+
+
     public void appendANSI(String s) { // convert ANSI color codes first
         int aPos = 0;   // current char position in addString
         int aIndex = 0; // index of next Escape sequence

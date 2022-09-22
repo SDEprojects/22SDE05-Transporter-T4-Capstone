@@ -2,6 +2,7 @@ package com.tlglearning.middleware;
 
 import com.sun.tools.javac.Main;
 import com.tlglearning.gui.panelinterface.MapPanel;
+import com.tlglearning.gui.panelinterface.PanelAbstractMethods;
 import com.tlglearning.util.Location;
 import org.yaml.snakeyaml.Yaml;
 
@@ -37,6 +38,8 @@ public class Redirect {
     static HashMap<String, Object> DestinationsMap;
     static HashMap<String, Object> GamePromptsMap;
 
+
+
     static final List<String> gameMapImages = new ArrayList<String>() {
         {
             add("truck");
@@ -52,7 +55,6 @@ public class Redirect {
     static final List<String> gamePhotoImages = new ArrayList<String>() {
         {
             add("truck");
-            add("warehouse");
 //            add("front office");
 //            add("boss office");
 //            add("break room");
@@ -163,8 +165,9 @@ public class Redirect {
         return location;
     }
 
-    public static void getPromptKey_DictLookUp_PromptToGui(String identity,String key) {
-        MapPanel.updateMapIfChange(identity,key);
+    public static void getPromptKey_DictLookUp_PromptToGui(String identity, String key) {
+        MapPanel.updateChange(identity,key);
+        System.out.println(identity+key);
 
     }
 
@@ -189,6 +192,7 @@ public class Redirect {
     public static void setLocation(Location loc) {
 
         location = loc;
+        PanelAbstractMethods.setLocation(loc);
     }
 
 
