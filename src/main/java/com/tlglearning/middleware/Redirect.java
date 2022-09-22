@@ -113,7 +113,12 @@ public class Redirect {
 
 
     //TODO: THIS IS A LIST OF TODO'S FOR THE REDIRECT TO THE GUI________________________________________________________
+
+    //TODO: CREATE A FUNCTION TO DISPLAY CYAN GAME OVER TEXT CORRECTLY
+
+
     //TODO: CREATE A FUNCTION TO CHANGE COLOR OF TEXT
+
     public static void sendExploreTextToGui(String identity,String exploreText) {
         mainWindow.setPrompt("#"+identity+": "+exploreText);
     }
@@ -123,7 +128,6 @@ public class Redirect {
     public static void sendItemTextToGui(String identity,String itemText) {
         mainWindow.setPrompt("#"+identity+": "+itemText);
     }
-
 
     /**
      * sendprintfAppToGui Allows for communication from App To Gui interface

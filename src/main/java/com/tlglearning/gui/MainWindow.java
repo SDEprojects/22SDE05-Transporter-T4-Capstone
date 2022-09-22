@@ -205,13 +205,14 @@ public class MainWindow {
      * setPrompt() - calls sleep, setPromptText and appends text to P3 JColorPane
      */
     public void setPrompt(String str) {
+        String savedGameStartPrompt = "The map above the prompt, shows you what room you are in, what locations are explorable in the room, and the available exits, to see a full map type 'h' and select option 3";
         P3.setEditable(true);
         sleep();
         if (!gameStarted) {
             setPromptText(str);
             P3.appendANSI("\n" + text);
         }
-        if (str.contains("New game started.")) {
+        if (str.contains("New game started.") || str.contains(savedGameStartPrompt)) {
             P3.setPreferredSize(new Dimension(600, 150));
             setGameStarted();
             setPromptText(str);
