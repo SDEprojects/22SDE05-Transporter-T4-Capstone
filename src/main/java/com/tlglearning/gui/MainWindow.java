@@ -124,7 +124,7 @@ public class MainWindow {
 
         BUTTON_GO_CONTAINER.add((new CommandButton(this, "N","Go North")).getButton(),BorderLayout.NORTH);
         BUTTON_GO_CONTAINER.add((new CommandButton(this, "S","Go South")).getButton(),BorderLayout.SOUTH);
-        BUTTON_GO_CONTAINER.add(commandTextField, BorderLayout.CENTER);
+//        BUTTON_GO_CONTAINER.add(commandTextField, BorderLayout.CENTER);
         BUTTON_GO_CONTAINER.add((new CommandButton(this, "E","Go East")).getButton(),BorderLayout.EAST);
         BUTTON_GO_CONTAINER.add((new CommandButton(this, "W","Go West")).getButton(),BorderLayout.WEST);
 

@@ -8,6 +8,7 @@ import com.tlglearning.util.Location;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -30,6 +31,8 @@ public class CommandButton {
      */
     private String displayName = "";
     private static List<CommandButton> buttonList = new ArrayList<>();
+    static HashMap<String, Object> DestinationsMap;
+
     /**
      * Constructor of CommandButton
      *
@@ -84,13 +87,12 @@ public class CommandButton {
     public void setButton(String displayName) {
 
 
-
         setDisplayName(displayName);
-        this.button = new JButton(displayName);
+        this.button = new JButton();
 
         setUpButtonImage();
 
-        if(!this.displayName.equals("E") && !this.displayName.equals("W") ){
+        if (!this.displayName.equals("E") && !this.displayName.equals("W")) {
             this.button.setEnabled(false);
             this.button.setVisible(false);
         }
@@ -122,41 +124,35 @@ public class CommandButton {
         // BUTTON_ACTION_CONTAINER.add((new CommandButton(this, "EXPLORE","Explore")).getButton(),BorderLayout.WEST);
         // BUTTON_ACTION_CONTAINER.add((new CommandButton(this, "Get","Get")).getButton(),BorderLayout.EAST);
 
-        if(location==null || CommandButton.buttonList.isEmpty()){
+        if (location == null || CommandButton.buttonList.isEmpty()) {
             return "setResetButton invalid";
         }
 
         for (CommandButton each : buttonList) {
-            System.out.println(each.displayName);
             if (each.command.equals("go north")) {
-
                 if (location.getNorth().equals("\"leads to nowhere\"")) {
                     each.button.setEnabled(false);
-//                    each.button.setText("No Go");
                     each.button.setVisible(false);
 
-                }else{
+                } else {
                     each.button.setEnabled(true);
                     each.button.setVisible(true);
-                    each.button.setText(each.displayName);
                 }
             } else if (each.command.equals("go south")) {
                 if (location.getSouth().equals("\"leads to nowhere\"")) {
                     each.button.setEnabled(false);
                     each.button.setVisible(false);
-                } else{
+                } else {
                     each.button.setEnabled(true);
                     each.button.setVisible(true);
-                    each.button.setText(each.displayName);
                 }
             } else if (each.command.equals("go east")) {
                 if (location.getEast().equals("\"leads to nowhere\"")) {
                     each.button.setEnabled(false);
                     each.button.setVisible(false);
-                }else{
+                } else {
                     each.button.setEnabled(true);
                     each.button.setVisible(true);
-                    each.button.setText(each.displayName);
                 }
             } else if (each.command.equals("go west")) {
                 if (location.getWest().equals("\"leads to nowhere\"")) {
@@ -165,76 +161,45 @@ public class CommandButton {
                 } else {
                     each.button.setEnabled(true);
                     each.button.setVisible(true);
-                    each.button.setText(each.displayName);
-                }
-            } else if (each.command.equals("EXPLORE")) {
-                if (location.getNorth().equals("\"leads to nowhere\"")) {
-                    each.button.setEnabled(false);
-
-                    each.button.setVisible(false);
-                } else {
-                    each.button.setEnabled(true);
-                    each.button.setVisible(true);
-                    each.button.setText(each.displayName);
-                }
-            }else if (each.command.equals("Get")) {
-                if (location.getNorth().equals("\"leads to nowhere\"")) {
-                    each.button.setEnabled(false);
-                    each.button.setVisible(false);
-                } else {
-                    each.button.setEnabled(true);
-                    each.button.setVisible(true);
-                    each.button.setText(each.displayName);
                 }
             }
         }
         return "setResetButton valid";
     }
 
-    private void setUpButtonImage(){
-        if(this.displayName.equalsIgnoreCase("N")){
-            ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-            ImageIcon NorthArrowIcon = new ImageIcon(
-                    new ImageIcon(classloader.getResource("photos/northBTN.png"))
-                            .getImage()
-                            .getScaledInstance(20, 20, Image.SCALE_DEFAULT));
+    private void setUpButtonImage() {
+        ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+        ImageIcon NorthArrowIcon = new ImageIcon(
+                new ImageIcon(classloader.getResource("photos/" + this.displayName + ".png"))
+                        .getImage()
+                        .getScaledInstance(20, 20, Image.SCALE_DEFAULT));
 
-            this.button.setBackground(Color.BLACK);
-            this.button.setBorderPainted(false);
-            this.button.setIcon(NorthArrowIcon );
-        } else if(this.displayName.equalsIgnoreCase("S")){
-            ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-            ImageIcon NorthArrowIcon = new ImageIcon(
-                    new ImageIcon(classloader.getResource("photos/southBTN.png"))
-                            .getImage()
-                            .getScaledInstance(20, 20, Image.SCALE_DEFAULT));
-
-            this.button.setBackground(Color.BLACK);
-            this.button.setBorderPainted(false);
-            this.button.setIcon(NorthArrowIcon );
-        }else if(this.displayName.equalsIgnoreCase("W")){
-            ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-            ImageIcon NorthArrowIcon = new ImageIcon(
-                    new ImageIcon(classloader.getResource("photos/westBTN.png"))
-                            .getImage()
-                            .getScaledInstance(20, 20, Image.SCALE_DEFAULT));
-
-            this.button.setBackground(Color.BLACK);
-            this.button.setBorderPainted(false);
-            this.button.setIcon(NorthArrowIcon );
-        }else if(this.displayName.equalsIgnoreCase("E")){
-            ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-            ImageIcon NorthArrowIcon = new ImageIcon(
-                    new ImageIcon(classloader.getResource("photos/eastBTN.png"))
-                            .getImage()
-                            .getScaledInstance(20, 20, Image.SCALE_DEFAULT));
-
-            this.button.setBackground(Color.BLACK);
-            this.button.setBorderPainted(false);
-            this.button.setIcon(NorthArrowIcon );
-        }
+        this.button.setBackground(Color.BLACK);
+        this.button.setBorderPainted(false);
+        this.button.setIcon(NorthArrowIcon);
     }
+
+    private void addGetExploreBTN() {
+        HashMap<String,Object> tempDestMap;
+        if(DestinationsMap.containsKey(location.getLocationName())){
+
+        }
+//        explore:
+//        cabinet": You see a GPS
+//        laptop": You see your broken laptop that was supposed to be fixed 3 weeks ago
+//        closet": You see a RADIO
+//        get:
+//        GETgps: GPS that provides directions
+//        GETradio: Communication radio
+
+
+    }
+
     public static void setLocation(Location loc) {
         location = loc;
+    }
+
+    public static void setDestinationsMap(HashMap<String, Object> destinationsMap) {
+        DestinationsMap = destinationsMap;
     }
 }

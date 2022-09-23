@@ -25,15 +25,6 @@ public class Redirect {
      * @param messageToGui
      */
 
-    private static final String ANSI_BLUE = "\u001B[34m";
-
-    private static final String ANSI_RESET = "\u001B[0m";
-
-    private static final String CYAN = "\u001B[36m";
-
-    private static final String RED = "\u001B[31m";
-
-    private static final String WHITE = "\u001B[37m";
     static Location location;
     static HashMap<String, Object> DestinationsMap;
     static HashMap<String, Object> GamePromptsMap;
@@ -203,6 +194,7 @@ public class Redirect {
 
 
     public static void setLocation(Location loc) {
+        CommandButton.setDestinationsMap(DestinationsMap);
         CommandButton.setLocation(loc);
         location = loc;
 
