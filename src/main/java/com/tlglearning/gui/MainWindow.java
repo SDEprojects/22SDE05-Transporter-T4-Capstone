@@ -2,14 +2,12 @@ package com.tlglearning.gui;
 
 import com.tlglearning.gui.button.CommandButton;
 import com.tlglearning.middleware.commandGateObject;
-
 import javax.swing.*;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-
 public class MainWindow {
 
     private static final JTextArea P1 = new JTextArea(6, 94);
@@ -29,10 +27,11 @@ public class MainWindow {
     private static final JPanel PROMPT_CONTAINER = new JPanel();
     private static boolean gameStarted = false;
     private static ImageIcon MapImageIcon;
-    JLabel mapPanelLabel = new JLabel();
+    static JLabel mapPanelLabel = new JLabel();
 
     public MainWindow() {
         initialize();
+
     }
 
 /**
@@ -44,33 +43,37 @@ public class MainWindow {
     /**
      * show() - display initialized APP_CONTAINER.
      */
-    public void show() {
+    public static void show() {
         APP_CONTAINER.setVisible(true);
     }
 
     /**
      * initialize() - setup and customize main gui panels & elements
      */
-    private void initialize() {
+    public void initialize() {
 
         /* Create a main window panel and set attributes. */
         APP_CONTAINER.setLayout(new BorderLayout(0, 0));
         APP_CONTAINER.setTitle("Transporter");
         APP_CONTAINER.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        APP_CONTAINER.setSize(1200, 1000);
-        APP_CONTAINER.setResizable(false);
+        //APP_CONTAINER.setSize(1500, 1500);
+        APP_CONTAINER.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        APP_CONTAINER.setResizable(true);
         APP_CONTAINER.setLocationRelativeTo(null);
 
         /* Element containers */
         MAP_CONTAINER.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         MAP_CONTAINER.setBackground(Color.BLACK);
+        //MAP_CONTAINER.setSize(500, 500);
 
         PROMPT_CONTAINER.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 5));
         PROMPT_CONTAINER.setBackground(Color.BLACK);
+        //PROMPT_CONTAINER.setSize(600, 600);
 
         TITLE_CONTAINER.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 5));
         TITLE_CONTAINER.setBackground(Color.BLACK);
+        //TITLE_CONTAINER.setSize(400, 400);
 
         /* P1 is JTextArea - will populate title */
         P1.setFont(new Font("Courier New", Font.PLAIN, 12));
@@ -88,7 +91,7 @@ public class MainWindow {
         SimpleAttributeSet att = new SimpleAttributeSet();
         StyleConstants.setBold(att, true);
         StyleConstants.setBackground(att, Color.BLACK);
-        P3.setPreferredSize(new Dimension(600, 350));
+        //P3.setPreferredSize(new Dimension(600, 350));
         P3.setCharacterAttributes(att, true);
         P3.setFont(new Font("Courier New", Font.PLAIN, 12));
         P3.setOpaque(false);
@@ -108,7 +111,6 @@ public class MainWindow {
                 }
             }
         });
-
 
         ClassLoader classloader = Thread.currentThread().getContextClassLoader();
         MapImageIcon= new ImageIcon(classloader.getResource("photos/intro.png"));
@@ -205,14 +207,15 @@ public class MainWindow {
      * setPrompt() - calls sleep, setPromptText and appends text to P3 JColorPane
      */
     public void setPrompt(String str) {
+        String savedGameStartPrompt = "The map above the prompt, shows you what room you are in, what locations are explorable in the room, and the available exits, to see a full map type 'h' and select option 3";
         P3.setEditable(true);
         sleep();
         if (!gameStarted) {
             setPromptText(str);
             P3.appendANSI("\n" + text);
         }
-        if (str.contains("New game started.")) {
-            P3.setPreferredSize(new Dimension(600, 150));
+        if (str.contains("New game started.") || str.contains(savedGameStartPrompt)) {
+            //P3.setPreferredSize(new Dimension(600, 150));
             setGameStarted();
             setPromptText(str);
             P3.setText(text);

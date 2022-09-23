@@ -1,6 +1,8 @@
 package com.tlglearning.middleware;
 
 import com.sun.tools.javac.Main;
+import com.tlglearning.gui.MainWindow;
+import com.tlglearning.gui.button.CommandButton;
 import com.tlglearning.util.Location;
 import org.yaml.snakeyaml.Yaml;
 
@@ -62,10 +64,11 @@ public class Redirect {
     };
 
 
-
-    public Redirect() {
-
-    }
+//
+//    static{
+//        MainWindow.initialize();
+//
+//    }
 
     public static void generateMaps() {
         ClassLoader cl = Main.class.getClassLoader();
@@ -79,6 +82,7 @@ public class Redirect {
         input = cl.getResourceAsStream("GamePrompts.yaml");
 
         GamePromptsMap = yaml.load(input);
+
 
     }
 
@@ -113,7 +117,12 @@ public class Redirect {
 
 
     //TODO: THIS IS A LIST OF TODO'S FOR THE REDIRECT TO THE GUI________________________________________________________
-    //TODO: CREATE A FUNCTION TO CHANGE COLOR OF TEXT
+
+    //TODO: CREATE A FUNCTION TO DISPLAY CURRENT AND PICKUP LOCATION IN GUI
+    public static void SendLocationInfoToGui(String identity, String locationInfo) { //TODO: THIS IS WHAT I ADDED IN THIS COMMIT
+        mainWindow.setPrompt("#"+identity+": "+ locationInfo);
+    }
+
     public static void sendExploreTextToGui(String identity,String exploreText) {
         mainWindow.setPrompt("#"+identity+": "+exploreText);
     }
@@ -123,7 +132,6 @@ public class Redirect {
     public static void sendItemTextToGui(String identity,String itemText) {
         mainWindow.setPrompt("#"+identity+": "+itemText);
     }
-
 
     /**
      * sendprintfAppToGui Allows for communication from App To Gui interface
@@ -194,10 +202,10 @@ public class Redirect {
     }
 
 
-
     public static void setLocation(Location loc) {
-
+        CommandButton.setLocation(loc);
         location = loc;
+
     }
 
 
