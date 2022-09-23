@@ -114,9 +114,10 @@ public class Redirect {
 
     //TODO: THIS IS A LIST OF TODO'S FOR THE REDIRECT TO THE GUI________________________________________________________
 
-    //TODO: CREATE A FUNCTION TO DISPLAY CYAN GAME OVER TEXT CORRECTLY
-
-    //TODO: CREATE A FUNCTION TO CHANGE COLOR OF TEXT
+    //TODO: CREATE A FUNCTION TO DISPLAY CURRENT AND PICKUP LOCATION IN GUI
+    public static void SendLocationInfoToGui(String identity, String locationInfo) { //TODO: THIS IS WHAT I ADDED IN THIS COMMIT
+        mainWindow.setPrompt("#"+identity+": "+ locationInfo);
+    }
 
     public static void sendExploreTextToGui(String identity,String exploreText) {
         mainWindow.setPrompt("#"+identity+": "+exploreText);
@@ -195,7 +196,6 @@ public class Redirect {
         String prompt = (String) GamePromptsMap.get(key);
         mainWindow.setPrompt("#"+identity+": "+prompt);
     }
-
 
 
     public static void setLocation(Location loc) {
