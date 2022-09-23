@@ -6,6 +6,7 @@ import com.tlglearning.middleware.commandGateObject;
 import com.tlglearning.util.Location;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +21,9 @@ public class CommandButton {
     private String command;
     private JButton button;
     MainWindow mainWindow;
+
+    private static JPanel BUTTON_ACTION_CONTAINER = MainWindow.getActionButtonContainer();
+
     private static Location location;
     /**
      * displayName is text that shows on the button itself.
@@ -68,6 +72,7 @@ public class CommandButton {
     }
 
     public void setDisplayName(String displayName) {
+
         this.displayName = displayName;
     }
 
@@ -78,11 +83,16 @@ public class CommandButton {
      */
     public void setButton(String displayName) {
 
+
+
         setDisplayName(displayName);
         this.button = new JButton(displayName);
 
+        setUpButtonImage();
+
         if(!this.displayName.equals("E") && !this.displayName.equals("W") ){
             this.button.setEnabled(false);
+            this.button.setVisible(false);
         }
 
         button.addActionListener(e ->
@@ -98,7 +108,7 @@ public class CommandButton {
                     // Then command string is passed to Transport Application.
                     commandGateObject.setIsCommandSentFromGui(true);
 
-                    Thread.sleep(130);
+                    Thread.sleep(500);
                     setResetButtons();
                     return null;
                 }
@@ -107,6 +117,10 @@ public class CommandButton {
     }
 
     public static String setResetButtons() {
+
+        //TODO ADD THESE BUTTON
+        // BUTTON_ACTION_CONTAINER.add((new CommandButton(this, "EXPLORE","Explore")).getButton(),BorderLayout.WEST);
+        // BUTTON_ACTION_CONTAINER.add((new CommandButton(this, "Get","Get")).getButton(),BorderLayout.EAST);
 
         if(location==null || CommandButton.buttonList.isEmpty()){
             return "setResetButton invalid";
@@ -118,54 +132,107 @@ public class CommandButton {
 
                 if (location.getNorth().equals("\"leads to nowhere\"")) {
                     each.button.setEnabled(false);
-                    each.button.setText("No Go");
+//                    each.button.setText("No Go");
+                    each.button.setVisible(false);
+
                 }else{
                     each.button.setEnabled(true);
+                    each.button.setVisible(true);
                     each.button.setText(each.displayName);
                 }
             } else if (each.command.equals("go south")) {
                 if (location.getSouth().equals("\"leads to nowhere\"")) {
                     each.button.setEnabled(false);
-                    each.button.setText("No Go");
+                    each.button.setVisible(false);
                 } else{
                     each.button.setEnabled(true);
+                    each.button.setVisible(true);
                     each.button.setText(each.displayName);
                 }
             } else if (each.command.equals("go east")) {
                 if (location.getEast().equals("\"leads to nowhere\"")) {
                     each.button.setEnabled(false);
-                    each.button.setText("No Go");
+                    each.button.setVisible(false);
                 }else{
                     each.button.setEnabled(true);
+                    each.button.setVisible(true);
                     each.button.setText(each.displayName);
                 }
             } else if (each.command.equals("go west")) {
                 if (location.getWest().equals("\"leads to nowhere\"")) {
                     each.button.setEnabled(false);
-                    each.button.setText("No Go");
+                    each.button.setVisible(false);
                 } else {
                     each.button.setEnabled(true);
+                    each.button.setVisible(true);
                     each.button.setText(each.displayName);
                 }
             } else if (each.command.equals("EXPLORE")) {
                 if (location.getNorth().equals("\"leads to nowhere\"")) {
                     each.button.setEnabled(false);
-                    each.button.setText("No Go");
+
+                    each.button.setVisible(false);
                 } else {
                     each.button.setEnabled(true);
+                    each.button.setVisible(true);
                     each.button.setText(each.displayName);
                 }
             }else if (each.command.equals("Get")) {
                 if (location.getNorth().equals("\"leads to nowhere\"")) {
                     each.button.setEnabled(false);
-                    each.button.setText("No Go");
+                    each.button.setVisible(false);
                 } else {
                     each.button.setEnabled(true);
+                    each.button.setVisible(true);
                     each.button.setText(each.displayName);
                 }
             }
         }
         return "setResetButton valid";
+    }
+
+    private void setUpButtonImage(){
+        if(this.displayName.equalsIgnoreCase("N")){
+            ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+            ImageIcon NorthArrowIcon = new ImageIcon(
+                    new ImageIcon(classloader.getResource("photos/northBTN.png"))
+                            .getImage()
+                            .getScaledInstance(20, 20, Image.SCALE_DEFAULT));
+
+            this.button.setBackground(Color.BLACK);
+            this.button.setBorderPainted(false);
+            this.button.setIcon(NorthArrowIcon );
+        } else if(this.displayName.equalsIgnoreCase("S")){
+            ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+            ImageIcon NorthArrowIcon = new ImageIcon(
+                    new ImageIcon(classloader.getResource("photos/southBTN.png"))
+                            .getImage()
+                            .getScaledInstance(20, 20, Image.SCALE_DEFAULT));
+
+            this.button.setBackground(Color.BLACK);
+            this.button.setBorderPainted(false);
+            this.button.setIcon(NorthArrowIcon );
+        }else if(this.displayName.equalsIgnoreCase("W")){
+            ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+            ImageIcon NorthArrowIcon = new ImageIcon(
+                    new ImageIcon(classloader.getResource("photos/westBTN.png"))
+                            .getImage()
+                            .getScaledInstance(20, 20, Image.SCALE_DEFAULT));
+
+            this.button.setBackground(Color.BLACK);
+            this.button.setBorderPainted(false);
+            this.button.setIcon(NorthArrowIcon );
+        }else if(this.displayName.equalsIgnoreCase("E")){
+            ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+            ImageIcon NorthArrowIcon = new ImageIcon(
+                    new ImageIcon(classloader.getResource("photos/eastBTN.png"))
+                            .getImage()
+                            .getScaledInstance(20, 20, Image.SCALE_DEFAULT));
+
+            this.button.setBackground(Color.BLACK);
+            this.button.setBorderPainted(false);
+            this.button.setIcon(NorthArrowIcon );
+        }
     }
     public static void setLocation(Location loc) {
         location = loc;

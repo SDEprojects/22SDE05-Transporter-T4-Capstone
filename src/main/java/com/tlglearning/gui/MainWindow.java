@@ -128,8 +128,8 @@ public class MainWindow {
         BUTTON_GO_CONTAINER.add((new CommandButton(this, "E","Go East")).getButton(),BorderLayout.EAST);
         BUTTON_GO_CONTAINER.add((new CommandButton(this, "W","Go West")).getButton(),BorderLayout.WEST);
 
-        BUTTON_ACTION_CONTAINER.add((new CommandButton(this, "EXPLORE","Explore")).getButton(),BorderLayout.WEST);
-        BUTTON_ACTION_CONTAINER.add((new CommandButton(this, "Get","Get")).getButton(),BorderLayout.EAST);
+//        BUTTON_ACTION_CONTAINER.add((new CommandButton(this, "EXPLORE","Explore")).getButton(),BorderLayout.WEST);
+//        BUTTON_ACTION_CONTAINER.add((new CommandButton(this, "Get","Get")).getButton(),BorderLayout.EAST);
 
         PROMPT_CONTAINER.add(BUTTON_GO_CONTAINER,BorderLayout.NORTH);
         PROMPT_CONTAINER.add(BUTTON_ACTION_CONTAINER,BorderLayout.SOUTH);
@@ -289,6 +289,10 @@ public class MainWindow {
         } catch (InterruptedException e) {
             System.out.println("An Exception occurred: " + e);
         }
+    }
+
+    public static JPanel getActionButtonContainer(){
+        return  BUTTON_ACTION_CONTAINER;
     }
 
     public void wipe() {
