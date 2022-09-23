@@ -57,7 +57,7 @@ public class MainWindow {
         APP_CONTAINER.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         //APP_CONTAINER.setSize(1500, 1500);
         APP_CONTAINER.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        APP_CONTAINER.setResizable(false);
+        APP_CONTAINER.setResizable(true);
         APP_CONTAINER.setLocationRelativeTo(null);
 
         /* Element containers */

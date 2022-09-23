@@ -55,11 +55,13 @@ public class GamePrompt {
     }
 
     public void runPromptWithLocation(String key, String nextLocation) {
-        System.out.println(("\n" +
+        Redirect.SendLocationInfoToGui("77",  PrettyText.RESET.getColor() + //TODO: THIS IS WHAT I ADDED IN THIS COMMIT
+                        gameInput.get(key) +
+                nextLocation);
+        System.out.println((
                 PrettyText.RESET.getColor() +
                 gameInput.get(key) +
                 nextLocation));
-        Redirect.getPromptWithLocation("15",key, nextLocation);
     }
 
 //This is where the officeMap comes from
