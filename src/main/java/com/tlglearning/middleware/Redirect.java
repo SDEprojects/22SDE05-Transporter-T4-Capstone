@@ -1,6 +1,8 @@
 package com.tlglearning.middleware;
 
 import com.sun.tools.javac.Main;
+import com.tlglearning.gui.MainWindow;
+import com.tlglearning.gui.button.CommandButton;
 import com.tlglearning.util.Location;
 import org.yaml.snakeyaml.Yaml;
 
@@ -62,10 +64,11 @@ public class Redirect {
     };
 
 
-
-    public Redirect() {
-
-    }
+//
+//    static{
+//        MainWindow.initialize();
+//
+//    }
 
     public static void generateMaps() {
         ClassLoader cl = Main.class.getClassLoader();
@@ -79,6 +82,7 @@ public class Redirect {
         input = cl.getResourceAsStream("GamePrompts.yaml");
 
         GamePromptsMap = yaml.load(input);
+
 
     }
 
@@ -199,8 +203,9 @@ public class Redirect {
 
 
     public static void setLocation(Location loc) {
-
+        CommandButton.setLocation(loc);
         location = loc;
+
     }
 
 
