@@ -108,7 +108,8 @@ public class CommandButton {
                     // Then command string is passed to Transport Application.
                     commandGateObject.setIsCommandSentFromGui(true);
 
-                    Thread.sleep(500);
+
+                    Thread.sleep(1000);
                     setResetButtons();
                     return null;
                 }
