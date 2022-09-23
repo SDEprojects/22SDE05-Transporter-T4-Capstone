@@ -27,10 +27,11 @@ public class MainWindow {
     private static final JPanel PROMPT_CONTAINER = new JPanel();
     private static boolean gameStarted = false;
     private static ImageIcon MapImageIcon;
-    JLabel mapPanelLabel = new JLabel();
+    static JLabel mapPanelLabel = new JLabel();
 
     public MainWindow() {
         initialize();
+
     }
 
 /**
@@ -42,14 +43,14 @@ public class MainWindow {
     /**
      * show() - display initialized APP_CONTAINER.
      */
-    public void show() {
+    public static void show() {
         APP_CONTAINER.setVisible(true);
     }
 
     /**
      * initialize() - setup and customize main gui panels & elements
      */
-    private void initialize() {
+    public void initialize() {
 
         /* Create a main window panel and set attributes. */
         APP_CONTAINER.setLayout(new BorderLayout(0, 0));
