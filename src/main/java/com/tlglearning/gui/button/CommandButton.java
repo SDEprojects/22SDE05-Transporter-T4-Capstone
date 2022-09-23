@@ -81,9 +81,10 @@ public class CommandButton {
         setDisplayName(displayName);
         this.button = new JButton(displayName);
 
-        if(!this.displayName.equals("E")){
+        if(!this.displayName.equals("E") && !this.displayName.equals("W") ){
             this.button.setEnabled(false);
         }
+
         button.addActionListener(e ->
         {
             new SwingWorker<String, Object>() {
