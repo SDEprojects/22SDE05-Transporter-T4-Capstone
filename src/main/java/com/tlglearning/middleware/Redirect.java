@@ -2,6 +2,7 @@ package com.tlglearning.middleware;
 
 import com.sun.tools.javac.Main;
 import com.tlglearning.gui.MainWindow;
+import com.tlglearning.gui.button.ButtonListener;
 import com.tlglearning.gui.button.CommandButton;
 import com.tlglearning.util.Location;
 import org.yaml.snakeyaml.Yaml;
@@ -12,6 +13,9 @@ import java.util.HashMap;
 import java.util.List;
 
 import static com.tlglearning.client.TransporterClient.mainWindow;
+//import static com.tlglearning.gui.button.CommandButton.addGetExploreBTN;
+import static com.tlglearning.gui.button.Compass.getPanel;
+//import static com.tlglearning.gui.button.CommandButton.addGetExploreBTN;
 
 /*
     Messages are sent from app to Gui and Gui to app. This class will function as a middleware.
@@ -25,15 +29,6 @@ public class Redirect {
      * @param messageToGui
      */
 
-    private static final String ANSI_BLUE = "\u001B[34m";
-
-    private static final String ANSI_RESET = "\u001B[0m";
-
-    private static final String CYAN = "\u001B[36m";
-
-    private static final String RED = "\u001B[31m";
-
-    private static final String WHITE = "\u001B[37m";
     static Location location;
     static HashMap<String, Object> DestinationsMap;
     static HashMap<String, Object> GamePromptsMap;
@@ -82,6 +77,8 @@ public class Redirect {
         input = cl.getResourceAsStream("GamePrompts.yaml");
 
         GamePromptsMap = yaml.load(input);
+//        addGetExploreBTN();
+
 
 
     }
@@ -203,7 +200,10 @@ public class Redirect {
 
 
     public static void setLocation(Location loc) {
-        CommandButton.setLocation(loc);
+//        CommandButton.setDestinationsMap(DestinationsMap);
+//        CommandButton.setLocation(loc);
+        ButtonListener.setDestinationsMap(DestinationsMap);
+        ButtonListener.setLocation(loc);
         location = loc;
 
     }

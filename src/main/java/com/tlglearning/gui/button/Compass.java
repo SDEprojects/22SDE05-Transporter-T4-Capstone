@@ -11,6 +11,7 @@ public class Compass {
         JPanel panel = new JPanel();
         panel.setSize(360,360);
         panel.setBounds(0,0, 360,360);
+
         panel.setBackground(Color.black);
         panel.setLayout(new GridLayout(3,3));
         ClassLoader classloader = Thread.currentThread().getContextClassLoader();
@@ -19,9 +20,17 @@ public class Compass {
         for (int i = 0; i < 9; i++) {
             int name = i + 1;
             System.out.println(name);
-            compass[i] = new ImageIcon(classloader.getResource("photos/buttons/"+name+".png"));
+
+            ImageIcon icon = new ImageIcon(classloader.getResource("photos/buttons/"+name+".png"));
+
+            icon.setDescription("No_Go");
+            compass[i] = icon;
         }
 
+        compass[1].setDescription("Go North");
+        compass[3].setDescription("Go West");
+        compass[5].setDescription("Go East");
+        compass[7].setDescription("Go South");
         //tile2_ACTIVE
         for (int i = 2; i < 9; i+=2) {
             int name = i;
@@ -33,11 +42,24 @@ public class Compass {
             if (i % 2 == 0) {
                 panel.add(new JLabel(compass[i]));
             } else {
-                JLabel buttonLabel = new JLabel(compass[i]);
+                JButton buttonLabel = new JButton(compass[i]);
                 buttonLabel.addMouseListener(new ButtonListener(buttonLabel, i));
+
+                buttonLabel.setBackground(Color.BLACK);
+                buttonLabel.setBorderPainted(false);
+                buttonLabel.setContentAreaFilled(false);
+                buttonLabel.setFocusPainted(false);
+
+
+                if (!compass[i].getDescription().equalsIgnoreCase("go east")) {
+                    buttonLabel.setEnabled(false);
+                    buttonLabel.setVisible(false);
+                }
                 panel.add(buttonLabel);
             }
         }
+
+
         return panel;
     }
 }
