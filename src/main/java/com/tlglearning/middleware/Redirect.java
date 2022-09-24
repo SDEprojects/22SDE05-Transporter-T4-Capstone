@@ -2,6 +2,7 @@ package com.tlglearning.middleware;
 
 import com.sun.tools.javac.Main;
 import com.tlglearning.gui.MainWindow;
+import com.tlglearning.gui.button.ButtonListener;
 import com.tlglearning.gui.button.CommandButton;
 import com.tlglearning.util.Location;
 import org.yaml.snakeyaml.Yaml;
@@ -12,6 +13,9 @@ import java.util.HashMap;
 import java.util.List;
 
 import static com.tlglearning.client.TransporterClient.mainWindow;
+//import static com.tlglearning.gui.button.CommandButton.addGetExploreBTN;
+import static com.tlglearning.gui.button.Compass.getPanel;
+//import static com.tlglearning.gui.button.CommandButton.addGetExploreBTN;
 
 /*
     Messages are sent from app to Gui and Gui to app. This class will function as a middleware.
@@ -73,6 +77,8 @@ public class Redirect {
         input = cl.getResourceAsStream("GamePrompts.yaml");
 
         GamePromptsMap = yaml.load(input);
+//        addGetExploreBTN();
+
 
 
     }
@@ -194,8 +200,10 @@ public class Redirect {
 
 
     public static void setLocation(Location loc) {
-        CommandButton.setDestinationsMap(DestinationsMap);
-        CommandButton.setLocation(loc);
+//        CommandButton.setDestinationsMap(DestinationsMap);
+//        CommandButton.setLocation(loc);
+        ButtonListener.setDestinationsMap(DestinationsMap);
+        ButtonListener.setLocation(loc);
         location = loc;
 
     }

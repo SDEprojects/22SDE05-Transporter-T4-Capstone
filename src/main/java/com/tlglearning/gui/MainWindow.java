@@ -8,6 +8,9 @@ import javax.swing.text.StyleConstants;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+
+import static com.tlglearning.gui.button.Compass.getPanel;
+
 public class MainWindow {
 
     private static final JTextArea P1 = new JTextArea(6, 94);
@@ -122,15 +125,15 @@ public class MainWindow {
         PROMPT_CONTAINER.add(P3);
         PROMPT_CONTAINER.add(commandTextField);
 
-        BUTTON_GO_CONTAINER.add((new CommandButton(this, "N","Go North")).getButton(),BorderLayout.NORTH);
-        BUTTON_GO_CONTAINER.add((new CommandButton(this, "S","Go South")).getButton(),BorderLayout.SOUTH);
-//        BUTTON_GO_CONTAINER.add(commandTextField, BorderLayout.CENTER);
-        BUTTON_GO_CONTAINER.add((new CommandButton(this, "E","Go East")).getButton(),BorderLayout.EAST);
-        BUTTON_GO_CONTAINER.add((new CommandButton(this, "W","Go West")).getButton(),BorderLayout.WEST);
+//        BUTTON_GO_CONTAINER.add((new CommandButton(this, "N","Go North")).getButton(),BorderLayout.NORTH);
+//        BUTTON_GO_CONTAINER.add((new CommandButton(this, "S","Go South")).getButton(),BorderLayout.SOUTH);
+        BUTTON_GO_CONTAINER.add(commandTextField, BorderLayout.CENTER);
+//        BUTTON_GO_CONTAINER.add((new CommandButton(this, "E","Go East")).getButton(),BorderLayout.EAST);
+//        BUTTON_GO_CONTAINER.add((new CommandButton(this, "W","Go West")).getButton(),BorderLayout.WEST);
 
 //        BUTTON_ACTION_CONTAINER.add((new CommandButton(this, "EXPLORE","Explore")).getButton(),BorderLayout.WEST);
 //        BUTTON_ACTION_CONTAINER.add((new CommandButton(this, "Get","Get")).getButton(),BorderLayout.EAST);
-
+//
         PROMPT_CONTAINER.add(BUTTON_GO_CONTAINER,BorderLayout.NORTH);
         PROMPT_CONTAINER.add(BUTTON_ACTION_CONTAINER,BorderLayout.SOUTH);
 
@@ -140,6 +143,7 @@ public class MainWindow {
         APP_CONTAINER.add(PROMPT_CONTAINER, BorderLayout.SOUTH);
         mapPanelLabel.setIcon(MapImageIcon);
         MAP_CONTAINER.add(mapPanelLabel, gbc);
+        BUTTON_ACTION_CONTAINER.add(getPanel());
 
         /* Setting GUI visibility */
         show();
