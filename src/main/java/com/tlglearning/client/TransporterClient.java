@@ -1,6 +1,7 @@
 package com.tlglearning.client;
 
 import com.tlglearning.gui.MainWindow;
+import com.tlglearning.gui.music.SimpleAudioPlayer;
 import com.tlglearning.middleware.Redirect;
 import com.tlglearning.util.InputHandling;
 import com.tlglearning.util.TitleScreen;
@@ -9,13 +10,10 @@ import javax.swing.*;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 
-import static com.tlglearning.gui.button.Compass.getPanel;
-
 public class TransporterClient {
     public static MainWindow mainWindow;
 
     public static void main(String[] args) throws InterruptedException, InvocationTargetException {
-
         Redirect.generateMaps();
         SwingUtilities.invokeAndWait(new Runnable() {
             /**
@@ -39,6 +37,5 @@ public class TransporterClient {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
     }
 }

@@ -1,16 +1,12 @@
 package com.tlglearning.gui;
 
-import com.tlglearning.gui.button.CommandButton;
 import com.tlglearning.middleware.commandGateObject;
-
-import javax.sound.sampled.Control;
 import javax.swing.*;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-
 import static com.tlglearning.gui.button.Compass.getPanel;
 
 public class MainWindow {
@@ -36,8 +32,8 @@ public class MainWindow {
 
     public MainWindow() {
         initialize();
-
     }
+
 
 /**
  * CLASS METHODS BELOW ------------------------------------------------------------------------------------------------|
@@ -149,7 +145,8 @@ public class MainWindow {
 
         /* Setting GUI visibility */
         show();
-    }
+
+        }
 
 
 /**
@@ -246,7 +243,6 @@ public class MainWindow {
         sleep();
     }
 
-
     public void setPhotoToMapPanel(String key)  {
         if (P4.getText().length() == 0){
             // Set to editable
@@ -304,35 +300,5 @@ public class MainWindow {
     public void wipe() {
         P4.setText(null);
         P2.setText(null);
-    }
-    /**
-     * Music Section Below
-     * */
-
-    Sound sound = new Sound(); //Instantiate this somewhere in another panel.
-
-    public void playMusic(int i) {
-
-        sound.setFile(i);
-        sound.play();
-        sound.loop();
-    }
-
-    public void stopMusic() {
-        sound.stop();
-    }
-
-    private class Sound {
-        public void stop() {
-        }
-
-        public void setFile(int i) {
-        }
-
-        public void play() {
-        }
-
-        public void loop() {
-        }
     }
 }
