@@ -13,9 +13,8 @@ public class TransporterClient {
     public static MainWindow mainWindow;
 
     public static void main(String[] args) throws InterruptedException, InvocationTargetException {
-
         Redirect.generateMaps();
-        SwingUtilities.invokeAndWait(new Runnable() {
+        SwingUtilities.invokeAndWait(new Runnable () {
             /**
              * run() - Override creates a new instance of our main window class.
              */
@@ -30,14 +29,16 @@ public class TransporterClient {
 
         //initializes input handling and calls the gameStart method to start new game or quit
         InputHandling gameStart = new InputHandling();
+
         start.titleScreen();
+
         start.intro();
+
         try {
             gameStart.gameStart();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
     }
 
 
