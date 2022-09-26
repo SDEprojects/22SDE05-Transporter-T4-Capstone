@@ -1,5 +1,6 @@
 package com.tlglearning.gui.interactwarehouse;
 
+import com.tlglearning.middleware.commandGateObject;
 import com.tlglearning.util.Location;
 
 import javax.swing.*;
@@ -9,6 +10,8 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import static com.tlglearning.client.TransporterClient.mainWindow;
 
 //import static com.tlglearning.client.TransporterClient.mainWindow;
 
@@ -46,11 +49,24 @@ public class WarehouseButtonListener implements MouseListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
+        String command="";
         if(button.getIcon().equals(orginalIcon)){
+            command=orginalIcon.getDescription();
             button.setIcon(showItemIcon);
+
         } else{
+            command=showItemIcon.getDescription();
             button.setIcon(orginalIcon);
         }
+
+        mainWindow.wipe();
+        // create String for the label
+        // Sets commandGateObject command text  field to the user input command.
+        commandGateObject.setCommand(command);
+
+        // Sends confirmation boolean variable to tell the middleware that command is sent.
+        // Then command string is passed to Transport Application.
+        commandGateObject.setIsCommandSentFromGui(true);
 
 
 
@@ -59,24 +75,7 @@ public class WarehouseButtonListener implements MouseListener {
 
     @Override
     public void mouseReleased(MouseEvent e) {
-//
-//        label.setIcon(inactive);
-//        mainWindow.wipe();
-//        // create String for the label
-//        // Sets commandGateObject command text  field to the user input command.
-//        commandGateObject.setCommand(active.getDescription());
-//
-//        // Sends confirmation boolean variable to tell the middleware that command is sent.
-//        // Then command string is passed to Transport Application.
-//        commandGateObject.setIsCommandSentFromGui(true);
-//
-//
-//        try {
-//            Thread.sleep(130);
-//        } catch (InterruptedException ex) {
-//            throw new RuntimeException(ex);
-//        }
-//        setResetButtons();
+
 
     }
 
