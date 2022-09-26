@@ -57,7 +57,6 @@ public class TruckGUI {
                         .getImage()
                         .getScaledInstance(300, 62, Image.SCALE_DEFAULT)
         );
-
         truckLabel = new JLabel(truckUp);
         truckPanel.add(truckLabel);
         truckPanel.setLocation(350,275);

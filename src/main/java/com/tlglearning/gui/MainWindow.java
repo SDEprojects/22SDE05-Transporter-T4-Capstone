@@ -1,6 +1,7 @@
 package com.tlglearning.gui;
 
-import com.tlglearning.gui.button.CommandButton;
+import com.tlglearning.gui.compassaction.Compass;
+import com.tlglearning.gui.interactwarehouse.actionWarehouse;
 import com.tlglearning.middleware.commandGateObject;
 import javax.swing.*;
 import javax.swing.text.SimpleAttributeSet;
@@ -8,12 +9,17 @@ import javax.swing.text.StyleConstants;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+
+import static com.tlglearning.gui.compassaction.Compass.getPanel;
+
+
 public class MainWindow {
 
     private static final JTextArea P1 = new JTextArea(6, 94);
     private static final JTextArea P2 = new JTextArea();
     private static final ColorPane P3 = new ColorPane();
     private static final JTextArea P4 = new JTextArea();
+
     // commandTextField is the user input area to be sent to application after button.
     private static final JTextField commandTextField = new JTextField(10);
     private static final JPanel BUTTON_ACTION_CONTAINER = new JPanel(new BorderLayout());
@@ -31,8 +37,8 @@ public class MainWindow {
 
     public MainWindow() {
         initialize();
-
     }
+
 
 /**
  * CLASS METHODS BELOW ------------------------------------------------------------------------------------------------|
@@ -56,7 +62,7 @@ public class MainWindow {
         APP_CONTAINER.setLayout(new BorderLayout(0, 0));
         APP_CONTAINER.setTitle("Transporter");
         APP_CONTAINER.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        //APP_CONTAINER.setSize(1500, 1500);
+        APP_CONTAINER.setSize(1500, 1500);
         APP_CONTAINER.setExtendedState(JFrame.MAXIMIZED_BOTH);
         APP_CONTAINER.setResizable(true);
         APP_CONTAINER.setLocationRelativeTo(null);
@@ -122,14 +128,7 @@ public class MainWindow {
         PROMPT_CONTAINER.add(P3);
         PROMPT_CONTAINER.add(commandTextField);
 
-        BUTTON_GO_CONTAINER.add((new CommandButton(this, "N","Go North")).getButton(),BorderLayout.NORTH);
-        BUTTON_GO_CONTAINER.add((new CommandButton(this, "S","Go South")).getButton(),BorderLayout.SOUTH);
         BUTTON_GO_CONTAINER.add(commandTextField, BorderLayout.CENTER);
-        BUTTON_GO_CONTAINER.add((new CommandButton(this, "E","Go East")).getButton(),BorderLayout.EAST);
-        BUTTON_GO_CONTAINER.add((new CommandButton(this, "W","Go West")).getButton(),BorderLayout.WEST);
-
-        BUTTON_ACTION_CONTAINER.add((new CommandButton(this, "EXPLORE","Explore")).getButton(),BorderLayout.WEST);
-        BUTTON_ACTION_CONTAINER.add((new CommandButton(this, "Get","Get")).getButton(),BorderLayout.EAST);
 
         PROMPT_CONTAINER.add(BUTTON_GO_CONTAINER,BorderLayout.NORTH);
         PROMPT_CONTAINER.add(BUTTON_ACTION_CONTAINER,BorderLayout.SOUTH);
@@ -140,9 +139,17 @@ public class MainWindow {
         APP_CONTAINER.add(PROMPT_CONTAINER, BorderLayout.SOUTH);
         mapPanelLabel.setIcon(MapImageIcon);
         MAP_CONTAINER.add(mapPanelLabel, gbc);
+//        APP_CONTAINER.setResizable();
+//        APP_CONTAINER.add(actionWarehouse.getPanel());
+
+
+
+      BUTTON_ACTION_CONTAINER.add(Compass.getPanel());
+//        APP_CONTAINER.add(actionWarehouse.getPanel());
 
         /* Setting GUI visibility */
         show();
+
     }
 
 
@@ -240,8 +247,9 @@ public class MainWindow {
         sleep();
     }
 
-
     public void setPhotoToMapPanel(String key)  {
+
+
         if (P4.getText().length() == 0){
             // Set to editable
             P2.setEditable(true);
@@ -289,6 +297,10 @@ public class MainWindow {
         } catch (InterruptedException e) {
             System.out.println("An Exception occurred: " + e);
         }
+    }
+
+    public static JPanel getActionButtonContainer(){
+        return  BUTTON_ACTION_CONTAINER;
     }
 
     public void wipe() {
