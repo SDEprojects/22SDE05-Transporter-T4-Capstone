@@ -1,4 +1,4 @@
-package com.tlglearning.gui.button;
+package com.tlglearning.gui.compassaction;
 
 import javax.swing.*;
 import java.awt.*;
@@ -32,11 +32,13 @@ public class Compass {
         compass[5].setDescription("Go East");
         compass[7].setDescription("Go South");
         //tile2_ACTIVE
+
         for (int i = 2; i < 9; i+=2) {
             int name = i;
             compass_Active[counter1] = new ImageIcon(classloader.getResource("photos/buttons/"+name+"_ACTIVE.png"));
             counter1++;
         }
+        compass[4]= new ImageIcon(classloader.getResource("photos/buttons/compass.png"));
 
         for (int i = 0; i < compass.length; i++) {
             if (i % 2 == 0) {

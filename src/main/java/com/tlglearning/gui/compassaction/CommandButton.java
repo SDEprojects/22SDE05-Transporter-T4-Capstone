@@ -1,17 +1,5 @@
-package com.tlglearning.gui.button;
+package com.tlglearning.gui.compassaction;
 
-
-import com.tlglearning.gui.MainWindow;
-import com.tlglearning.middleware.commandGateObject;
-import com.tlglearning.util.Location;
-
-import javax.swing.*;
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
-import static com.tlglearning.gui.button.Compass.getPanel;
 
 /**
  * CommandButton Generates buttons with a event actionlistener that sends

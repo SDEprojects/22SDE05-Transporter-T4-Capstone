@@ -1,9 +1,7 @@
 package com.tlglearning.middleware;
 
 import com.sun.tools.javac.Main;
-import com.tlglearning.gui.MainWindow;
-import com.tlglearning.gui.button.ButtonListener;
-import com.tlglearning.gui.button.CommandButton;
+import com.tlglearning.gui.compassaction.ButtonListener;
 import com.tlglearning.util.Location;
 import org.yaml.snakeyaml.Yaml;
 
@@ -14,7 +12,7 @@ import java.util.List;
 
 import static com.tlglearning.client.TransporterClient.mainWindow;
 //import static com.tlglearning.gui.button.CommandButton.addGetExploreBTN;
-import static com.tlglearning.gui.button.Compass.getPanel;
+
 //import static com.tlglearning.gui.button.CommandButton.addGetExploreBTN;
 
 /*

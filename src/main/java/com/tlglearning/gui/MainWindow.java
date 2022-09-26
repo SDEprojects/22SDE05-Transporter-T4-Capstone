@@ -1,5 +1,7 @@
 package com.tlglearning.gui;
 
+import com.tlglearning.gui.compassaction.Compass;
+import com.tlglearning.gui.interactwarehouse.actionWarehouse;
 import com.tlglearning.middleware.commandGateObject;
 import javax.swing.*;
 import javax.swing.text.SimpleAttributeSet;
@@ -8,6 +10,8 @@ import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import static com.tlglearning.gui.button.Compass.getPanel;
+import static com.tlglearning.gui.compassaction.Compass.getPanel;
+
 
 public class MainWindow {
 
@@ -58,7 +62,7 @@ public class MainWindow {
         APP_CONTAINER.setLayout(new BorderLayout(0, 0));
         APP_CONTAINER.setTitle("Transporter");
         APP_CONTAINER.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        //APP_CONTAINER.setSize(1500, 1500);
+        APP_CONTAINER.setSize(1500, 1500);
         APP_CONTAINER.setExtendedState(JFrame.MAXIMIZED_BOTH);
         APP_CONTAINER.setResizable(true);
         APP_CONTAINER.setLocationRelativeTo(null);
@@ -142,7 +146,11 @@ public class MainWindow {
         APP_CONTAINER.add(PROMPT_CONTAINER, BorderLayout.SOUTH);
         mapPanelLabel.setIcon(MapImageIcon);
         MAP_CONTAINER.add(mapPanelLabel, gbc);
-        BUTTON_ACTION_CONTAINER.add(getPanel());
+//        APP_CONTAINER.setResizable();
+//        APP_CONTAINER.add(actionWarehouse.getPanel());
+
+
+      BUTTON_ACTION_CONTAINER.add(Compass.getPanel());
 
         /* Setting GUI visibility */
         show();
