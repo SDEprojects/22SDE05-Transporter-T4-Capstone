@@ -9,7 +9,7 @@ import javax.swing.text.StyleConstants;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import static com.tlglearning.gui.button.Compass.getPanel;
+
 import static com.tlglearning.gui.compassaction.Compass.getPanel;
 
 
@@ -140,10 +140,11 @@ public class MainWindow {
         mapPanelLabel.setIcon(MapImageIcon);
         MAP_CONTAINER.add(mapPanelLabel, gbc);
 //        APP_CONTAINER.setResizable();
+        APP_CONTAINER.add(actionWarehouse.getPanel());
 
 
 
-      BUTTON_ACTION_CONTAINER.add(Compass.getPanel());
+//      BUTTON_ACTION_CONTAINER.add(Compass.getPanel());
 //        APP_CONTAINER.add(actionWarehouse.getPanel());
 
         /* Setting GUI visibility */
