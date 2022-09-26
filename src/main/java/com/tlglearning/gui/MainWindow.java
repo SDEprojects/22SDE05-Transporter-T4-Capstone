@@ -9,8 +9,9 @@ import javax.swing.text.StyleConstants;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-
+import static com.tlglearning.gui.button.Compass.getPanel;
 import static com.tlglearning.gui.compassaction.Compass.getPanel;
+
 
 public class MainWindow {
 
@@ -18,6 +19,7 @@ public class MainWindow {
     private static final JTextArea P2 = new JTextArea();
     private static final ColorPane P3 = new ColorPane();
     private static final JTextArea P4 = new JTextArea();
+
     // commandTextField is the user input area to be sent to application after button.
     private static final JTextField commandTextField = new JTextField(10);
     private static final JPanel BUTTON_ACTION_CONTAINER = new JPanel(new BorderLayout());
@@ -36,6 +38,7 @@ public class MainWindow {
     public MainWindow() {
         initialize();
     }
+
 
 /**
  * CLASS METHODS BELOW ------------------------------------------------------------------------------------------------|
@@ -145,6 +148,7 @@ public class MainWindow {
 
         /* Setting GUI visibility */
         show();
+
     }
 
 
@@ -241,7 +245,6 @@ public class MainWindow {
         P2.setText(null);
         sleep();
     }
-
 
     public void setPhotoToMapPanel(String key)  {
 
