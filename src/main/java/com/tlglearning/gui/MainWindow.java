@@ -144,7 +144,7 @@ public class MainWindow {
 
 
 
-//      BUTTON_ACTION_CONTAINER.add(Compass.getPanel());
+      BUTTON_ACTION_CONTAINER.add(Compass.getPanel());
 //        APP_CONTAINER.add(actionWarehouse.getPanel());
 
         /* Setting GUI visibility */
