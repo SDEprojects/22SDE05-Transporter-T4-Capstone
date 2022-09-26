@@ -140,7 +140,7 @@ public class MainWindow {
         mapPanelLabel.setIcon(MapImageIcon);
         MAP_CONTAINER.add(mapPanelLabel, gbc);
 //        APP_CONTAINER.setResizable();
-        APP_CONTAINER.add(actionWarehouse.getPanel());
+//        APP_CONTAINER.add(actionWarehouse.getPanel());
 
 
 
