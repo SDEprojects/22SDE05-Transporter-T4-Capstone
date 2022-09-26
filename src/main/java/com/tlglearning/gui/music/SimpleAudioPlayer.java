@@ -2,8 +2,12 @@ package com.tlglearning.gui.music;
 
 // Java program to play an Audio
 // file using Clip Object
+import org.w3c.dom.ls.LSOutput;
+
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import javax.sound.sampled.AudioInputStream;
@@ -12,8 +16,9 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
-public class SimpleAudioPlayer
-{
+public class SimpleAudioPlayer {
+
+    ArrayList<String>  radioSongs = new ArrayList<>();
 
     // to store current position
     Long currentFrame;
@@ -23,7 +28,7 @@ public class SimpleAudioPlayer
     String status;
 
     AudioInputStream audioInputStream;
-    static String filePath = "music/BlueBoyAdventure.wav";
+    static String filePath = "music/easyonme.wav";
 
     // constructor to initialize streams and clip
     public SimpleAudioPlayer()
@@ -34,7 +39,7 @@ public class SimpleAudioPlayer
 
         // create AudioInputStream object
         audioInputStream =
-                AudioSystem.getAudioInputStream(new File(classloader.getResource("music/BlueBoyAdventure.wav").getFile()));
+                AudioSystem.getAudioInputStream(new File(classloader.getResource("music/easyonme.wav").getFile()));
 
         // create clip reference
         clip = AudioSystem.getClip();
@@ -45,11 +50,11 @@ public class SimpleAudioPlayer
         clip.loop(Clip.LOOP_CONTINUOUSLY);
     }
 
-    public static void mains()  /** OLD MAIN METHOD HERE **//** OLD MAIN METHOD HERE **//** OLD MAIN METHOD HERE **//** OLD MAIN METHOD HERE **//** OLD MAIN METHOD HERE **//** OLD MAIN METHOD HERE **/
+    public static void main(String[] args)  /** OLD MAIN METHOD HERE **//** OLD MAIN METHOD HERE **//** OLD MAIN METHOD HERE **//** OLD MAIN METHOD HERE **//** OLD MAIN METHOD HERE **//** OLD MAIN METHOD HERE **/
     {
         try
         {
-            filePath = "/resources/music/OnTheRoadAgain.mp3";
+            filePath = "music/easyonme.wav";
             SimpleAudioPlayer audioPlayer =
                     new SimpleAudioPlayer();
 
@@ -193,6 +198,13 @@ public class SimpleAudioPlayer
                 new File(filePath).getAbsoluteFile());
         clip.open(audioInputStream);
         clip.loop(Clip.LOOP_CONTINUOUSLY);
+
+
+        radioSongs.add("easyonme.wav");
+        radioSongs.add("gocrazy.wav");
+        radioSongs.add("hittheroadjack.wav");
+        radioSongs.add("hotelcalifornia.wav");
+        radioSongs.add("OnTheRoadAgain.wav");
     }
 
 }

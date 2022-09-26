@@ -15,6 +15,7 @@ public class MainWindow {
     private static final JTextArea P2 = new JTextArea();
     private static final ColorPane P3 = new ColorPane();
     private static final JTextArea P4 = new JTextArea();
+
     // commandTextField is the user input area to be sent to application after button.
     private static final JTextField commandTextField = new JTextField(10);
     private static final JPanel BUTTON_ACTION_CONTAINER = new JPanel(new BorderLayout());
@@ -131,7 +132,7 @@ public class MainWindow {
 
 //        BUTTON_ACTION_CONTAINER.add((new CommandButton(this, "EXPLORE","Explore")).getButton(),BorderLayout.WEST);
 //        BUTTON_ACTION_CONTAINER.add((new CommandButton(this, "Get","Get")).getButton(),BorderLayout.EAST);
-//
+
         PROMPT_CONTAINER.add(BUTTON_GO_CONTAINER,BorderLayout.NORTH);
         PROMPT_CONTAINER.add(BUTTON_ACTION_CONTAINER,BorderLayout.SOUTH);
 
@@ -146,7 +147,7 @@ public class MainWindow {
         /* Setting GUI visibility */
         show();
 
-        }
+    }
 
 
 /**
