@@ -1,9 +1,10 @@
-package com.tlglearning.gui.button;
+package com.tlglearning.gui.compassaction;
 
 import com.tlglearning.middleware.commandGateObject;
 import com.tlglearning.util.Location;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -11,6 +12,8 @@ import java.util.HashMap;
 import java.util.List;
 
 import static com.tlglearning.client.TransporterClient.mainWindow;
+//
+//import static com.tlglearning.client.TransporterClient.mainWindow;
 
 public class ButtonListener implements MouseListener {
     int tile;
@@ -70,7 +73,6 @@ public class ButtonListener implements MouseListener {
     @Override
     public void mouseReleased(MouseEvent e) {
 
-
         label.setIcon(inactive);
         mainWindow.wipe();
         // create String for the label
@@ -96,6 +98,7 @@ public class ButtonListener implements MouseListener {
 
 
         label.setIcon(active);
+        label.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
     }
 

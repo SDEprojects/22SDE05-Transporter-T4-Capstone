@@ -1,5 +1,6 @@
 [{
   "warehouse": {
+
     "logbook": "The logbook has all of your trucks log hours in it",
     "key": "Key to the cabinet, closet, and locker"
   },

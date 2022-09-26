@@ -9,8 +9,6 @@ import javax.swing.*;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 
-import static com.tlglearning.gui.button.Compass.getPanel;
-
 public class TransporterClient {
     public static MainWindow mainWindow;
 
@@ -41,4 +39,9 @@ public class TransporterClient {
         }
 
     }
+
+
+
+
+
 }

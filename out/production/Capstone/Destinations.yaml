@@ -43,9 +43,9 @@ warehouse:
   east: boss office
   west: truck
   explore:
-     cabinet: You see a LOGBOOK
-     closet: Closet is empty
-     desk: You see a KEY (type 'get key' to add it to your inventory)
+     explore cabinet: You see a LOGBOOK
+     explore closet: Closet is empty
+     explore desk: You see a KEY (type 'get key' to add it to your inventory)
   get:
      GETlogbook: The logbook has all of your trucks log hours in it,
      GETkey: Key to the cabinet, closet, and locker
