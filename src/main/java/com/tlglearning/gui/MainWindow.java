@@ -2,19 +2,15 @@ package com.tlglearning.gui;
 
 import com.tlglearning.gui.compassaction.Compass;
 import com.tlglearning.gui.interactwarehouse.actionWarehouse;
-import com.tlglearning.gui.music.SimpleAudioPlayer;
-import com.tlglearning.gui.music.actionRadio;
 import com.tlglearning.middleware.commandGateObject;
-
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.io.IOException;
+
+import static com.tlglearning.gui.compassaction.Compass.getPanel;
 
 
 public class MainWindow {
@@ -39,7 +35,7 @@ public class MainWindow {
     private static ImageIcon MapImageIcon;
     static JLabel mapPanelLabel = new JLabel();
 
-    public MainWindow() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+    public MainWindow() {
         initialize();
     }
 
@@ -60,7 +56,7 @@ public class MainWindow {
     /**
      * initialize() - setup and customize main gui panels & elements
      */
-    public void initialize() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+    public void initialize() {
 
         /* Create a main window panel and set attributes. */
         APP_CONTAINER.setLayout(new BorderLayout(0, 0));
@@ -132,14 +128,7 @@ public class MainWindow {
         PROMPT_CONTAINER.add(P3);
         PROMPT_CONTAINER.add(commandTextField);
 
-//        BUTTON_GO_CONTAINER.add((new CommandButton(this, "N","Go North")).getButton(),BorderLayout.NORTH);
-//        BUTTON_GO_CONTAINER.add((new CommandButton(this, "S","Go South")).getButton(),BorderLayout.SOUTH);
         BUTTON_GO_CONTAINER.add(commandTextField, BorderLayout.CENTER);
-//        BUTTON_GO_CONTAINER.add((new CommandButton(this, "E","Go East")).getButton(),BorderLayout.EAST);
-//        BUTTON_GO_CONTAINER.add((new CommandButton(this, "W","Go West")).getButton(),BorderLayout.WEST);
-
-//        BUTTON_ACTION_CONTAINER.add((new CommandButton(this, "EXPLORE","Explore")).getButton(),BorderLayout.WEST);
-//        BUTTON_ACTION_CONTAINER.add((new CommandButton(this, "Get","Get")).getButton(),BorderLayout.EAST);
 
         PROMPT_CONTAINER.add(BUTTON_GO_CONTAINER,BorderLayout.NORTH);
         PROMPT_CONTAINER.add(BUTTON_ACTION_CONTAINER,BorderLayout.SOUTH);
@@ -148,14 +137,15 @@ public class MainWindow {
         APP_CONTAINER.add(TITLE_CONTAINER, BorderLayout.NORTH);
         APP_CONTAINER.add(MAP_CONTAINER, BorderLayout.CENTER);
         APP_CONTAINER.add(PROMPT_CONTAINER, BorderLayout.SOUTH);
-        APP_CONTAINER.add(actionRadio.getPanel()); //TODO: I added this earlier
         mapPanelLabel.setIcon(MapImageIcon);
         MAP_CONTAINER.add(mapPanelLabel, gbc);
 //        APP_CONTAINER.setResizable();
 //        APP_CONTAINER.add(actionWarehouse.getPanel());
 
 
+
       BUTTON_ACTION_CONTAINER.add(Compass.getPanel());
+//        APP_CONTAINER.add(actionWarehouse.getPanel());
 
         /* Setting GUI visibility */
         show();
@@ -258,6 +248,8 @@ public class MainWindow {
     }
 
     public void setPhotoToMapPanel(String key)  {
+
+
         if (P4.getText().length() == 0){
             // Set to editable
             P2.setEditable(true);
