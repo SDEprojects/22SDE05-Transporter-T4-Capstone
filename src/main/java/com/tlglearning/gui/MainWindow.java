@@ -149,7 +149,6 @@ public class MainWindow {
         APP_CONTAINER.add(MAP_CONTAINER, BorderLayout.CENTER);
         APP_CONTAINER.add(PROMPT_CONTAINER, BorderLayout.SOUTH);
         APP_CONTAINER.add(actionRadio.getPanel()); //TODO: I added this earlier
-        //APP_CONTAINER.add(SimpleAudioPlayer.BUTTONS_CONTAINER); //TODO: I just added this
         mapPanelLabel.setIcon(MapImageIcon);
         MAP_CONTAINER.add(mapPanelLabel, gbc);
 //        APP_CONTAINER.setResizable();

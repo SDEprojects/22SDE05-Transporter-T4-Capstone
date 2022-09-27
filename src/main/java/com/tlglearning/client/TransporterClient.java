@@ -51,7 +51,5 @@ public class TransporterClient {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        SimpleAudioPlayer.radioPlayer();
     }
-
 }
