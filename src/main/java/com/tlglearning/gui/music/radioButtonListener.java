@@ -13,19 +13,9 @@ import java.util.HashMap;
 //import static com.tlglearning.client.TransporterClient.mainWindow;
 
 public class radioButtonListener implements MouseListener {
-    SimpleAudioPlayer audioPlayer = new SimpleAudioPlayer();
+//    SimpleAudioPlayer audioPlayer = new SimpleAudioPlayer();
     Clip clip;
-    {
-        try {
-            audioPlayer = new SimpleAudioPlayer();
-        } catch (UnsupportedAudioFileException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (LineUnavailableException e) {
-            throw new RuntimeException(e);
-        }
-    }
+
 
     int tile;
 
@@ -34,12 +24,14 @@ public class radioButtonListener implements MouseListener {
     ImageIcon orginalIcon;
     ImageIcon showItemIcon;
     JButton button;
+    static SimpleAudioPlayer audioPlayer;
 
 
     static HashMap<String, Object> DestinationsMap;
 
 
     public radioButtonListener(JButton button,ImageIcon orginal, ImageIcon showItem) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+
         this.orginalIcon=orginal;
         this.showItemIcon=showItem;
         button.setIcon(orginal);
@@ -54,17 +46,25 @@ public class radioButtonListener implements MouseListener {
 
     }
 
+    public static void setUpRadio() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+        audioPlayer =
+                new SimpleAudioPlayer();
+
+    }
+
     @Override
     public void mouseClicked(MouseEvent e) {
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
+
+
         if(button.getIcon().equals(orginalIcon)){
-            audioPlayer.play();
+            audioPlayer.clip.start();
             button.setIcon(showItemIcon);
         } else{
-            audioPlayer.stop();
+            audioPlayer.clip.stop();
             button.setIcon(orginalIcon);
         }
     }

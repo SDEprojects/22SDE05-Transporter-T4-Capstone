@@ -51,7 +51,7 @@ public abstract class RadioButtons extends JFrame implements MouseListener {
         playButton = new JButton();
         playButton.setOpaque(true);
         playButton.setBounds(200, 100, 75, 50);
-        playButton.addActionListener(e -> SimpleAudioPlayer.radioPlayer());
+//        playButton.addActionListener(e -> SimpleAudioPlayer.radioPlayer());
         playButton.setText("PLAY");
         playButton.setFocusable(false);
         playButton.setIcon(icon2);

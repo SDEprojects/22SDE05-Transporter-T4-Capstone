@@ -32,7 +32,7 @@ public class PlayButton extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == playButton) {
-            SimpleAudioPlayer.radioPlayer();
+//            SimpleAudioPlayer.radioPlayer();
         }
     }
 

@@ -14,7 +14,17 @@ public class actionRadio extends JFrame {
 
     static int layerPaneHeight = 400;
 
+
+
+    public actionRadio() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+//       audioPlayer =
+//                new SimpleAudioPlayer();
+    }
+
     public static JLayeredPane getPanel() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+        radioButtonListener.setUpRadio();
+
+
 
         JLayeredPane layeredPane = new JLayeredPane();
 
@@ -30,6 +40,7 @@ public class actionRadio extends JFrame {
 
         Image orginalImage = new ImageIcon(classloader.getResource("photos/changeStation.png")).getImage().getScaledInstance(layerPaneWidth, layerPaneHeight, Image.SCALE_DEFAULT);
         ImageIcon orginalIcon=new ImageIcon(orginalImage);
+        orginalIcon.setDescription("changeStation");
 
         JLabel wareJLabel = new JLabel(orginalIcon);
 
