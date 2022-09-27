@@ -2,15 +2,19 @@ package com.tlglearning.gui;
 
 import com.tlglearning.gui.compassaction.Compass;
 import com.tlglearning.gui.interactwarehouse.actionWarehouse;
+import com.tlglearning.gui.music.SimpleAudioPlayer;
+import com.tlglearning.gui.music.actionRadio;
 import com.tlglearning.middleware.commandGateObject;
+
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import static com.tlglearning.gui.button.Compass.getPanel;
-import static com.tlglearning.gui.compassaction.Compass.getPanel;
+import java.io.IOException;
 
 
 public class MainWindow {
@@ -35,7 +39,7 @@ public class MainWindow {
     private static ImageIcon MapImageIcon;
     static JLabel mapPanelLabel = new JLabel();
 
-    public MainWindow() {
+    public MainWindow() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         initialize();
     }
 
@@ -56,7 +60,7 @@ public class MainWindow {
     /**
      * initialize() - setup and customize main gui panels & elements
      */
-    public void initialize() {
+    public void initialize() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
 
         /* Create a main window panel and set attributes. */
         APP_CONTAINER.setLayout(new BorderLayout(0, 0));
@@ -144,6 +148,8 @@ public class MainWindow {
         APP_CONTAINER.add(TITLE_CONTAINER, BorderLayout.NORTH);
         APP_CONTAINER.add(MAP_CONTAINER, BorderLayout.CENTER);
         APP_CONTAINER.add(PROMPT_CONTAINER, BorderLayout.SOUTH);
+        APP_CONTAINER.add(actionRadio.getPanel()); //TODO: I added this earlier
+        //APP_CONTAINER.add(SimpleAudioPlayer.BUTTONS_CONTAINER); //TODO: I just added this
         mapPanelLabel.setIcon(MapImageIcon);
         MAP_CONTAINER.add(mapPanelLabel, gbc);
 //        APP_CONTAINER.setResizable();

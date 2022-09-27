@@ -2,21 +2,24 @@ package com.tlglearning.gui.music;
 
 // Java program to play an Audio
 // file using Clip Object
-import org.w3c.dom.ls.LSOutput;
 
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.sound.sampled.*;
+import javax.swing.*;
 
 public class SimpleAudioPlayer {
+
+
+    JButton stopButton;
+    JButton playButton;
+    JButton pauseButton;
+    public static final JFrame RADIO_CONTAINER = new JFrame();
+    public static final JPanel BUTTONS_CONTAINER = new JPanel();
 
     ArrayList<String>  radioSongs = new ArrayList<>();
 
@@ -28,7 +31,7 @@ public class SimpleAudioPlayer {
     String status;
 
     AudioInputStream audioInputStream;
-    static String filePath = "music/easyonme.wav";
+    static String filePath = "music/hittheroadjack.wav";
 
     // constructor to initialize streams and clip
     public SimpleAudioPlayer()
@@ -39,7 +42,7 @@ public class SimpleAudioPlayer {
 
         // create AudioInputStream object
         audioInputStream =
-                AudioSystem.getAudioInputStream(new File(classloader.getResource("music/easyonme.wav").getFile()));
+                AudioSystem.getAudioInputStream(new File(classloader.getResource("music/hittheroadjack.wav").getFile()));
 
         // create clip reference
         clip = AudioSystem.getClip();
@@ -50,11 +53,11 @@ public class SimpleAudioPlayer {
         clip.loop(Clip.LOOP_CONTINUOUSLY);
     }
 
-    public static void main(String[] args)  /** OLD MAIN METHOD HERE **//** OLD MAIN METHOD HERE **//** OLD MAIN METHOD HERE **//** OLD MAIN METHOD HERE **//** OLD MAIN METHOD HERE **//** OLD MAIN METHOD HERE **/
+    public static void radioPlayer()  /** OLD MAIN METHOD HERE **//** OLD MAIN METHOD HERE **//** OLD MAIN METHOD HERE **//** OLD MAIN METHOD HERE **//** OLD MAIN METHOD HERE **//** OLD MAIN METHOD HERE **/
     {
         try
         {
-            filePath = "music/easyonme.wav";
+            filePath = "hittheroadjack.wav";
             SimpleAudioPlayer audioPlayer =
                     new SimpleAudioPlayer();
 
@@ -63,14 +66,15 @@ public class SimpleAudioPlayer {
 
             while (true)
             {
-                System.out.println("1. pause");
-                System.out.println("2. resume");
-                System.out.println("3. restart");
-                System.out.println("4. stop");
-                System.out.println("5. Jump to specific time");
+                System.out.println("1. play");
+                System.out.println("2. pause");
+                System.out.println("3. stop");
+                System.out.println("4. volUp");
+                System.out.println("5. volDown");
+                System.out.println("6. changeStation");
                 int c = sc.nextInt();
                 audioPlayer.gotoChoice(c);
-                if (c == 4)
+                if (c == 3)
                     break;
             }
             sc.close();
@@ -92,41 +96,79 @@ public class SimpleAudioPlayer {
         switch (c)
         {
             case 1:
-                pause();
+                play();
                 break;
             case 2:
-                resumeAudio();
+                pause();
                 break;
             case 3:
-                restart();
-                break;
-            case 4:
                 stop();
                 break;
-            case 5:
-                System.out.println("Enter time (" + 0 +
-                        ", " + clip.getMicrosecondLength() + ")");
-                Scanner sc = new Scanner(System.in);
-                long c1 = sc.nextLong();
-                jump(c1);
-                break;
-
+//            case 4:
+//                volUp();
+//                break;
+//            case 5:
+//                volDown();
+//            case 6:
+//                changeStation();
+//                break;
         }
-
     }
 
     // Method to play the audio
-    public void play()
-    {
+    public void play() {
+
+        //PLAY BUTTON
+        ImageIcon icon2 = new ImageIcon("photos/play.png");
+        playButton = new JButton();
+        playButton.setOpaque(true);
+        playButton.setBounds(200, 100, 75, 50);
+        playButton.addActionListener(e -> SimpleAudioPlayer.radioPlayer());
+        playButton.setText("PLAY");
+        playButton.setFocusable(false);
+        playButton.setIcon(icon2);
+        playButton.setForeground(Color.white);
+        playButton.setBackground(Color.green);
+        RADIO_CONTAINER.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        RADIO_CONTAINER.setLayout(null);
+        RADIO_CONTAINER.setSize(500,500);
+        RADIO_CONTAINER.add(playButton);
+        RADIO_CONTAINER.setVisible(true);
+
         //start the clip
         clip.start();
-
         status = "play";
     }
 
     // Method to pause the audio
-    public void pause()
-    {
+    public void pause() {
+
+        //PAUSE BUTTON
+        ImageIcon icon3 = new ImageIcon("photos/pause.png");
+        pauseButton = new JButton();
+        pauseButton.setOpaque(true);
+        pauseButton.setBounds(200, 100, 75, 50);
+        pauseButton.addActionListener(e -> clip.stop());
+        pauseButton.setText("pause");
+        pauseButton.setFocusable(false);
+        pauseButton.setIcon(icon3);
+        pauseButton.setForeground(Color.white);
+        pauseButton.setBackground(Color.blue);
+        RADIO_CONTAINER.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        RADIO_CONTAINER.setLayout(null);
+        RADIO_CONTAINER.setSize(500, 500);
+        RADIO_CONTAINER.add(pauseButton);
+        RADIO_CONTAINER.setVisible(true);
+        RADIO_CONTAINER.setSize(700, 700);
+        RADIO_CONTAINER.setVisible(true);
+        RADIO_CONTAINER.add(BUTTONS_CONTAINER);
+        BUTTONS_CONTAINER.add(stopButton);
+        BUTTONS_CONTAINER.add(playButton);
+        BUTTONS_CONTAINER.add(pauseButton);
+        BUTTONS_CONTAINER.setVisible(true);
+
+
+
         if (status.equals("paused"))
         {
             System.out.println("audio is already paused");
@@ -138,74 +180,31 @@ public class SimpleAudioPlayer {
         status = "paused";
     }
 
-    // Method to resume the audio
-    public void resumeAudio() throws UnsupportedAudioFileException,
-            IOException, LineUnavailableException
-    {
-        if (status.equals("play"))
-        {
-            System.out.println("Audio is already "+
-                    "being played");
-            return;
-        }
-        clip.close();
-        resetAudioStream();
-        clip.setMicrosecondPosition(currentFrame);
-        this.play();
-    }
-
-    // Method to restart the audio
-    public void restart() throws IOException, LineUnavailableException,
-            UnsupportedAudioFileException
-    {
-        clip.stop();
-        clip.close();
-        resetAudioStream();
-        currentFrame = 0L;
-        clip.setMicrosecondPosition(0);
-        this.play();
-    }
-
     // Method to stop the audio
-    public void stop() throws UnsupportedAudioFileException,
-            IOException, LineUnavailableException
-    {
+    public void stop() {
+
+        Scanner sc = new Scanner(System.in);
+        ImageIcon icon = new ImageIcon("photos/stop.png");
+        stopButton = new JButton();
+        stopButton.setOpaque(true);
+        stopButton.setBounds(200, 100, 75, 50);
+        stopButton.addActionListener(e -> sc.close());
+        stopButton.setText("STOP");
+        stopButton.setFocusable(false);
+        stopButton.setIcon(icon);
+        stopButton.setForeground(Color.black);
+        stopButton.setBackground(Color.red);
+        RADIO_CONTAINER.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        RADIO_CONTAINER.setLayout(null);
+        RADIO_CONTAINER.setSize(500, 500);
+        RADIO_CONTAINER.add(stopButton);
+        RADIO_CONTAINER.setVisible(true);
         currentFrame = 0L;
+
         clip.stop();
         clip.close();
     }
-
-    // Method to jump over a specific part
-    public void jump(long c) throws UnsupportedAudioFileException, IOException,
-            LineUnavailableException
-    {
-        if (c > 0 && c < clip.getMicrosecondLength())
-        {
-            clip.stop();
-            clip.close();
-            resetAudioStream();
-            currentFrame = c;
-            clip.setMicrosecondPosition(c);
-            this.play();
-        }
-    }
-
-    // Method to reset audio stream
-    public void resetAudioStream() throws UnsupportedAudioFileException, IOException,
-            LineUnavailableException
-    {
-        audioInputStream = AudioSystem.getAudioInputStream(
-                new File(filePath).getAbsoluteFile());
-        clip.open(audioInputStream);
-        clip.loop(Clip.LOOP_CONTINUOUSLY);
-
-
-        radioSongs.add("easyonme.wav");
-        radioSongs.add("gocrazy.wav");
-        radioSongs.add("hittheroadjack.wav");
-        radioSongs.add("hotelcalifornia.wav");
-        radioSongs.add("OnTheRoadAgain.wav");
-    }
-
 }
+
+
 

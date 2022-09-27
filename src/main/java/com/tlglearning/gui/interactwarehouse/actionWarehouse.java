@@ -22,6 +22,7 @@ public class actionWarehouse extends JFrame {
 
         // Retrieves image crop
         JButton buttonCabinet = setActionButton(35, 90, 0, 0, "0", "1");
+        JButton playButton = setActionButton(35, 90, 0, 0, "0", "1");
 
         Image orginalImage = new ImageIcon(classloader.getResource("photos/actionwarehouse/0.png")).getImage().getScaledInstance(layerPaneWidth, layerPaneHeight, Image.SCALE_DEFAULT);
         ImageIcon orginalIcon=new ImageIcon(orginalImage);
@@ -33,11 +34,13 @@ public class actionWarehouse extends JFrame {
 
         // Shift labels towards center of display.
         wareJLabel.setLocation(680,20);
-        buttonCabinet.setLocation(680,20);
+        playButton.setLocation(680,20);
+
+
         layeredPane.add(wareJLabel, 1);
-        layeredPane.add(buttonCabinet, 0);
+        layeredPane.add(playButton, 0);
         layeredPane.setOpaque(true);
-//        layeredPane.setBackground(Color.BLACK);
+//      layeredPane.setBackground(Color.BLACK);
         layeredPane.setSize(1500,1500);
         return layeredPane;
     }
