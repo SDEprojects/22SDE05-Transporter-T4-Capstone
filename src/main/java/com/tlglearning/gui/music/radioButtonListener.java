@@ -12,8 +12,9 @@ import java.util.HashMap;
 
 //import static com.tlglearning.client.TransporterClient.mainWindow;
 
-public class radioButtonListener implements MouseListener {
-//    SimpleAudioPlayer audioPlayer = new SimpleAudioPlayer();
+public class radioButtonListener extends JFrame implements MouseListener {
+
+    //    SimpleAudioPlayer audioPlayer = new SimpleAudioPlayer();
     Clip clip;
 
 
@@ -24,25 +25,35 @@ public class radioButtonListener implements MouseListener {
     ImageIcon orginalIcon;
     ImageIcon showItemIcon;
     JButton button;
+
+    JButton playButton;
+
+    JButton stopButton;
+
+    JButton pauseButton;
     static SimpleAudioPlayer audioPlayer;
 
 
     static HashMap<String, Object> DestinationsMap;
 
 
-    public radioButtonListener(JButton button,ImageIcon orginal, ImageIcon showItem) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+    public radioButtonListener(JButton button, ImageIcon orginal, ImageIcon showItem) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
 
-        this.orginalIcon=orginal;
-        this.showItemIcon=showItem;
+        this.orginalIcon = orginal;
+        this.showItemIcon = showItem;
         button.setIcon(orginal);
 
-        this.button=button;
+        this.button = button;
 
         // Button display settings
         button.setBackground(Color.BLACK);
         button.setBorderPainted(false);
         button.setContentAreaFilled(false);
         button.setFocusPainted(false);
+
+        JButton playButton = new JButton("PLAY");
+        JButton stopButton = new JButton("STOP");
+        JButton pauseButton = new JButton("PAUSE");
 
     }
 

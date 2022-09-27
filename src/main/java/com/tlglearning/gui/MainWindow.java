@@ -2,6 +2,7 @@ package com.tlglearning.gui;
 
 import com.tlglearning.gui.compassaction.Compass;
 import com.tlglearning.gui.interactwarehouse.actionWarehouse;
+import com.tlglearning.gui.music.radioButtonListener;
 import com.tlglearning.middleware.commandGateObject;
 import javax.swing.*;
 import javax.swing.text.SimpleAttributeSet;
@@ -34,6 +35,12 @@ public class MainWindow {
     private static boolean gameStarted = false;
     private static ImageIcon MapImageIcon;
     static JLabel mapPanelLabel = new JLabel();
+
+    private Component radioButtonListener;
+
+    JButton playButton;
+    JButton stopButton;
+    JButton pauseButton;
 
     public MainWindow() {
         initialize();
@@ -144,8 +151,11 @@ public class MainWindow {
 
 
 
-      BUTTON_ACTION_CONTAINER.add(Compass.getPanel());
-//        APP_CONTAINER.add(actionWarehouse.getPanel());
+        BUTTON_ACTION_CONTAINER.add(Compass.getPanel());
+//        BUTTON_ACTION_CONTAINER.add(playButton);
+//        BUTTON_ACTION_CONTAINER.add(stopButton);
+//        BUTTON_ACTION_CONTAINER.add(pauseButton);
+//      APP_CONTAINER.add(actionWarehouse.getPanel());
 
         /* Setting GUI visibility */
         show();
@@ -153,11 +163,11 @@ public class MainWindow {
     }
 
 
-/**
- * (NOT GUI!!) FIELD SETTER METHODS BELOW  ----------------------------------------------------------------------------|
- * --------------------------------------------------------------------------------------------------------------------|
- * --------------------------------------------------------------------------------------------------------------------|
- */
+    /**
+     * (NOT GUI!!) FIELD SETTER METHODS BELOW  ----------------------------------------------------------------------------|
+     * --------------------------------------------------------------------------------------------------------------------|
+     * --------------------------------------------------------------------------------------------------------------------|
+     */
 
     public void setMapChars(String map) {
         this.map = map;
@@ -259,9 +269,9 @@ public class MainWindow {
             switch(key){
                 case "truck":
                     MapImageIcon = new ImageIcon(
-                        new ImageIcon(classloader.getResource("photos/"+key+".png"))
-                            .getImage()
-                            .getScaledInstance(900, 186, Image.SCALE_DEFAULT));
+                            new ImageIcon(classloader.getResource("photos/"+key+".png"))
+                                    .getImage()
+                                    .getScaledInstance(900, 186, Image.SCALE_DEFAULT));
                     break;
                 default:
                     MapImageIcon= new ImageIcon(classloader.getResource("photos/"+key+".png"));

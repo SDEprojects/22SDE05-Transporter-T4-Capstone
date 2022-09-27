@@ -24,7 +24,7 @@ public class PlayButton extends JFrame implements ActionListener {
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLayout(null);
-        this.setSize(500,500);
+        this.setSize(500, 500);
         this.add(playButton);
         this.setVisible(true);
     }
@@ -32,11 +32,8 @@ public class PlayButton extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == playButton) {
-//            SimpleAudioPlayer.radioPlayer();
+            SimpleAudioPlayer.radioPlayer();
         }
     }
 
-    public static void main (String[]args){
-        new PlayButton();
-    }
 }

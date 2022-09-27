@@ -59,8 +59,7 @@ public class SimpleAudioPlayer {
         try
         {
             filePath = "hittheroadjack.wav";
-            SimpleAudioPlayer audioPlayer =
-                    new SimpleAudioPlayer();
+            SimpleAudioPlayer audioPlayer = new SimpleAudioPlayer();
 
 //            audioPlayer.play();
 
@@ -207,6 +206,3 @@ public class SimpleAudioPlayer {
         clip.close();
     }
 }
-
-
-
