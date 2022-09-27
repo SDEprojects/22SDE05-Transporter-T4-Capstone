@@ -1,15 +1,17 @@
 package com.tlglearning.gui;
 
+import com.tlglearning.gui.compassaction.CommandButton;
 import com.tlglearning.gui.compassaction.Compass;
-import com.tlglearning.gui.interactwarehouse.actionWarehouse;
+//import com.tlglearning.gui.interactwarehouse.actionWarehouse;
 import com.tlglearning.middleware.commandGateObject;
 import javax.swing.*;
+import javax.swing.border.Border;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import static com.tlglearning.gui.button.Compass.getPanel;
+//import static com.tlglearning.gui.button.Compass.getPanel;
 import static com.tlglearning.gui.compassaction.Compass.getPanel;
 
 
@@ -31,6 +33,7 @@ public class MainWindow {
     private static final JPanel TITLE_CONTAINER = new JPanel();
     private static final JPanel MAP_CONTAINER = new JPanel();
     private static final JPanel PROMPT_CONTAINER = new JPanel();
+
     private static boolean gameStarted = false;
     private static ImageIcon MapImageIcon;
     static JLabel mapPanelLabel = new JLabel();
@@ -38,6 +41,10 @@ public class MainWindow {
     public MainWindow() {
         initialize();
     }
+    ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+    private static final PromptContainer promptContainer = new PromptContainer();
+    BaseLayer baseLayer;
+    Title title;
 
 
 /**
@@ -59,12 +66,11 @@ public class MainWindow {
     public void initialize() {
 
         /* Create a main window panel and set attributes. */
-        APP_CONTAINER.setLayout(new BorderLayout(0, 0));
+        APP_CONTAINER.setLayout(null);
         APP_CONTAINER.setTitle("Transporter");
         APP_CONTAINER.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        APP_CONTAINER.setSize(1500, 1500);
-        APP_CONTAINER.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        APP_CONTAINER.setResizable(true);
+        APP_CONTAINER.setSize(1220,715) ;
+        APP_CONTAINER.setResizable(false);
         APP_CONTAINER.setLocationRelativeTo(null);
 
         /* Element containers */
@@ -73,19 +79,23 @@ public class MainWindow {
         MAP_CONTAINER.setBackground(Color.BLACK);
         //MAP_CONTAINER.setSize(500, 500);
 
-        PROMPT_CONTAINER.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 5));
+        PROMPT_CONTAINER.setLayout(new BorderLayout(0,0));
         PROMPT_CONTAINER.setBackground(Color.BLACK);
-        //PROMPT_CONTAINER.setSize(600, 600);
+        PROMPT_CONTAINER.setMinimumSize(new Dimension(600, 200));
 
         TITLE_CONTAINER.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 5));
-        TITLE_CONTAINER.setBackground(Color.BLACK);
-        //TITLE_CONTAINER.setSize(400, 400);
+//        TITLE_CONTAINER.setBackground(Color.BLACK);
+        TITLE_CONTAINER.setOpaque(false);
+
+        TITLE_CONTAINER.setSize(new Dimension(1220, 187));
+        TITLE_CONTAINER.setPreferredSize(new Dimension(1220, 187));
+        TITLE_CONTAINER.setMaximumSize(new Dimension(1220, 187));
+        TITLE_CONTAINER.add(new JLabel(new ImageIcon(classloader.getResource("photos/title.png"))));
 
         /* P1 is JTextArea - will populate title */
         P1.setFont(new Font("Courier New", Font.PLAIN, 12));
-        P1.setForeground(Color.WHITE);
+//        P1.setForeground(Color.WHITE);
         P1.setBackground(Color.BLACK);
-        TITLE_CONTAINER.setOpaque(true);
 
         /* P2 is JTextArea - will populate map */
         P2.setFont(new Font("Courier New", Font.PLAIN, 12));
@@ -97,7 +107,8 @@ public class MainWindow {
         SimpleAttributeSet att = new SimpleAttributeSet();
         StyleConstants.setBold(att, true);
         StyleConstants.setBackground(att, Color.BLACK);
-        //P3.setPreferredSize(new Dimension(600, 350));
+        P3.setPreferredSize(new Dimension(600, 350));
+
         P3.setCharacterAttributes(att, true);
         P3.setFont(new Font("Courier New", Font.PLAIN, 12));
         P3.setOpaque(false);
@@ -118,39 +129,71 @@ public class MainWindow {
             }
         });
 
-        ClassLoader classloader = Thread.currentThread().getContextClassLoader();
         MapImageIcon= new ImageIcon(classloader.getResource("photos/intro.png"));
 
-        /* Add basic GUI elements to their containers */
-        TITLE_CONTAINER.add(P1);
-        MAP_CONTAINER.add(P2, gbc);
-        MAP_CONTAINER.add(P4, gbc);
-        PROMPT_CONTAINER.add(P3);
-        PROMPT_CONTAINER.add(commandTextField);
+        ImageIcon MapImageIcon2  = new ImageIcon(
+            new ImageIcon(classloader.getResource("photos/intro.png"))
+                .getImage()
+                .getScaledInstance(1220, 686, Image.SCALE_DEFAULT)
+        );
 
+        baseLayer = new BaseLayer(MapImageIcon2);
+
+        title = new Title();
+        title.setSize(new Dimension(1220, 187));
+        title.setPreferredSize(new Dimension(756, 187));
+        title.setMaximumSize(new Dimension(756, 187));
+        title.setLocation((1220 - 756) / 2 , -20);
+        title.setOpaque(false);
+
+
+        baseLayer.add(title);
+
+        JPanel test = new JPanel();
+        test.setSize(new Dimension(1220, 187));
+        test.setLocation(460, 600);
+        test.setOpaque(false);
+        test.setBackground(new Color(0,0,0,0));
+        test.add(commandTextField);
+
+        baseLayer.add(test);
+        baseLayer.add(Compass.getPanel());
+        baseLayer.add(promptContainer.getPanel());
+        APP_CONTAINER.add(baseLayer.getPanel());
+
+//
+//        /* Add basic GUI elements to their containers */
+//        TITLE_CONTAINER.add(P1);
+//        MAP_CONTAINER.add(P2, gbc);
+//        MAP_CONTAINER.add(P4, gbc);
+//        PROMPT_CONTAINER.add(P3);
+////        PROMPT_CONTAINER.add(commandTextField);
+////
 //        BUTTON_GO_CONTAINER.add((new CommandButton(this, "N","Go North")).getButton(),BorderLayout.NORTH);
 //        BUTTON_GO_CONTAINER.add((new CommandButton(this, "S","Go South")).getButton(),BorderLayout.SOUTH);
-        BUTTON_GO_CONTAINER.add(commandTextField, BorderLayout.CENTER);
+//        BUTTON_GO_CONTAINER.add(commandTextField, BorderLayout.CENTER);
 //        BUTTON_GO_CONTAINER.add((new CommandButton(this, "E","Go East")).getButton(),BorderLayout.EAST);
 //        BUTTON_GO_CONTAINER.add((new CommandButton(this, "W","Go West")).getButton(),BorderLayout.WEST);
-
-//        BUTTON_ACTION_CONTAINER.add((new CommandButton(this, "EXPLORE","Explore")).getButton(),BorderLayout.WEST);
-//        BUTTON_ACTION_CONTAINER.add((new CommandButton(this, "Get","Get")).getButton(),BorderLayout.EAST);
-
-        PROMPT_CONTAINER.add(BUTTON_GO_CONTAINER,BorderLayout.NORTH);
-        PROMPT_CONTAINER.add(BUTTON_ACTION_CONTAINER,BorderLayout.SOUTH);
-
-        /* Add elements container to the main application */
-        APP_CONTAINER.add(TITLE_CONTAINER, BorderLayout.NORTH);
-        APP_CONTAINER.add(MAP_CONTAINER, BorderLayout.CENTER);
-        APP_CONTAINER.add(PROMPT_CONTAINER, BorderLayout.SOUTH);
-        mapPanelLabel.setIcon(MapImageIcon);
-        MAP_CONTAINER.add(mapPanelLabel, gbc);
+//
+////        BUTTON_ACTION_CONTAINER.add((new CommandButton(this, "EXPLORE","Explore")).getButton(),BorderLayout.WEST);
+////        BUTTON_ACTION_CONTAINER.add((new CommandButton(this, "Get","Get")).getButton(),BorderLayout.EAST);
+//
+//        PROMPT_CONTAINER.add(BUTTON_GO_CONTAINER,BorderLayout.NORTH);
+//        PROMPT_CONTAINER.add(BUTTON_ACTION_CONTAINER,BorderLayout.SOUTH);
+//
+//        /* Add elements container to the main application */
+//        APP_CONTAINER.add(TITLE_CONTAINER, BorderLayout.NORTH);
+//        APP_CONTAINER.add(MAP_CONTAINER, BorderLayout.CENTER);
+//        APP_CONTAINER.add(PROMPT_CONTAINER, BorderLayout.SOUTH);
+//        mapPanelLabel.setIcon(MapImageIcon);
+//        MAP_CONTAINER.add(mapPanelLabel, gbc);
 //        APP_CONTAINER.setResizable();
 //        APP_CONTAINER.add(actionWarehouse.getPanel());
 
 
-      BUTTON_ACTION_CONTAINER.add(Compass.getPanel());
+//      BUTTON_ACTION_CONTAINER.add(Compass.getPanel());
+
+
 
         /* Setting GUI visibility */
         show();
@@ -224,19 +267,22 @@ public class MainWindow {
         sleep();
         if (!gameStarted) {
             setPromptText(str);
-            P3.appendANSI("\n" + text);
+            promptContainer.setPrompt(text);
         }
         if (str.contains("New game started.") || str.contains(savedGameStartPrompt)) {
-            //P3.setPreferredSize(new Dimension(600, 150));
+            title.stop();
+            promptContainer.wipe();
+            promptContainer.positionSouth();
             setGameStarted();
             setPromptText(str);
-            P3.setText(text);
-        } else if (P3.getText().charAt(P3.getText().length() - 3) == '>') {
+            promptContainer.setPrompt(text);
+        } else if (text.charAt(text.length()-3) == '>') {
+            promptContainer.wipe();
             setPromptText(str);
-            P3.setText("\n" + text);
+            promptContainer.setPrompt(text);
         } else if (gameStarted) {
             setPromptText(str);
-            P3.appendANSI("\n" + text);
+            promptContainer.setPrompt(text);
         }
         PROMPT_CONTAINER.revalidate();
         PROMPT_CONTAINER.repaint();
@@ -261,19 +307,19 @@ public class MainWindow {
             ClassLoader classloader = Thread.currentThread().getContextClassLoader();
             switch(key){
                 case "truck":
-                    MapImageIcon = new ImageIcon(
-                        new ImageIcon(classloader.getResource("photos/"+key+".png"))
-                            .getImage()
-                            .getScaledInstance(900, 186, Image.SCALE_DEFAULT));
+                    for (int i = 0 ; i < 21; i++) {
+                        baseLayer.setBG(new ImageIcon(classloader.getResource("photos/animate/game-truck"+i+".jpg")));
+                    }
                     break;
                 default:
-                    MapImageIcon= new ImageIcon(classloader.getResource("photos/"+key+".png"));
+                    MapImageIcon= new ImageIcon(
+                    new ImageIcon(classloader.getResource("photos/"+key+".png"))
+                        .getImage()
+                        .getScaledInstance(1220, 686, Image.SCALE_DEFAULT));
+                    // Set Icon to new image Icon
+                    baseLayer.setBG(MapImageIcon);
                     break;
             }
-
-            // Set Icon to new image Icon
-            mapPanelLabel.setIcon(MapImageIcon);
-
             /* Sleep gui thread for .1 seconds for synchronicity */
             sleep();
             P2.setEditable(false);
