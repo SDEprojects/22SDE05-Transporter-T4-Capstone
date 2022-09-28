@@ -20,6 +20,7 @@ import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 //import static com.tlglearning.gui.button.Compass.getPanel;
 
 
@@ -142,7 +143,13 @@ public class MainWindow {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    sendCommandToApp();
+                    try {
+                        sendCommandToApp();
+                    } catch (InterruptedException ex) {
+                        throw new RuntimeException(ex);
+                    } catch (InvocationTargetException ex) {
+                        throw new RuntimeException(ex);
+                    }
                 }
             }
         });
@@ -271,7 +278,7 @@ public class MainWindow {
         }
         PROMPT_CONTAINER.revalidate();
         PROMPT_CONTAINER.repaint();
-        sleep();
+//        sleep();
         P3.setEditable(false);
     }
 
@@ -280,7 +287,7 @@ public class MainWindow {
         P4.append(officeMap);
         mapPanelLabel.setIcon(null);
         P2.setText(null);
-        sleep();
+//        sleep();
     }
 
     public void setPhotoToMapPanel(String key) {
@@ -327,7 +334,7 @@ public class MainWindow {
                     break;
             }
             /* Sleep gui thread for .1 seconds for synchronicity */
-            sleep();
+//            sleep();
             P2.setEditable(false);
         }
     }
@@ -336,13 +343,17 @@ public class MainWindow {
      * sendCommandToApp changes the value in commandObject to record command is sent and set command Variable to command text.
      */
 
-    public static void sendCommandToApp() {
+    public static void sendCommandToApp() throws InterruptedException, InvocationTargetException {
         // Sets commandGateObject command text  field to the user input command.
-        commandGateObject.setCommand(commandTextField.getText().toLowerCase());
+        if(!commandGateObject.isCommandSentFromGui()){
+            commandGateObject.setCommand(commandTextField.getText().toLowerCase());
 
-        // Sends confirmation boolean variable to tell the middleware that command is sent.
-        // Then command string is passed to Transport Application.
-        commandGateObject.setIsCommandSentFromGui(true);
+            // Sends confirmation boolean variable to tell the middleware that command is sent.
+            // Then command string is passed to Transport Application.
+            commandGateObject.setIsCommandSentFromGui(true);
+        }
+
+
     }
 
     public static void sleep() {

@@ -6,6 +6,7 @@ import com.tlglearning.util.Location;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.InputStream;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -27,7 +28,7 @@ public class Redirect {
      * @param messageToGui
      */
 
-    static Location location;
+    protected static Location location;
     static HashMap<String, Object> DestinationsMap;
     static HashMap<String, Object> GamePromptsMap;
 
@@ -64,7 +65,7 @@ public class Redirect {
 //
 //    }
 
-    public static void generateMaps() {
+    public static void generateMaps() throws InterruptedException, InvocationTargetException {
         ClassLoader cl = Main.class.getClassLoader();
 
         InputStream input = cl.getResourceAsStream("Destinations.yaml");
@@ -76,7 +77,6 @@ public class Redirect {
         input = cl.getResourceAsStream("GamePrompts.yaml");
 
         GamePromptsMap = yaml.load(input);
-//        addGetExploreBTN();
 
 
 
@@ -84,12 +84,8 @@ public class Redirect {
 
     public static void sendPromptToGui(String identity,String messageToGui) {
         mainWindow.setPrompt(messageToGui);
-        // Send Destination information to Gui. Destinations allow include button information.
-        if (location != null) {
-//            System.out.println(DestinationsMap.get(location.getLocationName()));
-        }
+//        commandGateObject.setIsCommandSentFromGui(false);
 
-//        mainWindow.setMap(messageToGui);
     }
 
     public static void sendTitleToGui(String identity,String title) {
@@ -103,6 +99,7 @@ public class Redirect {
      */
     //Redirecting the help menu to the GUI
     public static void sendHelpMenuToGui (String identity,String helpMenu){
+
         mainWindow.setPrompt(helpMenu);
     }
 
@@ -158,7 +155,7 @@ public class Redirect {
             }
         }
 //        command=commandObject.getCommand();
-        commandGateObject.setIsCommandSentFromGui(false);
+
         return commandGateObject.getCommand();
     }
 
@@ -182,6 +179,7 @@ public class Redirect {
 
 
     public static void getPromptCyan_DictLookUp_PromptToGui(String identity,String key) {
+        commandGateObject.setIsCommandSentFromGui(false);
         String prompt = (String) GamePromptsMap.get(key);
         mainWindow.setPrompt(prompt);
     }

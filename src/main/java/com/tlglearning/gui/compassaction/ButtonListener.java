@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -26,7 +27,10 @@ public class ButtonListener implements MouseListener {
     Compass compass;
 
     static HashMap<String, Object> DestinationsMap;
-    private static Location location;
+    private static Location location=new Location();
+    private static String currentLocation="";
+
+
 
     public ButtonListener(JButton label, int tile) {
         buttonsList.add(label);
@@ -82,17 +86,15 @@ public class ButtonListener implements MouseListener {
         // Sends confirmation boolean variable to tell the middleware that command is sent.
         // Then command string is passed to Transport Application.
         commandGateObject.setIsCommandSentFromGui(true);
+        disableButtons();
 
-        try {
-            Thread.sleep(130);
-        } catch (InterruptedException ex) {
-            throw new RuntimeException(ex);
-        }
         setResetButtons();
     }
 
     @Override
     public void mouseEntered(MouseEvent e) {
+
+            setResetButtons();
 
 
         label.setIcon(active);
@@ -113,9 +115,10 @@ public class ButtonListener implements MouseListener {
         // BUTTON_ACTION_CONTAINER.add((new CommandButton(this, "EXPLORE","Explore")).getButton(),BorderLayout.WEST);
         // BUTTON_ACTION_CONTAINER.add((new CommandButton(this, "Get","Get")).getButton(),BorderLayout.EAST);
 
-        if (location == null || buttonsList.isEmpty()) {
+        if (location.getLocationName() == null || buttonsList.isEmpty() ) {
             return "setResetButton invalid";
         }
+        currentLocation=location.getLocationName();
 
         for (JButton each : buttonsList) {
             if (((ImageIcon)each.getIcon()).getDescription().equalsIgnoreCase("go north")) {
@@ -152,15 +155,32 @@ public class ButtonListener implements MouseListener {
                     each.setVisible(true);
                 }
             }
+
         }
+        enableButtons();
         return "setResetButton valid";
     }
 
     public static void setLocation(Location loc) {
+        currentLocation=loc.getLocationName();
         location = loc;
     }
 
     public static void setDestinationsMap(HashMap<String, Object> destinationsMap) {
         DestinationsMap = destinationsMap;
     }
+
+    private static void disableButtons(){
+        for(JButton BTN:buttonsList){
+            BTN.setEnabled(false);
+        }
+    }
+
+    public static void enableButtons(){
+        for(JButton BTN:buttonsList){
+            BTN.setEnabled(true);
+        }
+    }
+
+
 }

@@ -1,7 +1,14 @@
 package com.tlglearning.gui.compassaction;
 
+import com.tlglearning.gui.MainWindow;
+
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+
 public class Compass {
     static ImageIcon[] compass = new ImageIcon[9];
     static ImageIcon[] compass_Active = new ImageIcon[4];
@@ -75,4 +82,6 @@ public class Compass {
 
         return panel;
     }
+
+
 }

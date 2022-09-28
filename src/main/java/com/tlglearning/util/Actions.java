@@ -3,6 +3,7 @@ package com.tlglearning.util;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.tlglearning.gui.MainWindow;
 import com.tlglearning.middleware.Redirect;
+import com.tlglearning.middleware.commandGateObject;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -58,6 +59,7 @@ public class Actions {
             Redirect.sendDescriptionToGui("2",InputHandling.getDescription(newLocation, "description", moveLocation));
             System.out.println(InputHandling.getDescription(newLocation, "description", moveLocation));
         }
+        commandGateObject.setIsCommandSentFromGui(false);
     }
 
     //uses current location and user input to explore a location within a room, also checks for locked locations
@@ -242,6 +244,8 @@ public class Actions {
         currentLocation.setSouth(InputHandling.getDescription(newLocation, "south", jsonNodeObj));
         currentLocation.setEast(InputHandling.getDescription(newLocation, "east", jsonNodeObj));
         currentLocation.setWest(InputHandling.getDescription(newLocation, "west", jsonNodeObj));
+
+
     }
 }
 

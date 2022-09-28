@@ -2,16 +2,22 @@ package com.tlglearning.middleware;
 
 
 import com.sun.tools.javac.Main;
+import com.tlglearning.gui.compassaction.ButtonListener;
 import org.yaml.snakeyaml.Yaml;
 
+import javax.swing.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import static com.tlglearning.gui.compassaction.ButtonListener.enableButtons;
+import static com.tlglearning.gui.compassaction.ButtonListener.setResetButtons;
 
 /**
  * commandObject
@@ -30,6 +36,8 @@ public class commandGateObject {
     static String command = "";
 
     static final List<String> commandHistory=new ArrayList<>();
+
+    private static String currentLocation="";
 
 
     /**
@@ -73,34 +81,52 @@ public class commandGateObject {
     }
 
 
-    // saveGame saves the game
-    //Todo text save game and add additional information including game time
-    // money on hand and scenerio of game.
-    public static void saveGame() throws FileNotFoundException {
-
-        ClassLoader cl = Main.class.getClassLoader();
-        URL saveURL = cl.getResource("savefile/saveFile.yaml");
-        PrintWriter writer = new PrintWriter(new File(String.valueOf(saveURL)));
-        Yaml yaml = new Yaml();
-        yaml.dump(commandHistory, writer);
-
-    }
-
-    // TODO add additional functionality that sends loaded game command into application.
-
-    public static void loadGame() throws FileNotFoundException {
-        ClassLoader cl = Main.class.getClassLoader();
-
-        InputStream input = cl.getResourceAsStream("savefile/saveFile.yaml");
-
-        Yaml yaml = new Yaml();
-
-        HashMap<String,Object> DestinationsMap = yaml.load(input);
-        System.out.println(DestinationsMap);
-
-
-
-
-
-    }
+//    // saveGame saves the game
+//    //Todo text save game and add additional information including game time
+//    // money on hand and scenerio of game.
+//    public static void saveGame() throws FileNotFoundException {
+//
+//        ClassLoader cl = Main.class.getClassLoader();
+//        URL saveURL = cl.getResource("savefile/saveFile.yaml");
+//        PrintWriter writer = new PrintWriter(new File(String.valueOf(saveURL)));
+//        Yaml yaml = new Yaml();
+//        yaml.dump(commandHistory, writer);
+//
+//    }
+//
+//    // TODO add additional functionality that sends loaded game command into application.
+//
+//    public static void loadGame() throws FileNotFoundException {
+//        ClassLoader cl = Main.class.getClassLoader();
+//
+//        InputStream input = cl.getResourceAsStream("savefile/saveFile.yaml");
+//
+//        Yaml yaml = new Yaml();
+//
+//        HashMap<String,Object> DestinationsMap = yaml.load(input);
+//        System.out.println(DestinationsMap);
+//
+//
+//
+//
+//
+////    }
+//
+//    public static void isLocationUpdated() throws InterruptedException, InvocationTargetException {
+//
+//        SwingUtilities.invokeAndWait(() -> {
+//            try {
+//                Thread.sleep(30);
+//                if(Redirect.location!=null && currentLocation!=Redirect.location.getLocationName()){
+//                    currentLocation=Redirect.location.getLocationName();
+//                    ButtonListener.setResetButtons();
+//                    ButtonListener.enableButtons();
+//                }
+//
+//            } catch (InterruptedException e) {
+//                throw new RuntimeException(e);
+//            }
+//        });
+//
+//    }
 }
