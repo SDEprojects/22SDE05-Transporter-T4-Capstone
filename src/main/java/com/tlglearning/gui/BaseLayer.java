@@ -8,6 +8,7 @@ public class BaseLayer {
     private static final int HEIGHT = 690;
     private static JLayeredPane panel;
     private static JLabel backgroundContainerLabel;
+    static JLayeredPane backgroundPanel = new JLayeredPane();
 
     public BaseLayer(ImageIcon background){
         init(background);
@@ -31,7 +32,7 @@ public class BaseLayer {
         backgroundContainerLabel.setIcon(background);
         backgroundContainerLabel.setOpaque(true);
 
-        JPanel backgroundPanel = new JPanel();
+//        JPanel backgroundPanel = new JPanel();
         backgroundPanel.setSize(new Dimension(WIDTH, HEIGHT));
         backgroundPanel.setPreferredSize(new Dimension(WIDTH, HEIGHT));
         backgroundPanel.setMaximumSize(new Dimension(WIDTH, HEIGHT));
@@ -52,7 +53,24 @@ public class BaseLayer {
     }
 
     public static void add(JPanel layer){
+
         panel.add(layer, JLayeredPane.PALETTE_LAYER);
     }
+
+    public static void add(JLayeredPane layer){
+
+            panel.add(layer, 0);
+
+
+    }
+
+//    public static void setBackGroudPanel(JLayeredPane backPanel){
+//        backgroundPanel=backPanel;
+//        panel.add(backgroundPanel);
+//        panel=null;
+//        System.out.println("asdfsdfsdf");
+//
+//
+//    }
 
 }
