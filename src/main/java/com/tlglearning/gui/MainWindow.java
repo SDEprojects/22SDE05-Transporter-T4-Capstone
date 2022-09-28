@@ -1,6 +1,6 @@
 package com.tlglearning.gui;
 
-import com.tlglearning.gui.interactOffice.actionOffice;
+import com.tlglearning.gui.Office.actionOffice;
 import com.tlglearning.gui.compassaction.Compass;
 import com.tlglearning.gui.interactHrOffice.actionHrOffice;
 import com.tlglearning.gui.interactTechRoom.actionTechRoom;
@@ -49,21 +49,19 @@ public class MainWindow {
     private static final JFrame APP_CONTAINER = new JFrame();
     private static final JPanel TITLE_CONTAINER = new JPanel();
     private static final JPanel MAP_CONTAINER = new JPanel();
-    private static final JPanel PROMPT_CONTAINER = new JPanel();
-
     private static boolean gameStarted = false;
     private static ImageIcon MapImageIcon;
     static JLabel mapPanelLabel = new JLabel();
+    ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+    private static final PromptContainer promptContainer = new PromptContainer();
+    private static Countdown countdown;
+    private static RadioButton radioButton;
+    BaseLayer baseLayer;
+    Title title;
 
     public MainWindow() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         initialize();
     }
-
-    ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-    private static final PromptContainer promptContainer = new PromptContainer();
-    BaseLayer baseLayer;
-    Title title;
-
 
 /**
  * CLASS METHODS BELOW ------------------------------------------------------------------------------------------------|
@@ -96,10 +94,10 @@ public class MainWindow {
         GridBagConstraints gbc = new GridBagConstraints();
         MAP_CONTAINER.setBackground(Color.BLACK);
         //MAP_CONTAINER.setSize(500, 500);
-
-        PROMPT_CONTAINER.setLayout(new BorderLayout(0, 0));
-        PROMPT_CONTAINER.setBackground(Color.BLACK);
-        PROMPT_CONTAINER.setMinimumSize(new Dimension(600, 200));
+//
+//        PROMPT_CONTAINER.setLayout(new BorderLayout(0, 0));
+//        PROMPT_CONTAINER.setBackground(Color.BLACK);
+//        PROMPT_CONTAINER.setMinimumSize(new Dimension(600, 200));
 
         TITLE_CONTAINER.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 5));
 //        TITLE_CONTAINER.setBackground(Color.BLACK);
@@ -168,17 +166,20 @@ public class MainWindow {
 
         baseLayer.add(title);
 
-        JPanel test = new JPanel();
-        test.setSize(new Dimension(1220, 187));
-        test.setLocation(460, 600);
-        test.setOpaque(false);
-        test.setBackground(new Color(0, 0, 0, 0));
-        test.add(commandTextField);
+        JPanel textBoxPanel = new JPanel();
+        textBoxPanel.setSize(new Dimension(1220, 187));
+        textBoxPanel.setLocation(460, 600);
+        textBoxPanel.setOpaque(false);
+        textBoxPanel.setBackground(new Color(0, 0, 0, 0));
+        textBoxPanel.add(commandTextField);
 
-        baseLayer.add(test);
+        radioButton = new RadioButton(this);
+
+        baseLayer.add(textBoxPanel);
         baseLayer.add(Compass.getPanel());
         baseLayer.add(promptContainer.getPanel());
-        baseLayer.add(RadioButton.init());
+        baseLayer.addModal(radioButton.getPanel());
+
         APP_CONTAINER.add(baseLayer.getPanel());
 //        baseLayer.add(gasStationPane);
         show();
@@ -237,7 +238,7 @@ public class MainWindow {
             setMapChars(str);
             P2.setText(map);
             /* Sleep gui thread for .1 seconds for synchronicity */
-//            sleep();
+            sleep();
             P2.setEditable(false);
         }
     }
@@ -247,10 +248,9 @@ public class MainWindow {
      * setPrompt() - calls sleep, setPromptText and appends text to P3 JColorPane
      */
     public void setPrompt(String str) {
-        commandGateObject.setIsCommandSentFromGui(false);
         String savedGameStartPrompt = "The map above the prompt, shows you what room you are in, what locations are explorable in the room, and the available exits, to see a full map type 'h' and select option 3";
         P3.setEditable(true);
-//        sleep();
+        sleep();
         if (!gameStarted) {
             setPromptText(str);
             promptContainer.setPrompt(text);
@@ -270,9 +270,15 @@ public class MainWindow {
             setPromptText(str);
             promptContainer.setPrompt(text);
         }
-        PROMPT_CONTAINER.revalidate();
-        PROMPT_CONTAINER.repaint();
-//        sleep();
+
+        if (str.contains(savedGameStartPrompt)) {
+            countdown = new Countdown();
+            baseLayer.addModal(countdown.getPanel());
+            baseLayer.revalidate();
+        }
+//        PROMPT_CONTAINER.revalidate();
+//        PROMPT_CONTAINER.repaint();
+        sleep();
         P3.setEditable(false);
     }
 
@@ -281,7 +287,7 @@ public class MainWindow {
         P4.append(officeMap);
         mapPanelLabel.setIcon(null);
         P2.setText(null);
-//        sleep();
+        sleep();
     }
 
     public void setPhotoToMapPanel(String key) {
@@ -328,7 +334,7 @@ public class MainWindow {
                     break;
             }
             /* Sleep gui thread for .1 seconds for synchronicity */
-//            sleep();
+            sleep();
             P2.setEditable(false);
         }
     }
