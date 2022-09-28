@@ -65,6 +65,7 @@ public class Redirect {
 //    }
 
     public static void generateMaps() {
+
         ClassLoader cl = Main.class.getClassLoader();
 
         InputStream input = cl.getResourceAsStream("Destinations.yaml");
@@ -202,6 +203,7 @@ public class Redirect {
 //        CommandButton.setLocation(loc);
         ButtonListener.setDestinationsMap(DestinationsMap);
         ButtonListener.setLocation(loc);
+
         location = loc;
 
     }

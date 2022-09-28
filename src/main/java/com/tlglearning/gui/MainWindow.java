@@ -1,14 +1,16 @@
 package com.tlglearning.gui;
 
-import com.tlglearning.gui.Office.actionOffice;
+
 import com.tlglearning.gui.compassaction.Compass;
 import com.tlglearning.gui.interactHrOffice.actionHrOffice;
+import com.tlglearning.gui.interactOffice.actionOffice;
 import com.tlglearning.gui.interactTechRoom.actionTechRoom;
 import com.tlglearning.gui.interactbossoffice.actionBossOffice;
 import com.tlglearning.gui.interactbreakroom.actionBreakRoom;
 import com.tlglearning.gui.interactgasstation.actionGasStation;
 import com.tlglearning.gui.interactwarehouse.actionWarehouse;
 import com.tlglearning.gui.music.RadioButton;
+import com.tlglearning.interactStates.actionStates;
 import com.tlglearning.middleware.commandGateObject;
 
 import javax.sound.sampled.LineUnavailableException;
@@ -22,7 +24,6 @@ import java.awt.event.KeyEvent;
 import java.io.IOException;
 //import static com.tlglearning.gui.button.Compass.getPanel;
 
-
 public class MainWindow {
     JLayeredPane wareHousePane = actionWarehouse.getPanel();
     JLayeredPane frontOfficePane = actionOffice.getPanel();
@@ -34,6 +35,8 @@ public class MainWindow {
     JLayeredPane hrOfficePane = actionHrOffice.getPanel();
 
     JLayeredPane gasStationPane = actionGasStation.getPanel();
+
+    JLayeredPane statesPane = actionStates.getPanel();
     private static final JTextArea P1 = new JTextArea(6, 94);
     private static final JTextArea P2 = new JTextArea();
     private static final ColorPane P3 = new ColorPane();
@@ -59,6 +62,8 @@ public class MainWindow {
     BaseLayer baseLayer;
     Title title;
 
+
+
     public MainWindow() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         initialize();
     }
@@ -73,6 +78,7 @@ public class MainWindow {
      * show() - display initialized APP_CONTAINER.
      */
     public static void show() {
+
         APP_CONTAINER.setVisible(true);
     }
 
@@ -163,7 +169,6 @@ public class MainWindow {
         title.setLocation((1220 - 756) / 2, -20);
         title.setOpaque(false);
 
-
         baseLayer.add(title);
 
         JPanel textBoxPanel = new JPanel();
@@ -177,11 +182,11 @@ public class MainWindow {
 
         baseLayer.add(textBoxPanel);
         baseLayer.add(Compass.getPanel());
-        baseLayer.add(promptContainer.getPanel());
+//        baseLayer.add(promptContainer.getPanel());
         baseLayer.addModal(radioButton.getPanel());
 
         APP_CONTAINER.add(baseLayer.getPanel());
-//        baseLayer.add(gasStationPane);
+        baseLayer.add(statesPane);
         show();
 
     }
@@ -248,6 +253,7 @@ public class MainWindow {
      * setPrompt() - calls sleep, setPromptText and appends text to P3 JColorPane
      */
     public void setPrompt(String str) {
+        commandGateObject.setIsCommandSentFromGui(false);
         String savedGameStartPrompt = "The map above the prompt, shows you what room you are in, what locations are explorable in the room, and the available exits, to see a full map type 'h' and select option 3";
         P3.setEditable(true);
         sleep();
@@ -323,7 +329,6 @@ public class MainWindow {
                     }
                     break;
 
-
                 default:
                     MapImageIcon = new ImageIcon(
                             new ImageIcon(classloader.getResource("photos/" + key + ".png"))
@@ -361,6 +366,8 @@ public class MainWindow {
     }
 
     public static JPanel getActionButtonContainer() {
+
+
         return BUTTON_ACTION_CONTAINER;
     }
 

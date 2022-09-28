@@ -19,9 +19,6 @@ public class breakRoomButtonListener implements MouseListener {
 
     private static boolean hasThermos=false;
 
-
-
-
     public breakRoomButtonListener(JButton button, ImageIcon orginal, ImageIcon showItem) {
         this.orginalIcon=orginal;
         this.orginalIcon.setDescription(orginal.getDescription());
