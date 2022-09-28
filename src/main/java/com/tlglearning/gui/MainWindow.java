@@ -3,7 +3,11 @@ package com.tlglearning.gui;
 import com.tlglearning.gui.compassaction.CommandButton;
 import com.tlglearning.gui.compassaction.Compass;
 //import com.tlglearning.gui.interactwarehouse.actionWarehouse;
+import com.tlglearning.gui.music.RadioButton;
 import com.tlglearning.middleware.commandGateObject;
+
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.text.SimpleAttributeSet;
@@ -11,6 +15,7 @@ import javax.swing.text.StyleConstants;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 //import static com.tlglearning.gui.button.Compass.getPanel;
 import static com.tlglearning.gui.compassaction.Compass.getPanel;
 
@@ -38,13 +43,30 @@ public class MainWindow {
     private static ImageIcon MapImageIcon;
     static JLabel mapPanelLabel = new JLabel();
 
-    public MainWindow() {
-        initialize();
-    }
+    JButton startButton;
+    JButton stopButton;
+    JButton pauseButton;
     ClassLoader classloader = Thread.currentThread().getContextClassLoader();
     private static final PromptContainer promptContainer = new PromptContainer();
     BaseLayer baseLayer;
     Title title;
+    private static final RadioButton radioButton;
+
+    static {
+        try {
+            radioButton = new RadioButton();
+        } catch (UnsupportedAudioFileException e) {
+            throw new RuntimeException(e);
+        } catch (LineUnavailableException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public MainWindow() {
+        initialize();
+    }
 
 
 /**
@@ -159,6 +181,8 @@ public class MainWindow {
         baseLayer.add(test);
         baseLayer.add(Compass.getPanel());
         baseLayer.add(promptContainer.getPanel());
+        baseLayer.add(radioButton.getPanel());
+
         APP_CONTAINER.add(baseLayer.getPanel());
 
 //

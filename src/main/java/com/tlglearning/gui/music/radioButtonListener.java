@@ -14,52 +14,26 @@ import java.util.HashMap;
 
 public class radioButtonListener extends JFrame implements MouseListener {
 
-    //    SimpleAudioPlayer audioPlayer = new SimpleAudioPlayer();
-    Clip clip;
-
-
-    int tile;
-
-//    static ImageIcon[] pics2 = actionWarehouse.compass;
-
     ImageIcon orginalIcon;
     ImageIcon showItemIcon;
-    JButton button;
+    JButton musicButton;
 
-    JButton playButton;
-
-    JButton stopButton;
-
-    JButton pauseButton;
     static SimpleAudioPlayer audioPlayer;
-
-
     static HashMap<String, Object> DestinationsMap;
 
-
-    public radioButtonListener(JButton button, ImageIcon orginal, ImageIcon showItem) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+    public radioButtonListener(JButton musicButton, ImageIcon orginal, ImageIcon showItem) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
 
         this.orginalIcon = orginal;
         this.showItemIcon = showItem;
-        button.setIcon(orginal);
+        musicButton.setIcon(orginal);
+        this.musicButton = musicButton;
 
-        this.button = button;
-
-        // Button display settings
-        button.setBackground(Color.BLACK);
-        button.setBorderPainted(false);
-        button.setContentAreaFilled(false);
-        button.setFocusPainted(false);
-
-        JButton playButton = new JButton("PLAY");
-        JButton stopButton = new JButton("STOP");
-        JButton pauseButton = new JButton("PAUSE");
+        setUpRadio();
 
     }
 
     public static void setUpRadio() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
-        audioPlayer =
-                new SimpleAudioPlayer();
+        audioPlayer = new SimpleAudioPlayer();
 
     }
 
@@ -70,44 +44,28 @@ public class radioButtonListener extends JFrame implements MouseListener {
     @Override
     public void mousePressed(MouseEvent e) {
 
-
-        if(button.getIcon().equals(orginalIcon)){
+        if(musicButton.getIcon().equals(orginalIcon)){
             audioPlayer.clip.start();
-            button.setIcon(showItemIcon);
+            musicButton.setIcon(showItemIcon);
         } else{
             audioPlayer.clip.stop();
-            button.setIcon(orginalIcon);
+            musicButton.setIcon(orginalIcon);
         }
+        musicButton.setOpaque(false);
+        musicButton.setContentAreaFilled(false);
+        musicButton.setBackground(new Color(0,0,0,0));
     }
     @Override
     public void mouseReleased(MouseEvent e) {
-//
-//        label.setIcon(inactive);
-//        mainWindow.wipe();
-//        // create String for the label
-//        // Sets commandGateObject command text  field to the user input command.
-//        commandGateObject.setCommand(active.getDescription());
-//
-//        // Sends confirmation boolean variable to tell the middleware that command is sent.
-//        // Then command string is passed to Transport Application.
-//        commandGateObject.setIsCommandSentFromGui(true);
-//
-//
-//        try {
-//            Thread.sleep(130);
-//        } catch (InterruptedException ex) {
-//            throw new RuntimeException(ex);
-//        }
-//        setResetButtons();
+
 
     }
 
     @Override
     public void mouseEntered(MouseEvent e) {
 
-
 //        label.setIcon(active);
-        button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        musicButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
     }
 
@@ -115,8 +73,6 @@ public class radioButtonListener extends JFrame implements MouseListener {
     public void mouseExited(MouseEvent e) {
 //        label.setIcon(inactive);
     }
-
-
 
     public static String setResetButtons() {
 
