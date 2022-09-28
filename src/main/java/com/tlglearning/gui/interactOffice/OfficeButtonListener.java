@@ -1,4 +1,4 @@
-package com.tlglearning.gui.Office;
+package com.tlglearning.gui.interactOffice;
 
 import com.tlglearning.middleware.commandGateObject;
 

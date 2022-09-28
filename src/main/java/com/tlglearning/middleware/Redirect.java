@@ -158,7 +158,7 @@ public class Redirect {
             }
         }
 //        command=commandObject.getCommand();
-        commandGateObject.setIsCommandSentFromGui(false);
+//        commandGateObject.setIsCommandSentFromGui(false);
         return commandGateObject.getCommand();
     }
 

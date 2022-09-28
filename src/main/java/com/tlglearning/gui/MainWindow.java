@@ -1,6 +1,6 @@
 package com.tlglearning.gui;
 
-import com.tlglearning.gui.Office.actionOffice;
+import com.tlglearning.gui.interactOffice.actionOffice;
 import com.tlglearning.gui.compassaction.Compass;
 import com.tlglearning.gui.interactHrOffice.actionHrOffice;
 import com.tlglearning.gui.interactTechRoom.actionTechRoom;
@@ -237,7 +237,7 @@ public class MainWindow {
             setMapChars(str);
             P2.setText(map);
             /* Sleep gui thread for .1 seconds for synchronicity */
-            sleep();
+//            sleep();
             P2.setEditable(false);
         }
     }
@@ -247,9 +247,10 @@ public class MainWindow {
      * setPrompt() - calls sleep, setPromptText and appends text to P3 JColorPane
      */
     public void setPrompt(String str) {
+        commandGateObject.setIsCommandSentFromGui(false);
         String savedGameStartPrompt = "The map above the prompt, shows you what room you are in, what locations are explorable in the room, and the available exits, to see a full map type 'h' and select option 3";
         P3.setEditable(true);
-        sleep();
+//        sleep();
         if (!gameStarted) {
             setPromptText(str);
             promptContainer.setPrompt(text);
@@ -271,7 +272,7 @@ public class MainWindow {
         }
         PROMPT_CONTAINER.revalidate();
         PROMPT_CONTAINER.repaint();
-        sleep();
+//        sleep();
         P3.setEditable(false);
     }
 
@@ -280,7 +281,7 @@ public class MainWindow {
         P4.append(officeMap);
         mapPanelLabel.setIcon(null);
         P2.setText(null);
-        sleep();
+//        sleep();
     }
 
     public void setPhotoToMapPanel(String key) {
@@ -327,7 +328,7 @@ public class MainWindow {
                     break;
             }
             /* Sleep gui thread for .1 seconds for synchronicity */
-            sleep();
+//            sleep();
             P2.setEditable(false);
         }
     }

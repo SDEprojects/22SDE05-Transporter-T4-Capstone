@@ -26,7 +26,7 @@ public class ButtonListener implements MouseListener {
     Compass compass;
 
     static HashMap<String, Object> DestinationsMap;
-    private static Location location;
+    private static Location location=null;
 
     public ButtonListener(JButton label, int tile) {
         buttonsList.add(label);
@@ -98,6 +98,7 @@ public class ButtonListener implements MouseListener {
         label.setIcon(active);
         label.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
+
     }
 
     @Override
@@ -113,7 +114,7 @@ public class ButtonListener implements MouseListener {
         // BUTTON_ACTION_CONTAINER.add((new CommandButton(this, "EXPLORE","Explore")).getButton(),BorderLayout.WEST);
         // BUTTON_ACTION_CONTAINER.add((new CommandButton(this, "Get","Get")).getButton(),BorderLayout.EAST);
 
-        if (location == null || buttonsList.isEmpty()) {
+        if (location == null || buttonsList.isEmpty() ) {
             return "setResetButton invalid";
         }
 
