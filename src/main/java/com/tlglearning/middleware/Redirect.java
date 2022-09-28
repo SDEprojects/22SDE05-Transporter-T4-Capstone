@@ -48,11 +48,12 @@ public class Redirect {
         {
             add("truck");
             add("warehouse");
-//            add("front office");
-//            add("boss office");
-//            add("break room");
-//            add("hr office");
-//            add("tech room");
+            add("front office");
+            add("boss office");
+            add("break room");
+            add("hr office");
+            add("tech room");
+            add("gas station");
         }
     };
 

@@ -1,33 +1,28 @@
-package com.tlglearning.gui.interactwarehouse;
+package com.tlglearning.gui.interactgasstation;
 
 import com.tlglearning.middleware.commandGateObject;
-import com.tlglearning.util.Location;
 
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 import static com.tlglearning.client.TransporterClient.mainWindow;
 
 //import static com.tlglearning.client.TransporterClient.mainWindow;
 
-public class WarehouseButtonListener implements MouseListener {
+public class gasRoomButtonListener implements MouseListener {
 
     ImageIcon orginalIcon;
     ImageIcon showItemIcon;
     JButton button;
 
-    private static boolean hasKey=false;
+    private static boolean hasThermos=false;
 
 
 
 
-    public WarehouseButtonListener(JButton button,ImageIcon orginal, ImageIcon showItem) {
+    public gasRoomButtonListener(JButton button, ImageIcon orginal, ImageIcon showItem) {
         this.orginalIcon=orginal;
         this.orginalIcon.setDescription(orginal.getDescription());
         this.showItemIcon=showItem;
@@ -53,7 +48,7 @@ public class WarehouseButtonListener implements MouseListener {
         String command="";
 
             if (button.getIcon().equals(orginalIcon) ) {
-                if((!orginalIcon.getDescription().equalsIgnoreCase("Explore Cabinet") || hasKey)){
+                if((!orginalIcon.getDescription().equalsIgnoreCase("Explore coffee maker") || hasThermos)){
                     command = orginalIcon.getDescription();
                     button.setIcon(showItemIcon);
                 }
@@ -66,8 +61,8 @@ public class WarehouseButtonListener implements MouseListener {
             }
 
 
-        if(command.equalsIgnoreCase("Get Key")){
-            hasKey=true;
+        if(command.equalsIgnoreCase("Get thermos")){
+            hasThermos=true;
         }
 
             mainWindow.wipe();

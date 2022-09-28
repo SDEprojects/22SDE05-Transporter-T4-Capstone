@@ -83,14 +83,12 @@ public class ButtonListener implements MouseListener {
         // Then command string is passed to Transport Application.
         commandGateObject.setIsCommandSentFromGui(true);
 
-
         try {
             Thread.sleep(130);
         } catch (InterruptedException ex) {
             throw new RuntimeException(ex);
         }
         setResetButtons();
-
     }
 
     @Override
