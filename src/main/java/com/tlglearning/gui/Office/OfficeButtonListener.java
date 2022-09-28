@@ -1,33 +1,28 @@
-package com.tlglearning.gui.interactwarehouse;
+package com.tlglearning.gui.Office;
 
 import com.tlglearning.middleware.commandGateObject;
-import com.tlglearning.util.Location;
 
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import static com.tlglearning.client.TransporterClient.mainWindow;
 
 //import static com.tlglearning.client.TransporterClient.mainWindow;
 
-public class WarehouseButtonListener implements MouseListener {
+public class OfficeButtonListener implements MouseListener {
 
     ImageIcon orginalIcon;
     ImageIcon showItemIcon;
     JButton button;
 
-    private static boolean hasKey=false;
+
+    static HashMap<String, Object> DestinationsMap;
 
 
-
-
-    public WarehouseButtonListener(JButton button,ImageIcon orginal, ImageIcon showItem) {
+    public OfficeButtonListener(JButton button, ImageIcon orginal, ImageIcon showItem) {
         this.orginalIcon=orginal;
         this.orginalIcon.setDescription(orginal.getDescription());
         this.showItemIcon=showItem;
@@ -51,31 +46,22 @@ public class WarehouseButtonListener implements MouseListener {
     @Override
     public void mousePressed(MouseEvent e) {
         String command="";
-
-            if (button.getIcon().equals(orginalIcon) ) {
-                if((!orginalIcon.getDescription().equalsIgnoreCase("Explore Cabinet") || hasKey)){
-                    command = orginalIcon.getDescription();
-                    button.setIcon(showItemIcon);
-                }
+        if(button.getIcon().equals(orginalIcon)){
+            command=orginalIcon.getDescription();
+            button.setIcon(showItemIcon);
 
 
-            } else {
-                command = showItemIcon.getDescription();
-                button.setIcon(orginalIcon);
-                showItemIcon = orginalIcon;
-            }
-
-
-        if(command.equalsIgnoreCase("Get Key")){
-            hasKey=true;
+        } else{
+            command=showItemIcon.getDescription();
+            button.setIcon(orginalIcon);
+            showItemIcon=orginalIcon;
         }
 
-            mainWindow.wipe();
+        mainWindow.wipe();
 
-            commandGateObject.setCommand(command);
+        commandGateObject.setCommand(command);
 
-            commandGateObject.setIsCommandSentFromGui(true);
-
+        commandGateObject.setIsCommandSentFromGui(true);
 
     }
 
