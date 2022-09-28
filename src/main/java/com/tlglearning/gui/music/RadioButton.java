@@ -34,10 +34,6 @@ public class RadioButton {
 
         stopButton.setIcon(stop);
 
-        panel.add(musicButton);
-
-        panel.revalidate();
-
         return panel;
     }
 

@@ -9,6 +9,7 @@ import com.tlglearning.gui.interactbreakroom.actionBreakRoom;
 import com.tlglearning.gui.interactgasstation.actionGasStation;
 import com.tlglearning.gui.interactwarehouse.actionWarehouse;
 import com.tlglearning.gui.music.RadioButton;
+import com.tlglearning.gui.states.StatesPanel;
 import com.tlglearning.middleware.commandGateObject;
 
 import javax.sound.sampled.LineUnavailableException;
@@ -46,6 +47,7 @@ public class MainWindow {
     private String titleText;
     private String map;
     private String text;
+
     private static final JFrame APP_CONTAINER = new JFrame();
     private static final JPanel TITLE_CONTAINER = new JPanel();
     private static final JPanel MAP_CONTAINER = new JPanel();
@@ -54,6 +56,10 @@ public class MainWindow {
     private static boolean gameStarted = false;
     private static ImageIcon MapImageIcon;
     static JLabel mapPanelLabel = new JLabel();
+
+    static JButton stateButton = new JButton();
+
+    static JPanel panel = new JPanel();
 
     public MainWindow() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         initialize();
@@ -179,6 +185,7 @@ public class MainWindow {
         baseLayer.add(Compass.getPanel());
         baseLayer.add(promptContainer.getPanel());
         baseLayer.add(RadioButton.init());
+        baseLayer.add(StatesPanel.init());
         APP_CONTAINER.add(baseLayer.getPanel());
 //        baseLayer.add(gasStationPane);
         show();
