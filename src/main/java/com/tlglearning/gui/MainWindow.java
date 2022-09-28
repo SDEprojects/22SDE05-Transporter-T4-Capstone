@@ -9,7 +9,6 @@ import com.tlglearning.gui.interactbreakroom.actionBreakRoom;
 import com.tlglearning.gui.interactgasstation.actionGasStation;
 import com.tlglearning.gui.interactwarehouse.actionWarehouse;
 import com.tlglearning.gui.music.RadioButton;
-import com.tlglearning.gui.states.StatesPanel;
 import com.tlglearning.middleware.commandGateObject;
 
 import javax.sound.sampled.LineUnavailableException;
@@ -47,29 +46,22 @@ public class MainWindow {
     private String titleText;
     private String map;
     private String text;
-
     private static final JFrame APP_CONTAINER = new JFrame();
     private static final JPanel TITLE_CONTAINER = new JPanel();
     private static final JPanel MAP_CONTAINER = new JPanel();
-    private static final JPanel PROMPT_CONTAINER = new JPanel();
-
     private static boolean gameStarted = false;
     private static ImageIcon MapImageIcon;
     static JLabel mapPanelLabel = new JLabel();
-
-    static JButton stateButton = new JButton();
-
-    static JPanel panel = new JPanel();
+    ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+    private static final PromptContainer promptContainer = new PromptContainer();
+    private static Countdown countdown;
+    private static RadioButton radioButton;
+    BaseLayer baseLayer;
+    Title title;
 
     public MainWindow() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         initialize();
     }
-
-    ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-    private static final PromptContainer promptContainer = new PromptContainer();
-    BaseLayer baseLayer;
-    Title title;
-
 
 /**
  * CLASS METHODS BELOW ------------------------------------------------------------------------------------------------|
@@ -102,10 +94,10 @@ public class MainWindow {
         GridBagConstraints gbc = new GridBagConstraints();
         MAP_CONTAINER.setBackground(Color.BLACK);
         //MAP_CONTAINER.setSize(500, 500);
-
-        PROMPT_CONTAINER.setLayout(new BorderLayout(0, 0));
-        PROMPT_CONTAINER.setBackground(Color.BLACK);
-        PROMPT_CONTAINER.setMinimumSize(new Dimension(600, 200));
+//
+//        PROMPT_CONTAINER.setLayout(new BorderLayout(0, 0));
+//        PROMPT_CONTAINER.setBackground(Color.BLACK);
+//        PROMPT_CONTAINER.setMinimumSize(new Dimension(600, 200));
 
         TITLE_CONTAINER.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 5));
 //        TITLE_CONTAINER.setBackground(Color.BLACK);
@@ -174,18 +166,20 @@ public class MainWindow {
 
         baseLayer.add(title);
 
-        JPanel test = new JPanel();
-        test.setSize(new Dimension(1220, 187));
-        test.setLocation(460, 600);
-        test.setOpaque(false);
-        test.setBackground(new Color(0, 0, 0, 0));
-        test.add(commandTextField);
+        JPanel textBoxPanel = new JPanel();
+        textBoxPanel.setSize(new Dimension(1220, 187));
+        textBoxPanel.setLocation(460, 600);
+        textBoxPanel.setOpaque(false);
+        textBoxPanel.setBackground(new Color(0, 0, 0, 0));
+        textBoxPanel.add(commandTextField);
 
-        baseLayer.add(test);
+        radioButton = new RadioButton(this);
+
+        baseLayer.add(textBoxPanel);
         baseLayer.add(Compass.getPanel());
         baseLayer.add(promptContainer.getPanel());
-        baseLayer.add(RadioButton.init());
-        baseLayer.add(StatesPanel.init());
+        baseLayer.addModal(radioButton.getPanel());
+
         APP_CONTAINER.add(baseLayer.getPanel());
 //        baseLayer.add(gasStationPane);
         show();
@@ -276,8 +270,14 @@ public class MainWindow {
             setPromptText(str);
             promptContainer.setPrompt(text);
         }
-        PROMPT_CONTAINER.revalidate();
-        PROMPT_CONTAINER.repaint();
+
+        if (str.contains(savedGameStartPrompt)) {
+            countdown = new Countdown();
+            baseLayer.addModal(countdown.getPanel());
+            baseLayer.revalidate();
+        }
+//        PROMPT_CONTAINER.revalidate();
+//        PROMPT_CONTAINER.repaint();
         sleep();
         P3.setEditable(false);
     }

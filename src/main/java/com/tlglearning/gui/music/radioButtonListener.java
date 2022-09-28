@@ -21,21 +21,21 @@ public class radioButtonListener extends JFrame implements MouseListener {
     static SimpleAudioPlayer audioPlayer;
     static HashMap<String, Object> DestinationsMap;
 
-    public radioButtonListener(JButton musicButton, ImageIcon orginal, ImageIcon showItem) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+    public radioButtonListener(JButton volumeButton, SimpleAudioPlayer audioPlayer) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+        this.musicButton = musicButton;
+        this.audioPlayer = audioPlayer;
+    }
 
+
+    public radioButtonListener(JButton musicButton, ImageIcon orginal, ImageIcon showItem, SimpleAudioPlayer audioPlayer) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         this.orginalIcon = orginal;
         this.showItemIcon = showItem;
         musicButton.setIcon(orginal);
         this.musicButton = musicButton;
-
-        setUpRadio();
-
+        this.audioPlayer = audioPlayer;
     }
 
-    public static void setUpRadio() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
-        audioPlayer = new SimpleAudioPlayer();
 
-    }
 
     @Override
     public void mouseClicked(MouseEvent e) {
@@ -57,7 +57,6 @@ public class radioButtonListener extends JFrame implements MouseListener {
     }
     @Override
     public void mouseReleased(MouseEvent e) {
-
 
     }
 
