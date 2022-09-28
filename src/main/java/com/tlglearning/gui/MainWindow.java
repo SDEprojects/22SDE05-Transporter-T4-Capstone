@@ -45,7 +45,7 @@ public class MainWindow {
     private static final JFrame APP_CONTAINER = new JFrame();
     private static final JPanel TITLE_CONTAINER = new JPanel();
     private static final JPanel MAP_CONTAINER = new JPanel();
-    private static final JPanel PROMPT_CONTAINER = new JPanel();
+//    private static final JPanel PROMPT_CONTAINER = new JPanel();
 
     private static boolean gameStarted = false;
     private static ImageIcon MapImageIcon;
@@ -59,6 +59,8 @@ public class MainWindow {
     private static final PromptContainer promptContainer = new PromptContainer();
     BaseLayer baseLayer;
     Title title;
+    private static Countdown countdown;
+
 
 
 /**
@@ -92,10 +94,10 @@ public class MainWindow {
         GridBagConstraints gbc = new GridBagConstraints();
         MAP_CONTAINER.setBackground(Color.BLACK);
         //MAP_CONTAINER.setSize(500, 500);
-
-        PROMPT_CONTAINER.setLayout(new BorderLayout(0, 0));
-        PROMPT_CONTAINER.setBackground(Color.BLACK);
-        PROMPT_CONTAINER.setMinimumSize(new Dimension(600, 200));
+//
+//        PROMPT_CONTAINER.setLayout(new BorderLayout(0, 0));
+//        PROMPT_CONTAINER.setBackground(Color.BLACK);
+//        PROMPT_CONTAINER.setMinimumSize(new Dimension(600, 200));
 
         TITLE_CONTAINER.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 5));
 //        TITLE_CONTAINER.setBackground(Color.BLACK);
@@ -164,16 +166,18 @@ public class MainWindow {
 
         baseLayer.add(title);
 
-        JPanel test = new JPanel();
-        test.setSize(new Dimension(1220, 187));
-        test.setLocation(460, 600);
-        test.setOpaque(false);
-        test.setBackground(new Color(0, 0, 0, 0));
-        test.add(commandTextField);
+        JPanel textBoxPanel = new JPanel();
+        textBoxPanel.setSize(new Dimension(1220, 187));
+        textBoxPanel.setLocation(460, 600);
+        textBoxPanel.setOpaque(false);
+        textBoxPanel.setBackground(new Color(0, 0, 0, 0));
+        textBoxPanel.add(commandTextField);
 
-        baseLayer.add(test);
+
+        baseLayer.add(textBoxPanel);
         baseLayer.add(Compass.getPanel());
         baseLayer.add(promptContainer.getPanel());
+
         APP_CONTAINER.add(baseLayer.getPanel());
 //        baseLayer.add(gasStationPane);
         show();
@@ -264,8 +268,14 @@ public class MainWindow {
             setPromptText(str);
             promptContainer.setPrompt(text);
         }
-        PROMPT_CONTAINER.revalidate();
-        PROMPT_CONTAINER.repaint();
+
+        if (str.contains(savedGameStartPrompt)) {
+            countdown = new Countdown();
+            baseLayer.addModal(countdown.getPanel());
+            baseLayer.revalidate();
+        }
+//        PROMPT_CONTAINER.revalidate();
+//        PROMPT_CONTAINER.repaint();
         sleep();
         P3.setEditable(false);
     }
