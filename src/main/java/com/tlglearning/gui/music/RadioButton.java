@@ -18,7 +18,7 @@ public class RadioButton {
         init();
     }
 
-    public static void init() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+    public static JPanel init() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         panel.setSize(80,80);
         panel.setBounds(0,0, 80, 80);
         panel.setLocation(125, 560);
@@ -38,6 +38,7 @@ public class RadioButton {
 
         panel.revalidate();
 
+        return panel;
     }
 
     public JPanel getPanel() {
