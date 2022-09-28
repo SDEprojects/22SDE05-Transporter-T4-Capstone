@@ -8,14 +8,18 @@ import com.tlglearning.gui.interactbossoffice.actionBossOffice;
 import com.tlglearning.gui.interactbreakroom.actionBreakRoom;
 import com.tlglearning.gui.interactgasstation.actionGasStation;
 import com.tlglearning.gui.interactwarehouse.actionWarehouse;
+import com.tlglearning.gui.music.RadioButton;
 import com.tlglearning.middleware.commandGateObject;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 //import static com.tlglearning.gui.button.Compass.getPanel;
 
 
@@ -45,23 +49,19 @@ public class MainWindow {
     private static final JFrame APP_CONTAINER = new JFrame();
     private static final JPanel TITLE_CONTAINER = new JPanel();
     private static final JPanel MAP_CONTAINER = new JPanel();
-//    private static final JPanel PROMPT_CONTAINER = new JPanel();
-
     private static boolean gameStarted = false;
     private static ImageIcon MapImageIcon;
     static JLabel mapPanelLabel = new JLabel();
-
-    public MainWindow() {
-        initialize();
-    }
-
     ClassLoader classloader = Thread.currentThread().getContextClassLoader();
     private static final PromptContainer promptContainer = new PromptContainer();
+    private static Countdown countdown;
+    private static RadioButton radioButton;
     BaseLayer baseLayer;
     Title title;
-    private static Countdown countdown;
 
-
+    public MainWindow() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+        initialize();
+    }
 
 /**
  * CLASS METHODS BELOW ------------------------------------------------------------------------------------------------|
@@ -79,7 +79,7 @@ public class MainWindow {
     /**
      * initialize() - setup and customize main gui panels & elements
      */
-    public void initialize() {
+    public void initialize() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
 
         /* Create a main window panel and set attributes. */
         APP_CONTAINER.setLayout(null);
@@ -173,10 +173,12 @@ public class MainWindow {
         textBoxPanel.setBackground(new Color(0, 0, 0, 0));
         textBoxPanel.add(commandTextField);
 
+        radioButton = new RadioButton(this);
 
         baseLayer.add(textBoxPanel);
         baseLayer.add(Compass.getPanel());
         baseLayer.add(promptContainer.getPanel());
+        baseLayer.addModal(radioButton.getPanel());
 
         APP_CONTAINER.add(baseLayer.getPanel());
 //        baseLayer.add(gasStationPane);
