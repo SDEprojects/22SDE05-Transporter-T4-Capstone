@@ -39,7 +39,7 @@ public class SimpleAudioPlayer {
         clip.open(audioInputStream);
 
         FloatControl volControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-        volControl.setValue(-20.0f); // Reduce vol by 10 decibels;
+            volControl.setValue(-25.0f); // Reduce vol by 10 decibels
 
         clip.loop(Clip.LOOP_CONTINUOUSLY);
         clip.stop();

@@ -33,6 +33,7 @@ public class Compass {
             compass[i] = icon;
         }
 
+
         compass[1].setDescription("Go North");
         compass[3].setDescription("Go West");
         compass[5].setDescription("Go East");

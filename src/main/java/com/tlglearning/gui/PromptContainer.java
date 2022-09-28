@@ -1,11 +1,6 @@
 package com.tlglearning.gui;
-
 import java.awt.*;
-import java.awt.event.ActionEvent;
-
 import javax.swing.*;
-import javax.swing.border.*;
-
 import static javax.swing.BorderFactory.createEmptyBorder;
 
 public class PromptContainer {
@@ -32,7 +27,6 @@ public class PromptContainer {
         scrollPane.setBorder(createEmptyBorder());
         scrollPane.setPreferredSize(new Dimension(600, 500));
         scrollPane.setMaximumSize(new Dimension(600,500));
-//        scrollPane.setLocation(100,600);
         scrollPane.getVerticalScrollBar().setPreferredSize(new Dimension(0, 0));
         scrollPane.getViewport().setOpaque(false);
         scrollPane.setOpaque(false);
@@ -70,7 +64,6 @@ public class PromptContainer {
         gbc.gridy = row++;
         content.add(p, gbc);
         content.revalidate();
-
         text.setFont(text.getFont().deriveFont(Font.BOLD, 16f));
     }
 
@@ -79,11 +72,10 @@ public class PromptContainer {
     }
 
     public static void positionSouth() {
-        scrollPane.setPreferredSize(new Dimension(600, 200));
-        scrollPane.setMaximumSize(new Dimension(600,200));
-//        scrollPane.setLocation(100,600);
+        scrollPane.setPreferredSize(new Dimension(600, 250));
+        scrollPane.setMaximumSize(new Dimension(600,250));
         panel.setSize(new Dimension(1220, 500));
-        panel.setLocation(0,450);
+        panel.setLocation(0,400);
     }
 
     public static void wipe() {
@@ -91,7 +83,5 @@ public class PromptContainer {
         content.revalidate();
     }
 
-    public static void main(String[] args) throws Exception {
-        new PromptContainer();
-    }
+
 }

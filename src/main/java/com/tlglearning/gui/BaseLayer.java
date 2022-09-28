@@ -58,12 +58,17 @@ public class BaseLayer {
     }
 
     public static void add(JLayeredPane layer){
-
-            panel.add(layer, 0);
-
-
+        panel.add(layer, 0);
     }
 
+    public static void addModal(JPanel layer) {
+        panel.add(layer, JLayeredPane.MODAL_LAYER);
+    }
+
+
+    public static void revalidate() {
+        panel.revalidate();
+    }
 //    public static void setBackGroudPanel(JLayeredPane backPanel){
 //        backgroundPanel=backPanel;
 //        panel.add(backgroundPanel);
