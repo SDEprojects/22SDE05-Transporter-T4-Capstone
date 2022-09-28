@@ -8,14 +8,18 @@ import com.tlglearning.gui.interactbossoffice.actionBossOffice;
 import com.tlglearning.gui.interactbreakroom.actionBreakRoom;
 import com.tlglearning.gui.interactgasstation.actionGasStation;
 import com.tlglearning.gui.interactwarehouse.actionWarehouse;
+import com.tlglearning.gui.music.RadioButton;
 import com.tlglearning.middleware.commandGateObject;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 //import static com.tlglearning.gui.button.Compass.getPanel;
 
 
@@ -51,7 +55,7 @@ public class MainWindow {
     private static ImageIcon MapImageIcon;
     static JLabel mapPanelLabel = new JLabel();
 
-    public MainWindow() {
+    public MainWindow() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         initialize();
     }
 
@@ -77,7 +81,7 @@ public class MainWindow {
     /**
      * initialize() - setup and customize main gui panels & elements
      */
-    public void initialize() {
+    public void initialize() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
 
         /* Create a main window panel and set attributes. */
         APP_CONTAINER.setLayout(null);
@@ -174,6 +178,7 @@ public class MainWindow {
         baseLayer.add(test);
         baseLayer.add(Compass.getPanel());
         baseLayer.add(promptContainer.getPanel());
+        baseLayer.add(RadioButton.init());
         APP_CONTAINER.add(baseLayer.getPanel());
 //        baseLayer.add(gasStationPane);
         show();
