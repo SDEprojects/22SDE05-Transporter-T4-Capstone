@@ -139,7 +139,7 @@ tech room:
     cabinet": You see a GPS
     laptop": You see your broken laptop that was supposed to be fixed 3 weeks ago
     closet": You see a RADIO
-  get:d
+  get:
     GETgps: GPS that provides directions
     GETradio: Communication radio
       ------------------------------------------------------------------------------------------------------------------
