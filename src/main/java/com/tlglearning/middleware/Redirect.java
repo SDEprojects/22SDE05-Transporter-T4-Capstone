@@ -150,13 +150,10 @@ public class Redirect {
      */
     public static String sendGuiCommandToApp() {
 
-
         commandGateObject.setWait(false);
         commandGateObject.setIsCommandSentFromGui(false);
 
-
         while (!commandGateObject.isCommandSentFromGui()) {
-
             // Sleep slows down the while loop from processing.
             try {
                 Thread.sleep(80);
@@ -199,10 +196,6 @@ public class Redirect {
         mainWindow.setPrompt(prompt);
     }
 
-    public static void getPromptWithLocation(String identity, String key, String nextLocation) {
-        String prompt = (String) GamePromptsMap.get(key);
-        mainWindow.setPrompt(prompt);
-    }
 
 
     public static void setLocation(Location loc) {
@@ -212,6 +205,18 @@ public class Redirect {
 
         location = loc;
 
+    }
+
+    public static void updateLocation(Location loc){
+        ButtonListener.setResetButtons();
+
+    }
+    public static void sleep(){
+        try {
+            Thread.sleep(80);
+        } catch (InterruptedException e) {
+            System.out.println("An Exception occurred: " + e);
+        }
     }
 
 

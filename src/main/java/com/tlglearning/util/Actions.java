@@ -242,6 +242,7 @@ public class Actions {
         currentLocation.setSouth(InputHandling.getDescription(newLocation, "south", jsonNodeObj));
         currentLocation.setEast(InputHandling.getDescription(newLocation, "east", jsonNodeObj));
         currentLocation.setWest(InputHandling.getDescription(newLocation, "west", jsonNodeObj));
+
     }
 }
 

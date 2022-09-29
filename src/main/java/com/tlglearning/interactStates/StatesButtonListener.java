@@ -81,12 +81,12 @@ public class StatesButtonListener implements MouseListener {
 //                System.out.println("==================================");
 //                ButtonListener.setResetButtons();
 //            }
-            try {
-                Thread.sleep(2000);
-
-            } catch (InterruptedException ex) {
-                throw new RuntimeException(ex);
-            }
+//            try {
+//                Thread.sleep(2000);
+//
+//            } catch (InterruptedException ex) {
+//                throw new RuntimeException(ex);
+//            }
         }
 
 
