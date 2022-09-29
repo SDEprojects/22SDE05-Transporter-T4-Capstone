@@ -31,7 +31,7 @@ public class RadioButton {
         setUpRadio();
         panel.setSize(80,80);
         panel.setBounds(0,0, 260, 80);
-        panel.setLocation(40, 580);
+        panel.setLocation(27, 560);
         panel.setOpaque(false);
         panel.setBackground(new Color(0,0,0,0));
         panel.setLayout(new GridLayout(1,3));

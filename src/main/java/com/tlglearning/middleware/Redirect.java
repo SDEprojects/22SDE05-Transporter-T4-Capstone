@@ -161,7 +161,7 @@ public class Redirect {
             }
         }
 //        command=commandObject.getCommand();
-        commandGateObject.setIsCommandSentFromGui(false);
+
         return commandGateObject.getCommand();
     }
 
