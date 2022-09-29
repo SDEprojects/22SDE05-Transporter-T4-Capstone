@@ -149,8 +149,12 @@ public class Redirect {
      * @return messageToApp
      */
     public static String sendGuiCommandToApp() {
+
+
         commandGateObject.setWait(false);
         commandGateObject.setIsCommandSentFromGui(false);
+
+
         while (!commandGateObject.isCommandSentFromGui()) {
 
             // Sleep slows down the while loop from processing.
@@ -202,8 +206,7 @@ public class Redirect {
 
 
     public static void setLocation(Location loc) {
-//        CommandButton.setDestinationsMap(DestinationsMap);
-//        CommandButton.setLocation(loc);
+
         ButtonListener.setDestinationsMap(DestinationsMap);
         ButtonListener.setLocation(loc);
 

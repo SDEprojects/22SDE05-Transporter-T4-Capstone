@@ -101,14 +101,10 @@ public class MainWindow {
         MAP_CONTAINER.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         MAP_CONTAINER.setBackground(Color.BLACK);
-        //MAP_CONTAINER.setSize(500, 500);
-//
-//        PROMPT_CONTAINER.setLayout(new BorderLayout(0, 0));
-//        PROMPT_CONTAINER.setBackground(Color.BLACK);
-//        PROMPT_CONTAINER.setMinimumSize(new Dimension(600, 200));
+
 
         TITLE_CONTAINER.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 5));
-//        TITLE_CONTAINER.setBackground(Color.BLACK);
+
         TITLE_CONTAINER.setOpaque(false);
 
         TITLE_CONTAINER.setSize(new Dimension(1220, 187));

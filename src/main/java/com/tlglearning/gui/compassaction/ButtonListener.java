@@ -23,8 +23,9 @@ public class ButtonListener implements MouseListener {
     ImageIcon active;
     ImageIcon inactive;
     JButton label;
-    Compass compass;
-    static final List<String> notDrivingLocations= new ArrayList<String>() {
+    static boolean isReady=false;
+
+    static final List<String> notDrivingLocations= new ArrayList<>() {
         {
             add("truck");
             add("warehouse");
@@ -42,7 +43,7 @@ public class ButtonListener implements MouseListener {
 
     public ButtonListener(JButton label, int tile) {
         buttonsList.add(label);
-        ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+
         this.tile = tile;
         this.label = label;
         switch (tile) {
@@ -75,11 +76,7 @@ public class ButtonListener implements MouseListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
-
         label.setIcon(active);
-
-
-
     }
 
     @Override
@@ -114,10 +111,8 @@ public class ButtonListener implements MouseListener {
     @Override
     public void mouseEntered(MouseEvent e) {
 
-
         label.setIcon(active);
         label.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-
 
     }
 
@@ -134,7 +129,7 @@ public class ButtonListener implements MouseListener {
         // BUTTON_ACTION_CONTAINER.add((new CommandButton(this, "EXPLORE","Explore")).getButton(),BorderLayout.WEST);
         // BUTTON_ACTION_CONTAINER.add((new CommandButton(this, "Get","Get")).getButton(),BorderLayout.EAST);
 
-        if (location == null || buttonsList.isEmpty() ) {
+        if (location == null || buttonsList.isEmpty()  ) {
             return "setResetButton invalid";
         }
 
@@ -175,6 +170,7 @@ public class ButtonListener implements MouseListener {
                 }
             }
         }
+        isReady=true;
         return "setResetButton valid";
     }
 
@@ -185,4 +181,5 @@ public class ButtonListener implements MouseListener {
     public static void setDestinationsMap(HashMap<String, Object> destinationsMap) {
         DestinationsMap = destinationsMap;
     }
+
 }

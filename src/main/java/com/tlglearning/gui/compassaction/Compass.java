@@ -33,7 +33,6 @@ public class Compass {
             compass[i] = icon;
         }
 
-
         compass[1].setDescription("Go North");
         compass[3].setDescription("Go West");
         compass[5].setDescription("Go East");
@@ -64,7 +63,6 @@ public class Compass {
                 buttonLabel.setContentAreaFilled(false);
                 buttonLabel.setFocusPainted(false);
 
-
                 if (!compass[i].getDescription().equalsIgnoreCase("go east")) {
                     buttonLabel.setEnabled(false);
                     buttonLabel.setVisible(false);
@@ -72,7 +70,6 @@ public class Compass {
                 panel.add(buttonLabel);
             }
         }
-
 
         return panel;
     }

@@ -1,5 +1,6 @@
 package com.tlglearning.interactStates;
 
+import com.tlglearning.gui.compassaction.ButtonListener;
 import com.tlglearning.middleware.commandGateObject;
 
 import javax.swing.*;
@@ -72,6 +73,20 @@ public class StatesButtonListener implements MouseListener {
             commandGateObject.setCommand(command);
 
             commandGateObject.setIsCommandSentFromGui(true);
+
+
+//            if(ButtonListener.isCompassReady()) {
+//                System.out.println("==================================");
+//                System.out.println(location.getLocationName());
+//                System.out.println("==================================");
+//                ButtonListener.setResetButtons();
+//            }
+            try {
+                Thread.sleep(2000);
+
+            } catch (InterruptedException ex) {
+                throw new RuntimeException(ex);
+            }
         }
 
 
