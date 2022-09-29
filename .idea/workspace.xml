@@ -9,11 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a3af4fcc-1377-45d1-80a3-ae75546d2e44" name="Changes" comment="Commit and push to Feature branch: Generate a class that displays the inside of the vehicle, AB#1155">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tlglearning/gui/music/RadioButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tlglearning/gui/music/RadioButton.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tlglearning/gui/music/SimpleAudioPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tlglearning/gui/music/SimpleAudioPlayer.java" afterDir="false" />
-    </list>
+    <list default="true" id="a3af4fcc-1377-45d1-80a3-ae75546d2e44" name="Changes" comment="Commit and push to Feature branch: Generate a class that displays the inside of the vehicle, AB#1155" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -139,13 +135,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1663610024397</updated>
-    </task>
-    <task id="LOCAL-00011" summary="Commit: Created Button class that contains dynamic action listeners, AB#1120">
-      <created>1663715321954</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1663715321954</updated>
     </task>
     <task id="LOCAL-00012" summary="Commit: Editing button action listener, AB#1120">
       <created>1663715824044</created>
@@ -483,7 +472,14 @@
       <option name="project" value="LOCAL" />
       <updated>1664442534276</updated>
     </task>
-    <option name="localTasksCounter" value="60" />
+    <task id="LOCAL-00060" summary="Commit and push to Feature branch: Generate a class that displays the inside of the vehicle, AB#1155">
+      <created>1664444264549</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1664444264549</updated>
+    </task>
+    <option name="localTasksCounter" value="61" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
