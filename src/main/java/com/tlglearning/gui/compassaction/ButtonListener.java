@@ -23,14 +23,27 @@ public class ButtonListener implements MouseListener {
     ImageIcon active;
     ImageIcon inactive;
     JButton label;
-    Compass compass;
+    static boolean isReady=false;
+
+    static final List<String> notDrivingLocations= new ArrayList<>() {
+        {
+            add("truck");
+            add("warehouse");
+            add("front office");
+            add("boss office");
+            add("break room");
+            add("hr office");
+            add("tech room");
+            add("gas station");
+        }
+    };
 
     static HashMap<String, Object> DestinationsMap;
-    private static Location location;
+    private static Location location=null;
 
     public ButtonListener(JButton label, int tile) {
         buttonsList.add(label);
-        ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+
         this.tile = tile;
         this.label = label;
         switch (tile) {
@@ -63,39 +76,37 @@ public class ButtonListener implements MouseListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
-
         label.setIcon(active);
-
-
-
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
+        if (!commandGateObject.getWait()) {
+            label.setIcon(inactive);
+            mainWindow.wipe();
+            // create String for the label
+            // Sets commandGateObject command text  field to the user input command.
 
-        label.setIcon(inactive);
-        mainWindow.wipe();
-        // create String for the label
-        // Sets commandGateObject command text  field to the user input command.
-        commandGateObject.setCommand(active.getDescription());
-
-        // Sends confirmation boolean variable to tell the middleware that command is sent.
-        // Then command string is passed to Transport Application.
-        commandGateObject.setIsCommandSentFromGui(true);
+            if (!notDrivingLocations.contains(location.getLocationName())) {
+                String tempCommand = active.getDescription().toLowerCase().replaceAll("go", "drive");
+                commandGateObject.setCommand(tempCommand);
+            } else {
+                commandGateObject.setCommand(active.getDescription());
+            }
 
 
-        try {
-            Thread.sleep(130);
-        } catch (InterruptedException ex) {
-            throw new RuntimeException(ex);
+            // Sends confirmation boolean variable to tell the middleware that command is sent.
+            // Then command string is passed to Transport Application.
+            commandGateObject.setIsCommandSentFromGui(true);
+
+
+                setResetButtons();
+
         }
-        setResetButtons();
-
     }
 
     @Override
     public void mouseEntered(MouseEvent e) {
-
 
         label.setIcon(active);
         label.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -108,23 +119,37 @@ public class ButtonListener implements MouseListener {
     }
 
 
+    public static String setResetButtons()  {
 
-    public static String setResetButtons() {
 
         //TODO ADD THESE BUTTON
         // BUTTON_ACTION_CONTAINER.add((new CommandButton(this, "EXPLORE","Explore")).getButton(),BorderLayout.WEST);
         // BUTTON_ACTION_CONTAINER.add((new CommandButton(this, "Get","Get")).getButton(),BorderLayout.EAST);
-
-        if (location == null || buttonsList.isEmpty()) {
-            return "setResetButton invalid";
+        while(commandGateObject.isCommandSentFromGui()) {
+            try {
+                Thread.sleep(30);
+            } catch (InterruptedException ex) {
+                throw new RuntimeException(ex);
+            }
         }
 
+//        if (location == null || buttonsList.isEmpty()  ) {
+//            return "setResetButton invalid";
+//        }
+        if(commandGateObject.getCommand().equalsIgnoreCase("start drive")){
+            try {
+                Thread.sleep(3000);
+                System.out.println("=========================");
+                System.out.println(location.getLocationName());
+            } catch (InterruptedException ex) {
+                throw new RuntimeException(ex);
+            }
+        }
         for (JButton each : buttonsList) {
             if (((ImageIcon)each.getIcon()).getDescription().equalsIgnoreCase("go north")) {
                 if (location.getNorth().equalsIgnoreCase("\"leads to nowhere\"")) {
                     each.setEnabled(false);
                     each.setVisible(false);
-
                 } else {
                     each.setEnabled(true);
                     each.setVisible(true);
@@ -155,6 +180,7 @@ public class ButtonListener implements MouseListener {
                 }
             }
         }
+        isReady=true;
         return "setResetButton valid";
     }
 
@@ -165,4 +191,7 @@ public class ButtonListener implements MouseListener {
     public static void setDestinationsMap(HashMap<String, Object> destinationsMap) {
         DestinationsMap = destinationsMap;
     }
+
+
+
 }

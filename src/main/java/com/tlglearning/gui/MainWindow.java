@@ -1,20 +1,43 @@
 package com.tlglearning.gui;
 
 import com.tlglearning.gui.compassaction.Compass;
+import com.tlglearning.gui.interactHrOffice.actionHrOffice;
+import com.tlglearning.gui.interactOffice.actionOffice;
+import com.tlglearning.gui.interactTechRoom.actionTechRoom;
+import com.tlglearning.gui.interactbossoffice.actionBossOffice;
+import com.tlglearning.gui.interactbreakroom.actionBreakRoom;
+import com.tlglearning.gui.interactgasstation.actionGasStation;
 import com.tlglearning.gui.interactwarehouse.actionWarehouse;
+import com.tlglearning.gui.music.RadioButton;
+import com.tlglearning.gui.states.StatesPanel;
+import com.tlglearning.interactStates.actionStates;
 import com.tlglearning.middleware.commandGateObject;
+
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-
-import static com.tlglearning.gui.compassaction.Compass.getPanel;
+import java.io.IOException;
+//import static com.tlglearning.gui.button.Compass.getPanel;
 
 
 public class MainWindow {
+    JLayeredPane wareHousePane = actionWarehouse.getPanel();
+    JLayeredPane frontOfficePane = actionOffice.getPanel();
+    JLayeredPane bossOfficePane = actionBossOffice.getPanel();
+    JLayeredPane breakRoomPane = actionBreakRoom.getPanel();
 
+    JLayeredPane techRoomPane = actionTechRoom.getPanel();
+
+    JLayeredPane hrOfficePane = actionHrOffice.getPanel();
+
+    JLayeredPane gasStationPane = actionGasStation.getPanel();
+
+    JLayeredPane statePane= actionStates.getPanel();
     private static final JTextArea P1 = new JTextArea(6, 94);
     private static final JTextArea P2 = new JTextArea();
     private static final ColorPane P3 = new ColorPane();
@@ -30,15 +53,22 @@ public class MainWindow {
     private static final JFrame APP_CONTAINER = new JFrame();
     private static final JPanel TITLE_CONTAINER = new JPanel();
     private static final JPanel MAP_CONTAINER = new JPanel();
-    private static final JPanel PROMPT_CONTAINER = new JPanel();
     private static boolean gameStarted = false;
     private static ImageIcon MapImageIcon;
     static JLabel mapPanelLabel = new JLabel();
+    ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+    private static final PromptContainer promptContainer = new PromptContainer();
+    private static Countdown countdown;
+    private static RadioButton radioButton;
+    private  static BaseLayer baseLayer;
+    private static Title title;
+    private static boolean isIntro=true;
 
-    public MainWindow() {
+
+
+    public MainWindow() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         initialize();
     }
-
 
 /**
  * CLASS METHODS BELOW ------------------------------------------------------------------------------------------------|
@@ -56,15 +86,14 @@ public class MainWindow {
     /**
      * initialize() - setup and customize main gui panels & elements
      */
-    public void initialize() {
+    public void initialize() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
 
         /* Create a main window panel and set attributes. */
-        APP_CONTAINER.setLayout(new BorderLayout(0, 0));
+        APP_CONTAINER.setLayout(null);
         APP_CONTAINER.setTitle("Transporter");
         APP_CONTAINER.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        APP_CONTAINER.setSize(1500, 1500);
-        APP_CONTAINER.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        APP_CONTAINER.setResizable(true);
+        APP_CONTAINER.setSize(1220, 690);
+        APP_CONTAINER.setResizable(false);
         APP_CONTAINER.setLocationRelativeTo(null);
 
         /* Element containers */
@@ -72,20 +101,24 @@ public class MainWindow {
         GridBagConstraints gbc = new GridBagConstraints();
         MAP_CONTAINER.setBackground(Color.BLACK);
         //MAP_CONTAINER.setSize(500, 500);
-
-        PROMPT_CONTAINER.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 5));
-        PROMPT_CONTAINER.setBackground(Color.BLACK);
-        //PROMPT_CONTAINER.setSize(600, 600);
+//
+//        PROMPT_CONTAINER.setLayout(new BorderLayout(0, 0));
+//        PROMPT_CONTAINER.setBackground(Color.BLACK);
+//        PROMPT_CONTAINER.setMinimumSize(new Dimension(600, 200));
 
         TITLE_CONTAINER.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 5));
-        TITLE_CONTAINER.setBackground(Color.BLACK);
-        //TITLE_CONTAINER.setSize(400, 400);
+//        TITLE_CONTAINER.setBackground(Color.BLACK);
+        TITLE_CONTAINER.setOpaque(false);
+
+        TITLE_CONTAINER.setSize(new Dimension(1220, 187));
+        TITLE_CONTAINER.setPreferredSize(new Dimension(1220, 187));
+        TITLE_CONTAINER.setMaximumSize(new Dimension(1220, 187));
+        TITLE_CONTAINER.add(new JLabel(new ImageIcon(classloader.getResource("photos/title.png"))));
 
         /* P1 is JTextArea - will populate title */
         P1.setFont(new Font("Courier New", Font.PLAIN, 12));
-        P1.setForeground(Color.WHITE);
+//        P1.setForeground(Color.WHITE);
         P1.setBackground(Color.BLACK);
-        TITLE_CONTAINER.setOpaque(true);
 
         /* P2 is JTextArea - will populate map */
         P2.setFont(new Font("Courier New", Font.PLAIN, 12));
@@ -97,7 +130,8 @@ public class MainWindow {
         SimpleAttributeSet att = new SimpleAttributeSet();
         StyleConstants.setBold(att, true);
         StyleConstants.setBackground(att, Color.BLACK);
-        //P3.setPreferredSize(new Dimension(600, 350));
+        P3.setPreferredSize(new Dimension(600, 350));
+
         P3.setCharacterAttributes(att, true);
         P3.setFont(new Font("Courier New", Font.PLAIN, 12));
         P3.setOpaque(false);
@@ -112,52 +146,59 @@ public class MainWindow {
         commandTextField.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
-                if(e.getKeyCode() == KeyEvent.VK_ENTER){
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                     sendCommandToApp();
                 }
             }
         });
 
-        ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-        MapImageIcon= new ImageIcon(classloader.getResource("photos/intro.png"));
+        MapImageIcon = new ImageIcon(classloader.getResource("photos/intro.png"));
 
-        /* Add basic GUI elements to their containers */
-        TITLE_CONTAINER.add(P1);
-        MAP_CONTAINER.add(P2, gbc);
-        MAP_CONTAINER.add(P4, gbc);
-        PROMPT_CONTAINER.add(P3);
-        PROMPT_CONTAINER.add(commandTextField);
+        ImageIcon MapImageIcon2 = new ImageIcon(
+                new ImageIcon(classloader.getResource("photos/intro.png"))
+                        .getImage()
+                        .getScaledInstance(1220, 686, Image.SCALE_DEFAULT)
+        );
 
-        BUTTON_GO_CONTAINER.add(commandTextField, BorderLayout.CENTER);
-
-        PROMPT_CONTAINER.add(BUTTON_GO_CONTAINER,BorderLayout.NORTH);
-        PROMPT_CONTAINER.add(BUTTON_ACTION_CONTAINER,BorderLayout.SOUTH);
-
-        /* Add elements container to the main application */
-        APP_CONTAINER.add(TITLE_CONTAINER, BorderLayout.NORTH);
-        APP_CONTAINER.add(MAP_CONTAINER, BorderLayout.CENTER);
-        APP_CONTAINER.add(PROMPT_CONTAINER, BorderLayout.SOUTH);
-        mapPanelLabel.setIcon(MapImageIcon);
-        MAP_CONTAINER.add(mapPanelLabel, gbc);
-//        APP_CONTAINER.setResizable();
-//        APP_CONTAINER.add(actionWarehouse.getPanel());
+        baseLayer = new BaseLayer(MapImageIcon2);
 
 
+        title = new Title();
+        title.setSize(new Dimension(1220, 187));
+        title.setPreferredSize(new Dimension(756, 187));
+        title.setMaximumSize(new Dimension(756, 187));
+        title.setLocation((1220 - 756) / 2, -20);
+        title.setOpaque(false);
 
-      BUTTON_ACTION_CONTAINER.add(Compass.getPanel());
-//        APP_CONTAINER.add(actionWarehouse.getPanel());
 
-        /* Setting GUI visibility */
+        baseLayer.add(title);
+
+        JPanel textBoxPanel = new JPanel();
+        textBoxPanel.setSize(new Dimension(1220, 187));
+        textBoxPanel.setLocation(460, 600);
+        textBoxPanel.setOpaque(false);
+        textBoxPanel.setBackground(new Color(0, 0, 0, 0));
+        textBoxPanel.add(commandTextField);
+
+        radioButton = new RadioButton(this);
+
+        baseLayer.add(textBoxPanel);
+        baseLayer.add(Compass.getPanel());
+        baseLayer.add(promptContainer.getPanel());
+        baseLayer.addModal(radioButton.getPanel());
+
+        APP_CONTAINER.add(baseLayer.getPanel());
+//        baseLayer.add(statePane);
         show();
 
     }
 
 
-/**
- * (NOT GUI!!) FIELD SETTER METHODS BELOW  ----------------------------------------------------------------------------|
- * --------------------------------------------------------------------------------------------------------------------|
- * --------------------------------------------------------------------------------------------------------------------|
- */
+    /**
+     * (NOT GUI!!) FIELD SETTER METHODS BELOW  ----------------------------------------------------------------------------|
+     * --------------------------------------------------------------------------------------------------------------------|
+     * --------------------------------------------------------------------------------------------------------------------|
+     */
 
     public void setMapChars(String map) {
         this.map = map;
@@ -174,7 +215,7 @@ public class MainWindow {
     }
 
 
-    public void setGameStarted(){
+    public void setGameStarted() {
         gameStarted = true;
     }
 
@@ -219,64 +260,94 @@ public class MainWindow {
         sleep();
         if (!gameStarted) {
             setPromptText(str);
-            P3.appendANSI("\n" + text);
+            promptContainer.setPrompt(text);
         }
         if (str.contains("New game started.") || str.contains(savedGameStartPrompt)) {
-            //P3.setPreferredSize(new Dimension(600, 150));
+            title.stop();
+            promptContainer.wipe();
+            promptContainer.positionSouth();
             setGameStarted();
             setPromptText(str);
-            P3.setText(text);
-        } else if (P3.getText().charAt(P3.getText().length() - 3) == '>') {
+            promptContainer.setPrompt(text);
+        } else if (text.charAt(text.length() - 3) == '>') {
+            promptContainer.wipe();
             setPromptText(str);
-            P3.setText("\n" + text);
+            promptContainer.setPrompt(text);
         } else if (gameStarted) {
             setPromptText(str);
-            P3.appendANSI("\n" + text);
+            promptContainer.setPrompt(text);
         }
-        PROMPT_CONTAINER.revalidate();
-        PROMPT_CONTAINER.repaint();
+
+        if (str.contains(savedGameStartPrompt)) {
+            countdown = new Countdown();
+            baseLayer.addModal(countdown.getPanel());
+            baseLayer.revalidate();
+        }
+//        PROMPT_CONTAINER.revalidate();
+//        PROMPT_CONTAINER.repaint();
         sleep();
         P3.setEditable(false);
     }
 
 
-    public void appendOfficeMap(String officeMap){
+    public void appendOfficeMap(String officeMap) {
         P4.append(officeMap);
         mapPanelLabel.setIcon(null);
         P2.setText(null);
         sleep();
     }
 
-    public void setPhotoToMapPanel(String key)  {
+    public void setPhotoToMapPanel(String key) {
+
+        if (key.equalsIgnoreCase("warehouse")) {
 
 
-        if (P4.getText().length() == 0){
+            baseLayer.add(wareHousePane);
+            System.out.println(key);
+        } else if (key.equalsIgnoreCase("front office")) {
+            baseLayer.add(frontOfficePane);
+
+        } else if (key.equalsIgnoreCase("boss office")) {
+            baseLayer.add(bossOfficePane);
+        } else if (key.equalsIgnoreCase("break room")) {
+            baseLayer.add(breakRoomPane);
+        } else if (key.equalsIgnoreCase("hr office")) {
+            baseLayer.add(hrOfficePane);
+        } else if (key.equalsIgnoreCase("tech room")) {
+            baseLayer.add(techRoomPane);
+        } else if (key.equalsIgnoreCase("gas station")) {
+            baseLayer.add(gasStationPane);
+        } else if (key.equalsIgnoreCase("truck") && !isIntro) {
+            baseLayer.add( statePane);
+        }else if (P4.getText().length() == 0) {
             // Set to editable
             P2.setEditable(true);
             P2.setText("");
             //Get the resource from resources Photos
             ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-            switch(key){
+            switch (key) {
                 case "truck":
-                    MapImageIcon = new ImageIcon(
-                        new ImageIcon(classloader.getResource("photos/"+key+".png"))
-                            .getImage()
-                            .getScaledInstance(900, 186, Image.SCALE_DEFAULT));
+                    for (int i = 0; i < 21; i++) {
+                        baseLayer.setBG(new ImageIcon(classloader.getResource("photos/animate/game-truck" + i + ".jpg")));
+                    }
+                    isIntro=false;
                     break;
+
+
                 default:
-                    MapImageIcon= new ImageIcon(classloader.getResource("photos/"+key+".png"));
+                    MapImageIcon = new ImageIcon(
+                            new ImageIcon(classloader.getResource("photos/" + key + ".png"))
+                                    .getImage()
+                                    .getScaledInstance(1220, 686, Image.SCALE_DEFAULT));
+                    // Set Icon to new image Icon
+                    baseLayer.setBG(MapImageIcon);
                     break;
             }
-
-            // Set Icon to new image Icon
-            mapPanelLabel.setIcon(MapImageIcon);
-
             /* Sleep gui thread for .1 seconds for synchronicity */
             sleep();
             P2.setEditable(false);
         }
     }
-
 
     /**
      * sendCommandToApp changes the value in commandObject to record command is sent and set command Variable to command text.
@@ -299,12 +370,16 @@ public class MainWindow {
         }
     }
 
-    public static JPanel getActionButtonContainer(){
-        return  BUTTON_ACTION_CONTAINER;
+    public static JPanel getActionButtonContainer() {
+        return BUTTON_ACTION_CONTAINER;
     }
 
     public void wipe() {
         P4.setText(null);
         P2.setText(null);
+    }
+    public static void setStateImages(String mapImages) {
+
+        baseLayer.revalidate();
     }
 }

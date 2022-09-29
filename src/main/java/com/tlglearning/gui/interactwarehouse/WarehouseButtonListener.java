@@ -4,6 +4,7 @@ import com.tlglearning.middleware.commandGateObject;
 import com.tlglearning.util.Location;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -16,21 +17,21 @@ import static com.tlglearning.client.TransporterClient.mainWindow;
 //import static com.tlglearning.client.TransporterClient.mainWindow;
 
 public class WarehouseButtonListener implements MouseListener {
-    int tile;
-
-//    static ImageIcon[] pics2 = actionWarehouse.compass;
 
     ImageIcon orginalIcon;
     ImageIcon showItemIcon;
     JButton button;
 
+    private static boolean hasKey=false;
 
-    static HashMap<String, Object> DestinationsMap;
+
 
 
     public WarehouseButtonListener(JButton button,ImageIcon orginal, ImageIcon showItem) {
         this.orginalIcon=orginal;
+        this.orginalIcon.setDescription(orginal.getDescription());
         this.showItemIcon=showItem;
+        this.showItemIcon.setDescription(showItem.getDescription());
         button.setIcon(orginal);
 
         this.button=button;
@@ -50,26 +51,31 @@ public class WarehouseButtonListener implements MouseListener {
     @Override
     public void mousePressed(MouseEvent e) {
         String command="";
-        if(button.getIcon().equals(orginalIcon)){
-            command=orginalIcon.getDescription();
-            button.setIcon(showItemIcon);
+        if (!commandGateObject.getWait()) {
+            if (button.getIcon().equals(orginalIcon)) {
+                if ((!orginalIcon.getDescription().equalsIgnoreCase("Explore Cabinet") || hasKey)) {
+                    command = orginalIcon.getDescription();
+                    button.setIcon(showItemIcon);
+                }
 
-        } else{
-            command=showItemIcon.getDescription();
-            button.setIcon(orginalIcon);
+
+            } else {
+                command = showItemIcon.getDescription();
+                button.setIcon(orginalIcon);
+                showItemIcon = orginalIcon;
+            }
+
+
+            if (command.equalsIgnoreCase("Get Key")) {
+                hasKey = true;
+            }
+
+            mainWindow.wipe();
+
+            commandGateObject.setCommand(command);
+
+            commandGateObject.setIsCommandSentFromGui(true);
         }
-
-        mainWindow.wipe();
-        // create String for the label
-        // Sets commandGateObject command text  field to the user input command.
-        commandGateObject.setCommand(command);
-
-        // Sends confirmation boolean variable to tell the middleware that command is sent.
-        // Then command string is passed to Transport Application.
-        commandGateObject.setIsCommandSentFromGui(true);
-
-
-
 
     }
 
@@ -81,19 +87,13 @@ public class WarehouseButtonListener implements MouseListener {
 
     @Override
     public void mouseEntered(MouseEvent e) {
-
-
 //        label.setIcon(active);
         button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-
     }
-
     @Override
     public void mouseExited(MouseEvent e) {
 //        label.setIcon(inactive);
     }
-
-
 
     public static String setResetButtons() {
 

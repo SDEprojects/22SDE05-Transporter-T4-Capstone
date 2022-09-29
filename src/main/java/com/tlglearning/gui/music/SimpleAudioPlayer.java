@@ -2,44 +2,35 @@ package com.tlglearning.gui.music;
 
 // Java program to play an Audio
 // file using Clip Object
-import org.w3c.dom.ls.LSOutput;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Scanner;
-
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.sound.sampled.*;
+import javax.swing.*;
 
 public class SimpleAudioPlayer {
 
-    ArrayList<String>  radioSongs = new ArrayList<>();
+    public static final JFrame RADIO_CONTAINER = new JFrame();
+    public static final JPanel BUTTONS_CONTAINER = new JPanel();
 
     // to store current position
     Long currentFrame;
-    Clip clip;
+    public Clip clip;
 
     // current status of clip
     String status;
 
     AudioInputStream audioInputStream;
-    static String filePath = "music/easyonme.wav";
+    static String filePath = "music/hittheroadjack.wav";
 
     // constructor to initialize streams and clip
-    public SimpleAudioPlayer()
-            throws UnsupportedAudioFileException,
-            IOException, LineUnavailableException
-    {
+    public SimpleAudioPlayer() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+
         ClassLoader classloader = Thread.currentThread().getContextClassLoader();
 
         // create AudioInputStream object
-        audioInputStream =
-                AudioSystem.getAudioInputStream(new File(classloader.getResource("music/easyonme.wav").getFile()));
+        audioInputStream = AudioSystem.getAudioInputStream(new File(classloader.getResource("music/hittheroadjack.wav").getFile()));
 
         // create clip reference
         clip = AudioSystem.getClip();
@@ -47,33 +38,19 @@ public class SimpleAudioPlayer {
         // open audioInputStream to the clip
         clip.open(audioInputStream);
 
+        FloatControl volControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+            volControl.setValue(-25.0f); // Reduce vol by 10 decibels
+
         clip.loop(Clip.LOOP_CONTINUOUSLY);
+        clip.stop();
     }
 
-    public static void main(String[] args)  /** OLD MAIN METHOD HERE **//** OLD MAIN METHOD HERE **//** OLD MAIN METHOD HERE **//** OLD MAIN METHOD HERE **//** OLD MAIN METHOD HERE **//** OLD MAIN METHOD HERE **/
-    {
+    public static void radioPlayer() {
         try
         {
-            filePath = "music/easyonme.wav";
-            SimpleAudioPlayer audioPlayer =
-                    new SimpleAudioPlayer();
+            filePath = "hittheroadjack.wav";
+            SimpleAudioPlayer audioPlayer = new SimpleAudioPlayer();
 
-            audioPlayer.play();
-            Scanner sc = new Scanner(System.in);
-
-            while (true)
-            {
-                System.out.println("1. pause");
-                System.out.println("2. resume");
-                System.out.println("3. restart");
-                System.out.println("4. stop");
-                System.out.println("5. Jump to specific time");
-                int c = sc.nextInt();
-                audioPlayer.gotoChoice(c);
-                if (c == 4)
-                    break;
-            }
-            sc.close();
         }
 
         catch (Exception ex)
@@ -92,41 +69,28 @@ public class SimpleAudioPlayer {
         switch (c)
         {
             case 1:
-                pause();
+                play();
                 break;
             case 2:
-                resumeAudio();
+                pause();
                 break;
             case 3:
-                restart();
-                break;
-            case 4:
                 stop();
                 break;
-            case 5:
-                System.out.println("Enter time (" + 0 +
-                        ", " + clip.getMicrosecondLength() + ")");
-                Scanner sc = new Scanner(System.in);
-                long c1 = sc.nextLong();
-                jump(c1);
-                break;
-
         }
-
     }
 
     // Method to play the audio
-    public void play()
-    {
+    public void play() {
+
         //start the clip
         clip.start();
-
         status = "play";
     }
 
     // Method to pause the audio
-    public void pause()
-    {
+    public void pause() {
+
         if (status.equals("paused"))
         {
             System.out.println("audio is already paused");
@@ -138,74 +102,12 @@ public class SimpleAudioPlayer {
         status = "paused";
     }
 
-    // Method to resume the audio
-    public void resumeAudio() throws UnsupportedAudioFileException,
-            IOException, LineUnavailableException
-    {
-        if (status.equals("play"))
-        {
-            System.out.println("Audio is already "+
-                    "being played");
-            return;
-        }
-        clip.close();
-        resetAudioStream();
-        clip.setMicrosecondPosition(currentFrame);
-        this.play();
-    }
-
-    // Method to restart the audio
-    public void restart() throws IOException, LineUnavailableException,
-            UnsupportedAudioFileException
-    {
-        clip.stop();
-        clip.close();
-        resetAudioStream();
-        currentFrame = 0L;
-        clip.setMicrosecondPosition(0);
-        this.play();
-    }
-
     // Method to stop the audio
-    public void stop() throws UnsupportedAudioFileException,
-            IOException, LineUnavailableException
-    {
+    public void stop() {
+
         currentFrame = 0L;
+
         clip.stop();
         clip.close();
     }
-
-    // Method to jump over a specific part
-    public void jump(long c) throws UnsupportedAudioFileException, IOException,
-            LineUnavailableException
-    {
-        if (c > 0 && c < clip.getMicrosecondLength())
-        {
-            clip.stop();
-            clip.close();
-            resetAudioStream();
-            currentFrame = c;
-            clip.setMicrosecondPosition(c);
-            this.play();
-        }
-    }
-
-    // Method to reset audio stream
-    public void resetAudioStream() throws UnsupportedAudioFileException, IOException,
-            LineUnavailableException
-    {
-        audioInputStream = AudioSystem.getAudioInputStream(
-                new File(filePath).getAbsoluteFile());
-        clip.open(audioInputStream);
-        clip.loop(Clip.LOOP_CONTINUOUSLY);
-
-
-        radioSongs.add("easyonme.wav");
-        radioSongs.add("gocrazy.wav");
-        radioSongs.add("hittheroadjack.wav");
-        radioSongs.add("hotelcalifornia.wav");
-        radioSongs.add("OnTheRoadAgain.wav");
-    }
-
 }
-

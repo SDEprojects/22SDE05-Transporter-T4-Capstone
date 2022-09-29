@@ -5,6 +5,8 @@ import com.tlglearning.middleware.Redirect;
 import com.tlglearning.util.InputHandling;
 import com.tlglearning.util.TitleScreen;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -13,6 +15,10 @@ public class TransporterClient {
     public static MainWindow mainWindow;
 
     public static void main(String[] args) throws InterruptedException, InvocationTargetException {
+
+
+        ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+        ImageIcon icon = new ImageIcon (classloader.getResource("photos/DrivingStates/rsz_arizona.jpg"));
         Redirect.generateMaps();
         SwingUtilities.invokeAndWait(new Runnable () {
             /**
@@ -20,7 +26,15 @@ public class TransporterClient {
              */
             @Override
             public void run() {
-                mainWindow = new MainWindow();
+                try {
+                    mainWindow = new MainWindow();
+                } catch (UnsupportedAudioFileException e) {
+                    throw new RuntimeException(e);
+                } catch (LineUnavailableException e) {
+                    throw new RuntimeException(e);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
 
@@ -40,9 +54,4 @@ public class TransporterClient {
             throw new RuntimeException(e);
         }
     }
-
-
-
-
-
 }

@@ -213,24 +213,37 @@ public class Actions {
         if (dLoadDelivered) {
             Redirect.sendPromptToGui("5","Current Location: " + currentLocation.getLocationName() + " --> "
                     + "Home Office Location: " + startingScenario.getOfficeLocation());
+            Redirect.setGps(currentLocation.getLocationName());
         } else if (cLoadDelivered) {
             Redirect.sendPromptToGui("6","Current Location: " + currentLocation.getLocationName() + " --> "
                     + "Deliver location: " + startingScenario.getDeliveryLocation2b());
+            Redirect.setGps(currentLocation.getLocationName());
+
         } else if (load2PickedUp) {
             Redirect.sendPromptToGui("7","Current Location: " + currentLocation.getLocationName() + " --> "
                     + "Deliver location: " + startingScenario.getDeliveryLocation2());
+            Redirect.setGps(currentLocation.getLocationName());
+
         } else if (bLoadDelivered) {
             Redirect.sendPromptToGui("8","Current Location: " + currentLocation.getLocationName() + " --> "
                     + "Pickup location: " + startingScenario.getPickupLocation2());
+            Redirect.setGps(currentLocation.getLocationName());
+
         } else if (aLoadDelivered) {
             Redirect.sendPromptToGui("9","Current Location: " + currentLocation.getLocationName() + " --> "
                     + "Deliver location: " + startingScenario.getDeliveryLocation1b());
+            Redirect.setGps(currentLocation.getLocationName());
+
         } else if (load1PickedUp) {
             Redirect.sendPromptToGui("10","Current Location: " + currentLocation.getLocationName() + " --> "
                     + "Deliver location: " + startingScenario.getDeliveryLocation1());
+            Redirect.setGps(currentLocation.getLocationName());
+
         } else {
             Redirect.sendPromptToGui("11","Current Location: " + currentLocation.getLocationName() + " --> "
                     + "Pickup location: " + startingScenario.getPickupLocation1());
+            Redirect.setGps(currentLocation.getLocationName());
+
         }
     }
 
@@ -242,6 +255,7 @@ public class Actions {
         currentLocation.setSouth(InputHandling.getDescription(newLocation, "south", jsonNodeObj));
         currentLocation.setEast(InputHandling.getDescription(newLocation, "east", jsonNodeObj));
         currentLocation.setWest(InputHandling.getDescription(newLocation, "west", jsonNodeObj));
+
     }
 }
 

@@ -2,6 +2,8 @@ package com.tlglearning.middleware;
 
 import com.sun.tools.javac.Main;
 import com.tlglearning.gui.compassaction.ButtonListener;
+import com.tlglearning.interactStates.StatesButtonListener;
+import com.tlglearning.interactStates.actionStates;
 import com.tlglearning.util.Location;
 import org.yaml.snakeyaml.Yaml;
 
@@ -11,9 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import static com.tlglearning.client.TransporterClient.mainWindow;
-//import static com.tlglearning.gui.button.CommandButton.addGetExploreBTN;
 
-//import static com.tlglearning.gui.button.CommandButton.addGetExploreBTN;
 
 /*
     Messages are sent from app to Gui and Gui to app. This class will function as a middleware.
@@ -30,7 +30,7 @@ public class Redirect {
     static Location location;
     static HashMap<String, Object> DestinationsMap;
     static HashMap<String, Object> GamePromptsMap;
-
+    private static String name;
     static final List<String> gameMapImages = new ArrayList<String>() {
         {
             add("truck");
@@ -48,22 +48,26 @@ public class Redirect {
         {
             add("truck");
             add("warehouse");
-//            add("front office");
-//            add("boss office");
-//            add("break room");
-//            add("hr office");
-//            add("tech room");
+            add("front office");
+            add("boss office");
+            add("break room");
+            add("hr office");
+            add("tech room");
+            add("gas station");
+        }
+    };
+
+    static final List<String> gamePanelList = new ArrayList<String>() {
+        {
+            add("washington");
+            add("oregan");
+
         }
     };
 
 
-//
-//    static{
-//        MainWindow.initialize();
-//
-//    }
-
     public static void generateMaps() {
+
         ClassLoader cl = Main.class.getClassLoader();
 
         InputStream input = cl.getResourceAsStream("Destinations.yaml");
@@ -75,15 +79,13 @@ public class Redirect {
         input = cl.getResourceAsStream("GamePrompts.yaml");
 
         GamePromptsMap = yaml.load(input);
-//        addGetExploreBTN();
 
 
 
     }
 
-    public static void sendPromptToGui(String identity,String messageToGui) {
-        System.out.println("85 " + messageToGui);
-        mainWindow.setPrompt("#"+identity+": "+messageToGui);
+    public static void sendPromptToGui(String identity, String messageToGui) {
+        mainWindow.setPrompt(messageToGui);
         // Send Destination information to Gui. Destinations allow include button information.
         if (location != null) {
 //            System.out.println(DestinationsMap.get(location.getLocationName()));
@@ -92,7 +94,7 @@ public class Redirect {
 //        mainWindow.setMap(messageToGui);
     }
 
-    public static void sendTitleToGui(String identity,String title) {
+    public static void sendTitleToGui(String identity, String title) {
         mainWindow.setTitle(title);
     }
 
@@ -102,12 +104,12 @@ public class Redirect {
      * @param helpMenu
      */
     //Redirecting the help menu to the GUI
-    public static void sendHelpMenuToGui (String identity,String helpMenu){
-        mainWindow.setPrompt("#"+identity+": "+helpMenu);
+    public static void sendHelpMenuToGui(String identity, String helpMenu) {
+        mainWindow.setPrompt(helpMenu);
     }
 
-    public static void sendDescriptionToGui(String identity,String description){
-        mainWindow.setPrompt("#"+identity+": "+description);
+    public static void sendDescriptionToGui(String identity, String description) {
+        mainWindow.setPrompt(description);
     }
 
 
@@ -115,17 +117,19 @@ public class Redirect {
 
     //TODO: CREATE A FUNCTION TO DISPLAY CURRENT AND PICKUP LOCATION IN GUI
     public static void SendLocationInfoToGui(String identity, String locationInfo) { //TODO: THIS IS WHAT I ADDED IN THIS COMMIT
-        mainWindow.setPrompt("#"+identity+": "+ locationInfo);
+        mainWindow.setPrompt(locationInfo);
     }
 
-    public static void sendExploreTextToGui(String identity,String exploreText) {
-        mainWindow.setPrompt("#"+identity+": "+exploreText);
+    public static void sendExploreTextToGui(String identity, String exploreText) {
+        mainWindow.setPrompt(exploreText);
     }
-    public static void sendLocationImagesToGui(String identity,String key) {
-        mainWindow.appendOfficeMap("#"+identity+": "+(String) GamePromptsMap.get(key));
+
+    public static void sendLocationImagesToGui(String identity, String key) {
+        mainWindow.appendOfficeMap((String) GamePromptsMap.get(key));
     }
-    public static void sendItemTextToGui(String identity,String itemText) {
-        mainWindow.setPrompt("#"+identity+": "+itemText);
+
+    public static void sendItemTextToGui(String identity, String itemText) {
+        mainWindow.setPrompt(itemText);
     }
 
     /**
@@ -134,10 +138,10 @@ public class Redirect {
      * @param format
      * @param messageToGui
      */
-    public static void sendprintfAppToGui(String identity,String format, String messageToGui) {
+    public static void sendprintfAppToGui(String identity, String format, String messageToGui) {
         System.out.printf(format, messageToGui);
         String prompt = String.format(format, messageToGui);
-        mainWindow.setPrompt("#"+identity+": "+prompt);
+        mainWindow.setPrompt(prompt);
     }
 
     /**
@@ -148,8 +152,10 @@ public class Redirect {
      */
     public static String sendGuiCommandToApp() {
 
-        while (!commandGateObject.isCommandSentFromGui()) {
+        commandGateObject.setWait(false);
+        commandGateObject.setIsCommandSentFromGui(false);
 
+        while (!commandGateObject.isCommandSentFromGui()) {
             // Sleep slows down the while loop from processing.
             try {
                 Thread.sleep(80);
@@ -157,8 +163,8 @@ public class Redirect {
                 System.out.println("An Exception occurred: " + e);
             }
         }
-//        command=commandObject.getCommand();
-        commandGateObject.setIsCommandSentFromGui(false);
+        commandGateObject.setWait(true);
+
         return commandGateObject.getCommand();
     }
 
@@ -166,44 +172,59 @@ public class Redirect {
         return location;
     }
 
-    public static void getPromptKey_DictLookUp_PromptToGui(String identity,String key) {
+    public static void getPromptKey_DictLookUp_PromptToGui(String identity, String key) {
         String prompt = (String) GamePromptsMap.get(key);
+
         if (gameMapImages.contains(key)) {
 
-            if(gamePhotoImages.contains(key)){
+            if (gamePhotoImages.contains(key)) {
                 mainWindow.setPhotoToMapPanel(key);
-            }else{
-                mainWindow.setMap("#"+identity+": "+prompt);
+            } else {
+                mainWindow.setMap(prompt);
             }
         } else {
-            mainWindow.setPrompt("#"+identity+": "+prompt);
+            mainWindow.setPrompt(prompt);
         }
     }
 
 
-    public static void getPromptCyan_DictLookUp_PromptToGui(String identity,String key) {
+    public static void getPromptCyan_DictLookUp_PromptToGui(String identity, String key) {
         String prompt = (String) GamePromptsMap.get(key);
-        mainWindow.setPrompt("#"+identity+": "+prompt);
+        mainWindow.setPrompt(prompt);
     }
 
-    public static void getPromptRed_DictLookUp_PromptToGui(String identity,String key) {
+    public static void getPromptRed_DictLookUp_PromptToGui(String identity, String key) {
         String prompt = (String) GamePromptsMap.get(key);
-        mainWindow.setPrompt("#"+identity+": "+prompt);
+        mainWindow.setPrompt(prompt);
     }
 
-    public static void getPromptWithLocation(String identity,String key, String nextLocation) {
-        String prompt = (String) GamePromptsMap.get(key);
-        mainWindow.setPrompt("#"+identity+": "+prompt);
-    }
 
 
     public static void setLocation(Location loc) {
-//        CommandButton.setDestinationsMap(DestinationsMap);
-//        CommandButton.setLocation(loc);
+
+        StatesButtonListener.setLocationo(loc);
         ButtonListener.setDestinationsMap(DestinationsMap);
         ButtonListener.setLocation(loc);
+
         location = loc;
 
+    }
+
+
+    public static void sleep(){
+        try {
+            Thread.sleep(80);
+        } catch (InterruptedException e) {
+            System.out.println("An Exception occurred: " + e);
+        }
+    }
+    public static void setGps(String loc) {
+
+        actionStates.changeBackGround();
+        name = loc;
+        if (!gameMapImages.contains(name)) {
+            mainWindow.setStateImages(name);
+        }
     }
 
 

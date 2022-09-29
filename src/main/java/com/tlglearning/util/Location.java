@@ -1,5 +1,7 @@
 package com.tlglearning.util;
 
+import com.tlglearning.middleware.Redirect;
+
 public class Location {
     //default starting location = truck for new game start
     private String locationName = "truck";
@@ -71,6 +73,7 @@ public class Location {
 
     public void setWest(String west) {
         this.west = west;
+
     }
 
     @Override
