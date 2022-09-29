@@ -303,7 +303,7 @@ wisconsin:
   east: michigan
   west: minnesota
 illinois:
-  description: You entered the state of Illinois
+  description: You entered the state of Illinoisr
   north: wisconsin
   south: tennessee
   east: indiana
