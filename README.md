@@ -1,3 +1,20 @@
+# Transporter New Released Version (GUI)
+Team 4 Project Authors: Jacques Jean-Gille, James Northup, & Lakita Gaither
+
+Project Concept: GUI based text game. 
+
+## Features:
+* GUI Features:
+    * Images of all office locations and states
+    *	Radio with volume control
+    *	Compass
+    *	Moving truck with gif
+    *	GPS that updates with current location
+    *   Text input field
+    
+    
+
+------------------------------------------------------------------------------------------
 # Transporter
 Team6 Project Authors:Jay Flowers, Kyle Ruane, Sam Maskey
 

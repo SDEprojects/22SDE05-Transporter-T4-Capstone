@@ -28,13 +28,13 @@ public class StatesPanel {
 
         stateButton  = new JButton();
 
-        panel.setSize(2500,2500);
+        panel.setSize(250,250);
         panel.setBounds(0,0, 250, 250);
         panel.setLocation(20, 20);
         panel.setOpaque(false);
         panel.setBackground(new Color(0,0,0,0));
         panel.setLayout(new BorderLayout(0,0));
-        stateButton.setBackground(Color.black);
+        //stateButton.setBackground(Color.black);
         stateButton.setBorderPainted(false);
         stateButton.setFocusPainted(false);
 
