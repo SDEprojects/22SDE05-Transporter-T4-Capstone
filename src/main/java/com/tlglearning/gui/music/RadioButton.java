@@ -95,7 +95,7 @@ public class RadioButton {
     }
 
     public static void setUpRadio() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
-//        audioPlayer = new SimpleAudioPlayer();
+        audioPlayer = new SimpleAudioPlayer();
     }
 
     private static void setWindow(MainWindow window) {
