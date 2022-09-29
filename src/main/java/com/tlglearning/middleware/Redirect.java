@@ -3,6 +3,7 @@ package com.tlglearning.middleware;
 import com.sun.tools.javac.Main;
 import com.tlglearning.gui.compassaction.ButtonListener;
 import com.tlglearning.interactStates.StatesButtonListener;
+import com.tlglearning.interactStates.actionStates;
 import com.tlglearning.util.Location;
 import org.yaml.snakeyaml.Yaml;
 
@@ -218,6 +219,8 @@ public class Redirect {
         }
     }
     public static void setGps(String loc) {
+
+        actionStates.changeBackGround();
         name = loc;
         if (!gameMapImages.contains(name)) {
             mainWindow.setStateImages(name);
