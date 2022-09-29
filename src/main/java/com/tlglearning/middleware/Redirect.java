@@ -202,7 +202,7 @@ public class Redirect {
 
     public static void setLocation(Location loc) {
 
-        StatesButtonListener.setLocationo(loc);
+        actionStates.changeBackGround(loc.getLocationName());
         ButtonListener.setDestinationsMap(DestinationsMap);
         ButtonListener.setLocation(loc);
 
@@ -219,8 +219,8 @@ public class Redirect {
         }
     }
     public static void setGps(String loc) {
-
-        actionStates.changeBackGround();
+        StatesButtonListener.setLocationo(location);
+        actionStates.changeBackGround(loc);
         name = loc;
         if (!gameMapImages.contains(name)) {
             mainWindow.setStateImages(name);

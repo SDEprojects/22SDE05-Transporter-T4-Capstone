@@ -70,13 +70,6 @@ public class BaseLayer {
         panel.revalidate();
         panel.repaint();
     }
-//    public static void setBackGroudPanel(JLayeredPane backPanel){
-//        backgroundPanel=backPanel;
-//        panel.add(backgroundPanel);
-//        panel=null;
-//        System.out.println("asdfsdfsdf");
-//
-//
-//    }
+
 
 }

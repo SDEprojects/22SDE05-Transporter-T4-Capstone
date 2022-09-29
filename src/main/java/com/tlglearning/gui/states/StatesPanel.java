@@ -49,7 +49,7 @@ public class StatesPanel {
 
     public static void setIcon(String name) {
         name=name.strip().toLowerCase();
-        System.out.println(":"+name+":");
+
         icon = new ImageIcon (classLoader.getResource("photos/DrivingStates/rsz_" +name+ ".jpg"));
         stateButton.setBackground(Color.black);
         stateButton.setBorderPainted(false);
