@@ -9,87 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a3af4fcc-1377-45d1-80a3-ae75546d2e44" name="Changes" comment="Commit and push to Feature branch: Generate a class that displays the inside of the vehicle, AB#1155">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/backGroundGifStates/DC.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/backGroundGifStates/alabama.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/backGroundGifStates/arizona.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/backGroundGifStates/arkansas.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/backGroundGifStates/california.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/backGroundGifStates/canada.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/backGroundGifStates/colorado.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/backGroundGifStates/connecticut.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/backGroundGifStates/delaware.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/backGroundGifStates/florida.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/backGroundGifStates/georgia.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/backGroundGifStates/idaho.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/backGroundGifStates/illinois.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/backGroundGifStates/indiana.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/backGroundGifStates/iowa.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/backGroundGifStates/kansas.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/backGroundGifStates/kentucky.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/backGroundGifStates/louisiana.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/backGroundGifStates/maine.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/backGroundGifStates/maryland.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/backGroundGifStates/massachusetts.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/backGroundGifStates/mexico.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/backGroundGifStates/michigan.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/backGroundGifStates/minnesota.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/backGroundGifStates/mississippi.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/backGroundGifStates/missouri.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/backGroundGifStates/montana.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/backGroundGifStates/nebraska.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/backGroundGifStates/nevada.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/backGroundGifStates/new-mexico.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/backGroundGifStates/new-york.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/backGroundGifStates/ocean.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/backGroundGifStates/ohio.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/backGroundGifStates/oklahoma.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/backGroundGifStates/oregon.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/backGroundGifStates/pennsylvania.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/backGroundGifStates/south-dakota.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/backGroundGifStates/tennessee.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/backGroundGifStates/texas.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/backGroundGifStates/utah.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/backGroundGifStates/washington.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/backGroundGifStates/west-virginia.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/backGroundGifStates/wisconsin.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/backGroundGifStates/wyoming.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/Capstone_jar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/fasterxml_jackson_core_databind.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/junit_jupiter_api.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/openjfx_javafx_media.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/webjars_npm_uppy__unsplash.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/yaml_snakeyaml.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Capstone/testinginformation/testingInfo1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Capstone/testinginformation/testingInfo2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tlglearning/client/TransporterClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tlglearning/client/TransporterClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tlglearning/gui/BaseLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tlglearning/gui/BaseLayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tlglearning/gui/MainWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tlglearning/gui/MainWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tlglearning/gui/interactHrOffice/HROfficeButtonListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tlglearning/gui/interactHrOffice/HROfficeButtonListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tlglearning/gui/interactOffice/OfficeButtonListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tlglearning/gui/interactOffice/OfficeButtonListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tlglearning/gui/interactTechRoom/techRoomButtonListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tlglearning/gui/interactTechRoom/techRoomButtonListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tlglearning/gui/interactbossoffice/actionBossOffice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tlglearning/gui/interactbossoffice/actionBossOffice.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tlglearning/gui/interactbreakroom/actionBreakRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tlglearning/gui/interactbreakroom/actionBreakRoom.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tlglearning/gui/interactgasstation/actionGasStation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tlglearning/gui/interactgasstation/actionGasStation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tlglearning/gui/interactgasstation/gasRoomButtonListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tlglearning/gui/interactgasstation/gasRoomButtonListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tlglearning/gui/interactwarehouse/WarehouseButtonListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tlglearning/gui/interactwarehouse/WarehouseButtonListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tlglearning/gui/interactwarehouse/actionWarehouse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tlglearning/gui/interactwarehouse/actionWarehouse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tlglearning/gui/music/RadioButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tlglearning/gui/music/RadioButton.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tlglearning/gui/music/RadioButtons.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tlglearning/gui/music/RadioButtons.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tlglearning/gui/music/actionRadio.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tlglearning/gui/music/radioButtonListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tlglearning/gui/music/radioButtonListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tlglearning/gui/states/StatesPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tlglearning/gui/states/StatesPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tlglearning/gui/truck/TruckLauncher.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tlglearning/interactStates/StatesButtonListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tlglearning/interactStates/StatesButtonListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tlglearning/interactStates/actionStates.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tlglearning/interactStates/actionStates.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tlglearning/middleware/Redirect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tlglearning/middleware/Redirect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/com/tlglearning/util/InventoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/com/tlglearning/util/InventoryTest.java" afterDir="false" />
-    </list>
+    <list default="true" id="a3af4fcc-1377-45d1-80a3-ae75546d2e44" name="Changes" comment="Commit and push to Feature branch: Generate a class that displays the inside of the vehicle, AB#1155" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -215,27 +135,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1663610024397</updated>
-    </task>
-    <task id="LOCAL-00009" summary="Commit: Created Button class that contains dynamic action listeners, AB#1120">
-      <created>1663713609224</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1663713609224</updated>
-    </task>
-    <task id="LOCAL-00010" summary="Commit: Created Button class that contains dynamic action listeners, AB#1120">
-      <created>1663715245561</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1663715245561</updated>
-    </task>
-    <task id="LOCAL-00011" summary="Commit: Created Button class that contains dynamic action listeners, AB#1120">
-      <created>1663715321954</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1663715321954</updated>
     </task>
     <task id="LOCAL-00012" summary="Commit: Editing button action listener, AB#1120">
       <created>1663715824044</created>
@@ -559,7 +458,28 @@
       <option name="project" value="LOCAL" />
       <updated>1664432972491</updated>
     </task>
-    <option name="localTasksCounter" value="58" />
+    <task id="LOCAL-00058" summary="Commit and push to Feature branch: Generate a class that displays the inside of the vehicle, AB#1155">
+      <created>1664442420001</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1664442420001</updated>
+    </task>
+    <task id="LOCAL-00059" summary="Commit and push to Feature branch: Generate a class that displays the inside of the vehicle, AB#1155">
+      <created>1664442534276</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1664442534276</updated>
+    </task>
+    <task id="LOCAL-00060" summary="Commit and push to Feature branch: Generate a class that displays the inside of the vehicle, AB#1155">
+      <created>1664444264549</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1664444264549</updated>
+    </task>
+    <option name="localTasksCounter" value="61" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

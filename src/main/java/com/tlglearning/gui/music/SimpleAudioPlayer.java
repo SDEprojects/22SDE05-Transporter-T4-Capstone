@@ -3,8 +3,11 @@ package com.tlglearning.gui.music;
 // Java program to play an Audio
 // file using Clip Object
 
+import java.awt.*;
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import javax.sound.sampled.*;
 import javax.swing.*;
@@ -21,16 +24,21 @@ public class SimpleAudioPlayer {
     // current status of clip
     String status;
 
-    AudioInputStream audioInputStream;
+    static AudioInputStream audioInputStream=null;
     static String filePath = "music/hittheroadjack.wav";
 
     // constructor to initialize streams and clip
     public SimpleAudioPlayer() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-
         ClassLoader classloader = Thread.currentThread().getContextClassLoader();
 
-        // create AudioInputStream object
-        audioInputStream = AudioSystem.getAudioInputStream(new File(classloader.getResource("music/hittheroadjack.wav").getFile()));
+//read audio data from whatever source (file/classloader/etc.)
+        InputStream audioSrc = getClass().getResourceAsStream("/music/hittheroadjack.wav");
+//add buffer for mark/reset support
+        InputStream bufferedIn = new BufferedInputStream(audioSrc);
+        audioInputStream  = AudioSystem.getAudioInputStream(bufferedIn);
+
+
+
 
         // create clip reference
         clip = AudioSystem.getClip();
