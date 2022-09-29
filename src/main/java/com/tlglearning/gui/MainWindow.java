@@ -3,16 +3,17 @@ package com.tlglearning.gui;
 import com.tlglearning.gui.Office.actionOffice;
 import com.tlglearning.gui.compassaction.Compass;
 import com.tlglearning.gui.interactHrOffice.actionHrOffice;
+import com.tlglearning.gui.interactOffice.actionOffice;
 import com.tlglearning.gui.interactTechRoom.actionTechRoom;
 import com.tlglearning.gui.interactbossoffice.actionBossOffice;
 import com.tlglearning.gui.interactbreakroom.actionBreakRoom;
 import com.tlglearning.gui.interactgasstation.actionGasStation;
 import com.tlglearning.gui.interactwarehouse.actionWarehouse;
 import com.tlglearning.gui.music.RadioButton;
+import com.tlglearning.middleware.commandGateObject;
+import com.tlglearning.interactStates.actionStates;
 import com.tlglearning.gui.states.StatesMaps;
 import com.tlglearning.gui.states.StatesPanel;
-import com.tlglearning.middleware.commandGateObject;
-
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
@@ -58,10 +59,11 @@ public class MainWindow {
     private static final PromptContainer promptContainer = new PromptContainer();
     private static Countdown countdown;
     private static RadioButton radioButton;
-    static BaseLayer baseLayer;
+    private  static BaseLayer baseLayer;
+    private static Title title;
+    private static boolean isIntro=true;
+    private static StatesPanel statePanel;
 
-    static StatesPanel statePanel;
-    Title title;
 
     public MainWindow() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         initialize();
@@ -89,7 +91,7 @@ public class MainWindow {
         APP_CONTAINER.setLayout(null);
         APP_CONTAINER.setTitle("Transporter");
         APP_CONTAINER.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        APP_CONTAINER.setSize(1220, 715);
+        APP_CONTAINER.setSize(1220, 690);
         APP_CONTAINER.setResizable(false);
         APP_CONTAINER.setLocationRelativeTo(null);
 
@@ -178,12 +180,12 @@ public class MainWindow {
         textBoxPanel.add(commandTextField);
 
         radioButton = new RadioButton(this);
-        statePanel = new StatesPanel();
+
         baseLayer.add(textBoxPanel);
         baseLayer.add(Compass.getPanel());
         baseLayer.add(promptContainer.getPanel());
         baseLayer.addModal(radioButton.getPanel());
-        baseLayer.addModal(statePanel.getPanel());
+
         APP_CONTAINER.add(baseLayer.getPanel());
 //        baseLayer.add(gasStationPane);
         show();
@@ -325,6 +327,7 @@ public class MainWindow {
                     for (int i = 0; i < 21; i++) {
                         baseLayer.setBG(new ImageIcon(classloader.getResource("photos/animate/game-truck" + i + ".jpg")));
                     }
+                    isIntro=false;
                     break;
 
 
@@ -372,7 +375,6 @@ public class MainWindow {
         P4.setText(null);
         P2.setText(null);
     }
-
     public static void setStateImages(String mapImages) {
         statePanel.setIcon(mapImages);
         baseLayer.revalidate();

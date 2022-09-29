@@ -1,4 +1,4 @@
-package com.tlglearning.gui.Office;
+package com.tlglearning.gui.interactOffice;
 
 import com.tlglearning.gui.crop.Crop;
 
@@ -9,7 +9,7 @@ import java.awt.*;
 public class actionOffice extends JFrame {
     static Crop cropImage = new Crop();
 
-    static int layerPaneWidth = 1200;
+    static int layerPaneWidth = 1220;
 
     static int layerPaneHeight = layerPaneWidth * 9 / 16;
 

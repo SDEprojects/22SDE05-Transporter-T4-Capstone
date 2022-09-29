@@ -1,16 +1,9 @@
 package com.tlglearning.middleware;
 
 
-import com.sun.tools.javac.Main;
-import org.yaml.snakeyaml.Yaml;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
-import java.io.PrintWriter;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
+
 import java.util.List;
 
 /**
@@ -25,6 +18,7 @@ public class commandGateObject {
 
     // When command is sent by GUI command ready is set to true in class in MainWindow attached to action listener.
     static Boolean commandReady = false;
+    static Boolean commandWait= true;
 
     // command is set to user input by MainWindow action listener button.
     static String command = "";
@@ -38,6 +32,8 @@ public class commandGateObject {
      * @return commandReady
      */
     public static Boolean isCommandSentFromGui() {
+
+
         return commandReady;
     }
 
@@ -48,6 +44,7 @@ public class commandGateObject {
      * @param ready
      */
     public static void setIsCommandSentFromGui(boolean ready) {
+
         commandReady = ready;
     }
 
@@ -57,7 +54,11 @@ public class commandGateObject {
      * @return command
      */
     public static String getCommand() {
-        return command;
+
+        if(commandReady ){
+            return command;
+        }
+        return "";
     }
 
     /**
@@ -71,36 +72,13 @@ public class commandGateObject {
         commandHistory.add(com);
         command = com;
     }
+public static void setWait(boolean comWait){
 
+        commandWait=comWait;
+}
 
-    // saveGame saves the game
-    //Todo text save game and add additional information including game time
-    // money on hand and scenerio of game.
-    public static void saveGame() throws FileNotFoundException {
-
-        ClassLoader cl = Main.class.getClassLoader();
-        URL saveURL = cl.getResource("savefile/saveFile.yaml");
-        PrintWriter writer = new PrintWriter(new File(String.valueOf(saveURL)));
-        Yaml yaml = new Yaml();
-        yaml.dump(commandHistory, writer);
-
-    }
-
-    // TODO add additional functionality that sends loaded game command into application.
-
-    public static void loadGame() throws FileNotFoundException {
-        ClassLoader cl = Main.class.getClassLoader();
-
-        InputStream input = cl.getResourceAsStream("savefile/saveFile.yaml");
-
-        Yaml yaml = new Yaml();
-
-        HashMap<String,Object> DestinationsMap = yaml.load(input);
-        System.out.println(DestinationsMap);
-
-
-
-
+    public static boolean getWait(){
+        return commandWait;
 
     }
 }

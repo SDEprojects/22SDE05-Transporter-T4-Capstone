@@ -26,14 +26,13 @@ public class Redirect {
      *
      * @param messageToGui
      */
+
     static Location location;
     static HashMap<String, Object> DestinationsMap;
     static HashMap<String, Object> GamePromptsMap;
-
     static ClassLoader c = Thread.currentThread().getContextClassLoader();
 
     private static String name;
-
     static final List<String> gameMapImages = new ArrayList<String>() {
         {
             add("truck");
@@ -59,13 +58,13 @@ public class Redirect {
             add("gas station");
         }
     };
+    static final List<String> gamePanelList = new ArrayList<String>() {
+        {
+            add("washington");
+            add("oregan");
+        }
+    };
 
-
-//
-//    static{
-//        MainWindow.initialize();
-//
-//    }
 
     public static void generateMaps() {
         ClassLoader cl = Main.class.getClassLoader();
@@ -83,11 +82,9 @@ public class Redirect {
 
 
 
-
     }
 
-    public static void sendPromptToGui(String identity,String messageToGui) {
-        System.out.println("7:" + messageToGui);
+    public static void sendPromptToGui(String identity, String messageToGui) {
         mainWindow.setPrompt(messageToGui);
         // Send Destination information to Gui. Destinations allow include button information.
         if (location != null) {
@@ -120,7 +117,6 @@ public class Redirect {
 
     //TODO: CREATE A FUNCTION TO DISPLAY CURRENT AND PICKUP LOCATION IN GUI
     public static void SendLocationInfoToGui(String identity, String locationInfo) { //TODO: THIS IS WHAT I ADDED IN THIS COMMIT
-        System.out.println("6:" + locationInfo);
         mainWindow.setPrompt(locationInfo);
     }
 
@@ -143,7 +139,6 @@ public class Redirect {
     public static void sendprintfAppToGui(String identity,String format, String messageToGui) {
         System.out.printf(format, messageToGui);
         String prompt = String.format(format, messageToGui);
-        System.out.println("5:" + prompt);
         mainWindow.setPrompt(prompt);
     }
 
@@ -154,7 +149,8 @@ public class Redirect {
      * @return messageToApp
      */
     public static String sendGuiCommandToApp() {
-
+        commandGateObject.setWait(false);
+        commandGateObject.setIsCommandSentFromGui(false);
         while (!commandGateObject.isCommandSentFromGui()) {
 
             // Sleep slows down the while loop from processing.
@@ -183,7 +179,6 @@ public class Redirect {
                 mainWindow.setMap(prompt);
             }
         } else {
-            System.out.println("4:" + prompt);
             mainWindow.setPrompt(prompt);
         }
     }
@@ -191,39 +186,31 @@ public class Redirect {
 
     public static void getPromptCyan_DictLookUp_PromptToGui(String identity,String key) {
         String prompt = (String) GamePromptsMap.get(key);
-        System.out.println("3:" + prompt);
         mainWindow.setPrompt(prompt);
     }
 
     public static void getPromptRed_DictLookUp_PromptToGui(String identity,String key) {
         String prompt = (String) GamePromptsMap.get(key);
-        System.out.println("2:" + prompt);
         mainWindow.setPrompt(prompt);
     }
 
     public static void getPromptWithLocation(String identity,String key, String nextLocation) {
         String prompt = (String) GamePromptsMap.get(key);
-        System.out.println("1:" + prompt);
         mainWindow.setPrompt(prompt);
     }
 
 
     public static void setLocation(Location loc) {
-//        CommandButton.setDestinationsMap(DestinationsMap);
-//        CommandButton.setLocation(loc);
         ButtonListener.setDestinationsMap(DestinationsMap);
         ButtonListener.setLocation(loc);
         location = loc;
-
-        }
-        public static void setGps(String loc) {
-            System.out.println("name:" + loc);
-
-            name = loc;
-//        mainWindow.setStateImages(name);
-
-            if (!gameMapImages.contains(name)) {
-                mainWindow.setStateImages(name);
     }
-}
+
+    public static void setGps(String loc) {
+        name = loc;
+        if (!gameMapImages.contains(name)) {
+            mainWindow.setStateImages(name);
+        }
+    }
+
 }

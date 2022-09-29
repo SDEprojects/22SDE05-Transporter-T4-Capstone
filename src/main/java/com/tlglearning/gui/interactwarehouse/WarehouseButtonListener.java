@@ -51,9 +51,9 @@ public class WarehouseButtonListener implements MouseListener {
     @Override
     public void mousePressed(MouseEvent e) {
         String command="";
-
-            if (button.getIcon().equals(orginalIcon) ) {
-                if((!orginalIcon.getDescription().equalsIgnoreCase("Explore Cabinet") || hasKey)){
+        if (!commandGateObject.getWait()) {
+            if (button.getIcon().equals(orginalIcon)) {
+                if ((!orginalIcon.getDescription().equalsIgnoreCase("Explore Cabinet") || hasKey)) {
                     command = orginalIcon.getDescription();
                     button.setIcon(showItemIcon);
                 }
@@ -66,16 +66,16 @@ public class WarehouseButtonListener implements MouseListener {
             }
 
 
-        if(command.equalsIgnoreCase("Get Key")){
-            hasKey=true;
-        }
+            if (command.equalsIgnoreCase("Get Key")) {
+                hasKey = true;
+            }
 
             mainWindow.wipe();
 
             commandGateObject.setCommand(command);
 
             commandGateObject.setIsCommandSentFromGui(true);
-
+        }
 
     }
 
