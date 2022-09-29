@@ -17,19 +17,16 @@ public class breakRoomButtonListener implements MouseListener {
     ImageIcon showItemIcon;
     JButton button;
 
-    private static boolean hasThermos=false;
-
-
-
+    private static boolean hasThermos = false;
 
     public breakRoomButtonListener(JButton button, ImageIcon orginal, ImageIcon showItem) {
-        this.orginalIcon=orginal;
+        this.orginalIcon = orginal;
         this.orginalIcon.setDescription(orginal.getDescription());
-        this.showItemIcon=showItem;
+        this.showItemIcon = showItem;
         this.showItemIcon.setDescription(showItem.getDescription());
         button.setIcon(orginal);
 
-        this.button=button;
+        this.button = button;
 
         // Button display settings
         button.setBackground(Color.BLACK);
@@ -45,10 +42,11 @@ public class breakRoomButtonListener implements MouseListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        String command="";
+        if (!commandGateObject.getWait()) {
+            String command = "";
 
-            if (button.getIcon().equals(orginalIcon) ) {
-                if((!orginalIcon.getDescription().equalsIgnoreCase("Explore coffee maker") || hasThermos)){
+            if (button.getIcon().equals(orginalIcon)) {
+                if ((!orginalIcon.getDescription().equalsIgnoreCase("Explore coffee maker") || hasThermos)) {
                     command = orginalIcon.getDescription();
                     button.setIcon(showItemIcon);
                 }
@@ -61,9 +59,9 @@ public class breakRoomButtonListener implements MouseListener {
             }
 
 
-        if(command.equalsIgnoreCase("Get thermos")){
-            hasThermos=true;
-        }
+            if (command.equalsIgnoreCase("Get thermos")) {
+                hasThermos = true;
+            }
 
             mainWindow.wipe();
 
@@ -71,7 +69,7 @@ public class breakRoomButtonListener implements MouseListener {
 
             commandGateObject.setIsCommandSentFromGui(true);
 
-
+        }
     }
 
     @Override
@@ -85,6 +83,7 @@ public class breakRoomButtonListener implements MouseListener {
 //        label.setIcon(active);
         button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
     }
+
     @Override
     public void mouseExited(MouseEvent e) {
 //        label.setIcon(inactive);

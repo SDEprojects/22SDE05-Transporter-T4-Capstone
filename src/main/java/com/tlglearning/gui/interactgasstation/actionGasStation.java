@@ -9,7 +9,7 @@ import java.awt.*;
 public class actionGasStation extends JFrame {
     static Crop cropImage = new Crop();
 
-    static int layerPaneWidth = 1200;
+    static int layerPaneWidth = 1220;
 
     static int layerPaneHeight = layerPaneWidth * 9 / 16;
 

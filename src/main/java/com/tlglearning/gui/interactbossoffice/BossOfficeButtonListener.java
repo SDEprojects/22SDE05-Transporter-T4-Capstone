@@ -8,6 +8,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import static com.tlglearning.client.TransporterClient.mainWindow;
+import static com.tlglearning.gui.MainWindow.sleep;
 
 //import static com.tlglearning.client.TransporterClient.mainWindow;
 
@@ -17,19 +18,17 @@ public class BossOfficeButtonListener implements MouseListener {
     ImageIcon showItemIcon;
     JButton button;
 
-    private static boolean hasKey=false;
-
-
+    private static boolean hasKey = false;
 
 
     public BossOfficeButtonListener(JButton button, ImageIcon orginal, ImageIcon showItem) {
-        this.orginalIcon=orginal;
+        this.orginalIcon = orginal;
         this.orginalIcon.setDescription(orginal.getDescription());
-        this.showItemIcon=showItem;
+        this.showItemIcon = showItem;
         this.showItemIcon.setDescription(showItem.getDescription());
         button.setIcon(orginal);
 
-        this.button=button;
+        this.button = button;
 
         // Button display settings
         button.setBackground(Color.BLACK);
@@ -45,14 +44,13 @@ public class BossOfficeButtonListener implements MouseListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        String command="";
-
-            if (button.getIcon().equals(orginalIcon) ) {
-                if((!orginalIcon.getDescription().equalsIgnoreCase("Explore Cabinet") || hasKey)){
+        String command = "";
+        if (!commandGateObject.getWait()) {
+            if (button.getIcon().equals(orginalIcon)) {
+                if ((!orginalIcon.getDescription().equalsIgnoreCase("Explore Cabinet") || hasKey)) {
                     command = orginalIcon.getDescription();
                     button.setIcon(showItemIcon);
                 }
-
 
             } else {
                 command = showItemIcon.getDescription();
@@ -60,10 +58,9 @@ public class BossOfficeButtonListener implements MouseListener {
                 showItemIcon = orginalIcon;
             }
 
-
-        if(command.equalsIgnoreCase("Get Key")){
-            hasKey=true;
-        }
+            if (command.equalsIgnoreCase("Get Key")) {
+                hasKey = true;
+            }
 
             mainWindow.wipe();
 
@@ -72,6 +69,7 @@ public class BossOfficeButtonListener implements MouseListener {
             commandGateObject.setIsCommandSentFromGui(true);
 
 
+        }
     }
 
     @Override
@@ -85,6 +83,7 @@ public class BossOfficeButtonListener implements MouseListener {
 //        label.setIcon(active);
         button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
     }
+
     @Override
     public void mouseExited(MouseEvent e) {
 //        label.setIcon(inactive);
