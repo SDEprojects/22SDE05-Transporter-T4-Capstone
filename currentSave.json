@@ -10,14 +10,14 @@
     "itemsNeeded" : [ "key", "logbook", "truck key", "gps", "snacks" ]
   },
   "location" : {
-    "locationName" : "truck",
+    "locationName" : "washington",
     "description" : null,
-    "north" : null,
-    "south" : null,
-    "east" : "warehouse",
-    "west" : null
+    "north" : "\"canada\"",
+    "south" : "\"oregon\"",
+    "east" : "\"montana\"",
+    "west" : "\"ocean\""
   },
   "inventory" : {
-    "backpack" : [ ]
+    "backpack" : [ "key", "logbook", "gps", "truck key", "snacks" ]
   }
 }
