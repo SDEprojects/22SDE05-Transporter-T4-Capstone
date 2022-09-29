@@ -18,6 +18,7 @@ public class commandGateObject {
 
     // When command is sent by GUI command ready is set to true in class in MainWindow attached to action listener.
     static Boolean commandReady = false;
+    static Boolean commandWait= true;
 
     // command is set to user input by MainWindow action listener button.
     static String command = "";
@@ -31,6 +32,8 @@ public class commandGateObject {
      * @return commandReady
      */
     public static Boolean isCommandSentFromGui() {
+
+
         return commandReady;
     }
 
@@ -41,6 +44,7 @@ public class commandGateObject {
      * @param ready
      */
     public static void setIsCommandSentFromGui(boolean ready) {
+
         commandReady = ready;
     }
 
@@ -68,5 +72,13 @@ public class commandGateObject {
         commandHistory.add(com);
         command = com;
     }
+public static void setWait(boolean comWait){
 
+        commandWait=comWait;
+}
+
+    public static boolean getWait(){
+        return commandWait;
+
+    }
 }

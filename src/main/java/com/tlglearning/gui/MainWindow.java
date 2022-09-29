@@ -25,18 +25,18 @@ import java.io.IOException;
 //import static com.tlglearning.gui.button.Compass.getPanel;
 
 public class MainWindow {
-    JLayeredPane wareHousePane = actionWarehouse.getPanel();
-    JLayeredPane frontOfficePane = actionOffice.getPanel();
-    JLayeredPane bossOfficePane = actionBossOffice.getPanel();
-    JLayeredPane breakRoomPane = actionBreakRoom.getPanel();
+    private static final JLayeredPane wareHousePane = actionWarehouse.getPanel();
+    private static final JLayeredPane frontOfficePane = actionOffice.getPanel();
+    private static final JLayeredPane bossOfficePane = actionBossOffice.getPanel();
+    private static  final JLayeredPane breakRoomPane = actionBreakRoom.getPanel();
 
-    JLayeredPane techRoomPane = actionTechRoom.getPanel();
+    private static JLayeredPane techRoomPane = actionTechRoom.getPanel();
 
-    JLayeredPane hrOfficePane = actionHrOffice.getPanel();
+    private static final JLayeredPane hrOfficePane = actionHrOffice.getPanel();
 
-    JLayeredPane gasStationPane = actionGasStation.getPanel();
+    private static final JLayeredPane gasStationPane = actionGasStation.getPanel();
 
-    JLayeredPane statesPane = actionStates.getPanel();
+    private static final JLayeredPane statesPane = actionStates.getPanel();
     private static final JTextArea P1 = new JTextArea(6, 94);
     private static final JTextArea P2 = new JTextArea();
     private static final ColorPane P3 = new ColorPane();
@@ -46,21 +46,23 @@ public class MainWindow {
     private static final JTextField commandTextField = new JTextField(10);
     private static final JPanel BUTTON_ACTION_CONTAINER = new JPanel(new BorderLayout());
     private static final JPanel BUTTON_GO_CONTAINER = new JPanel(new BorderLayout());
-    private String titleText;
-    private String map;
-    private String text;
+    private static String titleText;
+    private  static String map;
+    private  static String text;
     private static final JFrame APP_CONTAINER = new JFrame();
     private static final JPanel TITLE_CONTAINER = new JPanel();
     private static final JPanel MAP_CONTAINER = new JPanel();
     private static boolean gameStarted = false;
     private static ImageIcon MapImageIcon;
-    static JLabel mapPanelLabel = new JLabel();
-    ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+    private static JLabel mapPanelLabel = new JLabel();
+    private static ClassLoader classloader = Thread.currentThread().getContextClassLoader();
     private static final PromptContainer promptContainer = new PromptContainer();
     private static Countdown countdown;
     private static RadioButton radioButton;
-    BaseLayer baseLayer;
-    Title title;
+    private  static BaseLayer baseLayer;
+    private static Title title;
+
+    private static boolean isIntro=true;
 
 
 
@@ -182,11 +184,11 @@ public class MainWindow {
 
         baseLayer.add(textBoxPanel);
         baseLayer.add(Compass.getPanel());
-//        baseLayer.add(promptContainer.getPanel());
+        baseLayer.add(promptContainer.getPanel());
         baseLayer.addModal(radioButton.getPanel());
 
         APP_CONTAINER.add(baseLayer.getPanel());
-        baseLayer.add(statesPane);
+//        baseLayer.add(statesPane);
         show();
 
     }
@@ -253,7 +255,7 @@ public class MainWindow {
      * setPrompt() - calls sleep, setPromptText and appends text to P3 JColorPane
      */
     public void setPrompt(String str) {
-        commandGateObject.setIsCommandSentFromGui(false);
+
         String savedGameStartPrompt = "The map above the prompt, shows you what room you are in, what locations are explorable in the room, and the available exits, to see a full map type 'h' and select option 3";
         P3.setEditable(true);
         sleep();
@@ -297,9 +299,10 @@ public class MainWindow {
     }
 
     public void setPhotoToMapPanel(String key) {
-
-        if (key.equalsIgnoreCase("warehouse")) {
-
+        if(key.equalsIgnoreCase("washington")){
+            baseLayer.add(statesPane);
+        }
+        else if (key.equalsIgnoreCase("warehouse")) {
 
             baseLayer.add(wareHousePane);
             System.out.println(key);
@@ -315,7 +318,10 @@ public class MainWindow {
         } else if (key.equalsIgnoreCase("tech room")) {
             baseLayer.add(techRoomPane);
         } else if (key.equalsIgnoreCase("gas station")) {
-            baseLayer.add(gasStationPane);
+            baseLayer.add(gasStationPane);}
+            else if (key.equalsIgnoreCase("truck") && !isIntro) {
+                actionStates.setLocationImageBackGround("truck");
+                baseLayer.add(statesPane);
         } else if (P4.getText().length() == 0) {
             // Set to editable
             P2.setEditable(true);
@@ -327,6 +333,7 @@ public class MainWindow {
                     for (int i = 0; i < 21; i++) {
                         baseLayer.setBG(new ImageIcon(classloader.getResource("photos/animate/game-truck" + i + ".jpg")));
                     }
+                    isIntro=false;
                     break;
 
                 default:

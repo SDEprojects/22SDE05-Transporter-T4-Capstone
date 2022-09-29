@@ -23,13 +23,13 @@ public class OfficeButtonListener implements MouseListener {
 
 
     public OfficeButtonListener(JButton button, ImageIcon orginal, ImageIcon showItem) {
-        this.orginalIcon=orginal;
+        this.orginalIcon = orginal;
         this.orginalIcon.setDescription(orginal.getDescription());
-        this.showItemIcon=showItem;
+        this.showItemIcon = showItem;
         this.showItemIcon.setDescription(showItem.getDescription());
         button.setIcon(orginal);
 
-        this.button=button;
+        this.button = button;
 
         // Button display settings
         button.setBackground(Color.BLACK);
@@ -45,24 +45,25 @@ public class OfficeButtonListener implements MouseListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        String command="";
-        if(button.getIcon().equals(orginalIcon)){
-            command=orginalIcon.getDescription();
-            button.setIcon(showItemIcon);
+        if (!commandGateObject.getWait()) {
+            String command = "";
+            if (button.getIcon().equals(orginalIcon)) {
+                command = orginalIcon.getDescription();
+                button.setIcon(showItemIcon);
 
 
-        } else{
-            command=showItemIcon.getDescription();
-            button.setIcon(orginalIcon);
-            showItemIcon=orginalIcon;
+            } else {
+                command = showItemIcon.getDescription();
+                button.setIcon(orginalIcon);
+                showItemIcon = orginalIcon;
+            }
+
+            mainWindow.wipe();
+
+            commandGateObject.setCommand(command);
+
+            commandGateObject.setIsCommandSentFromGui(true);
         }
-
-        mainWindow.wipe();
-
-        commandGateObject.setCommand(command);
-
-        commandGateObject.setIsCommandSentFromGui(true);
-
     }
 
     @Override
@@ -76,6 +77,7 @@ public class OfficeButtonListener implements MouseListener {
 //        label.setIcon(active);
         button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
     }
+
     @Override
     public void mouseExited(MouseEvent e) {
 //        label.setIcon(inactive);

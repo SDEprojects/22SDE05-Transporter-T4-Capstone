@@ -24,6 +24,18 @@ public class ButtonListener implements MouseListener {
     ImageIcon inactive;
     JButton label;
     Compass compass;
+    static final List<String> notDrivingLocations= new ArrayList<String>() {
+        {
+            add("truck");
+            add("warehouse");
+            add("front office");
+            add("boss office");
+            add("break room");
+            add("hr office");
+            add("tech room");
+            add("gas station");
+        }
+    };
 
     static HashMap<String, Object> DestinationsMap;
     private static Location location=null;
@@ -72,23 +84,31 @@ public class ButtonListener implements MouseListener {
 
     @Override
     public void mouseReleased(MouseEvent e) {
+        if (!commandGateObject.getWait()) {
+            label.setIcon(inactive);
+            mainWindow.wipe();
+            // create String for the label
+            // Sets commandGateObject command text  field to the user input command.
 
-        label.setIcon(inactive);
-        mainWindow.wipe();
-        // create String for the label
-        // Sets commandGateObject command text  field to the user input command.
-        commandGateObject.setCommand(active.getDescription());
+            if (!notDrivingLocations.contains(location.getLocationName())) {
+                String tempCommand = active.getDescription().toLowerCase().replaceAll("go", "drive");
+                commandGateObject.setCommand(tempCommand);
+            } else {
+                commandGateObject.setCommand(active.getDescription());
+            }
 
-        // Sends confirmation boolean variable to tell the middleware that command is sent.
-        // Then command string is passed to Transport Application.
-        commandGateObject.setIsCommandSentFromGui(true);
 
-        try {
-            Thread.sleep(130);
-        } catch (InterruptedException ex) {
-            throw new RuntimeException(ex);
+            // Sends confirmation boolean variable to tell the middleware that command is sent.
+            // Then command string is passed to Transport Application.
+            commandGateObject.setIsCommandSentFromGui(true);
+
+            try {
+                Thread.sleep(130);
+            } catch (InterruptedException ex) {
+                throw new RuntimeException(ex);
+            }
+            setResetButtons();
         }
-        setResetButtons();
     }
 
     @Override
@@ -117,6 +137,7 @@ public class ButtonListener implements MouseListener {
         if (location == null || buttonsList.isEmpty() ) {
             return "setResetButton invalid";
         }
+
 
         for (JButton each : buttonsList) {
             if (((ImageIcon)each.getIcon()).getDescription().equalsIgnoreCase("go north")) {

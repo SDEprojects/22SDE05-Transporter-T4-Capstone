@@ -54,7 +54,7 @@ public class StatesButtonListener implements MouseListener {
         if (insideTruckIcon.getDescription().equalsIgnoreCase("open map")) {
             this.currentIcon.setDescription(insideTruckIconAction.getDescription());
             button.setIcon(insideTruckIconAction);
-            setLocationImageBackGround();
+
         } else if (insideTruckIcon.getDescription().equalsIgnoreCase("close map")) {
             this.currentIcon.setDescription(insideTruckIcon.getDescription());
             button.setIcon(insideTruckIcon);
@@ -63,7 +63,7 @@ public class StatesButtonListener implements MouseListener {
         }
 
 
-       else if (insideTruckIcon.getDescription().equalsIgnoreCase("drive truck") ) {
+       else if (insideTruckIcon.getDescription().equalsIgnoreCase("start drive") ) {
 
             String command = insideTruckIcon.getDescription();
 
@@ -90,7 +90,7 @@ public class StatesButtonListener implements MouseListener {
 
     @Override
     public void mouseEntered(MouseEvent e) {
-//        label.setIcon(active);
+
         button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
     }
 

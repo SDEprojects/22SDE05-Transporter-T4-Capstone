@@ -87,18 +87,18 @@ public class actionStates extends JFrame {
 
         ClassLoader classloader = Thread.currentThread().getContextClassLoader();
 
-        int x_loc = 400;
-        int y_loc = 500;
-        int width = 100;
-        int height = 100;
+        int x_loc = 200;
+        int y_loc = 200;
+        int width = 200;
+        int height = 600;
 
-        ImageIcon orginalIconCrop = new ImageIcon(classloader.getResource("photos/StateImages/truckKey.png"));
+        ImageIcon orginalIconCrop = new ImageIcon(classloader.getResource("photos/StateImages/InsideTruck.png"));
         orginalIconCrop = cropImage.crop(orginalIconCrop, x_loc, y_loc, width, height);
-        ImageIcon cabinetlayerImageCrop = new ImageIcon(classloader.getResource("photos/StateImages/truckKey.png"));// actionIcon;//cropImage.crop(actionIcon, 0, 0, width, height);
+        ImageIcon cabinetlayerImageCrop = new ImageIcon(classloader.getResource("photos/StateImages/InsideTruck.png"));// actionIcon;//cropImage.crop(actionIcon, 0, 0, width, height);
         cabinetlayerImageCrop = cropImage.crop(cabinetlayerImageCrop, x_loc, y_loc, width, height);
 
-        orginalIconCrop.setDescription("drive truck");
-        cabinetlayerImageCrop.setDescription("drive truck");
+        orginalIconCrop.setDescription("start drive");
+        cabinetlayerImageCrop.setDescription("start drive");
         button.addMouseListener(new StatesButtonListener(button, orginalIconCrop, cabinetlayerImageCrop));
         button.setSize(orginalIconCrop.getIconWidth(), orginalIconCrop.getIconHeight());
         button.setLocation(x_loc, y_loc);
@@ -108,12 +108,12 @@ public class actionStates extends JFrame {
     }
 
 
-    public static void setLocationImageBackGround(){
+    public static void setLocationImageBackGround(String loc){
 
         ClassLoader classloader = Thread.currentThread().getContextClassLoader();
 
         // Retrieves image crop
-      Image statesImage = new ImageIcon(classloader.getResource("photos/StateImages/Oregan.png")).getImage().getScaledInstance(layerPaneWidth, layerPaneHeight, Image.SCALE_DEFAULT);
+      Image statesImage = new ImageIcon(classloader.getResource("photos/StateImages/"+loc+".png")).getImage().getScaledInstance(layerPaneWidth, layerPaneHeight, Image.SCALE_DEFAULT);
 
 
 

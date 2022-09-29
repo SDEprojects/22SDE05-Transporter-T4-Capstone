@@ -45,10 +45,11 @@ public class HROfficeButtonListener implements MouseListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        String command="";
+        if (!commandGateObject.getWait()) {
+            String command = "";
 
-            if (button.getIcon().equals(orginalIcon) ) {
-                if((!orginalIcon.getDescription().equalsIgnoreCase("Explore coffee maker") || hasThermos)){
+            if (button.getIcon().equals(orginalIcon)) {
+                if ((!orginalIcon.getDescription().equalsIgnoreCase("Explore coffee maker") || hasThermos)) {
                     command = orginalIcon.getDescription();
                     button.setIcon(showItemIcon);
                 }
@@ -61,15 +62,16 @@ public class HROfficeButtonListener implements MouseListener {
             }
 
 
-        if(command.equalsIgnoreCase("Get thermos")){
-            hasThermos=true;
-        }
+            if (command.equalsIgnoreCase("Get thermos")) {
+                hasThermos = true;
+            }
 
             mainWindow.wipe();
 
             commandGateObject.setCommand(command);
 
             commandGateObject.setIsCommandSentFromGui(true);
+        }
 
 
     }
