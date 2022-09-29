@@ -9,6 +9,8 @@ import com.tlglearning.gui.interactbreakroom.actionBreakRoom;
 import com.tlglearning.gui.interactgasstation.actionGasStation;
 import com.tlglearning.gui.interactwarehouse.actionWarehouse;
 import com.tlglearning.gui.music.RadioButton;
+import com.tlglearning.gui.states.StatesMaps;
+import com.tlglearning.gui.states.StatesPanel;
 import com.tlglearning.middleware.commandGateObject;
 
 import javax.sound.sampled.LineUnavailableException;
@@ -56,7 +58,9 @@ public class MainWindow {
     private static final PromptContainer promptContainer = new PromptContainer();
     private static Countdown countdown;
     private static RadioButton radioButton;
-    BaseLayer baseLayer;
+    static BaseLayer baseLayer;
+
+    static StatesPanel statePanel;
     Title title;
 
     public MainWindow() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
@@ -174,12 +178,12 @@ public class MainWindow {
         textBoxPanel.add(commandTextField);
 
         radioButton = new RadioButton(this);
-
+        statePanel = new StatesPanel();
         baseLayer.add(textBoxPanel);
         baseLayer.add(Compass.getPanel());
         baseLayer.add(promptContainer.getPanel());
         baseLayer.addModal(radioButton.getPanel());
-
+        baseLayer.addModal(statePanel.getPanel());
         APP_CONTAINER.add(baseLayer.getPanel());
 //        baseLayer.add(gasStationPane);
         show();
@@ -367,5 +371,10 @@ public class MainWindow {
     public void wipe() {
         P4.setText(null);
         P2.setText(null);
+    }
+
+    public static void setStateImages(String mapImages) {
+        statePanel.setIcon(mapImages);
+        baseLayer.revalidate();
     }
 }

@@ -10,24 +10,23 @@ public class StatesPanel {
 
     // FIELDS
     static ClassLoader c = Thread.currentThread().getContextClassLoader();
-    static ImageIcon stateAlabama = new ImageIcon (c.getResource("photos/DrivingStates/alabama.jpg"));
+    private static String name;
+    static ImageIcon icon;
     static final JPanel panel = new JPanel();
 
-    JButton stateButton;
+
+    static JButton stateButton;
 
     // CONSTRUCTOR
-    StatesPanel() {
+    public StatesPanel() {
 
         init();
     }
 
     // INIT METHOD
-    public static JPanel init() {
+    public static void init() {
 
-
-        JPanel panel = new JPanel();
-
-        JButton stateButton = new JButton();
+        stateButton  = new JButton();
 
         panel.setSize(2500,2500);
         panel.setBounds(0,0, 250, 250);
@@ -35,22 +34,26 @@ public class StatesPanel {
         panel.setOpaque(false);
         panel.setBackground(new Color(0,0,0,0));
         panel.setLayout(new BorderLayout(0,0));
-
         stateButton.setBackground(Color.black);
         stateButton.setBorderPainted(false);
-        stateButton.setIcon(stateAlabama);
         stateButton.setFocusPainted(false);
 
         panel.add(stateButton);
 
         panel.revalidate();
-
-        return panel;
     }
 
     // GETPANEL METHOD:
     public static JPanel getPanel() {
 
         return panel;
+    }
+
+    public static void setIcon(String name) {
+        icon = new ImageIcon (c.getResource("photos/DrivingStates/rsz_" +name+ ".jpg"));
+        stateButton.setBackground(Color.black);
+        stateButton.setBorderPainted(false);
+        stateButton.setIcon(icon);
+        stateButton.setFocusPainted(false);
     }
 }
