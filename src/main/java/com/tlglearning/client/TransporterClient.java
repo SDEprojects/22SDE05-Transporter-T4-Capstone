@@ -17,6 +17,8 @@ public class TransporterClient {
     public static void main(String[] args) throws InterruptedException, InvocationTargetException {
 
 
+        ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+        ImageIcon icon = new ImageIcon (classloader.getResource("photos/DrivingStates/rsz_arizona.jpg"));
         Redirect.generateMaps();
         SwingUtilities.invokeAndWait(new Runnable () {
             /**

@@ -41,7 +41,7 @@ public class Compass {
 
         for (int i = 2; i < 9; i+=2) {
             int name = i;
-//            compass_Active[counter1] = new ImageIcon(classloader.getResource("photos/buttons/"+name+"_ACTIVE.png"));
+
             compass_Active[counter1] = new ImageIcon(
                     new ImageIcon(classloader.getResource("photos/buttons/"+name+"_ACTIVE.png"))
                             .getImage()
@@ -49,7 +49,7 @@ public class Compass {
             );
             counter1++;
         }
-//        compass[4]= new ImageIcon(classloader.getResource("photos/buttons/compass.png"));
+
 
         for (int i = 0; i < compass.length; i++) {
             if (i % 2 == 0) {

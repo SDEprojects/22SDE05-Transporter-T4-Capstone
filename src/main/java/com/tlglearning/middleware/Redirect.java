@@ -2,6 +2,7 @@ package com.tlglearning.middleware;
 
 import com.sun.tools.javac.Main;
 import com.tlglearning.gui.compassaction.ButtonListener;
+import com.tlglearning.interactStates.StatesButtonListener;
 import com.tlglearning.util.Location;
 import org.yaml.snakeyaml.Yaml;
 
@@ -28,7 +29,7 @@ public class Redirect {
     static Location location;
     static HashMap<String, Object> DestinationsMap;
     static HashMap<String, Object> GamePromptsMap;
-
+    private static String name;
     static final List<String> gameMapImages = new ArrayList<String>() {
         {
             add("truck");
@@ -200,6 +201,7 @@ public class Redirect {
 
     public static void setLocation(Location loc) {
 
+        StatesButtonListener.setLocationo(loc);
         ButtonListener.setDestinationsMap(DestinationsMap);
         ButtonListener.setLocation(loc);
 
@@ -207,15 +209,18 @@ public class Redirect {
 
     }
 
-    public static void updateLocation(Location loc){
-        ButtonListener.setResetButtons();
 
-    }
     public static void sleep(){
         try {
             Thread.sleep(80);
         } catch (InterruptedException e) {
             System.out.println("An Exception occurred: " + e);
+        }
+    }
+    public static void setGps(String loc) {
+        name = loc;
+        if (!gameMapImages.contains(name)) {
+            mainWindow.setStateImages(name);
         }
     }
 
