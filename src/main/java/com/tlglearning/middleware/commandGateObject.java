@@ -2,15 +2,25 @@ package com.tlglearning.middleware;
 
 
 
+import com.tlglearning.gui.compassaction.ButtonListener;
+import com.tlglearning.util.Location;
+
 import java.util.ArrayList;
 
 import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+
 
 /**
  * commandObject
  * Assists in communication between GUI action listener and middle in reference to command being sent, or to wait for command.
  */
 public class commandGateObject {
+    static ExecutorService executor = Executors.newFixedThreadPool(2);
+    static String currentLocation="";
 
     /**
      * commandObject field variables
@@ -22,7 +32,7 @@ public class commandGateObject {
 
     // command is set to user input by MainWindow action listener button.
     static String command = "";
-
+    static Location location;
     static final List<String> commandHistory=new ArrayList<>();
 
 
@@ -81,4 +91,39 @@ public static void setWait(boolean comWait){
         return commandWait;
 
     }
+
+    public static void runThreadUpdater(Location loc){
+        location=loc;
+        currentLocation=location.getLocationName();
+
+        List<Callable<Void>> taskList = new ArrayList<Callable<Void>>();
+
+        Callable<Void> callable1 = new Callable<Void>() {
+            @Override
+            public Void call() throws Exception {
+                updateAll();
+                return null;
+            }
+        };
+        taskList.add(callable1);
+        try {
+            //start the threads and wait for them to finish
+            executor.invokeAll(taskList);
+        } catch (InterruptedException ie) {
+
+        }
+    }
+    private static void updateAll() throws InterruptedException {
+
+        while(true) {
+            if(currentLocation!=location.getLocationName()){
+                currentLocation=location.getLocationName();
+                ButtonListener.setResetButtons();
+            }
+            Thread.sleep(100);
+
+        }
+    }
+
+
 }

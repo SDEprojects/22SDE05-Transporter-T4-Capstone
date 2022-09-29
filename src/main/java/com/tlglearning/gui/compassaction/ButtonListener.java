@@ -99,12 +99,9 @@ public class ButtonListener implements MouseListener {
             // Then command string is passed to Transport Application.
             commandGateObject.setIsCommandSentFromGui(true);
 
-            try {
-                Thread.sleep(130);
-            } catch (InterruptedException ex) {
-                throw new RuntimeException(ex);
-            }
-            setResetButtons();
+
+                setResetButtons();
+
         }
     }
 
@@ -122,24 +119,37 @@ public class ButtonListener implements MouseListener {
     }
 
 
+    public static String setResetButtons()  {
 
-    public static String setResetButtons() {
 
         //TODO ADD THESE BUTTON
         // BUTTON_ACTION_CONTAINER.add((new CommandButton(this, "EXPLORE","Explore")).getButton(),BorderLayout.WEST);
         // BUTTON_ACTION_CONTAINER.add((new CommandButton(this, "Get","Get")).getButton(),BorderLayout.EAST);
-
-        if (location == null || buttonsList.isEmpty()  ) {
-            return "setResetButton invalid";
+        while(commandGateObject.isCommandSentFromGui()) {
+            try {
+                Thread.sleep(30);
+            } catch (InterruptedException ex) {
+                throw new RuntimeException(ex);
+            }
         }
 
-
+//        if (location == null || buttonsList.isEmpty()  ) {
+//            return "setResetButton invalid";
+//        }
+        if(commandGateObject.getCommand().equalsIgnoreCase("start drive")){
+            try {
+                Thread.sleep(3000);
+                System.out.println("=========================");
+                System.out.println(location.getLocationName());
+            } catch (InterruptedException ex) {
+                throw new RuntimeException(ex);
+            }
+        }
         for (JButton each : buttonsList) {
             if (((ImageIcon)each.getIcon()).getDescription().equalsIgnoreCase("go north")) {
                 if (location.getNorth().equalsIgnoreCase("\"leads to nowhere\"")) {
                     each.setEnabled(false);
                     each.setVisible(false);
-
                 } else {
                     each.setEnabled(true);
                     each.setVisible(true);
@@ -181,5 +191,7 @@ public class ButtonListener implements MouseListener {
     public static void setDestinationsMap(HashMap<String, Object> destinationsMap) {
         DestinationsMap = destinationsMap;
     }
+
+
 
 }

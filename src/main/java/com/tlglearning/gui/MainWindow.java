@@ -9,8 +9,10 @@ import com.tlglearning.gui.interactbreakroom.actionBreakRoom;
 import com.tlglearning.gui.interactgasstation.actionGasStation;
 import com.tlglearning.gui.interactwarehouse.actionWarehouse;
 import com.tlglearning.gui.music.RadioButton;
-import com.tlglearning.middleware.commandGateObject;
 import com.tlglearning.gui.states.StatesPanel;
+import com.tlglearning.interactStates.actionStates;
+import com.tlglearning.middleware.commandGateObject;
+
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
@@ -34,6 +36,8 @@ public class MainWindow {
     JLayeredPane hrOfficePane = actionHrOffice.getPanel();
 
     JLayeredPane gasStationPane = actionGasStation.getPanel();
+
+    JLayeredPane statePane= actionStates.getPanel();
     private static final JTextArea P1 = new JTextArea(6, 94);
     private static final JTextArea P2 = new JTextArea();
     private static final ColorPane P3 = new ColorPane();
@@ -59,7 +63,7 @@ public class MainWindow {
     private  static BaseLayer baseLayer;
     private static Title title;
     private static boolean isIntro=true;
-    private static StatesPanel statePanel;
+
 
 
     public MainWindow() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
@@ -184,7 +188,7 @@ public class MainWindow {
         baseLayer.addModal(radioButton.getPanel());
 
         APP_CONTAINER.add(baseLayer.getPanel());
-//        baseLayer.add(gasStationPane);
+//        baseLayer.add(statePane);
         show();
 
     }
@@ -313,7 +317,9 @@ public class MainWindow {
             baseLayer.add(techRoomPane);
         } else if (key.equalsIgnoreCase("gas station")) {
             baseLayer.add(gasStationPane);
-        } else if (P4.getText().length() == 0) {
+        } else if (key.equalsIgnoreCase("truck") && !isIntro) {
+            baseLayer.add( statePane);
+        }else if (P4.getText().length() == 0) {
             // Set to editable
             P2.setEditable(true);
             P2.setText("");
@@ -373,7 +379,7 @@ public class MainWindow {
         P2.setText(null);
     }
     public static void setStateImages(String mapImages) {
-        statePanel.setIcon(mapImages);
+
         baseLayer.revalidate();
     }
 }

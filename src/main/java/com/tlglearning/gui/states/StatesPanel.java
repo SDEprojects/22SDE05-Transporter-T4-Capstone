@@ -9,7 +9,7 @@ import java.awt.*;
 public class StatesPanel {
 
     // FIELDS
-    static ClassLoader c = Thread.currentThread().getContextClassLoader();
+    static ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
     private static String name;
     static ImageIcon icon;
     static final JPanel panel = new JPanel();
@@ -28,13 +28,11 @@ public class StatesPanel {
 
         stateButton  = new JButton();
 
-        panel.setSize(2500,2500);
+        panel.setSize(250,250);
         panel.setBounds(0,0, 250, 250);
         panel.setLocation(20, 20);
         panel.setOpaque(false);
-        panel.setBackground(new Color(0,0,0,0));
-        panel.setLayout(new BorderLayout(0,0));
-        stateButton.setBackground(Color.black);
+
         stateButton.setBorderPainted(false);
         stateButton.setFocusPainted(false);
 
@@ -50,7 +48,9 @@ public class StatesPanel {
     }
 
     public static void setIcon(String name) {
-        icon = new ImageIcon (c.getResource("photos/DrivingStates/rsz_" +name+ ".jpg"));
+        name=name.strip().toLowerCase();
+        System.out.println(":"+name+":");
+        icon = new ImageIcon (classLoader.getResource("photos/DrivingStates/rsz_" +name+ ".jpg"));
         stateButton.setBackground(Color.black);
         stateButton.setBorderPainted(false);
         stateButton.setIcon(icon);

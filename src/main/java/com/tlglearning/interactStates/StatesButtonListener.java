@@ -1,15 +1,24 @@
 package com.tlglearning.interactStates;
 
 import com.tlglearning.gui.compassaction.ButtonListener;
+import com.tlglearning.gui.states.StatesMaps;
+import com.tlglearning.gui.states.StatesPanel;
 import com.tlglearning.middleware.commandGateObject;
+import com.tlglearning.util.Location;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import static com.tlglearning.client.TransporterClient.mainWindow;
+import static com.tlglearning.interactStates.actionStates.changeMapDisplay;
 import static com.tlglearning.interactStates.actionStates.setLocationImageBackGround;
+
+
 
 
 public class StatesButtonListener implements MouseListener {
@@ -20,10 +29,17 @@ public class StatesButtonListener implements MouseListener {
 
     ImageIcon currentIcon;
     JButton button;
+    private static JPanel statesMapPanelDisplay;
+    private static Location location;
+
+    StatesPanel statePanel;
 
 
 
-    public StatesButtonListener(JButton button, ImageIcon orginal, ImageIcon showItem) {
+
+    public StatesButtonListener(JButton button, ImageIcon orginal, ImageIcon showItem, JPanel mapDisplay, StatesPanel stPanel) {
+        statePanel=stPanel;
+        statesMapPanelDisplay = mapDisplay;
         this.insideTruckIcon = orginal;
         this.insideTruckIcon.setDescription(orginal.getDescription());
 
@@ -51,22 +67,38 @@ public class StatesButtonListener implements MouseListener {
     @Override
     public void mousePressed(MouseEvent e) {
 
+        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
 
-        if (insideTruckIcon.getDescription().equalsIgnoreCase("open map")) {
-            this.currentIcon.setDescription(insideTruckIconAction.getDescription());
-            button.setIcon(insideTruckIconAction);
 
-        } else if (insideTruckIcon.getDescription().equalsIgnoreCase("close map")) {
-            this.currentIcon.setDescription(insideTruckIcon.getDescription());
-            button.setIcon(insideTruckIcon);
-            //TODO close Map
+
+    if (currentIcon.getDescription().equalsIgnoreCase("open map")) {
+
+        try {
+
+            statePanel.setIcon(location.getLocationName());
+
+            currentIcon= insideTruckIconAction;
+
+            changeMapDisplay(true);
+
+
+        }catch(NullPointerException ex){
 
         }
 
 
-       else if (insideTruckIcon.getDescription().equalsIgnoreCase("start drive") ) {
+            //TODO close Map
 
-            String command = insideTruckIcon.getDescription();
+
+        } else if (currentIcon.getDescription().equalsIgnoreCase("close map")) {
+            currentIcon= insideTruckIcon;
+            changeMapDisplay(false);
+
+            //TODO close Map
+
+        } else if (currentIcon.getDescription().equalsIgnoreCase("start drive")) {
+
+            String command = currentIcon.getDescription();
 
             mainWindow.wipe();
 
@@ -81,17 +113,13 @@ public class StatesButtonListener implements MouseListener {
 //                System.out.println("==================================");
 //                ButtonListener.setResetButtons();
 //            }
-            try {
-                Thread.sleep(2000);
-
-            } catch (InterruptedException ex) {
-                throw new RuntimeException(ex);
-            }
+//            try {
+//                Thread.sleep(2000);
+//
+//            } catch (InterruptedException ex) {
+//                throw new RuntimeException(ex);
+//            }
         }
-
-
-
-
 
 
     }
@@ -114,10 +142,10 @@ public class StatesButtonListener implements MouseListener {
 //        label.setIcon(inactive);
     }
 
+    public static void setLocationo(Location loc){
+        location=loc;
 
-
-
-
+    }
 
 
 }
