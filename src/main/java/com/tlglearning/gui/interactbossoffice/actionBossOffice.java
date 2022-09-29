@@ -70,6 +70,7 @@ public class actionBossOffice extends JFrame {
         JButton button = new JButton();
         ClassLoader classloader = Thread.currentThread().getContextClassLoader();
 
+
         int x_loc = 50;
         int y_loc = 0;
         int width = 400;

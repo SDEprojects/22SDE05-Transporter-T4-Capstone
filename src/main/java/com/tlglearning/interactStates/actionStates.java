@@ -5,7 +5,6 @@ import com.tlglearning.gui.states.StatesPanel;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 
 
 public class actionStates extends JFrame {
@@ -28,10 +27,13 @@ public class actionStates extends JFrame {
 
     public static JLayeredPane getPanel() {
 
+        ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+
+
+
         layeredPane = new JLayeredPane();
 
 
-        ClassLoader classloader = Thread.currentThread().getContextClassLoader();
 
         // Retrieves image crop
 //        Image insideTruckImage = new ImageIcon(classloader.getResource("photos/StateImages/InsideTruck.png")).getImage().getScaledInstance(layerPaneWidth, layerPaneHeight, Image.SCALE_DEFAULT);
@@ -59,9 +61,9 @@ public class actionStates extends JFrame {
         mapJLabelDisplay=st.getPanel();
         mapJLabelDisplay.setVisible(false);
 
-//        mapJLabelDisplay.setVisible(false);
-        layeredPane.add(insideTruckJLabel, 5);
-        layeredPane.add(statesJLabel, 4);
+
+        layeredPane.add(insideTruckJLabel, 7);
+        layeredPane.add(statesJLabel, 6);
 
         layeredPane.add(mapJLabelDisplay, 0);
         layeredPane.add(gpsButton, 0);
@@ -70,7 +72,8 @@ public class actionStates extends JFrame {
         layeredPane.setOpaque(true);
 
         layeredPane.setSize(layerPaneWidth, layerPaneHeight);
-
+        Image backGround = new ImageIcon(classloader.getResource("photos/StateImages/Dawn.gif")).getImage().getScaledInstance(layerPaneWidth, layerPaneHeight, Image.SCALE_DEFAULT);
+        statesIcon.setImage(backGround );
 
         return layeredPane;
     }
@@ -129,42 +132,24 @@ public class actionStates extends JFrame {
     }
 
 
-    public static void setLocationImageBackGround(){
-        System.out.println("");
 
-        ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-
-        // Retrieves image crop
-
-
-
-//
-//        JLabel statesJLabel = new JLabel(statesIcon);
-//
-//
-//        statesJLabel.setSize(statesIcon.getIconWidth(),statesIcon.getIconHeight());
-//
-//        statesJLabel.setLocation(0,0);
-//
-//        layeredPane.removeAll();
-//        layeredPane.add(insideTruckJLabel, 1);
-//        layeredPane.add(statesJLabel, 2);
-//        layeredPane.add(gpsButton, 0);
-//        layeredPane.add(keyButton, 0);
-    }
 
     public static void changeMapDisplay(boolean isDisplayed){
         mapJLabelDisplay.setVisible(isDisplayed);
 
     }
 
-    public static void changeBackGround(){
+    public static void changeBackGround(String loc){
 
         ClassLoader classloader = Thread.currentThread().getContextClassLoader();
 
+        try{
+            Image backGround = new ImageIcon(classloader.getResource("backGroundGifStates/"+loc+".gif")).getImage().getScaledInstance(layerPaneWidth, layerPaneHeight, Image.SCALE_DEFAULT);
+            statesIcon.setImage(backGround );
+        }catch (NullPointerException ex){
 
-        Image backGround = new ImageIcon(classloader.getResource("photos/StateImages/Dawn.gif")).getImage().getScaledInstance(layerPaneWidth, layerPaneHeight, Image.SCALE_DEFAULT);
-        statesIcon.setImage(backGround );
+        }
+
         layeredPane.add(statesJLabel, 4);
 
     }
