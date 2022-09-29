@@ -32,9 +32,7 @@ public class StatesPanel {
         panel.setBounds(0,0, 250, 250);
         panel.setLocation(20, 20);
         panel.setOpaque(false);
-//        panel.setBackground(new Color(0,0,0,0));
-//        panel.setLayout(new BorderLayout(0,0));
-//        stateButton.setBackground(Color.black);
+
         stateButton.setBorderPainted(false);
         stateButton.setFocusPainted(false);
 
