@@ -1,6 +1,5 @@
 package com.tlglearning.gui;
 
-import com.tlglearning.gui.Office.actionOffice;
 import com.tlglearning.gui.compassaction.Compass;
 import com.tlglearning.gui.interactHrOffice.actionHrOffice;
 import com.tlglearning.gui.interactOffice.actionOffice;
@@ -11,8 +10,6 @@ import com.tlglearning.gui.interactgasstation.actionGasStation;
 import com.tlglearning.gui.interactwarehouse.actionWarehouse;
 import com.tlglearning.gui.music.RadioButton;
 import com.tlglearning.middleware.commandGateObject;
-import com.tlglearning.interactStates.actionStates;
-import com.tlglearning.gui.states.StatesMaps;
 import com.tlglearning.gui.states.StatesPanel;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
