@@ -186,9 +186,9 @@ public class MainWindow {
         baseLayer.add(Compass.getPanel());
         baseLayer.add(promptContainer.getPanel());
         baseLayer.addModal(radioButton.getPanel());
-
+//
         APP_CONTAINER.add(baseLayer.getPanel());
-//        baseLayer.add(statePane);
+//d
         show();
 
     }

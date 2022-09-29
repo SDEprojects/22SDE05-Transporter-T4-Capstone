@@ -1,7 +1,5 @@
 package com.tlglearning.interactStates;
 
-import com.tlglearning.gui.compassaction.ButtonListener;
-import com.tlglearning.gui.states.StatesMaps;
 import com.tlglearning.gui.states.StatesPanel;
 import com.tlglearning.middleware.commandGateObject;
 import com.tlglearning.util.Location;
@@ -10,13 +8,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+
 
 import static com.tlglearning.client.TransporterClient.mainWindow;
 import static com.tlglearning.interactStates.actionStates.changeMapDisplay;
-import static com.tlglearning.interactStates.actionStates.setLocationImageBackGround;
+
 
 
 
@@ -70,6 +66,7 @@ public class StatesButtonListener implements MouseListener {
     public void mousePressed(MouseEvent e) {
 
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+        System.out.println(currentIcon.getDescription());
 
 
 
@@ -109,18 +106,7 @@ public class StatesButtonListener implements MouseListener {
             commandGateObject.setIsCommandSentFromGui(true);
 
 
-//            if(ButtonListener.isCompassReady()) {
-//                System.out.println("==================================");
-//                System.out.println(location.getLocationName());
-//                System.out.println("==================================");
-//                ButtonListener.setResetButtons();
-//            }
-//            try {
-//                Thread.sleep(2000);
-//
-//            } catch (InterruptedException ex) {
-//                throw new RuntimeException(ex);
-//            }
+
         }
 
 
@@ -141,7 +127,7 @@ public class StatesButtonListener implements MouseListener {
 
     @Override
     public void mouseExited(MouseEvent e) {
-//        label.setIcon(inactive);
+
     }
 
     public static void setLocationo(Location loc){

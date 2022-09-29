@@ -56,7 +56,7 @@ public class actionBreakRoom extends JFrame {
         int width = 200;
         int height = 200;
 
-        ImageIcon orginalIconCrop = new ImageIcon(classloader.getResource("photos/actionbreakroom/coffee.png"));
+        ImageIcon orginalIconCrop = new ImageIcon(classloader.getResource("photos/actionbreakroom/Coffee.png"));
         orginalIconCrop = cropImage.crop(orginalIconCrop, x_loc, y_loc, width, height);
         ImageIcon cabinetlayerImageCrop = new ImageIcon(classloader.getResource("photos/actionbreakroom/coffeeCup.png"));// actionIcon;//cropImage.crop(actionIcon, 0, 0, width, height);
         cabinetlayerImageCrop = cropImage.crop(cabinetlayerImageCrop, x_loc, y_loc, width, height);

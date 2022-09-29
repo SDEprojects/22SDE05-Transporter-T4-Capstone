@@ -5,10 +5,13 @@ import com.tlglearning.middleware.Redirect;
 import com.tlglearning.util.InputHandling;
 import com.tlglearning.util.TitleScreen;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
-import java.io.IOException;
+import java.awt.*;
+import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 
 public class TransporterClient {
@@ -17,8 +20,6 @@ public class TransporterClient {
     public static void main(String[] args) throws InterruptedException, InvocationTargetException {
 
 
-        ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-        ImageIcon icon = new ImageIcon (classloader.getResource("photos/DrivingStates/rsz_arizona.jpg"));
         Redirect.generateMaps();
         SwingUtilities.invokeAndWait(new Runnable () {
             /**

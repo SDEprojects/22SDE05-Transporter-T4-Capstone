@@ -105,7 +105,7 @@ public class actionGasStation extends JFrame {
 
         ImageIcon orginalIconCrop = new ImageIcon(classloader.getResource("photos/actiongasstation/gas-station-snack-aisle.png"));
         orginalIconCrop = cropImage.crop(orginalIconCrop, x_loc, y_loc, width, height);
-        ImageIcon cabinetlayerImageCrop = new ImageIcon(classloader.getResource("photos/actiongasstation//gas-station-snacks.png"));// actionIcon;//cropImage.crop(actionIcon, 0, 0, width, height);
+        ImageIcon cabinetlayerImageCrop = new ImageIcon(classloader.getResource("photos/actiongasstation/gas-station-snacks.png"));// actionIcon;//cropImage.crop(actionIcon, 0, 0, width, height);
         cabinetlayerImageCrop = cropImage.crop(cabinetlayerImageCrop, x_loc, y_loc, width, height);
         orginalIconCrop.setDescription("Explore snacks");
         cabinetlayerImageCrop.setDescription("Get snacks");
