@@ -22,7 +22,7 @@ public class actionStates extends JFrame {
     static JPanel mapJLabelDisplay;
     public static StatesPanel st = new StatesPanel();
 
-
+    private static ImageIcon statesIcon;
     String[] backGround = {"Dawn.gif","Moving.gif"};
 
 
@@ -42,7 +42,7 @@ public class actionStates extends JFrame {
 
 
         ImageIcon insideTruckIcon = new ImageIcon(insideTruckImage);
-        ImageIcon statesIcon = new ImageIcon(statesImage);
+       statesIcon = new ImageIcon(statesImage);
 
         insideTruckJLabel = new JLabel(insideTruckIcon);
         statesJLabel = new JLabel(statesIcon);
@@ -155,6 +155,17 @@ public class actionStates extends JFrame {
 
     public static void changeMapDisplay(boolean isDisplayed){
         mapJLabelDisplay.setVisible(isDisplayed);
+
+    }
+
+    public static void changeBackGround(){
+
+        ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+
+
+        Image backGround = new ImageIcon(classloader.getResource("photos/StateImages/Dawn.gif")).getImage().getScaledInstance(layerPaneWidth, layerPaneHeight, Image.SCALE_DEFAULT);
+        statesIcon.setImage(backGround );
+        layeredPane.add(statesJLabel, 4);
 
     }
 

@@ -34,6 +34,8 @@ public class StatesButtonListener implements MouseListener {
 
     StatesPanel statePanel;
 
+    boolean onTheRoad=false;
+
 
 
 
